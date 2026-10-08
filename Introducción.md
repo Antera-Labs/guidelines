@@ -24,7 +24,7 @@ Conoce a los expertos que conforman nuestro equipo de trabajo en Antera Labs:
 | <img width="125" alt="image" src="https://github.com/user-attachments/assets/bbab4996-9e49-489a-892c-0006b8c70f98" />  | **Josue Xavier Pardo Chamba** | FrontEnd |
 | <img width="125" alt="image" src="https://github.com/user-attachments/assets/141eb62d-350e-4879-abf9-5f56909f5b23" /> | **Anthony Joel Romero Yaguana** | BackEnd |
 | <img width="125" alt="image" src="https://github.com/user-attachments/assets/879381eb-7828-4cbe-bec1-3c4519e29e86" /> | **Alberto Nicolás Herrera Salinas** | Seguridad |
-| <img width="125" alt="image" src="https://github.com/user-attachments/assets/ad4f85cd-0904-46c7-a015-f6871d33d921" /> | **Martin Ruiz** | Base de Datos |
+| <img width="125" alt="image" src="https://github.com/user-attachments/assets/ad4f85cd-0904-46c7-a015-f6871d33d921" /> | **Martin Emanuel Ruiz Sánchez** | Base de Datos |
 | <img width="125" alt="image" src="https://github.com/user-attachments/assets/8f589d43-850b-4412-91e1-bb15ae3af94a" />| **Andrés Sebastián Cárdenas Armijos** | Arquitecto de Software |
 
 ---
