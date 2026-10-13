@@ -245,4 +245,3 @@ Alineados con el modelo operativo de la **Organización Agéntica (McKinsey)** [
 
 1. **Protocolo MCP**: Actúa como el estándar de integración abierta para conectar las herramientas del backend con los agentes sin acoplamientos rígidos.
 2. **DevSecOps Agéntico**: Alberto supervisa la ejecución de **Agentes Guardianes (*Guardrail Agents*)** dentro del pipeline de **GitHub Actions**, auditando el código contra vulnerabilidades OWASP antes de cada fusión (*merge*).
-3. **Escuadras Híbridas**: El equipo humano (perfiles T-shaped y M-shaped) supervisa las redes planas de agentes [7].
