@@ -32,7 +32,7 @@ Asignando dominios arquitectónicos según el rol especializado de cada integran
 ## 2. Requerimientos Significativos para la Arquitectura (ASRs) y Calidad
 
 ### 2.1. Atributos de Calidad Priorizados (ISO/IEC 9126 / ISO/IEC 25010)
-El diseño se orienta a satisfacer los Requerimientos Significativos para la Arquitectura (ASRs) clave [6]:
+El diseño se orienta a satisfacer los Requerimientos Significativos para la Arquitectura:
 
 1. **Eficiencia en el Tiempo**: Tiempos de respuesta finales < 300 ms en consultas con procesamiento del motor RAG.
 2. **Seguridad**: Confidencialidad e integridad de la información mediante cifrado en tránsito (TLS 1.3), en reposo (AES-256) y mitigación de amenazas en IA (*prompt injection*) mediante agentes guardianes.
@@ -40,8 +40,8 @@ El diseño se orienta a satisfacer los Requerimientos Significativos para la Arq
 4. **Disponibilidad y Confiabilidad**: Tolerancia a fallas del 99.9% mediante autoescalado horizontal en la nube e infraestructura de recuperación.
 5. **Usabilidad**: Interfaz conversacional y táctil intuitiva con tiempo de aprendizaje menor a 5 minutos para usuarios no técnicos.
 
-### 2.2. Árbol de Utilidad de Atributos de Calidad (*Utility Tree*)
-Matriz de priorización (Importancia para el Negocio / Impacto Arquitectónico) y escenarios concretos [6]:
+### 2.2. Árbol de Utilidad de Atributos de Calidad
+Matriz de priorización (Importancia para el Negocio / Impacto Arquitectónico) y escenarios concretos:
 
 ```
 Utilidad del Sistema
@@ -59,7 +59,7 @@ Utilidad del Sistema
 
 ## 3. Estructura Interna: Arquitectura en Capas y Patrón BCE
 
-El sistema organiza sus módulos internos en una **Arquitectura de 3 Capas + Capa de Datos/Infraestructura**, estructurada mediante el patrón **Borde-Control-Entidad (BCE)**:
+El sistema organiza sus módulos internos en una **Arquitectura de 3 Capas + Capa de Datos/Infraestructura**, estructurada mediante el patrón **Borde-Control-Entidad**:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
