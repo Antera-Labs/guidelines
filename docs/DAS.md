@@ -2,7 +2,7 @@
 
 **Proyecto**: Solución Móvil y Web Nativa en la Nube con Malla Agéntica de IA  
 **Estándar de Documentación**: ISO/IEC/IEEE 42010:2011  
-**Marco de Representación**: Modelo 4+1 Vistas de Philippe Kruchten  + DevOps Agenticos
+**Marco de Representación**: Modelo 4+1 Vistas de Philippe Kruchten  + DevOps Agenticos </br>
 **Organización / Repositorio**: Antera Labs / UTPL (Retos Empresariales Ascendere)  
 **Versión**: 1.0.0  
 
