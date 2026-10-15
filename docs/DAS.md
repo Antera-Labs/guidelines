@@ -1,247 +1,328 @@
 # Documento de Descripción Arquitectónica de Software (DAS)
 
-**Proyecto**: Solución Móvil y Web Nativa en la Nube con Malla Agéntica de IA  
-**Estándar de Documentación**: ISO/IEC/IEEE 42010:2011  
-**Marco de Representación**: Modelo 4+1 Vistas de Philippe Kruchten  + DevOps Agenticos </br>
-**Organización / Repositorio**: Antera Labs / UTPL (Retos Empresariales Ascendere)  
-**Versión**: 1.0.0  
+**Proyecto**: Sistema de Scoring de Crédito Basado en Analítica Predictiva y Variables Alternativas  
+**Cliente / Empresa**: Cooperativa de Ahorro y Crédito Padre Julián Lorente  
+**Docente Responsable**: Armando Augusto Cabrera Silva  
+**Marco de Trabajo**: Aprendizaje Basado en Retos (CBL) - Proyecto Bimestral Ascendere  
+**Estándar de Documentación**: ISO/IEC/IEEE 42010:2022 | Modelo 4+1 Vistas de Philippe Kruchten  
+**Organización / Repositorio**: Antera Labs / UTPL (`Antera Labs / Proyecto-Ascendere`)  
+**Versión**: 1.0.0 (Infraestructura Simplificada Docker & Separación Web/Móvil)  
 
 ---
 
-## 1. Información General y Control del Documento
+## 1. Información General, Contexto de Negocio y Control del Documento
 
-### 1.1. Autores y Matriz de Responsabilidad del Equipo
-Asignando dominios arquitectónicos según el rol especializado de cada integrante:
+### 1.1. Contexto del Reto Empresarial
+La Cooperativa de Ahorro y Crédito Padre Julián Lorente requiere optimizar la evaluación de riesgo crediticio en la colocación de créditos de consumo y microcréditos en el sur del Ecuador. Actualmente, la dependencia exclusiva de burós de crédito tradicionales genera rechazos innecesarios de microempresarios y pequeños comerciantes locales que carecen de historial bancario formal, derivando en análisis manuales lentos y costosos.
+
+**Objetivo General del Sistema**:
+Optimizar la evaluación de riesgo y reducir el tiempo de respuesta en la colocación de créditos en un **40%**, manteniendo o mejorando la calidad de la cartera mediante analítica predictiva, variables alternativas locales y cumplimiento estricto de la **Ley Orgánica de Protección de Datos Personales (LOPDP) del Ecuador**.
+
+### 1.2. Autores y Matriz de Responsabilidad del Equipo Multifuncional
+El proyecto es ejecutado por una empresa de software simulada con asignación explícita de dominios arquitectónicos:
 
 | Nombre | Rol de Equipo | Dominio Arquitectónico Principal | Estándar / Foco Primario |
 | :--- | :--- | :--- | :--- |
-| **Andrés** | Arquitecto de Software & Líder Técnico | Liderazgo arquitectónico, Integridad conceptual, Vistas 4+1, Gobernanza IaC | ISO/IEC/IEEE 42010, ISO/IEC 15288 |
-| **Ronald** | Diseñador UX/UI | Capa de Presentación, Experiencia Conversacional / Multimodal | ISO/IEC 25010 (Usabilidad y Calidad en Uso) |
-| **Josué** | Desarrollador FrontEnd | Objetos Borde (*Boundary*), Clientes Web (Next.js) y Móvil (Flutter) | ISO/IEC 9126 (Eficiencia en Cliente) |
-| **Anthony** | Desarrollador BackEnd | Objetos Control (*Control*), Microservicios, Servidores MCP y APIs | ISO/IEC 12207 (Procesos de Software) |
-| **Martín** | Administrador de Base de Datos (DBA) | Objetos Entidad (*Entity*), Persistencia Relacional y Motor Vectorial RAG | ISO/IEC 25012 (Calidad de Datos) |
-| **Alberto** | Oficial de Seguridad & DevSecOps | Capa Transversal de Seguridad, DevSecOps y *Guardrail Agents* | ISO/IEC 27001, ISO/IEC 25010 (Seguridad) |
-
-### 1.2. Historial de Revisiones
-| Versión | Fecha | Autor | Descripción del Cambio |
-| :--- | :--- | :--- | :--- |
-| `1.0.0` | 12/10/2026 | Andrés (Arquitecto) | Estructuración inicial y completa del DAS bajo la ISO/IEC/IEEE 42010, integrando el Modelo 4+1 Vistas, Patrón BCE, Malla Agéntica y DevSecOps. |
+| **Andrés** | Arquitecto de Software & Líder Técnico | Liderazgo arquitectónico, Integridad conceptual, Vistas 4+1, Gobernanza Docker/IaC | ISO/IEC/IEEE 42010:2022, Microsoft Arch Guide v2 |
+| **Ronald** | Diseñador UX/UI | Capa de Presentación, Experiencia de Analista y Socio, Usabilidad | ISO/IEC 25010 (Usabilidad y Calidad en Uso) |
+| **Josué** | Desarrollador FrontEnd | Objetos Borde (*Boundary*), Clientes Web (Next.js), Móvil (Flutter) y UAT (Streamlit) | ISO/IEC 9126 / 25010 (Eficiencia en UI) |
+| **Anthony** | Desarrollador BackEnd | Objetos Control (*Control*), Microservicios de Scoring ML, Servidores MCP y APIs | ISO/IEC 12207 (Procesos de Software) |
+| **Martín** | Administrador de Base de Datos (DBA) | Objetos Entidad (*Entity*), PostgreSQL, Feature Store (Redis) y RAG (Qdrant) | ISO/IEC 25012 (Calidad de Datos) |
+| **Alberto** | Oficial de Seguridad & DevSecOps | Capa Transversal de Seguridad, Cumplimiento LOPDP y *Guardrail Agents* | ISO/IEC 27001, LOPDP Ecuador |
 
 ---
 
-## 2. Requerimientos Significativos para la Arquitectura (ASRs) y Calidad
+## 2. Mapa de Capacidades del Negocio (Ulrich Methodology)
 
-### 2.1. Atributos de Calidad Priorizados (ISO/IEC 9126 / ISO/IEC 25010)
-El diseño se orienta a satisfacer los Requerimientos Significativos para la Arquitectura:
-
-1. **Eficiencia en el Tiempo**: Tiempos de respuesta finales < 300 ms en consultas con procesamiento del motor RAG.
-2. **Seguridad**: Confidencialidad e integridad de la información mediante cifrado en tránsito (TLS 1.3), en reposo (AES-256) y mitigación de amenazas en IA (*prompt injection*) mediante agentes guardianes.
-3. **Mantenibilidad y Modularidad**: Desacoplamiento de componentes mediante Clean Architecture y patrones BCE para aislar cambios en menos de 2 días persona.
-4. **Disponibilidad y Confiabilidad**: Tolerancia a fallas del 99.9% mediante autoescalado horizontal en la nube e infraestructura de recuperación.
-5. **Usabilidad**: Interfaz conversacional y táctil intuitiva con tiempo de aprendizaje menor a 5 minutos para usuarios no técnicos.
-
-### 2.2. Árbol de Utilidad de Atributos de Calidad
-Matriz de priorización (Importancia para el Negocio / Impacto Arquitectónico) y escenarios concretos:
+Para la elicitación ágil de requisitos de la Cooperativa Padre Julián Lorente, la arquitectura se estructura en torno a 5 Capacidades del Negocio estables:
 
 ```
-Utilidad del Sistema
-├── Eficiencia (Alto / Alto)
-│   └── Escenario 1: El usuario envía una consulta compleja desde la app móvil. El motor RAG ejecuta la búsqueda semántica vectorial en Qdrant y sintetiza la respuesta con el LLM en menos de 300 ms bajo condiciones normales de carga.
-├── Seguridad (Alto / Alto)
-│   └── Escenario 2: Un usuario malintencionado intenta una inyección de prompt (prompt injection) en la interfaz conversacional. El Guardrail Agent intercepta la entrada, bloquea la solicitud y registra el evento de auditoría en < 50 ms.
-├── Mantenibilidad (Medio / Alto)
-│   └── Escenario 3: El equipo BackEnd reemplaza el proveedor del modelo LLM o la base de datos vectorial. Gracias al protocolo MCP y las interfaces de abstracción, el cambio se completa modificando únicamente la capa de controladores sin afectar el FrontEnd.
-└── Disponibilidad (Alto / Medio)
-    └── Escenario 4: Un nodo de microservicios en Kubernetes falla inesperadamente. El orquestador detecta la caída mediante health checks y redirige el tráfico a un pod secundario en menos de 2 segundos sin pérdida de sesión.
+┌───────────────────────────────────────────────────────────────────────────────────────────┐
+│                       MAPA DE CAPACIDADES DE ULRICH - COOPERATIVA LORENTE                 │
+├───────────────────────────────────────────────────────────────────────────────────────────┤
+│ 1. Gestión de Identidad, Consentimiento & LOPDP                                           │
+│    • Captura y trazabilidad del consentimiento explícito del socio.                       │
+│    • Anonimización y encriptación de datos sensibles socioeconómicos.                      │
+├───────────────────────────────────────────────────────────────────────────────────────────┤
+│ 2. Ingesta e Integración de Datos Híbridos                                                │
+│    • Conexión con Buró Tradicional (Histórico crediticio formal).                         │
+│    • Ingesta de Variables Alternativas Locales (Transacciones, estabilidad comercial).    │
+├───────────────────────────────────────────────────────────────────────────────────────────┤
+│ 3. Evaluación de Riesgo y Scoring Predictivo en Tiempo Real                               │
+│    • Ejecución del modelo de Machine Learning (Scikit-Learn / XGBoost).                   │
+│    • Cálculo del Score de crédito y probabilidad de mora.                                 │
+├───────────────────────────────────────────────────────────────────────────────────────────┤
+│ 4. Dictamen Automático y Ajuste de Condiciones                                            │
+│    • Generación de veredicto (Aprobado, Rechazado, Sujeto a Verificación).                │
+│    • Recomendación de límites de crédito, tasa y plazos ajustados al perfil.               │
+├───────────────────────────────────────────────────────────────────────────────────────────┤
+│ 5. Explicabilidad del Dictamen, Auditoría & UAT                                           │
+│    • Justificación del dictamen al analista vía Malla Agéntica y RAG de políticas.        │
+│    • Dashboard de analítica interactivo en Streamlit para validación con usuarios.         │
+└───────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 3. Estructura Interna: Arquitectura en Capas y Patrón BCE
+## 3. Requerimientos Significativos para la Arquitectura (ASRs) y Calidad
 
-El sistema organiza sus módulos internos en una **Arquitectura de 3 Capas + Capa de Datos/Infraestructura**, estructurada mediante el patrón **Borde-Control-Entidad**:
+### 3.1. Atributos de Calidad Priorizados (ISO/IEC 9126 / ISO/IEC 25010)
+1. **Seguridad y Privacidad (ISO 25010 / LOPDP Ecuador)**: Garantizar confidencialidad e integridad con cifrado TLS 1.3 en tránsito, AES-256 en reposo, y *Guardrail Agents* para mitigar inyecciones de prompt y accesos no autorizados.
+2. **Eficiencia en el Tiempo (*Performance Efficiency*)**: Tiempo de respuesta de scoring predictivo en tiempo real **< 300 ms**, reduciendo el tiempo total de colocación en un 40%.
+3. **Mantenibilidad y Explicabilidad (*Maintainability & Analyzability*)**: Aislamiento del modelo de Machine Learning mediante microservicios y protocolo MCP, permitiendo recalibrar algoritmos sin rehacer la interfaz.
+4. **Disponibilidad y Portabilidad Containerizada (*Availability & Portability*)**: Operatividad del 99.9% mediante arquitectura de contenedores Docker aislados, despliegue inmutable y reinicio automático de contenedores.
+5. **Usabilidad (*Usability*)**: Interfaz táctil y web intuitiva (Flutter/Next.js) más tablero analítico (Streamlit) con tiempo de aprendizaje < 5 minutos para analistas de la cooperativa.
+
+### 3.2. Árbol de Utilidad (*Utility Tree*)
+```
+Utilidad del Sistema de Scoring
+├── Seguridad / LOPDP (Alto / Alto)
+│   └── Escenario 1: Un socio ingresa una solicitud de microcrédito. El sistema verifica el consentimiento explícito registrado en la BD. Si no existe consentimiento, el Guardrail Agent bloquea la consulta al buró y registra la auditoría en < 30 ms.
+├── Eficiencia de Tiempo (Alto / Alto)
+│   └── Escenario 2: El analista envía los datos socioeconómicos de un comerciante. La API orquesta la lectura de Redis (Feature Store), invoca el modelo XGBoost y retorna el score, dictamen y límite sugerido en < 250 ms.
+├── Mantenibilidad / Modificabilidad (Medio / Alto)
+│   └── Escenario 3: El equipo de analítica recalibra el modelo de scoring con nuevas variables del sur del Ecuador. Gracias al desacoplamiento vía microservicios en Docker y protocolo MCP, el nuevo modelo se despliega sin detener la API core.
+└── Disponibilidad en Contenedores Docker (Alto / Medio)
+    └── Escenario 4: Si un contenedor de la API de scoring sufre una sobrecarga o fallo, el motor de contenedores ejecuta una reinicialización de salud (health check) y recupera la instancia en < 2 segundos sin pérdida de estado.
+```
+
+---
+
+## 4. Estructura Interna: Arquitectura en Capas (Patrón BCE y Microsoft Arch Guide v2)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │ CAPA DE PRESENTACIÓN (Objetos BORDE / Boundary)                         │
-│  • App Móvil Multiplataforma (Flutter)                                  │
-│  • Plataforma Web Reactiva (Next.js + Tailwind CSS + Shadcn UI)         │
+│  • App Móvil Socios: Flutter (iOS / Android)                            │
+│  • Web Socios / Portal: Next.js + Tailwind CSS + Shadcn UI              │
+│  • Dashboard Analistas / UAT: Streamlit (Python)                        │
 └────────────────────────────────────┬────────────────────────────────────┘
-                                     │ HTTP / REST / WebSockets / MCP
+                                     │ HTTP REST / WebSockets / MCP
 ┌────────────────────────────────────▼────────────────────────────────────┐
-│ CAPA DE NEGOCIO (Objetos CONTROL / Control)                             │
-│  • APIs de Microservicios (FastAPI / NestJS)                            │
-│  • Servidores MCP (Model Context Protocol)                              │
-│  • Malla Agéntica (Agentes de Razonamiento, RAG y Orquestación)         │
+│ CAPA DE NEGOCIO Y ANALÍTICA (Objetos CONTROL / Control)                 │
+│  • Core API Microservicios: FastAPI (Python) / NestJS                   │
+│  • Motor de Scoring ML: Scikit-Learn / XGBoost (Inferencia de Riesgo)   │
+│  • Servidores MCP: Protocolo de Integración para Herramientas de IA     │
+│  • Malla Agéntica Explicativa & RAG: Razonamiento de Políticas          │
+│  • Security & LOPDP Guardrails: Agente de Validación                    │
 └────────────────────────────────────┬────────────────────────────────────┘
-                                     │ ORM (Prisma/SQLAlchemy) / Vectors
+                                     │ ORM / Feature Queries / Vectors
 ┌────────────────────────────────────▼────────────────────────────────────┐
 │ CAPA DE PERSISTENCIA (Objetos ENTIDAD / Entity)                         │
-│  • Modelos del Dominio Transaccional                                    │
-│  • Embeddings y Almacenamiento Semántico Vectorial                      │
+│  • Modelos Transaccionales (Socios, Solicitudes, Dictámenes)            │
+│  • Feature Store de Variables Alternativas Locales                      │
+│  • Embeddings Vectoriales de Políticas de Crédito                       │
 └────────────────────────────────────┬────────────────────────────────────┘
                                      │ Conexiones Nativas de Datos
 ┌────────────────────────────────────▼────────────────────────────────────┐
-│ CAPA DE DATOS E INFRAESTRUCTURA CLOUD                                   │
-│  • Base de Datos Relacional (PostgreSQL)                                │
-│  • Base de Datos Vectorial (Qdrant / Pinecone / pgvector)               │
-│  • Nodos Cloud (Docker + Kubernetes / Cloud Run)                        │
+│ CAPA DE DATOS E INFRAESTRUCTURA CONTENEDORIZADA (Docker)                │
+│  • Base Relacional Transaccional: PostgreSQL (ACID)                     │
+│  • Feature Store / Caché: Redis (< 50 ms latency)                       │
+│  • Base Vectorial RAG: Qdrant / pgvector                                │
+│  • Infraestructura Docker: Docker Compose + GCP Cloud Run / AWS ECS     │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **Objetos Borde**: Interfaces móviles y web administradas por Josué y Ronald, encargadas de capturar la interacción del usuario y presentar información.
-* **Objetos Control**: Lógica de negocio y orquestación agéntica desarrollada por Anthony, administrando reglas de dominio y flujos de IA vía protocolo **MCP**.
-* **Objetos Entidad**: Definiciones de estado e información del negocio modeladas por Martín para la persistencia física.
-
 ---
 
-## 4. Representación en el Modelo de 4+1 Vistas Arquitectónicas
+## 5. Representación en el Modelo de 4+1 Vistas (ISO/IEC/IEEE 42010:2022)
 
-### 4.1. Vista Lógica
-Muestra la descomposición funcional del sistema, el modelo de componentes y la organización en capas del dominio.
-
+### 5.1. Vista Lógica (*Logical View*)
 ```mermaid
 classDiagram
     class ClienteBorde {
-        +FlutterApp()
+        +FlutterMobileApp()
         +NextJsWebApp()
-        +enviarPeticion()
+        +StreamlitDashboard()
+        +solicitarScoring()
     }
-    class ControlServicio {
-        +FastApiRouter()
-        +McpServer()
-        +orquestarAgente()
+    class ControlScoring {
+        +FastApiScoringRouter()
+        +McpCreditServer()
+        +evaluarRiesgoML()
     }
-    class AgenteIA {
-        +LlmReasoner()
-        +RagRetrieval()
-        +ejecutarHerramientaMcp()
+    class MotorPredictivoML {
+        +XGBoostScoringModel
+        +ScikitLearnPipeline
+        +predictScore()
     }
-    class EntidadDominio {
-        +Usuario
-        +Transaccion
-        +DocumentoVectorial
+    class AgenteGuardrailLOPDP {
+        +validarConsentimiento()
+        +anonimizarDatos()
     }
-    class RepositorioDatos {
+    class EntidadCredito {
+        +Socio
+        +SolicitudCredito
+        +VariablesAlternativas
+        +DictamenScoring
+    }
+    class PersistenciaDatos {
         +PostgreSQL
+        +RedisFeatureStore
         +QdrantVectorDB
     }
 
-    ClienteBorde ..> ControlServicio : Consume APIs / WebSockets
-    ControlServicio --> AgenteIA : Invoca Flujo Agéntico
-    ControlServicio --> EntidadDominio : Mapea Lógica
-    AgenteIA --> RepositorioDatos : Búsqueda Semántica
-    EntidadDominio --> RepositorioDatos : Persiste Estado
+    ClienteBorde ..> ControlScoring : Consume REST / MCP
+    ControlScoring --> AgenteGuardrailLOPDP : Inspecciona LOPDP
+    ControlScoring --> MotorPredictivoML : Invoca Modelo ML
+    ControlScoring --> EntidadCredito : Mapea Dominio
+    EntidadCredito --> PersistenciaDatos : Persiste en BD
 ```
 
-### 4.2. Vista de Procesos 
-Modela la concurrencia, comunicación asíncrona y el flujo dinámico entre la app, el backend, el motor RAG y los servidores MCP.
-
+### 5.2. Vista de Procesos (*Process View*)
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Usuario as Usuario (Móvil/Web)
-    participant Borde as Cliente (Boundary)
-    participant Control as API Backend (Control)
-    participant Guardrail as Guardrail Agent
-    participant RAG as Motor RAG (Qdrant)
-    participant LLM as LLM / Agentic Mesh
+    actor Analista as Analista / Socio
+    participant Interface as Interface (Streamlit / Flutter / Next)
+    participant CoreAPI as Core API (FastAPI)
+    participant LOPDP as Guardrail LOPDP
+    participant FeatureStore as Redis (Variables Alternativas)
+    participant ModelML as Modelo XGBoost (Scoring)
     participant DB as PostgreSQL (Entidad)
 
-    Usuario->>Borde: Ingresa solicitud / Prompt
-    Borde->>Control: HTTP POST /api/v1/agent/query
-    Control->>Guardrail: Validar prompt (Seguridad)
-    Guardrail-->>Control: Prompt Aprobado
-    Control->>RAG: Búsqueda de Embeddings por Similitud
-    RAG-->>Control: Contexto de Negocio Recuperado
-    Control->>LLM: Prompt Enriquecido + Contexto (Protocolo MCP)
-    LLM-->>Control: Respuesta Sintetizada + Acción Recomendada
-    Control->>DB: Actualizar Estado / Log de Auditoría
-    Control-->>Borde: JSON Response (Respuesta + Metadatos)
-    Borde-->>Usuario: Muestra interfaz procesada
+    Analista->>Interface: Ingresa datos del solicitante + Consentimiento
+    Interface->>CoreAPI: POST /api/v1/scoring/evaluate
+    CoreAPI->>LOPDP: Verificar consentimiento y cifrado LOPDP
+    LOPDP-->>CoreAPI: Consentimiento Válido
+    CoreAPI->>FeatureStore: Obtener variables alternativas (Transacciones locales)
+    FeatureStore-->>CoreAPI: Feature Vector (Histórico socioeconómico)
+    CoreAPI->>ModelML: Inferencia de Riesgo (Feature Vector + Buró Tradicional)
+    ModelML-->>CoreAPI: Score (0-1000) + Dictamen (Aprobado/Rechazado/Verificación) + Límite
+    CoreAPI->>DB: Registrar Solicitud, Dictamen y Log de Auditoría
+    CoreAPI-->>Interface: Respuesta JSON (Score + Dictamen + Explicabilidad)
+    Interface-->>Analista: Muestra resultado en pantalla
 ```
 
-### 4.3. Vista de Desarrollo / Implementación
-Describe la organización estática del código en el monorepo de GitHub (`Antera Labs / Proyecto-Ascendere`) estructurado bajo principios de **Clean Architecture**:
-
+### 5.3. Vista de Desarrollo (*Development View*)
 ```text
 /
 ├── .github/
 │   └── workflows/          # CI/CD Pipelines en GitHub Actions
-│       ├── devsecops.yml   # Auditoría de SonarQube + Guardrail Agents
-│       └── deploy.yml      # Despliegue en la Nube con Terraform
+│       ├── devsecops.yml   # SAST SonarQube + Auditoría LOPDP
+│       └── deploy-docker.yml # Despliegue de Contenedores Docker / Cloud Run
 ├── docs/
-│   └── DAS.md              # Presente Documento de Arquitectura
+│   └── DAS-Scoring-Credito.md # Presente Documento DAS
 ├── apps/
-│   ├── mobile/             # Aplicación Móvil en Flutter (Josué/Ronald)
-│   └── web/                # Aplicación Web en Next.js (Josué/Ronald)
+│   ├── mobile/             # App Móvil en Flutter (Josué/Ronald)
+│   ├── web/                # Portal Web en Next.js (Josué/Ronald)
+│   └── dashboard-uat/      # Dashboard Analítico en Streamlit (Josué)
 ├── services/
-│   ├── core-backend/       # Microservicios en FastAPI / NestJS (Anthony)
-│   └── mcp-servers/        # Servidores de Protocolo MCP para Herramientas de IA
+│   ├── core-api/           # Microservicios FastAPI en Docker (Anthony)
+│   ├── ml-scoring-engine/  # Modelos Scikit-Learn/XGBoost en Python (Anthony)
+│   └── mcp-servers/        # Servidores MCP de Integración de IA
 ├── database/
-│   ├── migrations/         # Migraciones SQL para PostgreSQL (Martín)
-│   └── vector-schemas/     # Configuración de Índices Vectoriales HNSW (Qdrant)
+│   ├── migrations/         # DDL SQL PostgreSQL para Créditos (Martín)
+│   └── feature-store/      # Esquemas Redis para Variables Alternativas (Martín)
 └── infra/
-    ├── docker/             # Dockerfiles y Docker Compose
-    └── terraform/          # Infraestructura como Código para Cloud (Andrés)
+    ├── docker/             # Dockerfiles y docker-compose.yml
+    └── terraform/          # Infraestructura como Código Docker Cloud (Andrés)
 ```
 
-### 4.4. Vista de Despliegue
-Mapea la asignación de componentes de software sobre los nodos de infraestructura cloud-native en la nube:
-
+### 5.4. Vista de Despliegue Web (*Web Application Archetype*)
 ```mermaid
 graph TD
-    subgraph Cliente ["Entorno de Cliente (Periferia)"]
-        A[Dispositivo Móvil iOS/Android - Flutter]
-        B[Navegador Web - Next.js App]
+    subgraph Browser_Tier [Capa de Navegador Web]
+        A1[Portal Web Next.js - Client Side]
+        A2[Dashboard UAT Streamlit - Client Side]
     end
 
-    subgraph CDN_Cloud ["Capa de Red & CDN"]
-        C[Cloudflare / AWS CloudFront]
-        D[API Gateway / Ingress NGINX]
+    subgraph Web_Server_Tier [Capa de Servidor Web Frontend]
+        B1[Contenedor Node.js - Next.js SSR]
+        B2[Contenedor NGINX Reverse Proxy]
     end
 
-    subgraph K8s_Cluster ["Clúster de Cómputo (Kubernetes / Cloud Run)"]
-        E[Pod: Next.js Frontend Server]
-        F[Pod: FastAPI / NestJS Core API]
-        G[Pod: MCP Agentic Mesh Servers]
-        H[Pod: Guardrail & Security Agent]
+    subgraph Business_Tier [Capa de Servicios y ML]
+        C1[Contenedor Core API FastAPI]
+        C2[Contenedor Motor ML XGBoost]
+        C3[Contenedor Agente Guardrail LOPDP]
     end
 
-    subgraph Data_Tier ["Capa de Datos Gestionada (VPC Privada)"]
-        I[(PostgreSQL Primary - ACID)]
-        J[(Qdrant / Pinecone Vector DB)]
+    subgraph Data_Tier [Capa de Datos e Infraestructura]
+        D1[(PostgreSQL Primary - ACID)]
+        D2[(Redis Feature Store - In-Memory)]
+        D3[(Qdrant Vector DB - RAG)]
     end
 
-    A -->|HTTPS / TLS 1.3| C
-    B -->|HTTPS / TLS 1.3| C
-    C --> D
-    D --> E
-    D --> F
-    F <--> H
-    F <--> G
-    F -->|SQL / ORM| I
-    G -->|Vector Query / gRPC| J
+    A1 -->|HTTPS TLS 1.3| B2
+    A2 -->|HTTPS TLS 1.3| B2
+    B2 --> B1
+    B2 --> C1
+    C1 <--> C3
+    C1 <--> C2
+    C1 -->|ORM SQL| D1
+    C2 -->|Fast Query < 50ms| D2
+    C1 -->|Vector Search| D3
 ```
 
-### 4.5. +1 Vista de Escenarios
-La arquitectura se valida mediante la traza de los casos de uso principales del reto empresarial sobre las cuatro vistas anteriores, asegurando la coherencia entre las capas de interfaz, control y persistencia.
+### 5.5. Vista de Despliegue Móvil (*Rich Mobile Client Archetype*)
+```mermaid
+graph TD
+    subgraph Mobile_Handheld_Tier [Dispositivo Móvil Socio]
+        M1[App Flutter Nativa ARM]
+        M2[Almacenamiento Seguro Keychain / Keystore]
+        M3[Sensores Biometría y Cámara]
+    end
+
+    subgraph Gateway_Security_Tier [Puerta de Entrada & Gateway]
+        G1[Contenedor NGINX API Gateway]
+        G2[Agente Guardián de Consentimiento LOPDP]
+    end
+
+    subgraph Mobile_Business_Tier [Capa de Negocio y Scoring ML]
+        MB1[Contenedor Core API FastAPI]
+        MB2[Contenedor Motor ML XGBoost]
+    end
+
+    subgraph Mobile_Data_Tier [Capa de Datos Persistente]
+        MD1[(PostgreSQL Primary - ACID)]
+        MD2[(Redis Feature Store - In-Memory)]
+        MD3[(Qdrant Vector DB - RAG)]
+    end
+
+    M1 -->|HTTPS TLS 1.3 REST| G1
+    M1 <--> M2
+    M1 <--> M3
+    G1 <--> G2
+    G1 --> MB1
+    MB1 <--> MB2
+    MB1 -->|ORM SQL| MD1
+    MB2 -->|Fast Query < 50ms| MD2
+    MB1 -->|Vector Search| MD3
+```
 
 ---
 
-## 5. Malla Agéntica, Gobernanza y DevSecOps
+## 6. Malla Agéntica, DevSecOps y Gobernanza LOPDP
 
-Alineados con el modelo operativo de la **Organización Agéntica (McKinsey)** [7]:
+1. **Cumplimiento LOPDP Ecuador**:
+   * Todos los datos personales identificables (PII) son anonimizados mediante *tokens* criptográficos antes de ser procesados por los modelos analíticos o la Malla Agéntica.
+   * Se almacena un registro de auditoría inmutable con la hora, usuario y consentimiento asociado a cada dictamen.
+2. **DevSecOps en GitHub Actions**:
+   * **SonarQube**: Revisa la mantenibilidad del código Python/Dart/TypeScript.
+   * **Guardrail Agents**: Verifican que ningún prompt exponga información financiera de los socios de la cooperativa.
+3. **Infraestructura Contenedorizada Docker**:
+   * Despliegue inmutable en contenedores Docker gestionados mediante Docker Compose y Cloud Run / ECS en red privada VPC.
 
-```
-[ Requisitos / ASRs ] ──> [ Agente Analista (Especificación) ]
-                                   │
-[ Código Fuente ]     ──> [ Anthony & Josué + Agentic Coding ]
-                                   │
-[ Integración CI ]    ──> [ Critic Agent (Pruebas Unitarias/E2E) ]
-                                   │
-[ DevSecOps Pipeline ]──> [ Guardrail Agent (Seguridad & Políticas) ] ──> [ Despliegue Cloud ]
-```
+---
 
-1. **Protocolo MCP**: Actúa como el estándar de integración abierta para conectar las herramientas del backend con los agentes sin acoplamientos rígidos.
-2. **DevSecOps Agéntico**: Alberto supervisa la ejecución de **Agentes Guardianes (*Guardrail Agents*)** dentro del pipeline de **GitHub Actions**, auditando el código contra vulnerabilidades OWASP antes de cada fusión (*merge*).
+## 7. Matriz de Entregables por Integrante
+
+| Integrante | Entregable Directo en el Repositorio | Ruta en GitHub |
+| :--- | :--- | :--- |
+| **Andrés** | Documento DAS, Dockerfiles, Docker Compose, Terraform | `docs/`, `infra/docker/` |
+| **Ronald** | Prototipos Figma, Sistema de Diseño UI | `apps/web/components/ui/` |
+| **Josué** | Apps Flutter, Next.js y Dashboard Streamlit | `apps/mobile/`, `apps/web/`, `apps/dashboard-uat/` |
+| **Anthony**| API FastAPI, Pipeline ML XGBoost y Servidores MCP | `services/core-api/`, `services/ml-scoring-engine/` |
+| **Martín** | Esquemas SQL PostgreSQL, Redis Feature Store | `database/migrations/`, `database/feature-store/` |
+| **Alberto**| Reglas SAST SonarQube, Guardrails LOPDP | `.github/workflows/devsecops.yml` |
+
+---
+
+## 8. Bibliografía de Referencia
+1. **ISO/IEC/IEEE 42010:2022**: *Software, systems and enterprise — Architecture description*.
+2. **ISO/IEC 25010:2011**: *System and software quality models (SQuaRE)*.
+3. **Microsoft Corporation (2009)**: *Microsoft Application Architecture Guide* (2nd ed. / v2).
+4. **Asamblea Nacional del Ecuador (2021)**: *Ley Orgánica de Protección de Datos Personales (LOPDP)*.
+5. **Bass, L., Clements, P., & Kazman, R. (2012)**: *Software Architecture in Practice* (3rd ed.).
+6. **Ulrich, W. (2010)**: *Business Architecture: Applying Business Capability Models*.
