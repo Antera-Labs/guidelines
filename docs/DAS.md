@@ -32,34 +32,49 @@ El proyecto es ejecutado por una empresa de software simulada con asignación ex
 
 ---
 
-## 2. Mapa de Capacidades del Negocio (Ulrich Methodology)
+## 2. Mapa de Capacidades del Negocio (Ulrich Methodology) – Nivel 3
 
-Para la elicitación ágil de requisitos de la Cooperativa Padre Julián Lorente, la arquitectura se estructura en torno a 5 Capacidades del Negocio estables:
-
+Para la elicitación ágil de requisitos de la Cooperativa Padre Julián Lorente, la arquitectura se divide en 7 Capacidades Operativas de la cadena de valor:
 ```
-┌───────────────────────────────────────────────────────────────────────────────────────────┐
-│                       MAPA DE CAPACIDADES DE ULRICH - COOPERATIVA LORENTE                 │
-├───────────────────────────────────────────────────────────────────────────────────────────┤
-│ 1. Gestión de Identidad, Consentimiento & LOPDP                                           │
-│    • Captura y trazabilidad del consentimiento explícito del socio.                       │
-│    • Anonimización y encriptación de datos sensibles socioeconómicos.                      │
-├───────────────────────────────────────────────────────────────────────────────────────────┤
-│ 2. Ingesta e Integración de Datos Híbridos                                                │
-│    • Conexión con Buró Tradicional (Histórico crediticio formal).                         │
-│    • Ingesta de Variables Alternativas Locales (Transacciones, estabilidad comercial).    │
-├───────────────────────────────────────────────────────────────────────────────────────────┤
-│ 3. Evaluación de Riesgo y Scoring Predictivo en Tiempo Real                               │
-│    • Ejecución del modelo de Machine Learning (Scikit-Learn / XGBoost).                   │
-│    • Cálculo del Score de crédito y probabilidad de mora.                                 │
-├───────────────────────────────────────────────────────────────────────────────────────────┤
-│ 4. Dictamen Automático y Ajuste de Condiciones                                            │
-│    • Generación de veredicto (Aprobado, Rechazado, Sujeto a Verificación).                │
-│    • Recomendación de límites de crédito, tasa y plazos ajustados al perfil.               │
-├───────────────────────────────────────────────────────────────────────────────────────────┤
-│ 5. Explicabilidad del Dictamen, Auditoría & UAT                                           │
-│    • Justificación del dictamen al analista vía Malla Agéntica y RAG de políticas.        │
-│    • Dashboard de analítica interactivo en Streamlit para validación con usuarios.         │
-└───────────────────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│              MAPA DE CAPACIDADES OPERATIVAS (ULRICH) - COOPERATIVA LORENTE                      │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 1. Gestión de Identidad y Consentimiento                                                        │
+│    • 1.1 Gestión de Solicitudes (Captura multicanal, Registro socioeconómico, Seguimiento)      │
+│    • 1.2 Gestión de Consentimiento (Firma, Trazabilidad, Revocación de consentimiento)          │
+│    • 1.3 Verificación y Pre-filtro (Validación identidad, Listas de control, Estado del socio)  │
+│    • 1.4 Protección de Datos Personales (Anonimización (tokens), Cifrado de datos sensibles)    │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 2. Integración de Datos Híbridos                                                                │
+│    • 2.1 Consulta de Buró Tradicional (Obtención reporte crediticio, Normalización historial)   │
+│    • 2.2 Gestión de Var. Alternativas (Ingesta transacciones locales, Estabilidad, Frecuencia)  │
+│    • 2.3 Consolidación Perfil del Socio (Construcción vector variables, Validación calidad)     │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 3. Evaluación de Riesgo Crediticio                                                              │
+│    • 3.1 Scoring Predictivo (Preparación variables, Inferencia modelo, Cálculo score [0-1000])  │
+│    • 3.2 Estimación de Riesgo (Prob. de incumplimiento (PD), Segmentación de riesgo)            │
+│    • 3.3 Análisis Capacidad de Pago (Análisis ingresos y egresos, Nivel de endeudamiento)       │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 4. Gestión de Dictamen y Condiciones                                                            │
+│    • 4.1 Dictamen Automático (Aplicación de reglas, Emisión de veredicto, Zona gris)            │
+│    • 4.2 Ajuste de Condiciones (Monto máximo recomendado, Tasa de interés, Plazo de pago)       │
+│    • 4.3 Evaluación Manual / Comité (Revisión expediente, Resolución comité, Justificación)     │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 5. Explicabilidad y Auditoría                                                                   │
+│    • 5.1 Explicabilidad del Dictamen (Factores determinantes, Políticas, Justificación)         │
+│    • 5.2 Auditoría y Trazabilidad (Registro Inmutable, Trazabilidad modelo, Reportes auditoría) │
+│    • 5.3 Validación con Usuarios (Tablero analítico, Pruebas UAT, Registro de hallazgos)        │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 6. Formalización y Desembolso                                                                   │
+│    • 6.1 Instrumentación Legal (Tabla de amortización, Contrato y pagare, Firma documentos)     │
+│    • 6.2 Gestión de Garantías (Registro de garantías, Valoración de garantías)                  │
+│    • 6.3 Desembolso y Liquidación (Transferencia de fondos, Activación del préstamo)            │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 7. Gestión de Cartera                                                                           │
+│    • 7.1 Monitoreo de Pagos (Registro de pagos, Control de mora, Alertas tempranas)             │
+│    • 7.2 Gestión de Cobranza (Recordatorios de pago, Cartera vencida, Acuerdos de pago)         │
+│    • 7.3 Retroalimentación del Modelo (Captura desempeño real, Reentrenamiento periódico)       │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
