@@ -23,7 +23,7 @@ El proyecto es ejecutado por una empresa de software simulada con asignación ex
 
 | Nombre | Rol de Equipo | Dominio Arquitectónico Principal | Estándar / Foco Primario |
 | :--- | :--- | :--- | :--- |
-| **Andrés** | Arquitecto de Software & Líder Técnico | Liderazgo arquitectónico, Integridad conceptual, Vistas 4+1, Gobernanza Docker/IaC | ISO/IEC/IEEE 42010:2022, Microsoft Arch Guide v2 |
+| **Andrés** | Arquitecto de Software | Liderazgo arquitectónico, Integridad conceptual, Vistas 4+1, Gobernanza Docker/IaC | ISO/IEC/IEEE 42010:2022, Microsoft Arch Guide v2 |
 | **Ronald** | Diseñador UX/UI | Capa de Presentación, Experiencia de Analista y Socio, Usabilidad | ISO/IEC 25010 (Usabilidad y Calidad en Uso) |
 | **Josué** | Desarrollador FrontEnd | Objetos Borde (*Boundary*), Clientes Web (Next.js), Móvil (Flutter) y UAT (Streamlit) | ISO/IEC 9126 / 25010 (Eficiencia en UI) |
 | **Anthony** | Desarrollador BackEnd | Objetos Control (*Control*), Microservicios de Scoring ML, Servidores MCP y APIs | ISO/IEC 12207 (Procesos de Software) |
