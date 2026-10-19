@@ -1,4 +1,4 @@
-# Documento de Descripción Arquitectónica de Software (DAS)
+# Documento de Arquitectura de Software (SAD)
 
 **Proyecto**: Sistema de Scoring de Crédito Basado en Analítica Predictiva y Variables Alternativas  
 **Cliente / Empresa**: Cooperativa de Ahorro y Crédito Padre Julián Lorente  
@@ -6,143 +6,102 @@
 **Marco de Trabajo**: Aprendizaje Basado en Retos (CBL) - Proyecto Bimestral Ascendere  
 **Estándar de Documentación**: ISO/IEC/IEEE 42010:2022 | Modelo 4+1 Vistas de Philippe Kruchten  
 **Organización / Repositorio**: Antera Labs / UTPL (`Antera Labs / Proyecto-Ascendere`)  
-**Versión**: 1.0.0 (Infraestructura Simplificada Docker & Separación Web/Móvil)  
+**Versión**: 1.0.0 (Oficial)  
+**Estado**: Aprobado para Desarrollo y Prototipado UAT  
 
 ---
 
-## 1. Información General, Contexto de Negocio y Control del Documento
+### Control y Metadatos del Documento
 
-### 1.1. Contexto del Reto Empresarial
-La Cooperativa de Ahorro y Crédito Padre Julián Lorente requiere optimizar la evaluación de riesgo crediticio en la colocación de créditos de consumo y microcréditos en el sur del Ecuador. Actualmente, la dependencia exclusiva de burós de crédito tradicionales genera rechazos innecesarios de microempresarios y pequeños comerciantes locales que carecen de historial bancario formal, derivando en análisis manuales lentos y costosos.
+#### Aprobador(es) del Documento:
+| **Nombre del Aprobador** | **Rol** |
+| :--- | :--- |
+| Armando Augusto Cabrera Silva | Docente Responsable & Evaluador del Reto (UTPL) |
+| Andrés | Arquitecto de Software Principal & Líder Técnico (Antera Labs) |
 
-**Objetivo General del Sistema**:
-Optimizar la evaluación de riesgo y reducir el tiempo de respuesta en la colocación de créditos en un **40%**, manteniendo o mejorando la calidad de la cartera mediante analítica predictiva, variables alternativas locales y cumplimiento estricto de la **Ley Orgánica de Protección de Datos Personales (LOPDP) del Ecuador**.
+#### Revisores del Documento:
+| **Nombre del Revisor** | **Rol** |
+| :--- | :--- |
+| Andrés | Arquitecto de Software & Gobernanza Cloud |
+| Anthony | Desarrollador BackEnd Lead & Malla Agéntica MCP |
+| Martín | Administrador de Base de Datos Lead (DBA & Feature Store) |
+| Alberto | Oficial de Seguridad & DevSecOps Lead (LOPDP Guardrails) |
+| Josué | Desarrollador FrontEnd Lead (Next.js, Flutter, Streamlit) |
+| Ronald | Diseñador UX/UI Lead (Figma & Sistema de Diseño) |
 
-### 1.2. Autores y Matriz de Responsabilidad del Equipo Multifuncional
-El proyecto es ejecutado por una empresa de software simulada con asignación explícita de dominios arquitectónicos:
-
-| Nombre | Rol de Equipo | Dominio Arquitectónico Principal | Estándar / Foco Primario |
+#### Resumen de Cambios:
+| **Versión** | **Fecha** | **Creado por** | **Descripción Corta de los Cambios** |
 | :--- | :--- | :--- | :--- |
-| **Andrés** | Arquitecto de Software | Liderazgo arquitectónico, Integridad conceptual, Vistas 4+1, Gobernanza Docker/IaC | ISO/IEC/IEEE 42010:2022, Microsoft Arch Guide v2 |
-| **Ronald** | Diseñador UX/UI | Capa de Presentación, Experiencia de Analista y Socio, Usabilidad | ISO/IEC 25010 (Usabilidad y Calidad en Uso) |
-| **Josué** | Desarrollador FrontEnd | Objetos Borde (*Boundary*), Clientes Web (Next.js), Móvil (Flutter) y UAT (Streamlit) | ISO/IEC 9126 / 25010 (Eficiencia en UI) |
-| **Anthony** | Desarrollador BackEnd | Objetos Control (*Control*), Microservicios de Scoring ML, Servidores MCP y APIs | ISO/IEC 12207 (Procesos de Software) |
-| **Martín** | Administrador de Base de Datos (DBA) | Objetos Entidad (*Entity*), PostgreSQL, Feature Store (Redis) y RAG (Qdrant) | ISO/IEC 25012 (Calidad de Datos) |
-| **Alberto** | Oficial de Seguridad & DevSecOps | Capa Transversal de Seguridad, Cumplimiento LOPDP y *Guardrail Agents* | ISO/IEC 27001, LOPDP Ecuador |
+| 0.1 | 12/10/2026 | Andrés | Borrador inicial del DAS bajo modelo 4+1 vistas. |
+| 0.5 | 15/10/2026 | Equipo Antera | Separación de arquetipos de infraestructura Web y Móvil. |
+| 1.0.0 | 19/10/2026 | Andrés | Versión oficial adaptada a la Plantilla SAD ISO/IEC/IEEE 42010. |
 
 ---
 
-## 2. Mapa de Capacidades del Negocio (Ulrich Methodology) – Nivel 3
+## 1. INTRODUCCIÓN
 
-Para la elicitación ágil de requisitos de la Cooperativa Padre Julián Lorente, la arquitectura se divide en 7 Capacidades Operativas de la cadena de valor:
-```
-┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
-│              MAPA DE CAPACIDADES OPERATIVAS (ULRICH) - COOPERATIVA LORENTE                      │
-├─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 1. Gestión de Identidad y Consentimiento                                                        │
-│    • 1.1 Gestión de Solicitudes (Captura multicanal, Registro socioeconómico, Seguimiento)      │
-│    • 1.2 Gestión de Consentimiento (Firma, Trazabilidad, Revocación de consentimiento)          │
-│    • 1.3 Verificación y Pre-filtro (Validación identidad, Listas de control, Estado del socio)  │
-│    • 1.4 Protección de Datos Personales (Anonimización (tokens), Cifrado de datos sensibles)    │
-├─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 2. Integración de Datos Híbridos                                                                │
-│    • 2.1 Consulta de Buró Tradicional (Obtención reporte crediticio, Normalización historial)   │
-│    • 2.2 Gestión de Var. Alternativas (Ingesta transacciones locales, Estabilidad, Frecuencia)  │
-│    • 2.3 Consolidación Perfil del Socio (Construcción vector variables, Validación calidad)     │
-├─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 3. Evaluación de Riesgo Crediticio                                                              │
-│    • 3.1 Scoring Predictivo (Preparación variables, Inferencia modelo, Cálculo score [0-1000])  │
-│    • 3.2 Estimación de Riesgo (Prob. de incumplimiento (PD), Segmentación de riesgo)            │
-│    • 3.3 Análisis Capacidad de Pago (Análisis ingresos y egresos, Nivel de endeudamiento)       │
-├─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 4. Gestión de Dictamen y Condiciones                                                            │
-│    • 4.1 Dictamen Automático (Aplicación de reglas, Emisión de veredicto, Zona gris)            │
-│    • 4.2 Ajuste de Condiciones (Monto máximo recomendado, Tasa de interés, Plazo de pago)       │
-│    • 4.3 Evaluación Manual / Comité (Revisión expediente, Resolución comité, Justificación)     │
-├─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 5. Explicabilidad y Auditoría                                                                   │
-│    • 5.1 Explicabilidad del Dictamen (Factores determinantes, Políticas, Justificación)         │
-│    • 5.2 Auditoría y Trazabilidad (Registro Inmutable, Trazabilidad modelo, Reportes auditoría) │
-│    • 5.3 Validación con Usuarios (Tablero analítico, Pruebas UAT, Registro de hallazgos)        │
-├─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 6. Formalización y Desembolso                                                                   │
-│    • 6.1 Instrumentación Legal (Tabla de amortización, Contrato y pagare, Firma documentos)     │
-│    • 6.2 Gestión de Garantías (Registro de garantías, Valoración de garantías)                  │
-│    • 6.3 Desembolso y Liquidación (Transferencia de fondos, Activación del préstamo)            │
-├─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 7. Gestión de Cartera                                                                           │
-│    • 7.1 Monitoreo de Pagos (Registro de pagos, Control de mora, Alertas tempranas)             │
-│    • 7.2 Gestión de Cobranza (Recordatorios de pago, Cartera vencida, Acuerdos de pago)         │
-│    • 7.3 Retroalimentación del Modelo (Captura desempeño real, Reentrenamiento periódico)       │
-└─────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+### 1.1. Propósito
+Este Documento de Arquitectura de Software (SAD) proporciona una visión integral, rigurosa y formal de la estructura del sistema de Scoring de Crédito para la Cooperativa de Ahorro y Crédito Padre Julián Lorente. Utiliza el Modelo de 4+1 Vistas de Philippe Kruchten y cumple strictly con el estándar internacional ISO/IEC/IEEE 42010:2022. Su objetivo es transmitir las decisiones arquitectónicas significativas a las partes interesadas (docente evaluador, directivos de la cooperativa, analistas de crédito y equipo de desarrollo), garantizando la trazabilidad entre los requisitos de negocio y la implementación en software.
+
+### 1.2. Alcance
+El sistema abarca la automatización inteligente del proceso de evaluación de riesgo crediticio para créditos de consumo y microcréditos. Integra la ingesta de información proveniente de burós tradicionales con variables alternativas locales (comportamiento transaccional, estabilidad de actividad comercial y patrones socioeconómicos regionales del sur del Ecuador). Incluye la clasificación de riesgo en tiempo real, la emisión de dictámenes automáticos (Aprobado, Rechazado o Sujeto a Verificación), la recomendación de límites crediticios y una interfaz de explicabilidad agéntica para el analista humano, todo operando bajo el estricto cumplimiento de la Ley Orgánica de Protección de Datos Personales (LOPDP) del Ecuador.
+
+### 1.3. Referencias
+| **#** | **Documento / Estándar** | **Resumen de Contenidos y Relevancia** |
+| :--- | :--- | :--- |
+| [REF1] | ISO/IEC/IEEE 42010:2022 | Estándar internacional para la especificación y organización de Descripciones Arquitectónicas. |
+| [REF2] | ISO/IEC 25010:2011 (SQuaRE) | Modelo de calidad del producto de software (Seguridad, Eficiencia, Mantenibilidad, Usabilidad). |
+| [REF3] | Ley Orgánica de Protección de Datos Personales (LOPDP) | Marco legal del Ecuador para la custodia, consentimiento y tratamiento de datos personales. |
+| [REF4] | Microsoft Application Architecture Guide v2 | Directrices para la separación estricta entre capas lógicas (Layers) y físicas (Tiers). |
+| [REF5] | Ulrich Business Capability Method | Metodología ágil para la elicitación de requisitos basada en el mapa de capacidades del negocio. |
+| [REF6] | OWASP Top 10 Web (2021) / Mobile (2024) | Estándar de seguridad para la mitigación de riesgos en aplicaciones web y móviles. |
+
+### 1.4. Visión General del Contenido del Documento
+A continuación, el documento detalla la representación arquitectónica, los objetivos y restricciones, la especificación de casos de uso significativos y la descomposición del sistema a través de las 4+1 Vistas de Kruchten (Lógica, Procesos, Implementación, Despliegue y Casos de Uso). Posteriormente, aborda la Vista de Datos, la evaluación de atributos de calidad basados en el estándar ISO 25010 y las medidas de seguridad transversales bajo las directrices OWASP Web y Mobile.
 
 ---
 
-## 3. Requerimientos Significativos para la Arquitectura (ASRs) y Calidad
-
-### 3.1. Atributos de Calidad Priorizados (ISO/IEC 9126 / ISO/IEC 25010)
-1. **Seguridad y Privacidad (ISO 25010 / LOPDP Ecuador)**: Garantizar confidencialidad e integridad con cifrado TLS 1.3 en tránsito, AES-256 en reposo, y *Guardrail Agents* para mitigar inyecciones de prompt y accesos no autorizados.
-2. **Eficiencia en el Tiempo (*Performance Efficiency*)**: Tiempo de respuesta de scoring predictivo en tiempo real **< 300 ms**, reduciendo el tiempo total de colocación en un 40%.
-3. **Mantenibilidad y Explicabilidad (*Maintainability & Analyzability*)**: Aislamiento del modelo de Machine Learning mediante microservicios y protocolo MCP, permitiendo recalibrar algoritmos sin rehacer la interfaz.
-4. **Disponibilidad y Portabilidad Containerizada (*Availability & Portability*)**: Operatividad del 99.9% mediante arquitectura de contenedores Docker aislados, despliegue inmutable y reinicio automático de contenedores.
-5. **Usabilidad (*Usability*)**: Interfaz táctil y web intuitiva (Flutter/Next.js) más tablero analítico (Streamlit) con tiempo de aprendizaje < 5 minutos para analistas de la cooperativa.
-
-### 3.2. Árbol de Utilidad (*Utility Tree*)
-```
-Utilidad del Sistema de Scoring
-├── Seguridad / LOPDP (Alto / Alto)
-│   └── Escenario 1: Un socio ingresa una solicitud de microcrédito. El sistema verifica el consentimiento explícito registrado en la BD. Si no existe consentimiento, el Guardrail Agent bloquea la consulta al buró y registra la auditoría en < 30 ms.
-├── Eficiencia de Tiempo (Alto / Alto)
-│   └── Escenario 2: El analista envía los datos socioeconómicos de un comerciante. La API orquesta la lectura de Redis (Feature Store), invoca el modelo XGBoost y retorna el score, dictamen y límite sugerido en < 250 ms.
-├── Mantenibilidad / Modificabilidad (Medio / Alto)
-│   └── Escenario 3: El equipo de analítica recalibra el modelo de scoring con nuevas variables del sur del Ecuador. Gracias al desacoplamiento vía microservicios en Docker y protocolo MCP, el nuevo modelo se despliega sin detener la API core.
-└── Disponibilidad en Contenedores Docker (Alto / Medio)
-    └── Escenario 4: Si un contenedor de la API de scoring sufre una sobrecarga o fallo, el motor de contenedores ejecuta una reinicialización de salud (health check) y recupera la instancia en < 2 segundos sin pérdida de estado.
-```
+## 2. REPRESENTACIÓN ARQUITECTÓNICA
+La arquitectura del sistema sigue un enfoque modular, multicapa y desacoplado, diseñado para soportar analítica predictiva e integración agéntica de IA. Se organiza bajo el patrón Borde-Control-Entidad (BCE) e integra los arquetipos de diseño del Microsoft Application Architecture Guide v2:
+* **Capa de Presentación (Objetos Borde / Boundary)**: Clientes independientes adaptados a su entorno (App Móvil en Flutter, Portal Web en Next.js y Dashboard Analítico UAT en Streamlit).
+* **Capa de Negocio y Analítica (Objetos Control / Control)**: Microservicios asíncronos en FastAPI, Motor de ML (Scikit-Learn/XGBoost) y Servidores del Model Context Protocol (MCP) para la Malla Agéntica.
+* **Capa de Persistencia y Datos (Objetos Entidad / Entity)**: Esquema híbrido compuesto por PostgreSQL (ACID), Redis (Feature Store en memoria para variables alternativas) y Qdrant (Base Vectorial RAG).
+* **Capa de Infraestructura y Despliegue**: Empaquetamiento inmutable en Contenedores Docker con despliegue físico desacoplado para web y móvil.
 
 ---
 
-## 4. Estructura Interna: Arquitectura en Capas (Patrón BCE y Microsoft Arch Guide v2)
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│ CAPA DE PRESENTACIÓN (Objetos BORDE / Boundary)                         │
-│  • App Móvil Socios: Flutter (iOS / Android)                            │
-│  • Web Socios / Portal: Next.js + Tailwind CSS + Shadcn UI              │
-│  • Dashboard Analistas / UAT: Streamlit (Python)                        │
-└────────────────────────────────────┬────────────────────────────────────┘
-                                     │ HTTP REST / WebSockets / MCP
-┌────────────────────────────────────▼────────────────────────────────────┐
-│ CAPA DE NEGOCIO Y ANALÍTICA (Objetos CONTROL / Control)                 │
-│  • Core API Microservicios: FastAPI (Python) / NestJS                   │
-│  • Motor de Scoring ML: Scikit-Learn / XGBoost (Inferencia de Riesgo)   │
-│  • Servidores MCP: Protocolo de Integración para Herramientas de IA     │
-│  • Malla Agéntica Explicativa & RAG: Razonamiento de Políticas          │
-│  • Security & LOPDP Guardrails: Agente de Validación                    │
-└────────────────────────────────────┬────────────────────────────────────┘
-                                     │ ORM / Feature Queries / Vectors
-┌────────────────────────────────────▼────────────────────────────────────┐
-│ CAPA DE PERSISTENCIA (Objetos ENTIDAD / Entity)                         │
-│  • Modelos Transaccionales (Socios, Solicitudes, Dictámenes)            │
-│  • Feature Store de Variables Alternativas Locales                      │
-│  • Embeddings Vectoriales de Políticas de Crédito                       │
-└────────────────────────────────────┬────────────────────────────────────┘
-                                     │ Conexiones Nativas de Datos
-┌────────────────────────────────────▼────────────────────────────────────┐
-│ CAPA DE DATOS E INFRAESTRUCTURA CONTENEDORIZADA (Docker)                │
-│  • Base Relacional Transaccional: PostgreSQL (ACID)                     │
-│  • Feature Store / Caché: Redis (< 50 ms latency)                       │
-│  • Base Vectorial RAG: Qdrant / pgvector                                │
-│  • Infraestructura Docker: Docker Compose + GCP Cloud Run / AWS ECS     │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+## 3. OBJETIVOS Y RESTRICCIONES ARQUITECTÓNICAS
+| **Atributo de Calidad** | **Meta Arquitectónica (ASR)** | **Mecanismo / Táctica de Diseño** |
+| :--- | :--- | :--- |
+| Eficiencia en Tiempo | Inferencia de scoring predictivo en < 300 ms. | Lectura de variables desde Redis Feature Store y ejecución asíncrona en FastAPI. |
+| Reducción de Tiempo | Reducir tiempo de colocación de crédito en un 40%. | Dictamen automático en tiempo real para el 80% de solicitudes viables. |
+| Seguridad / LOPDP | Cumplimiento estricto de la LOPDP Ecuador. | Guardrail Agents que verifican el consentimiento informado previo a la consulta. |
+| Disponibilidad | Disponibilidad del 99.9% en operación. | Despliegue de contenedores Docker con balanceo NGINX y reinicio automático. |
+| Mantenibilidad | Modificación del modelo ML sin alterar APIs. | Desacoplamiento del motor predictivo mediante protocolo abierto MCP. |
+| Portabilidad | Ejecución idéntica en desarrollo y producción. | Contenedores Docker inmutables y scripts declarativos de Terraform. |
 
 ---
 
-## 5. Representación en el Modelo de 4+1 Vistas (ISO/IEC/IEEE 42010:2022)
+## 4. VISTA DE CASOS DE USO
 
-### 5.1. Vista Lógica (*Logical View*)
+### 4.1. Especificación de Casos de Uso
+| **Código** | **Caso de Uso Clave** | **Actor Principal** | **Impacto y Requisito Arquitectónico** |
+| :--- | :--- | :--- | :--- |
+| UC-01 | Registro de Solicitud y Consentimiento LOPDP | Socio / Comerciante | Captura de firma digital y validación del permiso legal por el Guardrail Agent. |
+| UC-02 | Ingesta Híbrida de Variables Alternativas | Sistema Core API | Consulta simultánea a buró tradicional y lectura de Redis Feature Store (< 50 ms). |
+| UC-03 | Evaluación Predictiva de Scoring ML | Motor XGBoost | Ejecución de inferencia de riesgo y cálculo de probabilidad de mora en < 300 ms. |
+| UC-04 | Dictamen Automático y Condiciones | Motor de Reglas | Clasificación (Aprobado/Rechazado/Verificación) y cálculo de tasa/monto/plazo. |
+| UC-05 | Explicabilidad en Dashboard UAT | Analista de Crédito | Visualización en Streamlit del dictamen con justificación agéntica vía RAG. |
+| UC-06 | Auditoría de Transacción LOPDP | Oficial de Cumplimiento | Registro inmutable de trazabilidad de consulta en PostgreSQL. |
+
+---
+
+## 6. VISTA LÓGICA
+
+### 6.1. Visión General
+La Vista Lógica representa la descomposición funcional del sistema en componentes de software y sus abstracciones de dominio. Aplica el patrón Borde-Control-Entidad (BCE) para garantizar que las responsabilidades de interfaz, lógica de cálculo e ingesta de datos permanezcan desacopladas.
+
+### 6.2. Diagrama de Clases
 ```mermaid
 classDiagram
     class ClienteBorde {
@@ -184,7 +143,26 @@ classDiagram
     EntidadCredito --> PersistenciaDatos : Persiste en BD
 ```
 
-### 5.2. Vista de Procesos (*Process View*)
+### 6.3. Diccionario de Clases
+| **Nombre de Clase** | **Tipo BCE** | **Atributos Principales** | **Responsabilidad en el Sistema** |
+| :--- | :--- | :--- | :--- |
+| Socio | Entidad | id_socio, identificacion, nombres, actividad_economica | Representa al comerciante o solicitante en el sistema. |
+| SolicitudCredito | Entidad | id_solicitud, monto_solicitado, plazo_meses, estado | Mantiene el estado del trámite crediticio. |
+| ConsentimientoLOPDP | Entidad | id_consentimiento, fecha_firma, hash_firma, estado_vigente | Respaldo legal del permiso de tratamiento de datos. |
+| FeatureVectorLocal | Entidad | id_vector, f_transacciones_mes, f_estabilidad_local, f_buro | Variables socioeconómicas consolidadas para la IA. |
+| DictamenScoring | Entidad | id_dictamen, score_num, veredicto, limite_sugerido, tasa | Resultado numérico y cualitativo de la evaluación. |
+| GuardrailLopdpAgent | Control | apiKey, policyRules, auditLogger | Valida el consentimiento informado antes de consultar datos. |
+| XGBoostPredictiveEngine | Control | modelWeights, featureScaler, thresholdConfig | Ejecuta la inferencia de Machine Learning en tiempo real. |
+| StreamlitDashboard | Borde | sessionState, userRoles, renderComponents | Interfaz interactiva de validación UAT para analistas. |
+
+---
+
+## 7. VISTA DE PROCESOS
+
+### 7.1. Visión General
+La Vista de Procesos aborda el comportamiento dinámico en tiempo de ejecución, la concurrencia y la sincronización de tareas asíncronas durante el ciclo de vida del otorgamiento de crédito.
+
+### 7.2. Procesos y Flujos Clave (Diagramas de Secuencia)
 ```mermaid
 sequenceDiagram
     autonumber
@@ -209,135 +187,176 @@ sequenceDiagram
     Interface-->>Analista: Muestra resultado en pantalla
 ```
 
-### 5.3. Vista de Desarrollo (*Development View*)
+---
+
+## 8. VISTA DE IMPLEMENTACIÓN
+
+### 8.1. Visión General
+Esta vista describe la organización estática de los componentes de código fuente, bibliotecas y módulos en el monorepo de GitHub de Antera Labs (`Antera Labs / Proyecto-Ascendere`).
+
+### 8.2. Estructura de Componentes de Desarrollo
+* **Frontend Clients**: Aplicación móvil Flutter (`/apps/mobile`), aplicación web Next.js (`/apps/web`) y tablero analítico Streamlit (`/apps/dashboard-uat`).
+* **Backend Core & AI Services**: Microservicios en FastAPI (`/services/core-api`), motor de ML en Python (`/services/ml-scoring-engine`) y servidores del protocolo MCP (`/services/mcp-servers`).
+* **Data & Infrastructure**: Scripts de migración DDL SQL (`/database/migrations`), esquemas de Feature Store (`/database/feature-store`) y manifiestos Docker/Terraform (`/infra`).
+
+### 8.3. Estructura Detallada del Repositorio
 ```text
 /
-├── .github/
-│   └── workflows/          # CI/CD Pipelines en GitHub Actions
-│       ├── devsecops.yml   # SAST SonarQube + Auditoría LOPDP
-│       └── deploy-docker.yml # Despliegue de Contenedores Docker / Cloud Run
-├── docs/
-│   └── DAS-Scoring-Credito.md # Presente Documento DAS
+├── .github/workflows/          # Pipelines CI/CD DevSecOps (SonarQube + LOPDP)
+├── docs/                      # Documentación del Proyecto (SAD.md)
 ├── apps/
-│   ├── mobile/             # App Móvil en Flutter (Josué/Ronald)
-│   ├── web/                # Portal Web en Next.js (Josué/Ronald)
-│   └── dashboard-uat/      # Dashboard Analítico en Streamlit (Josué)
+│   ├── mobile/                # App Móvil Socios en Flutter (iOS/Android)
+│   ├── web/                   # Portal Web en Next.js + Tailwind CSS
+│   └── dashboard-uat/         # Dashboard Analítico para Analistas en Streamlit
 ├── services/
-│   ├── core-api/           # Microservicios FastAPI en Docker (Anthony)
-│   ├── ml-scoring-engine/  # Modelos Scikit-Learn/XGBoost en Python (Anthony)
-│   └── mcp-servers/        # Servidores MCP de Integración de IA
+│   ├── core-api/              # Microservicios en FastAPI / Python
+│   ├── ml-scoring-engine/     # Modelos de Machine Learning (Scikit-Learn / XGBoost)
+│   └── mcp-servers/           # Servidores MCP de Integración de IA
 ├── database/
-│   ├── migrations/         # DDL SQL PostgreSQL para Créditos (Martín)
-│   └── feature-store/      # Esquemas Redis para Variables Alternativas (Martín)
+│   ├── migrations/            # Scripts DDL PostgreSQL (Socios, Créditos, Auditoría)
+│   └── feature-store/         # Esquemas Redis para Variables Alternativas Locales
 └── infra/
-    ├── docker/             # Dockerfiles y docker-compose.yml
-    └── terraform/          # Infraestructura como Código Docker Cloud (Andrés)
+    ├── docker/                # Dockerfiles y Docker Compose
+    └── terraform/             # Scripts de Infraestructura como Código (IaC)
 ```
 
-### 5.4. Vista de Despliegue Web (*Web Application Archetype*)
-```mermaid
-graph TD
-    subgraph Browser_Tier [Capa de Navegador Web]
-        A1[Portal Web Next.js - Client Side]
-        A2[Dashboard UAT Streamlit - Client Side]
-    end
+### 8.4. Diagrama de Componentes de Desarrollo
+Los componentes de software interactúan mediante interfaces bien definidas: los clientes de frontend consumen endpoints REST expuestos por FastAPI; la Core API invoca las funciones del motor predictivo XGBoost vía llamadas locales en Python e integra la Malla Agéntica mediante conectores del protocolo MCP; la capa de persistencia abstrae el acceso a PostgreSQL y Redis mediante controladores SQLAlchemy y Redis-Py.
 
-    subgraph Web_Server_Tier [Capa de Servidor Web Frontend]
-        B1[Contenedor Node.js - Next.js SSR]
-        B2[Contenedor NGINX Reverse Proxy]
-    end
+---
 
-    subgraph Business_Tier [Capa de Servicios y ML]
-        C1[Contenedor Core API FastAPI]
-        C2[Contenedor Motor ML XGBoost]
-        C3[Contenedor Agente Guardrail LOPDP]
-    end
+## 9. VISTA DE DESPLIEGUE
 
-    subgraph Data_Tier [Capa de Datos e Infraestructura]
-        D1[(PostgreSQL Primary - ACID)]
-        D2[(Redis Feature Store - In-Memory)]
-        D3[(Qdrant Vector DB - RAG)]
-    end
+### 9.1. Visión General
+Fundamentado en el Microsoft Application Architecture Guide v2, el sistema adopta una arquitectura de contenedores Docker cloud-native. Para evitar acoplamientos innecesarios, se separan físicamente las topologías de despliegue de la Plataforma Web y de la Plataforma Móvil.
 
-    A1 -->|HTTPS TLS 1.3| B2
-    A2 -->|HTTPS TLS 1.3| B2
-    B2 --> B1
-    B2 --> C1
-    C1 <--> C3
-    C1 <--> C2
-    C1 -->|ORM SQL| D1
-    C2 -->|Fast Query < 50ms| D2
-    C1 -->|Vector Search| D3
+### 9.2. Diagrama de Despliegue
+
+#### Topología de Despliegue Web (Web Application Archetype):
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ 1. BROWSER CLIENT TIER (Navegador del Usuario)                                         │
+│    • Next.js App (React / TypeScript) + Tailwind CSS / Shadcn UI                      │
+│    • Streamlit Analytics Dashboard (Interface de prueba UAT para Analistas)            │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ HTTPS / TLS 1.3 / WebSockets
+┌───────────────────────────────────────────▼────────────────────────────────────────────┐
+│ 2. WEB SERVER TIER (Capa de Servidor Frontend en Contenedor)                           │
+│    • Node.js Container: Server-Side Rendering (SSR) & Static Site Generation (SSG)    │
+│    • NGINX Reverse Proxy Container (SSL Termination & Ingress Enrutamiento)             │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ Red Privada Interna de Contenedores
+┌───────────────────────────────────────────▼────────────────────────────────────────────┐
+│ 3. APPLICATION & BUSINESS TIER (Capa de Servicios de Negocio y ML)                     │
+│    • FastAPI Core API (Python)                                                         │
+│    • Motor Analítico ML: Scikit-Learn / XGBoost (Inferencia de Scoring < 300 ms)       │
+│    • Integración Agéntica: Servidores MCP (Model Context Protocol)                     │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ Consultas SQL / Feature Queries / Vectors
+┌───────────────────────────────────────────▼────────────────────────────────────────────┐
+│ 4. DATA TIER (Capa de Datos e Infraestructura)                                         │
+│    • PostgreSQL (Base Relacional Transaccional ACID)                                   │
+│    • Redis (Feature Store & Caché de Variables Alternativas Locales < 50 ms)           │
+│    • Qdrant (Base Vectorial de Políticas Crediticias para RAG)                         │
+└────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.5. Vista de Despliegue Móvil (*Rich Mobile Client Archetype*)
-```mermaid
-graph TD
-    subgraph Mobile_Handheld_Tier [Dispositivo Móvil Socio]
-        M1[App Flutter Nativa ARM]
-        M2[Almacenamiento Seguro Keychain / Keystore]
-        M3[Sensores Biometría y Cámara]
-    end
-
-    subgraph Gateway_Security_Tier [Puerta de Entrada & Gateway]
-        G1[Contenedor NGINX API Gateway]
-        G2[Agente Guardián de Consentimiento LOPDP]
-    end
-
-    subgraph Mobile_Business_Tier [Capa de Negocio y Scoring ML]
-        MB1[Contenedor Core API FastAPI]
-        MB2[Contenedor Motor ML XGBoost]
-    end
-
-    subgraph Mobile_Data_Tier [Capa de Datos Persistente]
-        MD1[(PostgreSQL Primary - ACID)]
-        MD2[(Redis Feature Store - In-Memory)]
-        MD3[(Qdrant Vector DB - RAG)]
-    end
-
-    M1 -->|HTTPS TLS 1.3 REST| G1
-    M1 <--> M2
-    M1 <--> M3
-    G1 <--> G2
-    G1 --> MB1
-    MB1 <--> MB2
-    MB1 -->|ORM SQL| MD1
-    MB2 -->|Fast Query < 50ms| MD2
-    MB1 -->|Vector Search| MD3
+#### Topología de Despliegue Móvil (Rich Mobile Client Archetype):
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ 1. HANDHELD MOBILE TIER (Dispositivo Móvil del Socio / Comerciante)                   │
+│    • Flutter App (Dart AOT compilado a código máquina nativo ARM para iOS / Android)   │
+│    • Almacenamiento Seguro Local: iOS Keychain / Android Keystore (Tokens JWT)         │
+│    • Sensores & Hardware: Biometría (FaceID/Huella), Cámara (Escaneo de Documentos)    │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ HTTPS / REST API / TLS 1.3
+┌───────────────────────────────────────────▼────────────────────────────────────────────┐
+│ 2. API GATEWAY & SECURITY TIER (Puerta de Entrada Móvil)                               │
+│    • NGINX API Gateway (Validación de Headers, Rate Limiting, Filtro Móvil)            │
+│    • Agente Guardián LOPDP: Verificación de Consentimiento Firmado por el Socio        │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ Red Privada Interna de Contenedores
+┌───────────────────────────────────────────▼────────────────────────────────────────────┐
+│ 3. APPLICATION & BUSINESS TIER (Capa de Servicios de Negocio y ML)                     │
+│    • FastAPI Core API (Python)                                                         │
+│    • Motor Analítico ML: Scikit-Learn / XGBoost (Inferencia de Scoring)                │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │ Consultas SQL / Feature Queries
+┌───────────────────────────────────────────▼────────────────────────────────────────────┐
+│ 4. DATA TIER (Capa de Datos e Infraestructura)                                         │
+│    • PostgreSQL (Base Relacional Transaccional)                                        │
+│    • Redis (Feature Store & Caché de Variables Alternativas Locales)                   │
+└────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 6. Malla Agéntica, DevSecOps y Gobernanza LOPDP
+## 10. VISTA DE DATOS
 
-1. **Cumplimiento LOPDP Ecuador**:
-   * Todos los datos personales identificables (PII) son anonimizados mediante *tokens* criptográficos antes de ser procesados por los modelos analíticos o la Malla Agéntica.
-   * Se almacena un registro de auditoría inmutable con la hora, usuario y consentimiento asociado a cada dictamen.
-2. **DevSecOps en GitHub Actions**:
-   * **SonarQube**: Revisa la mantenibilidad del código Python/Dart/TypeScript.
-   * **Guardrail Agents**: Verifican que ningún prompt exponga información financiera de los socios de la cooperativa.
-3. **Infraestructura Contenedorizada Docker**:
-   * Despliegue inmutable en contenedores Docker gestionados mediante Docker Compose y Cloud Run / ECS en red privada VPC.
+### 10.1. Visión General
+El sistema combina tres tecnologías de persistencia especializadas bajo la norma ISO/IEC 25012 de Calidad de Datos: PostgreSQL para transacciones relacionales ACID, Redis para el almacenamiento de variables alternativas en memoria y Qdrant para la búsqueda semántica de políticas crediticias en el motor RAG.
+
+### 10.2. Modelo de Datos
+El modelo relacional vincula la entidad `tb_socio` con sus `tb_solicitud_credito`, sus registros de `tb_consentimiento_lopdp`, sus `tb_feature_vector_local` socioeconómicos y sus `tb_dictamen_scoring` finales.
+
+### 10.3. Diccionarios de Datos
+
+#### Tabla: tb_socio
+| **Campo** | **Tipo de Dato** | **Null** | **Clave** | **Descripción** |
+| :--- | :--- | :--- | :--- | :--- |
+| id_socio | UUID | No | PK | Identificador único universal del socio. |
+| identificacion | VARCHAR(13) | No | Unique | Cédula o RUC del comerciante. |
+| nombres_completos | VARCHAR(150) | No | - | Nombres y apellidos anonimizables. |
+| actividad_economica | VARCHAR(100) | No | - | Sector comercial (ej. Comercio local, Textil). |
+
+#### Tabla: tb_dictamen_scoring
+| **Campo** | **Tipo de Dato** | **Null** | **Clave** | **Descripción** |
+| :--- | :--- | :--- | :--- | :--- |
+| id_dictamen | UUID | No | PK | Identificador único del dictamen. |
+| id_solicitud | UUID | No | FK | Referencia a la solicitud de crédito. |
+| score_num | INTEGER | No | - | Puntaje de crédito calculado (0 - 1000). |
+| veredicto | VARCHAR(30) | No | - | Aprobado, Rechazado o Sujeto a Verificación. |
+| monto_sugerido | DECIMAL(10,2) | No | - | Límite de crédito sugerido por la IA. |
 
 ---
 
-## 7. Matriz de Entregables por Integrante
+## 11. CALIDAD
 
-| Integrante | Entregable Directo en el Repositorio | Ruta en GitHub |
+### 11.1. Visión General
+El producto de software se evalúa formalmente bajo el estándar ISO/IEC 25010 (SQuaRE) e incorpora los principios de diseño de aplicaciones nativas en nube recomendados por la Cloud Native Computing Foundation (CNCF).
+
+### 11.2. Atributos de Calidad y Principios CNCF
+* **Inmutabilidad de Contenedores**: Cada microservicio se empaqueta en una imagen Docker inmutable que no modifica su estado interno en ejecución.
+* **Desacoplamiento y Resiliencia**: La caída del dashboard Streamlit no afecta la operación de la Core API de scoring ni el acceso a la base de datos.
+* **Explicabilidad y Transparencia**: Los dictámenes generados por el algoritmo ML son interpretados por la Malla Agéntica RAG, eliminando el sesgo de "caja negra".
+
+---
+
+## 12. SEGURIDAD
+
+### 12.1. Visión General
+La arquitectura aplica principios de Seguridad por Diseño (Security by Design), asegurando cifrado TLS 1.3 en tránsito, AES-256 en reposo, autenticación JWT con firma RSA y agentes guardianes LOPDP en el pipeline CI/CD.
+
+### 12.2. Seguridad de Aplicaciones Web OWASP (OWASP Top 10 Web 2021)
+| **Riesgo OWASP Web** | **Descripción del Riesgo** | **Medida de Mitigación en la Arquitectura** |
 | :--- | :--- | :--- |
-| **Andrés** | Documento DAS, Dockerfiles, Docker Compose, Terraform | `docs/`, `infra/docker/` |
-| **Ronald** | Prototipos Figma, Sistema de Diseño UI | `apps/web/components/ui/` |
-| **Josué** | Apps Flutter, Next.js y Dashboard Streamlit | `apps/mobile/`, `apps/web/`, `apps/dashboard-uat/` |
-| **Anthony**| API FastAPI, Pipeline ML XGBoost y Servidores MCP | `services/core-api/`, `services/ml-scoring-engine/` |
-| **Martín** | Esquemas SQL PostgreSQL, Redis Feature Store | `database/migrations/`, `database/feature-store/` |
-| **Alberto**| Reglas SAST SonarQube, Guardrails LOPDP | `.github/workflows/devsecops.yml` |
+| A01: Broken Access Control | Accesos no autorizados a datos de otros socios. | Validación de roles JWT (RBAC) e inspección de pertenencia en backend. |
+| A02: Cryptographic Failures | Exposición de datos sensibles en tránsito o reposo. | Cifrado TLS 1.3 en red interna y AES-256 para columnas sensibles en PostgreSQL. |
+| A03: Injection (SQL / Prompt) | Inyección de código SQL o manipulación del LLM. | Uso de ORM SQLAlchemy parametrizado y Guardrail Agents para prompts. |
+| A05: Security Misconfiguration | Configuraciones por defecto inseguras. | Escaneo estático automatizado con SonarQube en GitHub Actions. |
+
+### 12.3. Seguridad de Aplicaciones Móviles OWASP (OWASP Mobile Top 10 2024)
+| **Riesgo OWASP Mobile** | **Descripción del Riesgo** | **Medida de Mitigación en la Arquitectura** |
+| :--- | :--- | :--- |
+| M01: Improper Credential Usage | Almacenamiento inseguro de tokens de sesión. | Uso exclusivo de iOS Keychain y Android Keystore encriptados por hardware. |
+| M02: Insecure Communication | Intercepción de tráfico de red móvil. | SSL Pinning obligatorio en la app Flutter y certificado TLS 1.3 en NGINX Gateway. |
+| M04: Insecure Authentication | Autenticación débil en dispositivos cliente. | Autenticación biométrica nativa (FaceID/Huella) combinada con OAuth2/JWT. |
 
 ---
 
-## 8. Bibliografía de Referencia
-1. **ISO/IEC/IEEE 42010:2022**: *Software, systems and enterprise — Architecture description*.
-2. **ISO/IEC 25010:2011**: *System and software quality models (SQuaRE)*.
-3. **Microsoft Corporation (2009)**: *Microsoft Application Architecture Guide* (2nd ed. / v2).
-4. **Asamblea Nacional del Ecuador (2021)**: *Ley Orgánica de Protección de Datos Personales (LOPDP)*.
-5. **Bass, L., Clements, P., & Kazman, R. (2012)**: *Software Architecture in Practice* (3rd ed.).
-6. **Ulrich, W. (2010)**: *Business Architecture: Applying Business Capability Models*.
+## 13. INFORMACIÓN DE CONTACTO
+Para soporte técnico, consultas sobre la arquitectura o auditorías de cumplimiento, comunicarse con:
+* **Equipo de Desarrollo**: Antera Labs (UTPL / Proyecto Ascendere)
+* **Líder Técnico & Arquitecto Principal**: Andrés (`ascardenas5@utol.edu.ec`)
+* **Docente Responsable del Reto**: Armando Augusto Cabrera Silva (UTPL)
+* **Empresa Cliente**: Cooperativa de Ahorro y Crédito Padre Julián Lorente (Loja, Ecuador)
