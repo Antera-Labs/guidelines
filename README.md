@@ -65,7 +65,7 @@ Aplicando la **Metodología de Ulrich (Nivel 3)**, la solución se estructura en
 1. **Gestión de Identidad, Consentimiento & Gobierno LOPDP**: Captura y trazabilidad del consentimiento firmado del socio con anonimización de datos.
 2. **Ingesta e Integración de Datos Híbridos**: Agregación de datos de buró bancario tradicional y variables socioeconómicas alternativas regionales.
 3. **Pre-filtro y Validación de Elegibilidad Normativa**: Verificación automática de requisitos mínimos y estado del socio.
-4. **Evaluación de Riesgo y Scoring Predictivo**: Inferencia en tiempo real (< 300 ms) mediante modelos de Machine Learning (XGBoost / Scikit-Learn).
+4. **Evaluación de Riesgo y Scoring Predictivo**: Inferencia en tiempo real mediante modelos de Machine Learning (XGBoost / Scikit-Learn).
 5. **Motor de Decisiones y Dictamen Automático**: Emisión de veredicto (*Aprobado, Rechazado o Sujeto a Verificación*) y recomendación de monto, tasa y plazo.
 6. **Explicabilidad Agéntica del Dictamen, RAG & Asistencia UAT**: Asistencia al analista con justificación en lenguaje natural e interfaz interactiva en Streamlit.
 7. **Monitoreo de Cartera, Auditoría Inmutable & Retroalimentación**: Registro de trazabilidad y recalibración periódica del modelo con datos de pago reales.
