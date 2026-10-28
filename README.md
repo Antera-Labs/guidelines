@@ -112,12 +112,12 @@ El proyecto cuenta con un **Documento de Arquitectura de Software (SAD)** estruc
 
 ---
 
-## Pilares Tecnológicos y Gobernanza LOPDP
+## Pilares Tecnológicos y Gobernanza LOPDP 
 
 * **Seguridad & LOPDP**: Encriptación TLS 1.3 en tránsito y AES-256 en reposo. Inspección de prompts por agentes guardianes para garantizar el derecho a la privacidad.
 * **Eficiencia**: Respuesta del scoring en tiempo real (< 300 ms) y lecturas de variables socioeconómicas en Redis (< 50 ms).
 * **Escalabilidad**: Arquitectura basada en microservicios y contenedores Docker listos para crecimiento horizontal.
-* **Compromiso**: Inclusión financiera real para microempresarios y pequeños comerciantes del sur del Ecuador.
+* **Compromiso**: Inclusión financiera real para microempresarios y pequeños comerciantes del sur del Ecuador. 
 
 ---
 
