@@ -1,0 +1,746 @@
+{
+ "meta": {
+  "fuente": "Nube privada COAC PJL (simulada)",
+  "nota": "Datos de prueba: el tarifario fue transcrito de la hoja física y debe validarse.",
+  "version": "2026-11"
+ },
+ "productos": [
+  {
+   "id": 1,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Microcrédito minorista",
+   "nombre": "Micro Minorista",
+   "rangoVentas": "Ventas anuales iguales o inferiores a $20.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": 24.09,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 21.5,
+   "requiereAhorro": false,
+   "descripcion": "Capital de trabajo y activos para pequeños negocios.",
+   "tasaReferencial": 24.09,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 2,
+   "codigo": "650",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Microcrédito minorista",
+   "nombre": "Tu Plata al Toque",
+   "rangoVentas": "Ventas anuales iguales o inferiores a $20.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 550.0,
+   "plazoMaximoMeses": 6,
+   "tasaSinAhorro": 24.7,
+   "tasaConAhorro": 24.7,
+   "porcentajeAhorro": 10.0,
+   "tasaAhorro": 0.0,
+   "porcentajeAportacion": null,
+   "tasaConAportacion": null,
+   "requiereAhorro": false,
+   "descripcion": "Crédito inmediato de montos pequeños.",
+   "tasaReferencial": 24.7,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 3,
+   "codigo": "646",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Microcrédito minorista",
+   "nombre": "Micro Minorista Emergente",
+   "rangoVentas": "Ventas anuales iguales o inferiores a $20.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 1000.0,
+   "plazoMaximoMeses": 12,
+   "tasaSinAhorro": 24.7,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 23.5,
+   "requiereAhorro": false,
+   "descripcion": "Para emprendimientos que recién inician.",
+   "tasaReferencial": 24.7,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 4,
+   "codigo": "645",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Microcrédito minorista",
+   "nombre": "Micro Minorista Crediahorro",
+   "rangoVentas": "Ventas anuales iguales o inferiores a $20.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": null,
+   "tasaConAhorro": 24.09,
+   "porcentajeAhorro": 0.0,
+   "tasaAhorro": 8.19,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 20.5,
+   "requiereAhorro": true,
+   "descripcion": "Crédito respaldado con ahorro programado.",
+   "tasaReferencial": 24.09,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Ahorro programado que crece contigo",
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 5,
+   "codigo": "641",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Microcrédito minorista",
+   "nombre": "Microcrédito LC1 Minorista",
+   "rangoVentas": "Ventas anuales iguales o inferiores a $20.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 60000.0,
+   "plazoMaximoMeses": 48,
+   "tasaSinAhorro": 17.0,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 14.5,
+   "requiereAhorro": false,
+   "descripcion": "Línea de crédito con fondeo especial.",
+   "tasaReferencial": 17.0,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 6,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Microcrédito minorista",
+   "nombre": "Micro-Capital de Trabajo",
+   "rangoVentas": "Ventas anuales iguales o inferiores a $20.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 10000.0,
+   "plazoMaximoMeses": 24,
+   "tasaSinAhorro": 16.0,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": null,
+   "tasaConAportacion": null,
+   "requiereAhorro": false,
+   "descripcion": "Reposición de inventario y capital de trabajo.",
+   "tasaReferencial": 16.0,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 7,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación simple",
+   "nombre": "Micro AC. Simple",
+   "rangoVentas": "Ventas anuales de $20.000,01 hasta $120.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": 21.8,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 20.5,
+   "requiereAhorro": false,
+   "descripcion": "Para negocios en crecimiento.",
+   "tasaReferencial": 21.8,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 8,
+   "codigo": "646",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación simple",
+   "nombre": "Micro AC. Simple Emergente",
+   "rangoVentas": "Ventas anuales de $20.000,01 hasta $120.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 3000.0,
+   "plazoMaximoMeses": 12,
+   "tasaSinAhorro": 21.9,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 19.5,
+   "requiereAhorro": false,
+   "descripcion": "Liquidez rápida para imprevistos del negocio.",
+   "tasaReferencial": 21.9,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 9,
+   "codigo": "645",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación simple",
+   "nombre": "Micro AC. Simple Crediahorro",
+   "rangoVentas": "Ventas anuales de $20.000,01 hasta $120.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": null,
+   "tasaConAhorro": 21.8,
+   "porcentajeAhorro": 0.0,
+   "tasaAhorro": 8.19,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 15.4,
+   "requiereAhorro": true,
+   "descripcion": "Crédito respaldado con ahorro programado.",
+   "tasaReferencial": 21.8,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Ahorro programado que crece contigo",
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 10,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación simple",
+   "nombre": "Micro AC. Simple Agrícola",
+   "rangoVentas": "Ventas anuales de $20.000,01 hasta $120.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": 21.8,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 14.5,
+   "requiereAhorro": false,
+   "descripcion": "Siembra, cosecha y producción agropecuaria.",
+   "tasaReferencial": 21.8,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 11,
+   "codigo": "642",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación simple",
+   "nombre": "Microcrédito LC2 Simple",
+   "rangoVentas": "Ventas anuales de $20.000,01 hasta $120.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 60000.0,
+   "plazoMaximoMeses": 48,
+   "tasaSinAhorro": 16.5,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 14.5,
+   "requiereAhorro": false,
+   "descripcion": "Línea de crédito con fondeo especial.",
+   "tasaReferencial": 16.5,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 12,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación simple",
+   "nombre": "Micro-Capital de Trabajo",
+   "rangoVentas": "Ventas anuales de $20.000,01 hasta $120.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 10000.0,
+   "plazoMaximoMeses": 24,
+   "tasaSinAhorro": 16.5,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": null,
+   "tasaConAportacion": null,
+   "requiereAhorro": false,
+   "descripcion": "Reposición de inventario y capital de trabajo.",
+   "tasaReferencial": 16.5,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 13,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación ampliada",
+   "nombre": "Micro AC. Ampliada",
+   "rangoVentas": "Ventas anuales de $120.000,01 hasta $300.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": 19.8,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.3,
+   "tasaConAportacion": 18.3,
+   "requiereAhorro": false,
+   "descripcion": "Para negocios consolidados.",
+   "tasaReferencial": 19.8,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 14,
+   "codigo": "645",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación ampliada",
+   "nombre": "Micro AC. Ampliada Crediahorro",
+   "rangoVentas": "Ventas anuales de $120.000,01 hasta $300.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": null,
+   "tasaConAhorro": 19.8,
+   "porcentajeAhorro": 0.0,
+   "tasaAhorro": 8.19,
+   "porcentajeAportacion": 7.3,
+   "tasaConAportacion": 15.4,
+   "requiereAhorro": true,
+   "descripcion": "Crédito respaldado con ahorro programado.",
+   "tasaReferencial": 19.8,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Ahorro programado que crece contigo",
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 15,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación ampliada",
+   "nombre": "Micro AC. Ampliada Agrícola",
+   "rangoVentas": "Ventas anuales de $120.000,01 hasta $300.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 40000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": 19.8,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 15.4,
+   "requiereAhorro": false,
+   "descripcion": "Siembra, cosecha y producción agropecuaria.",
+   "tasaReferencial": 19.8,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 16,
+   "codigo": "643",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación ampliada",
+   "nombre": "Microcrédito LC3 Ampliada",
+   "rangoVentas": "Ventas anuales de $120.000,01 hasta $300.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 60000.0,
+   "plazoMaximoMeses": 48,
+   "tasaSinAhorro": 16.0,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 14.0,
+   "requiereAhorro": false,
+   "descripcion": "Línea de crédito con fondeo especial.",
+   "tasaReferencial": 16.0,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 17,
+   "codigo": "644",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación ampliada",
+   "nombre": "Microcrédito LC4 Ampliada",
+   "rangoVentas": "Ventas anuales de $120.000,01 hasta $300.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 80000.0,
+   "plazoMaximoMeses": 60,
+   "tasaSinAhorro": 15.9,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 13.5,
+   "requiereAhorro": false,
+   "descripcion": "Línea de crédito con fondeo especial.",
+   "tasaReferencial": 15.9,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 18,
+   "codigo": "640",
+   "segmento": "MICROCREDITO",
+   "subsegmento": "Acumulación ampliada",
+   "nombre": "Micro-Capital de Trabajo",
+   "rangoVentas": "Ventas anuales de $120.000,01 hasta $300.000,00",
+   "montoMinimo": 100.0,
+   "montoMaximo": 10000.0,
+   "plazoMaximoMeses": 24,
+   "tasaSinAhorro": 14.9,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": null,
+   "tasaConAportacion": null,
+   "requiereAhorro": false,
+   "descripcion": "Reposición de inventario y capital de trabajo.",
+   "tasaReferencial": 14.9,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "RUC o RISE del negocio",
+    "Declaraciones de IVA de los últimos 6 meses",
+    "Croquis del domicilio y del negocio"
+   ],
+   "beneficios": [
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 19,
+   "codigo": "620",
+   "segmento": "CONSUMO",
+   "subsegmento": "Consumo",
+   "nombre": "Consumo",
+   "rangoVentas": null,
+   "montoMinimo": 100.0,
+   "montoMaximo": 150000.0,
+   "plazoMaximoMeses": 72,
+   "tasaSinAhorro": 14.9,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 13.0,
+   "requiereAhorro": false,
+   "descripcion": "Para gastos personales y del hogar.",
+   "tasaReferencial": 14.9,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "Rol de pagos de los últimos 3 meses o certificado de ingresos",
+    "Croquis del domicilio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 20,
+   "codigo": "624",
+   "segmento": "CONSUMO",
+   "subsegmento": "Consumo",
+   "nombre": "Credi Ágil",
+   "rangoVentas": null,
+   "montoMinimo": 100.0,
+   "montoMaximo": 500.0,
+   "plazoMaximoMeses": 6,
+   "tasaSinAhorro": 14.9,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 12.85,
+   "requiereAhorro": false,
+   "descripcion": "Montos pequeños con respuesta inmediata.",
+   "tasaReferencial": 14.9,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "Rol de pagos de los últimos 3 meses o certificado de ingresos",
+    "Croquis del domicilio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 21,
+   "codigo": "623",
+   "segmento": "CONSUMO",
+   "subsegmento": "Consumo",
+   "nombre": "Crediahorro",
+   "rangoVentas": null,
+   "montoMinimo": 1000.0,
+   "montoMaximo": 5000.0,
+   "plazoMaximoMeses": 36,
+   "tasaSinAhorro": null,
+   "tasaConAhorro": 14.59,
+   "porcentajeAhorro": 0.0,
+   "tasaAhorro": 8.19,
+   "porcentajeAportacion": 7.0,
+   "tasaConAportacion": 13.0,
+   "requiereAhorro": true,
+   "descripcion": "Crédito respaldado con ahorro programado.",
+   "tasaReferencial": 14.59,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "Rol de pagos de los últimos 3 meses o certificado de ingresos",
+    "Croquis del domicilio"
+   ],
+   "beneficios": [
+    "Ahorro programado que crece contigo",
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 22,
+   "codigo": "623",
+   "segmento": "CONSUMO",
+   "subsegmento": "Consumo",
+   "nombre": "Credit on Demand",
+   "rangoVentas": "Hasta el 90 % del depósito a plazo fijo",
+   "montoMinimo": 100.0,
+   "montoMaximo": 5000.0,
+   "plazoMaximoMeses": 12,
+   "tasaSinAhorro": 11.2,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": null,
+   "tasaConAportacion": null,
+   "requiereAhorro": false,
+   "descripcion": "Crédito garantizado con tu depósito a plazo fijo.",
+   "tasaReferencial": 11.2,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "Rol de pagos de los últimos 3 meses o certificado de ingresos",
+    "Croquis del domicilio"
+   ],
+   "beneficios": [
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 23,
+   "codigo": "623",
+   "segmento": "CONSUMO",
+   "subsegmento": "Consumo",
+   "nombre": "Crediinversión",
+   "rangoVentas": null,
+   "montoMinimo": 100.0,
+   "montoMaximo": 150000.0,
+   "plazoMaximoMeses": 72,
+   "tasaSinAhorro": 13.5,
+   "tasaConAhorro": 14.3,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.3,
+   "tasaConAportacion": 13.0,
+   "requiereAhorro": false,
+   "descripcion": "Para invertir en tu hogar o tu formación.",
+   "tasaReferencial": 13.5,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "Rol de pagos de los últimos 3 meses o certificado de ingresos",
+    "Croquis del domicilio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  },
+  {
+   "id": 24,
+   "codigo": "621",
+   "segmento": "CONSUMO",
+   "subsegmento": "Consumo",
+   "nombre": "Crediconvenio",
+   "rangoVentas": "Empleados de instituciones con convenio",
+   "montoMinimo": 100.0,
+   "montoMaximo": 150000.0,
+   "plazoMaximoMeses": 72,
+   "tasaSinAhorro": 13.5,
+   "tasaConAhorro": null,
+   "porcentajeAhorro": null,
+   "tasaAhorro": null,
+   "porcentajeAportacion": 7.3,
+   "tasaConAportacion": 13.0,
+   "requiereAhorro": false,
+   "descripcion": "Descuento por rol para empresas con convenio.",
+   "tasaReferencial": 13.5,
+   "requisitos": [
+    "Cédula de identidad y certificado de votación",
+    "Planilla de un servicio básico",
+    "Rol de pagos de los últimos 3 meses o certificado de ingresos",
+    "Croquis del domicilio"
+   ],
+   "beneficios": [
+    "Tasa preferencial con certificados de aportación",
+    "Respuesta en línea para montos dentro del umbral automático"
+   ]
+  }
+ ]
+}

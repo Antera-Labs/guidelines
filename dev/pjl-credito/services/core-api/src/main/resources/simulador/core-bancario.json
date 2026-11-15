@@ -1,0 +1,2237 @@
+{
+ "1145525752": {
+  "numeroSocio": "PJL-010207",
+  "cedula": "1145525752",
+  "nombres": "María Fernanda",
+  "apellidos": "Jiménez Ochoa",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 64,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4072944452",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 347.51,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4119766809",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 110.83,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6051387232",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1104244296": {
+  "numeroSocio": "PJL-010214",
+  "cedula": "1104244296",
+  "nombres": "Gloria Esperanza",
+  "apellidos": "Ordóñez Aguirre",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 43,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4092286721",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1197.25,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4153557779",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 134.74,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 18,
+   "promedioDiasMora": 6.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1130181835": {
+  "numeroSocio": "PJL-010221",
+  "cedula": "1130181835",
+  "nombres": "Milton Rodrigo",
+  "apellidos": "Ochoa Ramón",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 158,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4085099370",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 534.02,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4128427370",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 252.75,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6052636263",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 5,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1107517433": {
+  "numeroSocio": "PJL-010228",
+  "cedula": "1107517433",
+  "nombres": "Darwin Patricio",
+  "apellidos": "Tinoco Jiménez",
+  "agencia": "Cariamanga",
+  "antiguedadMeses": 65,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4062150315",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5364.35,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4113817131",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 134.06,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1112574411": {
+  "numeroSocio": "PJL-010235",
+  "cedula": "1112574411",
+  "nombres": "Juan Pablo",
+  "apellidos": "Vivanco Torres",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 141,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4072807214",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1636.22,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4120650476",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 52.13,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6098568976",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 1,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1941394312": {
+  "numeroSocio": "PJL-010242",
+  "cedula": "1941394312",
+  "nombres": "Rosario del Pilar",
+  "apellidos": "Vega Eguiguren",
+  "agencia": "Zamora",
+  "antiguedadMeses": 72,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4092038337",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5498.47,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4162586564",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 106.34,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6058438171",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1106709585": {
+  "numeroSocio": "PJL-010249",
+  "cedula": "1106709585",
+  "nombres": "Manuel Agustín",
+  "apellidos": "Eguiguren Granda",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 99,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4056252278",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 324.36,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4195447294",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 65.15,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6095127232",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 30,
+   "promedioDiasMora": 10.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1117124873": {
+  "numeroSocio": "PJL-010256",
+  "cedula": "1117124873",
+  "nombres": "Rómulo Efraín",
+  "apellidos": "Riofrío Soto",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 180,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4035145458",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 3944.71,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4128181247",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 432.4,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6078918765",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 1,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1153281728": {
+  "numeroSocio": "PJL-010263",
+  "cedula": "1153281728",
+  "nombres": "Paola Andrea",
+  "apellidos": "Granda Ojeda",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 13,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4093358840",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 6282.32,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4116941652",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 129.56,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 18,
+   "promedioDiasMora": 6.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1130294901": {
+  "numeroSocio": "PJL-010270",
+  "cedula": "1130294901",
+  "nombres": "Sandra Patricia",
+  "apellidos": "Ojeda Sánchez",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 75,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4096099005",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1683.99,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4118879666",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 106.74,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 5,
+   "creditosCancelados": 5,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1117264372": {
+  "numeroSocio": "PJL-010277",
+  "cedula": "1117264372",
+  "nombres": "Hernán Gonzalo",
+  "apellidos": "Guarnizo Tinoco",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 93,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4082050989",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 517.08,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4177787975",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 98.65,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 26,
+   "promedioDiasMora": 8.67,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1117941821": {
+  "numeroSocio": "PJL-010284",
+  "cedula": "1117941821",
+  "nombres": "Carmen Lucía",
+  "apellidos": "Medina Abad",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 126,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4058510585",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 461.47,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4199990219",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 205.46,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6082789994",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 1,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 2,
+   "promedioDiasMora": 0.67,
+   "comportamiento": "BUENO"
+  }
+ },
+ "1133285526": {
+  "numeroSocio": "PJL-010291",
+  "cedula": "1133285526",
+  "nombres": "Luz Marina",
+  "apellidos": "Ordóñez Castillo",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 83,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4016684758",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 259.04,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4119677238",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 100.56,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6081320112",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1122138678": {
+  "numeroSocio": "PJL-010298",
+  "cedula": "1122138678",
+  "nombres": "Carmen Lucía",
+  "apellidos": "Quizhpe Torres",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 21,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4015802053",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 3021.97,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4177664826",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 151.9,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6046451022",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1121138711": {
+  "numeroSocio": "PJL-010305",
+  "cedula": "1121138711",
+  "nombres": "Gloria Esperanza",
+  "apellidos": "Ludeña Montesinos",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 177,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4070448378",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 326.17,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4146490554",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 422.37,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 34,
+   "promedioDiasMora": 11.33,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1116054279": {
+  "numeroSocio": "PJL-010312",
+  "cedula": "1116054279",
+  "nombres": "Franklin Geovanny",
+  "apellidos": "Valdivieso Jiménez",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 166,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4068572076",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5815.33,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4146078229",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 403.63,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1102472584": {
+  "numeroSocio": "PJL-010319",
+  "cedula": "1102472584",
+  "nombres": "Carmen Lucía",
+  "apellidos": "Tinoco Paladines",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 172,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4069136978",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 99.94,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4196729391",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 81.44,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6074312075",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 16,
+   "promedioDiasMora": 5.33,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1920674965": {
+  "numeroSocio": "PJL-010326",
+  "cedula": "1920674965",
+  "nombres": "Cristina Alejandra",
+  "apellidos": "Bravo Abad",
+  "agencia": "Zamora",
+  "antiguedadMeses": 135,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4092715683",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 3051.38,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4178893898",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 113.81,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6036890717",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 1,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1133156024": {
+  "numeroSocio": "PJL-010333",
+  "cedula": "1133156024",
+  "nombres": "Manuel Agustín",
+  "apellidos": "Loaiza Ludeña",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 152,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4013194060",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1581.56,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4156415762",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 454.99,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1146005739": {
+  "numeroSocio": "PJL-010340",
+  "cedula": "1146005739",
+  "nombres": "Cristina Alejandra",
+  "apellidos": "Correa Ochoa",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 171,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4029692736",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 837.34,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4110842528",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 97.85,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1108382274": {
+  "numeroSocio": "PJL-010347",
+  "cedula": "1108382274",
+  "nombres": "Byron Fabricio",
+  "apellidos": "Castillo Quizhpe",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 47,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4053210423",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5330.21,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4113521359",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 129.48,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6028006206",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1138836281": {
+  "numeroSocio": "PJL-010354",
+  "cedula": "1138836281",
+  "nombres": "Byron Fabricio",
+  "apellidos": "Guarnizo Chamba",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 17,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4052776706",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 2344.23,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4178235523",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 431.6,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1925731570": {
+  "numeroSocio": "PJL-010361",
+  "cedula": "1925731570",
+  "nombres": "Washington Darío",
+  "apellidos": "Loaiza Abad",
+  "agencia": "Zamora",
+  "antiguedadMeses": 19,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4023876681",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 151.93,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4113727153",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 435.47,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6082504440",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1143517918": {
+  "numeroSocio": "PJL-010368",
+  "cedula": "1143517918",
+  "nombres": "Nancy Beatriz",
+  "apellidos": "Cuenca Ludeña",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 38,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4023704212",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1675.5,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4124242436",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 80.4,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6047209848",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 14,
+   "promedioDiasMora": 4.67,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1147599326": {
+  "numeroSocio": "PJL-010375",
+  "cedula": "1147599326",
+  "nombres": "Hernán Gonzalo",
+  "apellidos": "Guarnizo Zhunaula",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 141,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4014784906",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 3467.91,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4118797246",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 128.83,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 16,
+   "promedioDiasMora": 5.33,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1147497067": {
+  "numeroSocio": "PJL-010382",
+  "cedula": "1147497067",
+  "nombres": "Diego Armando",
+  "apellidos": "Tinoco Ojeda",
+  "agencia": "Cariamanga",
+  "antiguedadMeses": 131,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4038681641",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 2971.79,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4163200139",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 99.27,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1137514574": {
+  "numeroSocio": "PJL-010389",
+  "cedula": "1137514574",
+  "nombres": "Verónica del Cisne",
+  "apellidos": "Riofrío Guarnizo",
+  "agencia": "Cariamanga",
+  "antiguedadMeses": 162,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4041989704",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 2571.0,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4112517208",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 422.43,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6054217671",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1130359233": {
+  "numeroSocio": "PJL-010396",
+  "cedula": "1130359233",
+  "nombres": "Jenny Maribel",
+  "apellidos": "Chamba Vega",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 139,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4011795015",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1268.97,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4199151305",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 416.76,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6053550733",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 5,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1147938250": {
+  "numeroSocio": "PJL-010403",
+  "cedula": "1147938250",
+  "nombres": "Carlos Eduardo",
+  "apellidos": "Chamba Cuenca",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 82,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4020438846",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 3226.01,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4179120398",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 132.02,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1156986877": {
+  "numeroSocio": "PJL-010410",
+  "cedula": "1156986877",
+  "nombres": "Hernán Gonzalo",
+  "apellidos": "Quizhpe Cuenca",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 28,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4019995860",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1842.6,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4168540346",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 84.37,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6012708201",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1124244318": {
+  "numeroSocio": "PJL-010417",
+  "cedula": "1124244318",
+  "nombres": "Teresa de Jesús",
+  "apellidos": "Torres Iñiguez",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 40,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4062331791",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 4506.91,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4167950157",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 242.08,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6072669619",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1123257303": {
+  "numeroSocio": "PJL-010424",
+  "cedula": "1123257303",
+  "nombres": "Sandra Patricia",
+  "apellidos": "Loaiza Vivanco",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 85,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4028051702",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 2127.32,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4183249389",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 444.55,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 42,
+   "promedioDiasMora": 14.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1135203915": {
+  "numeroSocio": "PJL-010431",
+  "cedula": "1135203915",
+  "nombres": "Klever Ricardo",
+  "apellidos": "Merino Armijos",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 111,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4032778108",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 4930.67,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4115798570",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 222.07,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 22,
+   "promedioDiasMora": 7.33,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1106633595": {
+  "numeroSocio": "PJL-010438",
+  "cedula": "1106633595",
+  "nombres": "Gloria Esperanza",
+  "apellidos": "Aguirre Armijos",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 132,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4037689789",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 2056.88,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4164179754",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 235.21,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6061274098",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 4,
+   "promedioDiasMora": 1.33,
+   "comportamiento": "BUENO"
+  }
+ },
+ "1130805318": {
+  "numeroSocio": "PJL-010445",
+  "cedula": "1130805318",
+  "nombres": "Verónica del Cisne",
+  "apellidos": "Torres Ochoa",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 137,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4027282903",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5622.21,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4189013680",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 419.54,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6035640746",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 26,
+   "promedioDiasMora": 8.67,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1110652102": {
+  "numeroSocio": "PJL-010452",
+  "cedula": "1110652102",
+  "nombres": "Sandra Patricia",
+  "apellidos": "Cueva Aguirre",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 120,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4023547531",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5088.45,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4121347961",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 98.1,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 35,
+   "promedioDiasMora": 11.67,
+   "comportamiento": "DEFICIENTE"
+  }
+ },
+ "1122891029": {
+  "numeroSocio": "PJL-010459",
+  "cedula": "1122891029",
+  "nombres": "Wilson Ramiro",
+  "apellidos": "Iñiguez Tinoco",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 116,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4096383960",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 958.27,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4117669670",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 250.06,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 28,
+   "promedioDiasMora": 9.33,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1119656781": {
+  "numeroSocio": "PJL-010466",
+  "cedula": "1119656781",
+  "nombres": "Marco Vinicio",
+  "apellidos": "Armijos Quizhpe",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 129,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4036015357",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 2469.99,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4111865701",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 251.08,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6090173639",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 43,
+   "promedioDiasMora": 14.33,
+   "comportamiento": "DEFICIENTE"
+  }
+ },
+ "1131655324": {
+  "numeroSocio": "PJL-010473",
+  "cedula": "1131655324",
+  "nombres": "Mónica Alexandra",
+  "apellidos": "Riofrío Cuenca",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 142,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4060902756",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 572.03,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4139015358",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 114.17,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6036986503",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 25,
+   "promedioDiasMora": 8.33,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1123110742": {
+  "numeroSocio": "PJL-010480",
+  "cedula": "1123110742",
+  "nombres": "Milton Rodrigo",
+  "apellidos": "Aguirre Valdivieso",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 95,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4011770352",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 3611.48,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4135339473",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 414.7,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 5,
+   "creditosCancelados": 5,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1152165989": {
+  "numeroSocio": "PJL-010487",
+  "cedula": "1152165989",
+  "nombres": "Verónica del Cisne",
+  "apellidos": "Paladines Sarango",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 22,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4063006994",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 443.63,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4140897496",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 455.03,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6010081690",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 30,
+   "promedioDiasMora": 10.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1105995201": {
+  "numeroSocio": "PJL-010494",
+  "cedula": "1105995201",
+  "nombres": "Diana Carolina",
+  "apellidos": "Cuenca Jiménez",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 82,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4065083253",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1526.23,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4163999531",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 100.3,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6077853652",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 1,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 45,
+   "promedioDiasMora": 15.0,
+   "comportamiento": "DEFICIENTE"
+  }
+ },
+ "1118963113": {
+  "numeroSocio": "PJL-010501",
+  "cedula": "1118963113",
+  "nombres": "Martha Cecilia",
+  "apellidos": "Cueva Aguirre",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 137,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4059386029",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 6025.62,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4175116500",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 159.79,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 19,
+   "promedioDiasMora": 6.33,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1115891986": {
+  "numeroSocio": "PJL-010508",
+  "cedula": "1115891986",
+  "nombres": "Fausto Leonardo",
+  "apellidos": "Vega Tinoco",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 126,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4082878549",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1804.78,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4189527853",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 157.19,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1126567435": {
+  "numeroSocio": "PJL-010515",
+  "cedula": "1126567435",
+  "nombres": "Byron Fabricio",
+  "apellidos": "Correa Sánchez",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 159,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4047328031",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 4690.21,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4166391747",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 405.83,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6051930888",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1118202553": {
+  "numeroSocio": "PJL-010522",
+  "cedula": "1118202553",
+  "nombres": "Paola Andrea",
+  "apellidos": "Ludeña Cuenca",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 141,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4064174869",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 4688.28,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4187510672",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 79.03,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6020126422",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1150342382": {
+  "numeroSocio": "PJL-010529",
+  "cedula": "1150342382",
+  "nombres": "Nancy Beatriz",
+  "apellidos": "Soto Vega",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 20,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4099073202",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1054.3,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4122075117",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 107.62,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6068944685",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 5,
+   "creditosCancelados": 5,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1144838099": {
+  "numeroSocio": "PJL-010536",
+  "cedula": "1144838099",
+  "nombres": "Rosa Elvira",
+  "apellidos": "Paladines Tinoco",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 171,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4013759450",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5908.83,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4180371142",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 239.37,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1143139242": {
+  "numeroSocio": "PJL-010543",
+  "cedula": "1143139242",
+  "nombres": "Milton Rodrigo",
+  "apellidos": "Granda Correa",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 40,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4093880627",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1276.1,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4192826704",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 101.54,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6061916437",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1134076460": {
+  "numeroSocio": "PJL-010550",
+  "cedula": "1134076460",
+  "nombres": "Blanca Azucena",
+  "apellidos": "Torres Guarnizo",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 68,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4098590432",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5639.69,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4151217373",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 242.73,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6096625478",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 2,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1101182911": {
+  "numeroSocio": "PJL-010557",
+  "cedula": "1101182911",
+  "nombres": "Mercedes Rosario",
+  "apellidos": "Vega Ojeda",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 157,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4019474809",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 1388.06,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4124350792",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 147.01,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1914685605": {
+  "numeroSocio": "PJL-010564",
+  "cedula": "1914685605",
+  "nombres": "Marco Vinicio",
+  "apellidos": "Zhunaula Vivanco",
+  "agencia": "Zamora",
+  "antiguedadMeses": 24,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4048172671",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 6146.32,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4115154322",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 218.32,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6027993616",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1150847141": {
+  "numeroSocio": "PJL-010571",
+  "cedula": "1150847141",
+  "nombres": "Rocío Elizabeth",
+  "apellidos": "Bravo Ojeda",
+  "agencia": "Cariamanga",
+  "antiguedadMeses": 33,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4078329280",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5119.61,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4114055970",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 89.82,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6093423364",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 5,
+   "creditosCancelados": 5,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1926671031": {
+  "numeroSocio": "PJL-010578",
+  "cedula": "1926671031",
+  "nombres": "Johanna Katherine",
+  "apellidos": "Sarango Medina",
+  "agencia": "Zamora",
+  "antiguedadMeses": 117,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4051782323",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 6365.1,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4180234013",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 241.55,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 3,
+   "creditosCancelados": 3,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1149451815": {
+  "numeroSocio": "PJL-010585",
+  "cedula": "1149451815",
+  "nombres": "Diana Carolina",
+  "apellidos": "Vega Bravo",
+  "agencia": "Cariamanga",
+  "antiguedadMeses": 173,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4099876849",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 3256.6,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4187879269",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 452.07,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1140874619": {
+  "numeroSocio": "PJL-010592",
+  "cedula": "1140874619",
+  "nombres": "Marco Vinicio",
+  "apellidos": "Zhunaula Medina",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 80,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4084741571",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 6051.81,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4136811614",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 228.89,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6013240078",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 1,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 34,
+   "promedioDiasMora": 11.33,
+   "comportamiento": "DEFICIENTE"
+  }
+ },
+ "1128065032": {
+  "numeroSocio": "PJL-010599",
+  "cedula": "1128065032",
+  "nombres": "Klever Ricardo",
+  "apellidos": "Ochoa Medina",
+  "agencia": "Cariamanga",
+  "antiguedadMeses": 32,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4067153637",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 5954.93,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4141529939",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 205.55,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6032170955",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 2000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 0,
+   "creditosCancelados": 0,
+   "maxDiasMoraHistorico": 7,
+   "promedioDiasMora": 2.33,
+   "comportamiento": "SIN_HISTORIAL"
+  }
+ },
+ "1126367083": {
+  "numeroSocio": "PJL-010606",
+  "cedula": "1126367083",
+  "nombres": "Carmen Lucía",
+  "apellidos": "Riofrío Valdivieso",
+  "agencia": "Loja Norte",
+  "antiguedadMeses": 46,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4075175781",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 364.79,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4153281012",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 64.66,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6074336813",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 5000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 11,
+   "promedioDiasMora": 3.67,
+   "comportamiento": "REGULAR"
+  }
+ },
+ "1133516516": {
+  "numeroSocio": "PJL-010613",
+  "cedula": "1133516516",
+  "nombres": "Luz Marina",
+  "apellidos": "Riofrío Aguirre",
+  "agencia": "Catamayo",
+  "antiguedadMeses": 41,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4022348085",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 6452.49,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4177345767",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 429.15,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "6039727708",
+    "tipo": "PLAZO_FIJO",
+    "nombre": "Depósito a plazo fijo",
+    "saldo": 10000.0,
+    "estado": "ACTIVA",
+    "plazoDias": 180,
+    "tasa": 7.25
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 2,
+   "creditosCancelados": 1,
+   "maxDiasMoraHistorico": 0,
+   "promedioDiasMora": 0.0,
+   "comportamiento": "EXCELENTE"
+  }
+ },
+ "1124053826": {
+  "numeroSocio": "PJL-010620",
+  "cedula": "1124053826",
+  "nombres": "Paola Andrea",
+  "apellidos": "Granda Abad",
+  "agencia": "Loja Centro",
+  "antiguedadMeses": 152,
+  "estado": "ACTIVO",
+  "cuentas": [
+   {
+    "numero": "4068968973",
+    "tipo": "AHORRO_VISTA",
+    "nombre": "Ahorro a la vista",
+    "saldo": 867.91,
+    "estado": "ACTIVA"
+   },
+   {
+    "numero": "4165997560",
+    "tipo": "CERTIFICADO_APORTACION",
+    "nombre": "Certificados de aportación",
+    "saldo": 106.18,
+    "estado": "ACTIVA"
+   }
+  ],
+  "historial": {
+   "creditosAnteriores": 4,
+   "creditosCancelados": 4,
+   "maxDiasMoraHistorico": 44,
+   "promedioDiasMora": 14.67,
+   "comportamiento": "DEFICIENTE"
+  }
+ }
+}

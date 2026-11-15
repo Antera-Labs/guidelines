@@ -1,0 +1,80 @@
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: pjl-core-api
+  profiles:
+    # "simulador" expone /sim/** (core bancario, buró y nube privada simulados) para desarrollo.
+    # En producción: SPRING_PROFILES_ACTIVE=produccion y las URL reales de integración.
+    default: simulador
+  datasource:
+    url: ${PJL_DB_URL:jdbc:oracle:thin:@//localhost:1521/FREEPDB1}
+    username: ${PJL_DB_USER:PJL_CREDITO}
+    password: ${PJL_DB_PASSWORD:PjlCredito2026}
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 20000
+      data-source-properties:
+        oracle.jdbc.J2EE13Compliant: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: America/Guayaquil
+  threads:
+    virtual:
+      enabled: true
+  # Correo saliente (recuperación de clave). En desarrollo: Mailpit del docker-compose.
+  mail:
+    host: ${PJL_SMTP_HOST:localhost}
+    port: ${PJL_SMTP_PORT:1025}
+    username: ${PJL_SMTP_USUARIO:}
+    password: ${PJL_SMTP_CLAVE:}
+    properties:
+      mail.smtp.auth: ${PJL_SMTP_AUTH:false}
+      mail.smtp.starttls.enable: ${PJL_SMTP_TLS:false}
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 8000
+      mail.smtp.writetimeout: 8000
+
+pjl:
+  jwt:
+    # Solo desarrollo. En producción: PJL_JWT_SECRET con 32 bytes o más.
+    secreto: ${PJL_JWT_SECRET:desarrollo-pjl-credito-clave-jwt-hs256-solo-local-2026}
+    minutos: 480
+  cors: ${PJL_CORS:http://localhost:4200,http://localhost:5173,http://localhost:8081,http://localhost:8082}
+  integraciones:
+    core-url: ${PJL_CORE_URL:http://localhost:${server.port}/sim/core}
+    externos-url: ${PJL_EXTERNOS_URL:http://localhost:${server.port}/sim/externos}
+    nube-url: ${PJL_NUBE_URL:http://localhost:${server.port}/sim/nube}
+    expediente-dir: ${PJL_EXPEDIENTE_DIR:${java.io.tmpdir}/pjl-expediente}
+  recuperacion:
+    # Dirección pública de la Web Trx: el enlace del correo apunta a <web-url>/restablecer
+    web-url: ${PJL_WEB_URL:http://localhost:8081}
+    remitente: ${PJL_CORREO_REMITENTE:LorenteScore <no-responder@pjl-credito.test>}
+    minutos: 30
+    # Solo con el perfil simulador: buzón de Mailpit que se muestra en la pantalla
+    buzon-desarrollo: ${PJL_BUZON_URL:http://localhost:8025}
+  motor:
+    umbral-automatico: 20000
+    modelo: logit-pjl-v1.2
+
+management:
+  health:
+    mail:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    ec.coop.pjl: INFO

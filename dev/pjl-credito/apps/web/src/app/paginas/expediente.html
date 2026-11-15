@@ -1,0 +1,555 @@
+<div class="pagina">
+  <a class="volver" routerLink="/solicitudes"><pjl-icono nombre="arrow-left" [tam]="16" /> Bandeja</a>
+
+  @if (error()) {
+    <div class="aviso-error" role="alert"><pjl-icono nombre="alerta" /> {{ error() }}</div>
+  } @else if (exp(); as e) {
+    <!-- Cabecera del expediente -->
+    <header class="exp-cab">
+      <div class="quien">
+        <div class="linea-id">
+          <span class="num">{{ e['numero'] }}</span>
+          <span class="insignia" [class]="'insignia ' + estado().clase">{{ estado().texto }}</span>
+          <span class="canal">{{ e['canal'] === 'MOVIL' ? 'Solicitada desde la app' : 'Agencia ' + e['agencia'] }}</span>
+        </div>
+        <h1>{{ e['socio'] }}</h1>
+        <p class="meta">
+          <span>Cédula {{ e['cedula'] | cedula }}</span>
+          <span>Socio {{ e['numeroSocio'] }}</span>
+          <span>{{ e['producto'] }} · {{ e['codigoProducto'] }}</span>
+          @if (e['asesor']) { <span>Asesor: {{ e['asesor'] }}</span> }
+        </p>
+      </div>
+      <div class="montos">
+        <span class="etq">Monto solicitado</span>
+        <strong class="num">{{ e['montoSolicitado'] | dinero }}</strong>
+        <span class="suave">{{ e['plazoMeses'] }} meses · {{ e['destino'] }}</span>
+        @if (e['montoAprobado']) {
+          <span class="aprobado num">Aprobado {{ e['montoAprobado'] | dinero }} · cuota {{ e['cuotaMensual'] | dinero }} · {{ e['tasaNominal'] | pct: 2 }}</span>
+        }
+      </div>
+    </header>
+
+    <!-- Pantallas pequeñas: «Siguiente paso» y las pestañas en una sola fila de botones -->
+    <pjl-vistas [opciones]="vistasChicas()" [vista]="vistaChica()" (vistaChange)="verVista($event)" etiqueta="Elegir sección del expediente" />
+
+    <!-- Ruta del Value Stream (rejilla de 6 columnas) -->
+    <ol class="ruta" [class.fuera-de-vista]="!enPaso()" aria-label="Etapas del Value Stream">
+      @for (et of etapas; track et.id) {
+        <li [class]="marca(et.id)" [attr.aria-current]="marca(et.id) === 'actual' ? 'step' : null">
+          <i class="m" aria-hidden="true"></i>
+          <span class="et-num">Etapa {{ et.id }}</span>
+          <span class="et-nombre">{{ et.nombre }}</span>
+          @if (marca(et.id) === 'actual' && e['estado'] !== 'DESEMBOLSADA') {
+            <span class="et-sub">{{ e['subetapa'] }} · {{ e['horasEnEtapa'] | horas }}</span>
+          }
+          @if (marca(et.id) === 'rechazada') { <span class="et-sub">Cerrada en {{ e['subetapa'] }}</span> }
+          <span class="sr-only">{{ marca(et.id) === 'hecha' ? 'completada' : marca(et.id) === 'actual' ? 'en curso' : marca(et.id) === 'rechazada' ? 'cerrada' : 'pendiente' }}</span>
+        </li>
+      }
+    </ol>
+
+    <!-- Siguiente paso -->
+    <section class="siguiente panel" [class.fuera-de-vista]="!enPaso()" aria-labelledby="sig-titulo">
+      @switch (e['estado']) {
+        @case ('RECHAZADA') {
+          <div class="sig-texto">
+            <h2 id="sig-titulo">Solicitud cerrada sin aprobación</h2>
+            <p>{{ ultimaDecision()?.['motivo'] ?? 'La solicitud no superó la validación.' }}</p>
+          </div>
+        }
+        @case ('DESEMBOLSADA') {
+          <div class="sig-texto">
+            <h2 id="sig-titulo">Crédito desembolsado</h2>
+            <p>Operación {{ e['numeroOperacion'] }}: el seguimiento continúa en cartera (etapa 6).</p>
+          </div>
+          <a class="btn btn-primario" [routerLink]="['/cartera', e['idCredito']]">Ver crédito {{ e['numeroOperacion'] }}</a>
+        }
+        @case ('EN_COMITE') {
+          <div class="sig-texto">
+            <h2 id="sig-titulo">Resolución del comité</h2>
+            <p>{{ ultimaDecision()?.['motivo'] }}</p>
+          </div>
+          @if (sesion.puede('COMITE')) {
+            <form class="formulario sig-form" (ngSubmit)="resolverComite()">
+              <fieldset class="c12 opciones" aria-label="Dictamen">
+                <label class="opcion"><input type="radio" name="dictamen" value="APROBADO" [(ngModel)]="comite.dictamen" /><span>Aprobar</span></label>
+                <label class="opcion"><input type="radio" name="dictamen" value="RECHAZADO" [(ngModel)]="comite.dictamen" /><span>Rechazar</span></label>
+              </fieldset>
+              <div class="campo c12">
+                <label for="motivo">Motivo de la resolución</label>
+                <textarea id="motivo" class="entrada" name="motivo" [(ngModel)]="comite.motivo" rows="3" placeholder="Fundamenta la decisión con los factores revisados"></textarea>
+              </div>
+              <div class="campo c3"><label for="acta">Acta</label><input id="acta" class="entrada" name="acta" [(ngModel)]="comite.acta" placeholder="AC-2026-210" /></div>
+              <div class="campo c2"><label for="vf">Votos a favor</label><input id="vf" class="entrada num" type="number" min="0" name="vf" [(ngModel)]="comite.votosFavor" /></div>
+              <div class="campo c2"><label for="vc">En contra</label><input id="vc" class="entrada num" type="number" min="0" name="vc" [(ngModel)]="comite.votosContra" /></div>
+              @if (comite.dictamen === 'APROBADO') {
+                <div class="campo c3"><label for="mc">Monto a aprobar</label><div class="entrada-prefijo"><span>$</span><input id="mc" class="entrada num" type="number" name="mc" [(ngModel)]="comite.montoAprobado" [placeholder]="e['montoSolicitado']" /></div></div>
+                <div class="campo c2"><label for="pc">Plazo (meses)</label><input id="pc" class="entrada num" type="number" name="pc" [(ngModel)]="comite.plazoMeses" [placeholder]="e['plazoMeses']" /></div>
+              }
+              <div class="c12 acciones">
+                <button class="btn" [class.btn-primario]="comite.dictamen === 'APROBADO'" [class.btn-peligro]="comite.dictamen === 'RECHAZADO'" type="submit" [disabled]="!!trabajando()">
+                  @if (trabajando() === 'comite') { <span class="giro"></span> } <pjl-icono nombre="comite" />
+                  {{ comite.dictamen === 'APROBADO' ? 'Registrar aprobación' : 'Registrar rechazo' }}
+                </button>
+              </div>
+            </form>
+          } @else {
+            <p class="suave">Solo el comité de crédito registra esta resolución.</p>
+          }
+        }
+        @case ('APROBADA') {
+          @if (!e['aceptadaSocio']) {
+            <div class="sig-texto">
+              <h2 id="sig-titulo">Oferta enviada al socio</h2>
+              <p>{{ e['montoAprobado'] | dinero }} a {{ e['plazoAprobado'] }} meses, cuota {{ e['cuotaMensual'] | dinero }}. Garantía: {{ e['detalleGarantia'] }}. El socio la acepta desde la app o en agencia.</p>
+            </div>
+            @if (sesion.puede('ANALISTA', 'RIESGO', 'COMITE')) {
+              @if (!ajustando()) {
+                <button class="btn" type="button" (click)="ajustando.set(true)">Ajustar condiciones</button>
+              } @else {
+                <form class="formulario sig-form" (ngSubmit)="guardarAjuste()">
+                  <div class="campo c3"><label for="am">Monto aprobado</label><div class="entrada-prefijo"><span>$</span><input id="am" class="entrada num" type="number" name="am" [(ngModel)]="ajuste.montoAprobado" /></div></div>
+                  <div class="campo c2"><label for="ap">Plazo (meses)</label><input id="ap" class="entrada num" type="number" name="ap" [(ngModel)]="ajuste.plazoMeses" /></div>
+                  <div class="campo c3">
+                    <label for="ag">Garantía</label>
+                    <select id="ag" class="entrada" name="ag" [(ngModel)]="ajuste.tipoGarantia">
+                      <option value="SOBRE_FIRMAS">Sobre firmas</option><option value="GARANTE_PERSONAL">Garante personal</option>
+                      <option value="HIPOTECARIA">Hipotecaria</option><option value="PRENDARIA">Prendaria</option><option value="AHORRO_ENCAJE">Encaje de ahorro</option>
+                    </select>
+                  </div>
+                  <div class="campo c4"><label for="ad">Detalle de la garantía</label><input id="ad" class="entrada" name="ad" [(ngModel)]="ajuste.detalleGarantia" /></div>
+                  <div class="c12 acciones">
+                    <button class="btn btn-primario" type="submit" [disabled]="!!trabajando()">@if (trabajando() === 'ajuste') { <span class="giro"></span> } Guardar condiciones</button>
+                    <button class="btn btn-fantasma" type="button" (click)="ajustando.set(false)">Cancelar</button>
+                  </div>
+                </form>
+              }
+            }
+          } @else if (!formalizado()) {
+            <div class="sig-texto">
+              <h2 id="sig-titulo">Formalización</h2>
+              <p>El socio aceptó la oferta. Registra la firma de contrato, pagaré y garantías.</p>
+            </div>
+            @if (sesion.puede('OPERACIONES')) {
+              <form class="sig-form checks" (ngSubmit)="formalizar()">
+                <label class="casilla"><input type="checkbox" name="c" [(ngModel)]="formal.contratoFirmado" /> Contrato de crédito firmado</label>
+                <label class="casilla"><input type="checkbox" name="p" [(ngModel)]="formal.pagareFirmado" /> Pagaré firmado</label>
+                <label class="casilla"><input type="checkbox" name="g" [(ngModel)]="formal.garantiasConstituidas" /> Garantías constituidas ({{ e['detalleGarantia'] }})</label>
+                <button class="btn btn-primario" type="submit" [disabled]="!!trabajando()">@if (trabajando() === 'formal') { <span class="giro"></span> } Guardar formalización</button>
+              </form>
+            } @else { <p class="suave">Operaciones registra la formalización.</p> }
+          } @else {
+            <div class="sig-texto">
+              <h2 id="sig-titulo">Listo para desembolso</h2>
+              <p>Se acreditarán {{ e['montoAprobado'] | dinero }} en la cuenta de ahorros del socio en el core y se generará la tabla de amortización.</p>
+            </div>
+            @if (sesion.puede('OPERACIONES')) {
+              <button class="btn btn-primario btn-grande" type="button" (click)="desembolsar()" [disabled]="!!trabajando()">
+                @if (trabajando() === 'desembolso') { <span class="giro"></span> } @else { <pjl-icono nombre="banknote" /> } Desembolsar {{ e['montoAprobado'] | dinero }}
+              </button>
+            } @else { <p class="suave">Operaciones ejecuta el desembolso.</p> }
+          }
+        }
+        @default {
+          @if (sub() === '1.1' || sub() === '1.2') {
+            <div class="sig-texto">
+              <h2 id="sig-titulo">Validar identidad (KYC)</h2>
+              <p>Consulta la cédula en el Registro Civil, la biometría y las listas restrictivas UAFE, OFAC y ONU.</p>
+            </div>
+            @if (sesion.puede('ASESOR', 'ANALISTA')) {
+              <button class="btn btn-primario" type="button" (click)="validarIdentidad()" [disabled]="!!trabajando()">
+                @if (trabajando() === 'kyc') { <span class="giro"></span> } @else { <pjl-icono nombre="escudo" /> } Validar identidad
+              </button>
+            }
+          } @else {
+            <div class="sig-texto">
+              <h2 id="sig-titulo">{{ sub() === '1.3' ? 'Recolección documental' : 'Evaluación automática (etapas 2 a 4)' }}</h2>
+              <p>
+                @if (sub() === '1.3') { Sube los respaldos al expediente digital. Con la cédula, la planilla y un respaldo de ingresos se habilita el motor. }
+                @else { El motor consulta el core, el buró y la central de riesgos, aplica filtros, capacidad de pago, score y matriz de decisión. }
+              </p>
+              @if (!e['tieneConsentimiento']) {
+                <p class="falta"><pjl-icono nombre="candado" [tam]="16" /> El socio aún no firma la autorización LOPDP: sin ella no se consulta el buró.</p>
+              }
+              @if (sub() === '1.3') {
+                <ul class="requisitos">
+                  <li [class.ok]="tieneDoc('CEDULA')"><pjl-icono [nombre]="tieneDoc('CEDULA') ? 'ok' : 'documento'" [tam]="16" /> Cédula</li>
+                  <li [class.ok]="tieneDoc('PLANILLA_SERVICIO')"><pjl-icono [nombre]="tieneDoc('PLANILLA_SERVICIO') ? 'ok' : 'documento'" [tam]="16" /> Planilla de servicio</li>
+                  <li [class.ok]="tieneDoc('ROL_PAGOS') || tieneDoc('RUC_RISE') || tieneDoc('DECLARACION_SRI')"><pjl-icono [nombre]="tieneDoc('ROL_PAGOS') || tieneDoc('RUC_RISE') || tieneDoc('DECLARACION_SRI') ? 'ok' : 'documento'" [tam]="16" /> Respaldo de ingresos</li>
+                </ul>
+              }
+            </div>
+            <div class="acciones">
+              @if (sub() === '1.3') {
+                <button class="btn" type="button" (click)="verVista('documentos')"><pjl-icono nombre="subir" /> Subir documentos</button>
+              }
+              @if (sesion.puede('ASESOR', 'ANALISTA', 'RIESGO')) {
+                <button class="btn btn-primario" type="button" (click)="procesar()" [disabled]="!!trabajando() || (sub() === '1.3' && !docsCompletos())">
+                  @if (trabajando() === 'motor') { <span class="giro"></span> Evaluando… } @else { <pjl-icono nombre="motor" /> Ejecutar motor de evaluación }
+                </button>
+              }
+            </div>
+          }
+        }
+      }
+      @if (errorAccion()) { <p class="error-accion" role="alert"><pjl-icono nombre="alerta" [tam]="16" /> {{ errorAccion() }}</p> }
+    </section>
+
+    <!-- Pestañas -->
+    <div class="pestanas solo-grande" role="tablist" aria-label="Secciones del expediente">
+      @for (t of [['evaluacion', 'Evaluación'], ['solicitud', 'Solicitud'], ['datos', 'Datos y buró'], ['documentos', 'Documentos'], ['linea', 'Línea de tiempo']]; track t[0]) {
+        <button role="tab" type="button" [id]="'tab-' + t[0]" [attr.aria-selected]="pestana() === t[0]" [attr.aria-controls]="'panel-' + t[0]"
+                [tabindex]="pestana() === t[0] ? 0 : -1" (click)="pestana.set($any(t[0]))">{{ t[1] }}
+          @if (t[0] === 'documentos') { <span class="cuenta">{{ e['documentos'].length }}</span> }
+        </button>
+      }
+    </div>
+
+    <div class="panel contenido" [class.fuera-de-vista]="enPaso()" role="tabpanel" [id]="'panel-' + pestana()" [attr.aria-labelledby]="'tab-' + pestana()">
+      @switch (pestana()) {
+        @case ('evaluacion') {
+          @if (e['score']) {
+            <div class="eval">
+              <section class="score-bloque" aria-labelledby="t-score">
+                <h3 id="t-score">Score</h3>
+                <div class="score-fila">
+                  <strong class="score num">{{ e['score'] }}</strong>
+                  <pjl-riesgo [categoria]="e['categoriaRiesgo']" />
+                  <dl class="mini">
+                    <div><dt>Probabilidad de default</dt><dd class="num">{{ e['probabilidadDefault'] | pct: 2 : true }}</dd></div>
+                    <div><dt>Modelo</dt><dd>{{ e['modelo'] }}</dd></div>
+                  </dl>
+                </div>
+                <div class="escala" role="img" [attr.aria-label]="'Score ' + e['score'] + ' de 1000, categoría ' + e['categoriaRiesgo']">
+                  @for (c of cortes; track c.cat) {
+                    <span [class]="'tramo riesgo-' + c.cat" [style.flex]="c.hasta - c.desde">{{ c.cat }}</span>
+                  }
+                  <i class="marcador" [style.left.%]="marcador()"></i>
+                </div>
+                <div class="escala-ejes num"><span>0</span><span>500</span><span>580</span><span>650</span><span>720</span><span>1000</span></div>
+              </section>
+
+              <section aria-labelledby="t-filtros">
+                <h3 id="t-filtros">Filtros de política</h3>
+                <ul class="filtros">
+                  @for (f of filtros; track f.clave) {
+                    <li [class.no]="!e[f.clave]"><pjl-icono [nombre]="e[f.clave] ? 'ok' : 'no'" [tam]="18" /> {{ f.texto }}</li>
+                  }
+                </ul>
+              </section>
+
+              <section aria-labelledby="t-cap">
+                <h3 id="t-cap">Capacidad de pago</h3>
+                <dl class="datos">
+                  <div><dt>Ingreso mensual</dt><dd class="num">{{ e['ingresoMensual'] | dinero }}</dd></div>
+                  <div><dt>Gasto mensual</dt><dd class="num">{{ e['gastoMensual'] | dinero }}</dd></div>
+                  <div><dt>Cuota propuesta</dt><dd class="num">{{ e['cuotaPropuesta'] | dinero }}</dd></div>
+                  <div><dt>Cuotas en el sistema</dt><dd class="num">{{ e['cuotasSfn'] | dinero }}</dd></div>
+                  <div><dt>Flujo disponible</dt><dd class="num" [class.negativo]="e['flujoDisponible'] < 0">{{ e['flujoDisponible'] | dinero }}</dd></div>
+                  <div><dt>Endeudamiento</dt><dd class="num">{{ e['nivelEndeudamiento'] | pct: 1 : true }}</dd></div>
+                </dl>
+                <div class="rci">
+                  <div class="rci-cab"><span>Cuota / ingreso</span><strong class="num">{{ e['ratioCuotaIngreso'] | pct: 1 : true }}</strong></div>
+                  <div class="rci-barra" role="img" [attr.aria-label]="'Cuota sobre ingreso ' + (e['ratioCuotaIngreso'] * 100).toFixed(1) + ' por ciento; límite automático 40, knock-out 50'">
+                    <i [style.width.%]="e['ratioCuotaIngreso'] * 100 / 0.6" [class.alto]="e['ratioCuotaIngreso'] > 0.4"></i>
+                    <span class="tope" style="left: 66.6%">40 %</span><span class="tope ko" style="left: 83.3%">50 %</span>
+                  </div>
+                </div>
+              </section>
+
+              <section aria-labelledby="t-fact">
+                <h3 id="t-fact">Por qué este score</h3>
+                <p class="suave nota">Aporte de cada variable a la probabilidad de default (regresión logística). A la izquierda reduce el riesgo; a la derecha lo eleva.</p>
+                <ul class="factores">
+                  @for (f of factores(); track f['factor']) {
+                    <li>
+                      <span class="f-nombre">{{ f['factor'] }}<small>{{ f['valor'] }}</small></span>
+                      <span class="f-barra" [class.sube]="f['aporte'] > 0"><i [style.width.%]="f['ancho'] / 2"></i></span>
+                    </li>
+                  }
+                </ul>
+              </section>
+
+              <section aria-labelledby="t-dec">
+                <h3 id="t-dec">Decisión</h3>
+                <ul class="decisiones">
+                  @for (d of e['decisiones']; track d['idDecision']) {
+                    <li>
+                      <div class="d-cab">
+                        <strong>{{ d['instancia'] === 'MATRIZ_AUTOMATICA' ? 'Matriz automática' : d['instancia'] === 'COMITE' ? 'Comité de crédito' : 'Analista' }}</strong>
+                        <span class="insignia" [class]="'insignia ' + (d['dictamen'] === 'APROBADO' ? 'ok' : d['dictamen'] === 'RECHAZADO' ? 'peligro' : 'aviso')">{{ d['dictamen'] | etiqueta }}</span>
+                        <span class="muted">{{ d['fecha'] | fecha: true }}</span>
+                      </div>
+                      <p>{{ d['motivo'] }}</p>
+                      @if (d['acta']) { <p class="muted">Acta {{ d['acta'] }} · {{ d['votosFavor'] }} a favor, {{ d['votosContra'] }} en contra · {{ d['usuario'] }}</p> }
+                    </li>
+                  }
+                </ul>
+              </section>
+
+              @if (e['montoAprobado']) {
+                <section aria-labelledby="t-cond">
+                  <h3 id="t-cond">Condiciones</h3>
+                  <dl class="datos">
+                    <div><dt>Monto aprobado</dt><dd class="num">{{ e['montoAprobado'] | dinero }}</dd></div>
+                    <div><dt>Plazo</dt><dd>{{ e['plazoAprobado'] }} meses</dd></div>
+                    <div><dt>Tasa nominal</dt><dd class="num">{{ e['tasaNominal'] | pct: 2 }}</dd></div>
+                    <div><dt>Tasa efectiva anual</dt><dd class="num">{{ e['tasaEfectiva'] | pct: 2 }}</dd></div>
+                    <div><dt>Cuota mensual</dt><dd class="num">{{ e['cuotaMensual'] | dinero }}</dd></div>
+                    <div><dt>Garantía</dt><dd>{{ e['tipoGarantia'] | etiqueta }}</dd></div>
+                  </dl>
+                </section>
+              }
+            </div>
+          } @else {
+            <div class="vacio"><strong>Aún no hay evaluación</strong><span>Se calcula al ejecutar el motor (etapas 2 a 4).</span></div>
+          }
+        }
+
+        @case ('solicitud') {
+          <div class="form-papel">
+            <section>
+              <h3>Crédito solicitado</h3>
+              <dl class="datos">
+                <div><dt>Tipo de crédito</dt><dd>{{ e['tipoCredito'] | etiqueta }}</dd></div>
+                <div><dt>Producto</dt><dd>{{ e['producto'] }}</dd></div>
+                <div><dt>Monto</dt><dd class="num">{{ e['montoSolicitado'] | dinero }}</dd></div>
+                <div><dt>Plazo</dt><dd>{{ e['plazoMeses'] }} meses</dd></div>
+                <div><dt>Tipo de pago mensual</dt><dd>{{ e['tipoPago'] | etiqueta }}</dd></div>
+                <div><dt>Calidad</dt><dd>{{ e['calidad'] | etiqueta }}</dd></div>
+                <div class="ancho"><dt>Destino del crédito</dt><dd>{{ e['destino'] }}</dd></div>
+              </dl>
+            </section>
+            <section>
+              <h3>1 · Información personal</h3>
+              <dl class="datos">
+                <div><dt>Apellidos y nombres</dt><dd>{{ e['apellidoPaterno'] }} {{ e['apellidoMaterno'] }} {{ e['nombres'] }}</dd></div>
+                <div><dt>Edad</dt><dd>{{ e['edad'] }} años · {{ e['fechaNacimiento'] | fecha }}</dd></div>
+                <div><dt>Estado civil</dt><dd>{{ e['estadoCivil'] | etiqueta }}</dd></div>
+                <div><dt>Cargas familiares</dt><dd>{{ e['cargasFamiliares'] }}</dd></div>
+                <div><dt>Instrucción</dt><dd>{{ e['instruccion'] | etiqueta }}</dd></div>
+                <div><dt>Profesión</dt><dd>{{ e['profesion'] ?? '—' }}</dd></div>
+                <div><dt>Vivienda</dt><dd>{{ e['tipoVivienda'] | etiqueta }} · {{ e['tiempoResidenciaMeses'] }} meses</dd></div>
+                <div class="ancho"><dt>Dirección</dt><dd>{{ e['callePrincipal'] }} y {{ e['calleTransversal'] }}, {{ e['barrio'] }}, {{ e['parroquia'] }}, {{ e['canton'] }}, {{ e['provincia'] }}</dd></div>
+                <div><dt>Celular</dt><dd class="num">{{ e['celular'] }}</dd></div>
+                <div><dt>Correo</dt><dd>{{ e['correo'] ?? '—' }}</dd></div>
+              </dl>
+            </section>
+            @for (a of e['actividades']; track a['idActividad']) {
+              <section>
+                <h3>{{ a['orden'] === 1 ? '2' : '3' }} · Actividad económica ({{ a['orden'] }})</h3>
+                <dl class="datos">
+                  <div><dt>Condición</dt><dd>{{ a['condicion'] | etiqueta }}</dd></div>
+                  <div><dt>Empresa o negocio</dt><dd>{{ a['empresa'] ?? '—' }}</dd></div>
+                  <div><dt>Actividad</dt><dd>{{ a['actividadEmpresa'] ?? '—' }}</dd></div>
+                  <div><dt>Sector</dt><dd>{{ a['sector'] | etiqueta }}</dd></div>
+                  <div><dt>Tiempo de trabajo</dt><dd>{{ a['tiempoTrabajoMeses'] }} meses</dd></div>
+                  <div><dt>Ingresos</dt><dd>{{ a['tipoIngresos'] | etiqueta }}</dd></div>
+                  @if (a['ventasAnuales']) { <div><dt>Ventas anuales</dt><dd class="num">{{ a['ventasAnuales'] | dinero }}</dd></div> }
+                  @if (a['productos']) { <div class="ancho"><dt>Productos que comercializa</dt><dd>{{ a['productos'] }}</dd></div> }
+                </dl>
+              </section>
+            }
+            @if (e['conyuge']; as c) {
+              <section>
+                <h3>4 · Datos del cónyuge</h3>
+                <dl class="datos">
+                  <div><dt>Nombre</dt><dd>{{ c['nombres'] }} {{ c['apellidos'] }}</dd></div>
+                  <div><dt>Cédula</dt><dd>{{ c['cedula'] | cedula }}</dd></div>
+                  <div><dt>Actividad</dt><dd>{{ c['actividad'] ?? '—' }}</dd></div>
+                  <div><dt>Celular</dt><dd class="num">{{ c['celular'] ?? '—' }}</dd></div>
+                </dl>
+              </section>
+            }
+            <section>
+              <h3>5 a 7 · Referencias</h3>
+              <div class="tabla-marco">
+                <table class="tabla">
+                  <thead><tr><th>Tipo</th><th>Nombre o institución</th><th>Detalle</th><th>Teléfono</th></tr></thead>
+                  <tbody>
+                    @for (r of e['referencias']; track r['idReferencia']) {
+                      <tr><td>{{ r['tipo'] | etiqueta }}</td><td>{{ r['nombre'] }}</td><td>{{ r['parentesco'] ?? r['tipoCuenta'] ?? r['direccion'] ?? '—' }} {{ r['numeroCuenta'] ?? '' }}</td><td class="num">{{ r['telefono'] ?? '—' }}</td></tr>
+                    } @empty { <tr><td colspan="4" class="muted">Sin referencias registradas.</td></tr> }
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <section>
+              <h3>8 · Bienes inmuebles y vehículos</h3>
+              <div class="tabla-marco">
+                <table class="tabla">
+                  <thead><tr><th>Tipo</th><th>Ubicación o descripción</th><th class="num">Valor comercial</th><th>Hipoteca o prenda</th></tr></thead>
+                  <tbody>
+                    @for (b of e['bienes']; track b['idBien']) {
+                      <tr><td>{{ b['tipo'] | etiqueta }}</td><td>{{ b['descripcion'] }}</td><td class="num">{{ b['valorComercial'] | dinero }}</td><td>{{ b['hipotecado'] ? 'Sí' : 'No' }}</td></tr>
+                    } @empty { <tr><td colspan="4" class="muted">No declara bienes.</td></tr> }
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            @if (e['situacion']; as s) {
+              <section>
+                <h3>9 · Situación patrimonial e ingresos y gastos mensuales</h3>
+                <div class="balance">
+                  <dl>
+                    <dt>Activos</dt>
+                    @for (k of [['efectivo','Efectivo'],['bancos','Bancos'],['mobiliario','Mobiliario'],['vehiculos','Vehículos'],['bienesInmuebles','Bienes inmuebles'],['cuentasPorCobrar','Cuentas por cobrar'],['otrosActivos','Otros activos']]; track k[0]) {
+                      <div><span>{{ k[1] }}</span><span class="num">{{ s[k[0]] | dinero }}</span></div>
+                    }
+                    <div class="total"><span>Total activos</span><span class="num">{{ s['totalActivos'] | dinero }}</span></div>
+                  </dl>
+                  <dl>
+                    <dt>Pasivos</dt>
+                    @for (k of [['cuentasPorPagar','Cuentas por pagar'],['deudasSfnMicrocredito','Deudas SFN microcrédito'],['deudasSfnConsumo','Deudas SFN consumo'],['deudasSfnComercial','Deudas SFN comercial'],['deudasSfnVivienda','Deudas SFN vivienda'],['deudasSectorComercial','Deudas sector comercial'],['otrosPasivos','Otros pasivos']]; track k[0]) {
+                      <div><span>{{ k[1] }}</span><span class="num">{{ s[k[0]] | dinero }}</span></div>
+                    }
+                    <div class="total"><span>Total pasivos</span><span class="num">{{ s['totalPasivos'] | dinero }}</span></div>
+                    <div class="total"><span>Patrimonio</span><span class="num">{{ s['patrimonio'] | dinero }}</span></div>
+                  </dl>
+                  <dl>
+                    <dt>Ingresos</dt>
+                    @for (k of [['sueldo','Sueldos'],['sueldoConyuge','Sueldo cónyuge'],['arriendos','Arriendos'],['pensionJubilacion','Pensión jubilación'],['comisiones','Comisiones'],['remesasIntereses','Remesas e intereses'],['ingresoVentas','Ingreso por ventas'],['ingresoVentasConyuge','Ventas cónyuge'],['otrosIngresos','Otros ingresos']]; track k[0]) {
+                      <div><span>{{ k[1] }}</span><span class="num">{{ s[k[0]] | dinero }}</span></div>
+                    }
+                    <div class="total"><span>Total ingresos</span><span class="num">{{ s['totalIngresos'] | dinero }}</span></div>
+                  </dl>
+                  <dl>
+                    <dt>Egresos</dt>
+                    @for (k of [['alimentacion','Alimentación'],['arriendo','Arriendo'],['serviciosBasicos','Servicios básicos'],['gastosFinancieros','Gastos financieros'],['transporte','Transporte'],['educacion','Educación'],['salud','Salud'],['vestimenta','Vestimenta'],['otrosEgresos','Otros egresos']]; track k[0]) {
+                      <div><span>{{ k[1] }}</span><span class="num">{{ s[k[0]] | dinero }}</span></div>
+                    }
+                    <div class="total"><span>Total egresos</span><span class="num">{{ s['totalEgresos'] | dinero }}</span></div>
+                    <div class="total disp"><span>Disponible</span><span class="num">{{ s['disponible'] | dinero }}</span></div>
+                  </dl>
+                </div>
+              </section>
+            }
+            <section>
+              <h3>Declaraciones</h3>
+              <dl class="datos">
+                <div><dt>Origen lícito de fondos</dt><dd>{{ e['declaraLicitud'] ? 'Declarado' : 'No declarado' }}</dd></div>
+                <div><dt>Persona expuesta políticamente</dt><dd>{{ e['esPep'] ? 'Sí' : 'No' }}</dd></div>
+                <div><dt>Croquis del domicilio</dt><dd class="num">{{ e['croquisCasaLat'] ? (e['croquisCasaLat'] + ', ' + e['croquisCasaLng']) : '—' }}</dd></div>
+              </dl>
+            </section>
+          </div>
+        }
+
+        @case ('datos') {
+          <div class="form-papel">
+            <section>
+              <h3>Autorización LOPDP</h3>
+              @if (e['idConsentimiento']) {
+                <dl class="datos">
+                  <div><dt>Firmada</dt><dd>{{ e['consentimientoFecha'] | fecha: true }}</dd></div>
+                  <div><dt>Vigente hasta</dt><dd>{{ e['consentimientoVigencia'] | fecha }}</dd></div>
+                  <div><dt>Canal</dt><dd>{{ e['consentimientoCanal'] | etiqueta }}</dd></div>
+                </dl>
+              } @else { <p class="falta"><pjl-icono nombre="candado" [tam]="16" /> Sin autorización firmada. No se puede consultar el buró ni la central de riesgos.</p> }
+            </section>
+            <section>
+              <h3>Validación de identidad</h3>
+              @if (e['kycResultado']) {
+                <dl class="datos">
+                  <div><dt>Resultado</dt><dd>{{ e['kycResultado'] | etiqueta }}</dd></div>
+                  <div><dt>Cédula en Registro Civil</dt><dd>{{ e['cedulaVerificada'] ? 'Vigente' : 'No verificada' }}</dd></div>
+                  <div><dt>Similitud biométrica</dt><dd class="num">{{ e['similitudBiometrica'] | pct: 1 }}</dd></div>
+                  <div><dt>UAFE · OFAC · ONU</dt><dd>{{ e['listaUafe'] | etiqueta }} · {{ e['listaOfac'] | etiqueta }} · {{ e['listaOnu'] | etiqueta }}</dd></div>
+                </dl>
+              } @else { <p class="muted">Pendiente.</p> }
+            </section>
+            <section>
+              <h3>Datos internos del core</h3>
+              @if (e['antiguedadMeses'] !== null) {
+                <dl class="datos">
+                  <div><dt>Antigüedad como socio</dt><dd>{{ e['antiguedadMeses'] }} meses</dd></div>
+                  <div><dt>Ahorro a la vista</dt><dd class="num">{{ e['saldoAhorros'] | dinero }}</dd></div>
+                  <div><dt>Certificados de aportación</dt><dd class="num">{{ e['saldoCertificados'] | dinero }}</dd></div>
+                  <div><dt>Plazo fijo</dt><dd class="num">{{ e['saldoPlazoFijo'] | dinero }}</dd></div>
+                  <div><dt>Créditos anteriores</dt><dd>{{ e['creditosAnteriores'] }} ({{ e['creditosCancelados'] }} cancelados)</dd></div>
+                  <div><dt>Mora máxima histórica</dt><dd>{{ e['maxDiasMoraHistorico'] }} días</dd></div>
+                  <div><dt>Comportamiento</dt><dd>{{ e['comportamiento'] | etiqueta }}</dd></div>
+                </dl>
+              } @else { <p class="muted">Se consulta al ejecutar el motor.</p> }
+            </section>
+            <section>
+              <h3>Buró y central de riesgos SB/SEPS</h3>
+              <div class="tabla-marco">
+                <table class="tabla">
+                  <thead><tr><th>Fuente</th><th class="num">Score</th><th class="num">Operaciones</th><th class="num">Deuda total</th><th class="num">Vencido</th><th class="num">Cuota mensual</th><th>Peor calificación</th></tr></thead>
+                  <tbody>
+                    @for (x of e['externos']; track x['idConsulta']) {
+                      <tr><td>{{ x['fuente'] === 'BURO_CREDITO' ? 'Buró de crédito' : 'Central de riesgos' }}</td><td class="num">{{ x['scoreBuro'] ?? '—' }}</td><td class="num">{{ x['operacionesActivas'] }}</td>
+                        <td class="num">{{ x['deudaTotal'] | dinero }}</td><td class="num" [class.negativo]="x['deudaVencida'] > 0">{{ x['deudaVencida'] | dinero }}</td><td class="num">{{ x['cuotaMensualSfn'] | dinero }}</td><td>{{ x['peorCalificacion'] ?? '—' }}</td></tr>
+                    } @empty { <tr><td colspan="7" class="muted">Sin consultas todavía.</td></tr> }
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        }
+
+        @case ('documentos') {
+          <div class="form-papel">
+            @if ((e['estado'] === 'EN_PROCESO' || e['estado'] === 'APROBADA') && sesion.puede('ASESOR', 'ANALISTA')) {
+              <form #f class="subida" (ngSubmit)="subir(f)">
+                <div class="campo">
+                  <label for="tipo-doc">Tipo de documento</label>
+                  <select id="tipo-doc" class="entrada" name="tipo" [(ngModel)]="tipoDoc">
+                    @for (d of docs; track d.tipo) { <option [value]="d.tipo">{{ d.texto }}</option> }
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="archivo">Archivo (PDF, JPG, PNG o WEBP, hasta 10 MB)</label>
+                  <input id="archivo" class="entrada" type="file" accept="application/pdf,image/jpeg,image/png,image/webp" (change)="elegirArchivo($event)" />
+                </div>
+                <button class="btn btn-primario" type="submit" [disabled]="!!trabajando()">@if (trabajando() === 'subir') { <span class="giro"></span> } @else { <pjl-icono nombre="subir" /> } Subir al expediente</button>
+              </form>
+            }
+            <ul class="documentos">
+              @for (d of e['documentos']; track d['idDocumento']) {
+                <li>
+                  <pjl-icono nombre="documento" [tam]="20" />
+                  <div><strong>{{ nombreDoc(d['tipo']) }}</strong><span class="muted">{{ d['nombreArchivo'] }} · {{ kb(d['tamanoBytes']) }} · {{ d['fechaCarga'] | fecha: true }}</span></div>
+                  <span class="insignia" [class]="'insignia ' + (d['estado'] === 'VALIDADO' ? 'ok' : d['estado'] === 'RECHAZADO' ? 'peligro' : 'info')">{{ d['estado'] | etiqueta }}</span>
+                  <button type="button" class="btn btn-chico descargar" (click)="descargar(d)" [disabled]="descargando() === d['idDocumento']"
+                          [attr.aria-label]="'Descargar ' + nombreDoc(d['tipo']) + ' (' + d['nombreArchivo'] + ')'">
+                    @if (descargando() === d['idDocumento']) { <span class="giro" aria-hidden="true"></span> } @else { <pjl-icono nombre="descargar" [tam]="16" /> }
+                    <span class="texto-descargar">Descargar</span>
+                  </button>
+                </li>
+              } @empty { <li class="vacio"><strong>Sin documentos</strong><span>Los respaldos se guardan en el expediente digital de la nube privada.</span></li> }
+            </ul>
+          </div>
+        }
+
+        @case ('linea') {
+          <div class="linea">
+            @for (g of lineaPorEtapa(); track g.id) {
+              <section>
+                <h3><span class="num">Etapa {{ g.id }}</span> {{ g.nombre }}</h3>
+                <ol>
+                  @for (x of g.eventos; track x['idHistorial']) {
+                    <li>
+                      <span class="punto" aria-hidden="true"></span>
+                      <div>
+                        <strong>{{ x['evento'] }}</strong>
+                        @if (x['detalle']) { <p>{{ x['detalle'] }}</p> }
+                        <span class="muted">{{ x['actor'] }} · {{ x['fecha'] | fecha: true }}@if (!x['visibleSocio']) { · solo personal }</span>
+                      </div>
+                    </li>
+                  }
+                </ol>
+              </section>
+            }
+          </div>
+        }
+      }
+    </div>
+  } @else {
+    <div class="esqueleto" style="height: 120px; border-radius: 16px"></div>
+    <div class="esqueleto" style="height: 88px; border-radius: 16px"></div>
+    <div class="esqueleto" style="height: 360px; border-radius: 16px"></div>
+  }
+</div>

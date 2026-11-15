@@ -1,0 +1,54 @@
+{
+ "meta": {
+  "fuente": "Nube privada COAC PJL (simulada)",
+  "nota": "Datos de prueba: el tarifario fue transcrito de la hoja física y debe validarse.",
+  "version": "2026-11"
+ },
+ "agencias": [
+  {
+   "codigo": "LOJ-C",
+   "nombre": "Loja Centro",
+   "canton": "Loja",
+   "direccion": "Calle Bolívar y 10 de Agosto (dato de prueba)",
+   "horario": "Lunes a viernes 08:00–17:00 · sábados 09:00–13:00",
+   "lat": -3.9965,
+   "lng": -79.2039
+  },
+  {
+   "codigo": "LOJ-N",
+   "nombre": "Loja Norte",
+   "canton": "Loja",
+   "direccion": "Av. Cuxibamba y Guaranda (dato de prueba)",
+   "horario": "Lunes a viernes 08:30–17:00",
+   "lat": -3.9781,
+   "lng": -79.2052
+  },
+  {
+   "codigo": "CAT",
+   "nombre": "Catamayo",
+   "canton": "Catamayo",
+   "direccion": "Av. Isidro Ayora (dato de prueba)",
+   "horario": "Lunes a viernes 08:30–16:30",
+   "lat": -3.9858,
+   "lng": -79.3567
+  },
+  {
+   "codigo": "CAR",
+   "nombre": "Cariamanga",
+   "canton": "Calvas",
+   "direccion": "Calle Bolívar (dato de prueba)",
+   "horario": "Lunes a viernes 08:30–16:30",
+   "lat": -4.3288,
+   "lng": -79.5545
+  },
+  {
+   "codigo": "ZAM",
+   "nombre": "Zamora",
+   "canton": "Zamora",
+   "direccion": "Calle Diego de Vaca (dato de prueba)",
+   "horario": "Lunes a viernes 08:30–16:30",
+   "lat": -4.0672,
+   "lng": -78.9563
+  }
+ ]
+}

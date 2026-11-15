@@ -1,0 +1,65 @@
+# =====================================================================
+#  PJL Crédito · qué NO se sube al repositorio
+# =====================================================================
+
+# ---- Secretos y configuración local -------------------------------
+# Solo se versiona .env.example; el .env real nunca se sube.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+
+# ---- Dependencias --------------------------------------------------
+node_modules/
+
+# ---- Compilados y cachés (Angular, Vite, Gradle) -------------------
+dist/
+build/
+out/
+.angular/
+.gradle/
+.vite/
+dev-dist/
+*.tsbuildinfo
+*.class
+
+# ---- Pruebas y cobertura -------------------------------------------
+coverage/
+__screenshots__/
+
+# ---- Python (generador de datos de prueba) -------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- Registros y volcados ------------------------------------------
+*.log
+npm-debug.log*
+hs_err_pid*
+replay_pid*
+
+# ---- Datos locales (expediente digital del simulador, respaldos) ---
+pjl-expediente/
+*.dmp
+*.bak
+
+# ---- Editor y sistema operativo ------------------------------------
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.iml
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# ---- Herramientas de diseño y asistentes (estado local) ------------
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/questions/
+.taste-skill/
+.claude/settings.local.json

@@ -1,0 +1,1562 @@
+{
+ "1145525752": {
+  "registroCivil": {
+   "cedula": "1145525752",
+   "nombre": "JIMÉNEZ OCHOA MARÍA FERNANDA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.89
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 781,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1104244296": {
+  "registroCivil": {
+   "cedula": "1104244296",
+   "nombre": "ORDÓÑEZ AGUIRRE GLORIA ESPERANZA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.83
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 824,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1130181835": {
+  "registroCivil": {
+   "cedula": "1130181835",
+   "nombre": "OCHOA RAMÓN MILTON RODRIGO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.53
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 859,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1107517433": {
+  "registroCivil": {
+   "cedula": "1107517433",
+   "nombre": "TINOCO JIMÉNEZ DARWIN PATRICIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.13
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 736,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1112574411": {
+  "registroCivil": {
+   "cedula": "1112574411",
+   "nombre": "VIVANCO TORRES JUAN PABLO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.89
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 781,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1941394312": {
+  "registroCivil": {
+   "cedula": "1941394312",
+   "nombre": "VEGA EGUIGUREN ROSARIO DEL PILAR",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 93.61
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 734,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1106709585": {
+  "registroCivil": {
+   "cedula": "1106709585",
+   "nombre": "EGUIGUREN GRANDA MANUEL AGUSTÍN",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 93.95
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 649,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A2",
+   "maxDiasMora24m": 7,
+   "demandaJudicial": false
+  }
+ },
+ "1117124873": {
+  "registroCivil": {
+   "cedula": "1117124873",
+   "nombre": "RIOFRÍO SOTO RÓMULO EFRAÍN",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.62
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 780,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1153281728": {
+  "registroCivil": {
+   "cedula": "1153281728",
+   "nombre": "GRANDA OJEDA PAOLA ANDREA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 98.81
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 828,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1130294901": {
+  "registroCivil": {
+   "cedula": "1130294901",
+   "nombre": "OJEDA SÁNCHEZ SANDRA PATRICIA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.44
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 817,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1117264372": {
+  "registroCivil": {
+   "cedula": "1117264372",
+   "nombre": "GUARNIZO TINOCO HERNÁN GONZALO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 98.04
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 756,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1117941821": {
+  "registroCivil": {
+   "cedula": "1117941821",
+   "nombre": "MEDINA ABAD CARMEN LUCÍA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.28
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 698,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "B1",
+   "maxDiasMora24m": 25,
+   "demandaJudicial": false
+  }
+ },
+ "1133285526": {
+  "registroCivil": {
+   "cedula": "1133285526",
+   "nombre": "ORDÓÑEZ CASTILLO LUZ MARINA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.47
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 808,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1122138678": {
+  "registroCivil": {
+   "cedula": "1122138678",
+   "nombre": "QUIZHPE TORRES CARMEN LUCÍA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.5
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 807,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1121138711": {
+  "registroCivil": {
+   "cedula": "1121138711",
+   "nombre": "LUDEÑA MONTESINOS GLORIA ESPERANZA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.28
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 602,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A2",
+   "maxDiasMora24m": 1,
+   "demandaJudicial": false
+  }
+ },
+ "1116054279": {
+  "registroCivil": {
+   "cedula": "1116054279",
+   "nombre": "VALDIVIESO JIMÉNEZ FRANKLIN GEOVANNY",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.77
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 700,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1102472584": {
+  "registroCivil": {
+   "cedula": "1102472584",
+   "nombre": "TINOCO PALADINES CARMEN LUCÍA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 98.52
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 565,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "B2",
+   "maxDiasMora24m": 21,
+   "demandaJudicial": false
+  }
+ },
+ "1920674965": {
+  "registroCivil": {
+   "cedula": "1920674965",
+   "nombre": "BRAVO ABAD CRISTINA ALEJANDRA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 98.98
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 797,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1133156024": {
+  "registroCivil": {
+   "cedula": "1133156024",
+   "nombre": "LOAIZA LUDEÑA MANUEL AGUSTÍN",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.57
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 832,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1146005739": {
+  "registroCivil": {
+   "cedula": "1146005739",
+   "nombre": "CORREA OCHOA CRISTINA ALEJANDRA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.21
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 704,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1108382274": {
+  "registroCivil": {
+   "cedula": "1108382274",
+   "nombre": "CASTILLO QUIZHPE BYRON FABRICIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.01
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 737,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1138836281": {
+  "registroCivil": {
+   "cedula": "1138836281",
+   "nombre": "GUARNIZO CHAMBA BYRON FABRICIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.85
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 774,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1925731570": {
+  "registroCivil": {
+   "cedula": "1925731570",
+   "nombre": "LOAIZA ABAD WASHINGTON DARÍO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.33
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 801,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1143517918": {
+  "registroCivil": {
+   "cedula": "1143517918",
+   "nombre": "CUENCA LUDEÑA NANCY BEATRIZ",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.73
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 735,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1147599326": {
+  "registroCivil": {
+   "cedula": "1147599326",
+   "nombre": "GUARNIZO ZHUNAULA HERNÁN GONZALO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.1
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 856,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1147497067": {
+  "registroCivil": {
+   "cedula": "1147497067",
+   "nombre": "TINOCO OJEDA DIEGO ARMANDO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.82
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 815,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1137514574": {
+  "registroCivil": {
+   "cedula": "1137514574",
+   "nombre": "RIOFRÍO GUARNIZO VERÓNICA DEL CISNE",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 93.53
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 701,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1130359233": {
+  "registroCivil": {
+   "cedula": "1130359233",
+   "nombre": "CHAMBA VEGA JENNY MARIBEL",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.68
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 750,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1147938250": {
+  "registroCivil": {
+   "cedula": "1147938250",
+   "nombre": "CHAMBA CUENCA CARLOS EDUARDO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.48
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 799,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1156986877": {
+  "registroCivil": {
+   "cedula": "1156986877",
+   "nombre": "QUIZHPE CUENCA HERNÁN GONZALO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.05
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 754,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1124244318": {
+  "registroCivil": {
+   "cedula": "1124244318",
+   "nombre": "TORRES IÑIGUEZ TERESA DE JESÚS",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.23
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 788,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1123257303": {
+  "registroCivil": {
+   "cedula": "1123257303",
+   "nombre": "LOAIZA VIVANCO SANDRA PATRICIA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.9
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 830,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1135203915": {
+  "registroCivil": {
+   "cedula": "1135203915",
+   "nombre": "MERINO ARMIJOS KLEVER RICARDO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.31
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 795,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1106633595": {
+  "registroCivil": {
+   "cedula": "1106633595",
+   "nombre": "AGUIRRE ARMIJOS GLORIA ESPERANZA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.81
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 764,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1130805318": {
+  "registroCivil": {
+   "cedula": "1130805318",
+   "nombre": "TORRES OCHOA VERÓNICA DEL CISNE",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 93.64
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 722,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1110652102": {
+  "registroCivil": {
+   "cedula": "1110652102",
+   "nombre": "CUEVA AGUIRRE SANDRA PATRICIA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.41
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 733,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1122891029": {
+  "registroCivil": {
+   "cedula": "1122891029",
+   "nombre": "IÑIGUEZ TINOCO WILSON RAMIRO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 93.62
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 823,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1119656781": {
+  "registroCivil": {
+   "cedula": "1119656781",
+   "nombre": "ARMIJOS QUIZHPE MARCO VINICIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.04
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 698,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1131655324": {
+  "registroCivil": {
+   "cedula": "1131655324",
+   "nombre": "RIOFRÍO CUENCA MÓNICA ALEXANDRA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.85
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 662,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "B2",
+   "maxDiasMora24m": 10,
+   "demandaJudicial": false
+  }
+ },
+ "1123110742": {
+  "registroCivil": {
+   "cedula": "1123110742",
+   "nombre": "AGUIRRE VALDIVIESO MILTON RODRIGO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.28
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 768,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1152165989": {
+  "registroCivil": {
+   "cedula": "1152165989",
+   "nombre": "PALADINES SARANGO VERÓNICA DEL CISNE",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.21
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 641,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "B1",
+   "maxDiasMora24m": 19,
+   "demandaJudicial": false
+  }
+ },
+ "1105995201": {
+  "registroCivil": {
+   "cedula": "1105995201",
+   "nombre": "CUENCA JIMÉNEZ DIANA CAROLINA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 98.96
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 712,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1118963113": {
+  "registroCivil": {
+   "cedula": "1118963113",
+   "nombre": "CUEVA AGUIRRE MARTHA CECILIA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 99.3
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 703,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1115891986": {
+  "registroCivil": {
+   "cedula": "1115891986",
+   "nombre": "VEGA TINOCO FAUSTO LEONARDO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.79
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 855,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1126567435": {
+  "registroCivil": {
+   "cedula": "1126567435",
+   "nombre": "CORREA SÁNCHEZ BYRON FABRICIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 98.3
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 804,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1118202553": {
+  "registroCivil": {
+   "cedula": "1118202553",
+   "nombre": "LUDEÑA CUENCA PAOLA ANDREA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 96.2
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 698,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1150342382": {
+  "registroCivil": {
+   "cedula": "1150342382",
+   "nombre": "SOTO VEGA NANCY BEATRIZ",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 93.68
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 712,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1144838099": {
+  "registroCivil": {
+   "cedula": "1144838099",
+   "nombre": "PALADINES TINOCO ROSA ELVIRA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.65
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 833,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1143139242": {
+  "registroCivil": {
+   "cedula": "1143139242",
+   "nombre": "GRANDA CORREA MILTON RODRIGO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.33
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 773,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1134076460": {
+  "registroCivil": {
+   "cedula": "1134076460",
+   "nombre": "TORRES GUARNIZO BLANCA AZUCENA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.89
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 760,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1101182911": {
+  "registroCivil": {
+   "cedula": "1101182911",
+   "nombre": "VEGA OJEDA MERCEDES ROSARIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.02
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 804,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1914685605": {
+  "registroCivil": {
+   "cedula": "1914685605",
+   "nombre": "ZHUNAULA VIVANCO MARCO VINICIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.89
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 748,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1150847141": {
+  "registroCivil": {
+   "cedula": "1150847141",
+   "nombre": "BRAVO OJEDA ROCÍO ELIZABETH",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.26
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 735,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1926671031": {
+  "registroCivil": {
+   "cedula": "1926671031",
+   "nombre": "SARANGO MEDINA JOHANNA KATHERINE",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.57
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 846,
+   "operacionesActivas": 2,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1149451815": {
+  "registroCivil": {
+   "cedula": "1149451815",
+   "nombre": "VEGA BRAVO DIANA CAROLINA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.6
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 764,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1140874619": {
+  "registroCivil": {
+   "cedula": "1140874619",
+   "nombre": "ZHUNAULA MEDINA MARCO VINICIO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.58
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 834,
+   "operacionesActivas": 0,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1128065032": {
+  "registroCivil": {
+   "cedula": "1128065032",
+   "nombre": "OCHOA MEDINA KLEVER RICARDO",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 99.09
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 814,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1126367083": {
+  "registroCivil": {
+   "cedula": "1126367083",
+   "nombre": "RIOFRÍO VALDIVIESO CARMEN LUCÍA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 95.13
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 678,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A2",
+   "maxDiasMora24m": 10,
+   "demandaJudicial": false
+  }
+ },
+ "1133516516": {
+  "registroCivil": {
+   "cedula": "1133516516",
+   "nombre": "RIOFRÍO AGUIRRE LUZ MARINA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 97.99
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 823,
+   "operacionesActivas": 3,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ },
+ "1124053826": {
+  "registroCivil": {
+   "cedula": "1124053826",
+   "nombre": "GRANDA ABAD PAOLA ANDREA",
+   "estadoCedula": "VIGENTE",
+   "condicion": "CIUDADANO"
+  },
+  "biometria": {
+   "similitud": 94.14
+  },
+  "listas": {
+   "uafe": "SATISFACTORIO",
+   "ofac": "SATISFACTORIO",
+   "onu": "SATISFACTORIO"
+  },
+  "buro": {
+   "score": 850,
+   "operacionesActivas": 1,
+   "deudaTotal": 0.0,
+   "deudaVencida": 0.0,
+   "cuotaMensual": 0.0,
+   "peorCalificacion": "A1",
+   "maxDiasMora24m": 0,
+   "demandaJudicial": false
+  }
+ }
+}

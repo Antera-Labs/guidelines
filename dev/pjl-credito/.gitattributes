@@ -1,0 +1,23 @@
+# Texto con finales de línea LF en el repositorio, sin importar el sistema de quien clone.
+* text=auto eol=lf
+
+# Guiones: el de Unix siempre LF (si no, falla dentro de Docker); el de Windows, CRLF.
+gradlew        text eol=lf
+*.sh           text eol=lf
+*.bat          text eol=crlf
+*.cmd          text eol=crlf
+
+# Binarios: no se tocan ni se comparan como texto.
+*.png          binary
+*.ico          binary
+*.jpg          binary
+*.jpeg         binary
+*.webp         binary
+*.pdf          binary
+*.jar          binary
+*.woff2        binary
+
+# Archivos generados: se pliegan en las revisiones de GitHub y no cuentan en las estadísticas de lenguaje.
+package-lock.json                    linguist-generated=true
+database/oracle/05_datos_prueba.sql  linguist-generated=true
+services/core-api/src/main/resources/simulador/*.json  linguist-generated=true

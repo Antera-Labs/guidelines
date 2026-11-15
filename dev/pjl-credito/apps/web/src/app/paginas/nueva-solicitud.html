@@ -1,0 +1,340 @@
+<div class="pagina">
+  <a class="volver" routerLink="/solicitudes"><pjl-icono nombre="arrow-left" [tam]="16" /> Bandeja</a>
+  <header class="cabecera">
+    <div>
+      <h1>Nueva solicitud de crédito</h1>
+    </div>
+    <div class="acciones">
+      <span class="guardado" aria-live="polite">
+        @if (guardadoA()) { <pjl-icono nombre="check" [tam]="15" [trazo]="2.5" /> Borrador guardado }
+      </span>
+      <button class="btn" type="button" (click)="empezarOtra()"><pjl-icono nombre="mas" [tam]="17" /> Empezar otra solicitud</button>
+    </div>
+  </header>
+
+  @if (otros().length) {
+    <pjl-vistas [opciones]="vistas()" [(vista)]="vista" etiqueta="Elegir sección de la solicitud" />
+    <section class="panel borradores" [class.fuera-de-vista]="vista() !== 'borradores'" aria-labelledby="borradores-titulo">
+      <div class="panel-cab">
+        <div>
+          <h2 id="borradores-titulo">Solicitudes sin terminar <span class="cuenta">{{ otros().length }}</span></h2>
+          <p class="muted">Se guardan solas mientras trabajas, en esta pestaña del navegador. Se borran al cerrar sesión.</p>
+        </div>
+      </div>
+      <ul>
+        @for (b of otros(); track b.id) {
+          <li>
+            <pjl-icono nombre="borrador" [tam]="20" />
+            <div class="quien">
+              <strong>{{ nombreSocio(b) }}</strong>
+              <span>{{ resumen(b) }}</span>
+            </div>
+            <span class="avance">Paso {{ b.paso }} de 8 · {{ hace(b.actualizado) }}</span>
+            <div class="botones">
+              @if (porDescartar() === b.id) {
+                <span class="pregunta">¿Descartar?</span>
+                <button class="btn btn-chico btn-peligro" type="button" (click)="descartar(b)">Sí, descartar</button>
+                <button class="btn btn-chico" type="button" (click)="porDescartar.set(null)">No</button>
+              } @else {
+                <button class="btn btn-chico btn-fantasma" type="button" (click)="porDescartar.set(b.id)"
+                        [attr.aria-label]="'Descartar la solicitud de ' + nombreSocio(b)">Descartar</button>
+                <button class="btn btn-chico btn-primario" type="button" (click)="continuar(b.id)"
+                        [attr.aria-label]="'Continuar la solicitud de ' + nombreSocio(b)">Continuar</button>
+              }
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  <div class="asistente" [class.fuera-de-vista]="otros().length > 0 && vista() !== 'formulario'">
+    <nav class="pasos" aria-label="Pasos de la solicitud">
+      <ol>
+        @for (p of pasos; track p.id) {
+          <li>
+            <button type="button" (click)="irA(p.id)" [attr.aria-current]="paso() === p.id ? 'step' : null"
+                    [class.hecho]="p.id < paso()" [disabled]="p.id > visitado() + 1 || (p.id === 4 && !conConyuge())">
+              <span class="n">@if (p.id < paso()) { <pjl-icono nombre="check" [tam]="14" [trazo]="3" /> } @else { {{ p.id }} }</span>
+              <span class="t">{{ p.titulo }}@if (p.id === 4 && !conConyuge()) { <small>No aplica</small> }</span>
+            </button>
+          </li>
+        }
+      </ol>
+    </nav>
+
+    <form class="panel hoja" (ngSubmit)="paso() === 8 ? registrar() : irA(paso() + (paso() === 3 && !conConyuge() ? 2 : 1))" (input)="marcar()" (change)="marcar()" novalidate>
+      <h2 id="paso-titulo" tabindex="-1">{{ paso() }} · {{ pasos[paso() - 1].titulo }}</h2>
+
+      @switch (paso()) {
+        @case (1) {
+          <div class="formulario">
+            <div class="campo c6">
+              <label for="cedula">Cédula del socio</label>
+              <div class="con-boton">
+                <input id="cedula" class="entrada num" name="cedula" inputmode="numeric" maxlength="10" [(ngModel)]="m['cedula']"
+                       [attr.aria-invalid]="!!errores()['cedula']" aria-describedby="e-cedula" (keydown.enter)="$event.preventDefault(); buscarSocio()" />
+                <button class="btn" type="button" (click)="buscarSocio()" [disabled]="buscando()">
+                  @if (buscando()) { <span class="giro"></span> } @else { <pjl-icono nombre="buscar" [tam]="17" /> } Buscar en el core
+                </button>
+              </div>
+              @if (errores()['cedula']) { <span class="error" id="e-cedula">{{ errores()['cedula'] }}</span> }
+            </div>
+            @if (socioCore(); as s) {
+              <div class="c6 socio-core">
+                <strong>{{ s['core']?.['nombres'] ?? s['ficha']?.['nombres'] }} {{ s['core']?.['apellidos'] ?? s['ficha']?.['apellidoPaterno'] }}</strong>
+                <span>Socio {{ s['core']?.['numeroSocio'] ?? s['ficha']?.['numeroSocio'] }} · {{ s['core']?.['agencia'] ?? s['ficha']?.['agencia'] }} · {{ s['core']?.['antiguedadMeses'] }} meses de antigüedad</span>
+                <span [class]="s['consentimiento'] ? 'lopdp ok' : 'lopdp'">
+                  <pjl-icono [nombre]="s['consentimiento'] ? 'escudo' : 'candado'" [tam]="15" />
+                  {{ s['consentimiento'] ? 'Autorización LOPDP vigente hasta ' + (s['consentimiento']['vigenteHasta'] | fecha) : 'Sin autorización LOPDP: se firma en el paso 8' }}
+                </span>
+              </div>
+            }
+            <div class="campo c12">
+              <label for="producto">Producto (tarifario vigente)</label>
+              <select id="producto" class="entrada" name="producto" [(ngModel)]="m['idProducto']" (ngModelChange)="tocar()" [attr.aria-invalid]="!!errores()['idProducto']">
+                <option [ngValue]="null" disabled>Elige un producto</option>
+                @for (g of segmentos(); track g[0]) {
+                  <optgroup [label]="g[0]">
+                    @for (p of g[1]; track p['idProducto']) {
+                      <option [ngValue]="p['idProducto']">{{ p['codigo'] }} · {{ p['nombre'] }} · {{ p['tasaReferencial'] | pct: 2 }}</option>
+                    }
+                  </optgroup>
+                }
+              </select>
+              @if (producto(); as p) { <span class="ayuda">{{ p['rangoVentas'] ?? p['descripcion'] }} · de {{ p['montoMinimo'] | dinero }} a {{ p['montoMaximo'] | dinero }}, hasta {{ p['plazoMaximoMeses'] }} meses</span> }
+              @if (errores()['idProducto']) { <span class="error">{{ errores()['idProducto'] }}</span> }
+            </div>
+            <div class="campo c4">
+              <label for="monto">Monto solicitado</label>
+              <div class="entrada-prefijo"><span>$</span><input id="monto" class="entrada num" type="number" min="0" step="50" name="monto" [(ngModel)]="m['monto']" (ngModelChange)="tocar()" [attr.aria-invalid]="!!errores()['monto']" /></div>
+              @if (errores()['monto']) { <span class="error">{{ errores()['monto'] }}</span> }
+            </div>
+            <div class="campo c4">
+              <label for="plazo">Plazo (meses)</label>
+              <input id="plazo" class="entrada num" type="number" min="1" name="plazo" [(ngModel)]="m['plazoMeses']" (ngModelChange)="tocar()" [attr.aria-invalid]="!!errores()['plazoMeses']" />
+              @if (errores()['plazoMeses']) { <span class="error">{{ errores()['plazoMeses'] }}</span> }
+            </div>
+            <div class="c4 estimado" aria-live="polite">
+              <span>Cuota referencial</span>
+              <strong class="num">{{ cuotaEstimada() !== null ? (cuotaEstimada() | dinero) : '—' }}</strong>
+              <small>Con la tasa del tarifario; la final depende del riesgo.</small>
+            </div>
+            <div class="campo c12">
+              <label for="destino">Destino del crédito</label>
+              <input id="destino" class="entrada" name="destino" maxlength="250" [(ngModel)]="m['destino']" placeholder="Ej.: compra de mercadería para la tienda" [attr.aria-invalid]="!!errores()['destino']" />
+              @if (errores()['destino']) { <span class="error">{{ errores()['destino'] }}</span> }
+            </div>
+            <fieldset class="campo c6">
+              <legend class="etiqueta">Tipo de pago mensual</legend>
+              <div class="opciones">
+                <label class="opcion"><input type="radio" name="tp" value="FIJO" [(ngModel)]="m['tipoPago']" /><span>Fijo</span></label>
+                <label class="opcion"><input type="radio" name="tp" value="VARIABLE" [(ngModel)]="m['tipoPago']" /><span>Variable</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="campo c6">
+              <legend class="etiqueta">El solicitante es</legend>
+              <div class="opciones">
+                <label class="opcion"><input type="radio" name="cal" value="DEUDOR" [(ngModel)]="m['calidad']" /><span>Deudor</span></label>
+                <label class="opcion"><input type="radio" name="cal" value="GARANTE" [(ngModel)]="m['calidad']" /><span>Garante</span></label>
+              </div>
+            </fieldset>
+          </div>
+        }
+
+        @case (2) {
+          <div class="formulario">
+            <div class="campo c4"><label for="fn">Fecha de nacimiento</label><input id="fn" class="entrada" type="date" name="fn" [(ngModel)]="m['socio']['fechaNacimiento']" [attr.aria-invalid]="!!errores()['fechaNacimiento']" />
+              @if (errores()['fechaNacimiento']) { <span class="error">{{ errores()['fechaNacimiento'] }}</span> }</div>
+            <div class="campo c4"><label for="sexo">Sexo</label><select id="sexo" class="entrada" name="sexo" [(ngModel)]="m['socio']['sexo']"><option value="">—</option><option value="F">Femenino</option><option value="M">Masculino</option></select></div>
+            <div class="campo c4"><label for="ec">Estado civil</label>
+              <select id="ec" class="entrada" name="ec" [(ngModel)]="m['socio']['estadoCivil']" (ngModelChange)="tocar()" [attr.aria-invalid]="!!errores()['estadoCivil']">
+                <option value="">Elige</option><option value="SOLTERO">Soltero/a</option><option value="CASADO">Casado/a</option><option value="UNION_LIBRE">Unión libre</option><option value="DIVORCIADO">Divorciado/a</option><option value="VIUDO">Viudo/a</option>
+              </select>
+              @if (errores()['estadoCivil']) { <span class="error">{{ errores()['estadoCivil'] }}</span> }</div>
+            <div class="campo c3"><label for="cf">Cargas familiares</label><input id="cf" class="entrada num" type="number" min="0" name="cf" [(ngModel)]="m['socio']['cargasFamiliares']" /></div>
+            <div class="campo c3"><label for="ins">Instrucción</label><select id="ins" class="entrada" name="ins" [(ngModel)]="m['socio']['instruccion']"><option value="">—</option><option value="PRIMARIA">Primaria</option><option value="SECUNDARIA">Secundaria</option><option value="TECNICO">Técnico</option><option value="UNIVERSITARIO">Universitario</option><option value="CUARTO_NIVEL">Cuarto nivel</option><option value="NINGUNA">Ninguna</option></select></div>
+            <div class="campo c6"><label for="prof">Profesión (título)</label><input id="prof" class="entrada" name="prof" [(ngModel)]="m['socio']['profesion']" /></div>
+            <div class="campo c4"><label for="viv">Tipo de vivienda</label><select id="viv" class="entrada" name="viv" [(ngModel)]="m['socio']['tipoVivienda']"><option value="">—</option><option value="PROPIA">Propia</option><option value="ARRENDADA">Arrendada</option><option value="FAMILIAR">Familiar</option><option value="HIPOTECADA">Hipotecada</option><option value="PRESTADA">Prestada</option></select></div>
+            <div class="campo c4"><label for="tr">Tiempo de residencia (meses)</label><input id="tr" class="entrada num" type="number" min="0" name="tr" [(ngModel)]="m['socio']['tiempoResidenciaMeses']" /></div>
+            <div class="c4 casilla-campo"><label class="casilla"><input type="checkbox" name="sb" [(ngModel)]="m['socio']['separacionBienes']" /> Separación de bienes</label></div>
+            <div class="campo c6"><label for="cp">Calle principal</label><input id="cp" class="entrada" name="cp" [(ngModel)]="m['socio']['callePrincipal']" /></div>
+            <div class="campo c4"><label for="ct">Calle transversal</label><input id="ct" class="entrada" name="ct" [(ngModel)]="m['socio']['calleTransversal']" /></div>
+            <div class="campo c2"><label for="nc">Número</label><input id="nc" class="entrada" name="nc" [(ngModel)]="m['socio']['numeroCasa']" /></div>
+            <div class="campo c12"><label for="ru">Referencia de ubicación</label><input id="ru" class="entrada" name="ru" [(ngModel)]="m['socio']['referenciaUbicacion']" /></div>
+            <div class="campo c3"><label for="pv">Provincia</label><input id="pv" class="entrada" name="pv" [(ngModel)]="m['socio']['provincia']" /></div>
+            <div class="campo c3"><label for="cn">Cantón</label><input id="cn" class="entrada" name="cn" [(ngModel)]="m['socio']['canton']" /></div>
+            <div class="campo c3"><label for="pq">Parroquia</label><input id="pq" class="entrada" name="pq" [(ngModel)]="m['socio']['parroquia']" /></div>
+            <div class="campo c3"><label for="br">Barrio</label><input id="br" class="entrada" name="br" [(ngModel)]="m['socio']['barrio']" /></div>
+            <div class="campo c4"><label for="tel">Teléfono domicilio</label><input id="tel" class="entrada num" inputmode="tel" name="tel" [(ngModel)]="m['socio']['telefono']" /></div>
+            <div class="campo c4"><label for="cel">Celular</label><input id="cel" class="entrada num" inputmode="tel" name="cel" [(ngModel)]="m['socio']['celular']" [attr.aria-invalid]="!!errores()['celular']" />
+              @if (errores()['celular']) { <span class="error">{{ errores()['celular'] }}</span> }</div>
+            <div class="campo c4"><label for="mail">Correo personal</label><input id="mail" class="entrada" type="email" name="mail" [(ngModel)]="m['socio']['correo']" /></div>
+          </div>
+        }
+
+        @case (3) {
+          @for (a of m['actividades']; track $index; let i = $index) {
+            <fieldset class="formulario bloque">
+              <legend class="c12">Actividad económica {{ i + 1 }}</legend>
+              <div class="campo c4"><label [for]="'cond' + i">Condición</label>
+                <select [id]="'cond' + i" class="entrada" [name]="'cond' + i" [(ngModel)]="a['condicion']" [attr.aria-invalid]="i === 0 && !!errores()['condicion']">
+                  <option value="">Elige</option><option value="EMPLEADO_PUBLICO">Empleado público</option><option value="EMPLEADO_PRIVADO">Empleado privado</option>
+                  <option value="NEGOCIO_PROPIO">Independiente · negocio propio</option><option value="HONORARIOS">Independiente · por honorarios</option>
+                  <option value="COMERCIANTE">Comerciante</option><option value="JUBILADO">Jubilado</option><option value="QUEHACERES_DOMESTICOS">Quehaceres domésticos</option><option value="OTROS">Otros</option>
+                </select>
+                @if (i === 0 && errores()['condicion']) { <span class="error">{{ errores()['condicion'] }}</span> }</div>
+              <div class="campo c4"><label [for]="'emp' + i">Empresa o negocio</label><input [id]="'emp' + i" class="entrada" [name]="'emp' + i" [(ngModel)]="a['empresa']" /></div>
+              <div class="campo c4"><label [for]="'act' + i">Actividad de la empresa</label><input [id]="'act' + i" class="entrada" [name]="'act' + i" [(ngModel)]="a['actividadEmpresa']" /></div>
+              <div class="campo c4"><label [for]="'sec' + i">Actividad principal</label><select [id]="'sec' + i" class="entrada" [name]="'sec' + i" [(ngModel)]="a['sector']"><option value="">—</option><option value="SERVICIO">Servicio</option><option value="PRODUCCION">Producción</option><option value="COMERCIO">Comercio</option><option value="AGRICULTURA">Agricultura</option><option value="OTROS">Otros</option></select></div>
+              <div class="campo c4"><label [for]="'tt' + i">Tiempo de trabajo (meses)</label><input [id]="'tt' + i" class="entrada num" type="number" min="0" [name]="'tt' + i" [(ngModel)]="a['tiempoTrabajoMeses']" [attr.aria-invalid]="i === 0 && !!errores()['tiempoTrabajoMeses']" />
+                @if (i === 0 && errores()['tiempoTrabajoMeses']) { <span class="error">{{ errores()['tiempoTrabajoMeses'] }}</span> }</div>
+              <div class="campo c4"><label [for]="'af' + i">Afiliación</label><select [id]="'af' + i" class="entrada" [name]="'af' + i" [(ngModel)]="a['afiliacion']"><option value="IESS">IESS</option><option value="ISSFA">ISSFA</option><option value="ISSPOL">ISSPOL</option><option value="NINGUNO">Ninguno</option></select></div>
+              <div class="campo c3"><label [for]="'ti' + i">Tipo de ingresos</label><select [id]="'ti' + i" class="entrada" [name]="'ti' + i" [(ngModel)]="a['tipoIngresos']"><option value="FIJO">Fijo</option><option value="VARIABLE">Variable</option></select></div>
+              <div class="campo c3"><label [for]="'tc' + i">Contratación</label><select [id]="'tc' + i" class="entrada" [name]="'tc' + i" [(ngModel)]="a['tipoContratacion']"><option value="">No aplica</option><option value="CONTRATO">Contrato</option><option value="NOMBRAMIENTO">Nombramiento</option></select></div>
+              <div class="campo c3"><label [for]="'cg' + i">Cargo</label><input [id]="'cg' + i" class="entrada" [name]="'cg' + i" [(ngModel)]="a['cargo']" /></div>
+              <div class="campo c3"><label [for]="'va' + i">Ventas anuales</label><div class="entrada-prefijo"><span>$</span><input [id]="'va' + i" class="entrada num" type="number" min="0" [name]="'va' + i" [(ngModel)]="a['ventasAnuales']" /></div></div>
+              <div class="campo c3"><label [for]="'nt' + i">N.º de trabajadores</label><input [id]="'nt' + i" class="entrada num" type="number" min="0" [name]="'nt' + i" [(ngModel)]="a['numeroTrabajadores']" /></div>
+              <div class="campo c3"><label [for]="'tm' + i">Tiempo en el mercado (meses)</label><input [id]="'tm' + i" class="entrada num" type="number" min="0" [name]="'tm' + i" [(ngModel)]="a['tiempoMercadoMeses']" /></div>
+              <div class="c6 casilla-campo"><label class="casilla"><input type="checkbox" [name]="'lp' + i" [(ngModel)]="a['localPropio']" /> Local propio</label></div>
+              <div class="campo c12"><label [for]="'pr' + i">Tres productos que comercializa o produce</label><input [id]="'pr' + i" class="entrada" [name]="'pr' + i" [(ngModel)]="a['productos']" /></div>
+              <div class="campo c12"><label [for]="'dir' + i">Dirección del trabajo o negocio</label><input [id]="'dir' + i" class="entrada" [name]="'dir' + i" [(ngModel)]="a['direccion']" /></div>
+            </fieldset>
+          }
+          @if (m['actividades'].length < 2) {
+            <button class="btn" type="button" (click)="m['actividades'].push({ condicion: '', tipoIngresos: 'VARIABLE', afiliacion: 'NINGUNO' }); tocar()"><pjl-icono nombre="mas" /> Agregar actividad económica (2)</button>
+          }
+        }
+
+        @case (4) {
+          <div class="formulario">
+            <div class="campo c4"><label for="cc">Cédula</label><input id="cc" class="entrada num" name="cc" maxlength="10" [(ngModel)]="m['conyuge']['cedula']" /></div>
+            <div class="campo c4"><label for="cap">Apellidos</label><input id="cap" class="entrada" name="cap" [(ngModel)]="m['conyuge']['apellidos']" [attr.aria-invalid]="!!errores()['conyuge']" /></div>
+            <div class="campo c4"><label for="cno">Nombres</label><input id="cno" class="entrada" name="cno" [(ngModel)]="m['conyuge']['nombres']" [attr.aria-invalid]="!!errores()['conyuge']" /></div>
+            @if (errores()['conyuge']) { <span class="error c12">{{ errores()['conyuge'] }}</span> }
+            <div class="campo c4"><label for="cfn">Fecha de nacimiento</label><input id="cfn" class="entrada" type="date" name="cfn" [(ngModel)]="m['conyuge']['fechaNacimiento']" /></div>
+            <div class="campo c4"><label for="ccl">Condición laboral</label><select id="ccl" class="entrada" name="ccl" [(ngModel)]="m['conyuge']['condicionLaboral']"><option value="">—</option><option value="EMPLEADO_PUBLICO">Empleado público</option><option value="EMPLEADO_PRIVADO">Empleado privado</option><option value="NEGOCIO_PROPIO">Independiente</option><option value="QUEHACERES_DOMESTICOS">Quehaceres domésticos</option></select></div>
+            <div class="campo c4"><label for="cpr">Profesión</label><input id="cpr" class="entrada" name="cpr" [(ngModel)]="m['conyuge']['profesion']" /></div>
+            <div class="campo c6"><label for="cac">Descripción de la actividad económica</label><input id="cac" class="entrada" name="cac" [(ngModel)]="m['conyuge']['actividad']" /></div>
+            <div class="campo c6"><label for="cem">Empresa o negocio</label><input id="cem" class="entrada" name="cem" [(ngModel)]="m['conyuge']['empresa']" /></div>
+            <div class="campo c6"><label for="ccel">Celular del cónyuge</label><input id="ccel" class="entrada num" inputmode="tel" name="ccel" [(ngModel)]="m['conyuge']['celular']" /></div>
+            <div class="campo c6"><label for="cco">Correo</label><input id="cco" class="entrada" type="email" name="cco" [(ngModel)]="m['conyuge']['correo']" /></div>
+          </div>
+        }
+
+        @case (5) {
+          @for (r of m['referencias']; track $index; let i = $index) {
+            <fieldset class="formulario bloque">
+              <legend class="c12">{{ r['tipo'] === 'CUENTA_BANCARIA' ? 'Referencia bancaria' : r['tipo'] === 'COMERCIAL' ? 'Referencia comercial' : 'Referencia personal ' + (i - 1) }}</legend>
+              <div class="campo c6"><label [for]="'rn' + i">{{ r['tipo'] === 'CUENTA_BANCARIA' ? 'Banco o cooperativa' : r['tipo'] === 'COMERCIAL' ? 'Empresa comercial' : 'Nombre completo' }}</label><input [id]="'rn' + i" class="entrada" [name]="'rn' + i" [(ngModel)]="r['nombre']" /></div>
+              @if (r['tipo'] === 'CUENTA_BANCARIA') {
+                <div class="campo c3"><label [for]="'rtc' + i">Tipo de cuenta</label><select [id]="'rtc' + i" class="entrada" [name]="'rtc' + i" [(ngModel)]="r['tipoCuenta']"><option value="AHORROS">Ahorros</option><option value="CORRIENTE">Corriente</option></select></div>
+                <div class="campo c3"><label [for]="'rnc' + i">Últimos 4 dígitos</label><input [id]="'rnc' + i" class="entrada num" maxlength="4" inputmode="numeric" [name]="'rnc' + i" [(ngModel)]="r['numeroCuenta']" /></div>
+              } @else {
+                <div class="campo c6"><label [for]="'rd' + i">Dirección</label><input [id]="'rd' + i" class="entrada" [name]="'rd' + i" [(ngModel)]="r['direccion']" /></div>
+                <div class="campo c4"><label [for]="'rt' + i">Teléfono</label><input [id]="'rt' + i" class="entrada num" inputmode="tel" [name]="'rt' + i" [(ngModel)]="r['telefono']" /></div>
+                @if (r['tipo'] === 'PERSONAL') {
+                  <div class="campo c4"><label [for]="'re' + i">Empresa donde trabaja</label><input [id]="'re' + i" class="entrada" [name]="'re' + i" [(ngModel)]="r['empresaTrabajo']" /></div>
+                  <div class="campo c4"><label [for]="'rp' + i">Relación o parentesco</label><input [id]="'rp' + i" class="entrada" [name]="'rp' + i" [(ngModel)]="r['parentesco']" /></div>
+                }
+              }
+            </fieldset>
+          }
+        }
+
+        @case (6) {
+          @for (b of m['bienes']; track $index; let i = $index) {
+            <fieldset class="formulario bloque">
+              <legend class="c12">Bien {{ i + 1 }}</legend>
+              <div class="campo c3"><label [for]="'bt' + i">Tipo</label><select [id]="'bt' + i" class="entrada" [name]="'bt' + i" [(ngModel)]="b['tipo']"><option value="CASA">Casa</option><option value="DEPARTAMENTO">Departamento</option><option value="LOTE">Lote</option><option value="LOCAL">Local</option><option value="VEHICULO">Vehículo</option><option value="OTRO">Otro</option></select></div>
+              <div class="campo c6"><label [for]="'bd' + i">Ubicación (ciudad, calle) o marca, modelo y año</label><input [id]="'bd' + i" class="entrada" [name]="'bd' + i" [(ngModel)]="b['descripcion']" /></div>
+              <div class="campo c3"><label [for]="'bv' + i">Valor comercial</label><div class="entrada-prefijo"><span>$</span><input [id]="'bv' + i" class="entrada num" type="number" min="0" [name]="'bv' + i" [(ngModel)]="b['valorComercial']" /></div></div>
+              <div class="c3 casilla-campo"><label class="casilla"><input type="checkbox" [name]="'bh' + i" [(ngModel)]="b['hipotecado']" /> Hipoteca o prenda</label></div>
+              <div class="campo c6"><label [for]="'bi' + i">Institución financiera</label><input [id]="'bi' + i" class="entrada" [name]="'bi' + i" [(ngModel)]="b['institucion']" [disabled]="!b['hipotecado']" /></div>
+              <div class="c3 quitar"><button class="btn btn-peligro btn-chico" type="button" (click)="quitarBien(i)">Quitar</button></div>
+            </fieldset>
+          } @empty {
+            <p class="suave">El socio no declara bienes inmuebles ni vehículos. Agrega los que tenga: sirven para definir la garantía en montos altos.</p>
+          }
+          <button class="btn" type="button" (click)="agregarBien()"><pjl-icono nombre="mas" /> Agregar bien</button>
+        }
+
+        @case (7) {
+          <div class="situacion">
+            @for (g of grupos; track g.titulo) {
+              <fieldset>
+                <legend>{{ g.titulo }}</legend>
+                @for (c of g.campos; track c[0]) {
+                  <label class="fila-num">
+                    <span>{{ c[1] }}</span>
+                    <span class="entrada-prefijo"><span>$</span><input class="entrada num" type="number" min="0" step="10" [name]="c[0]" [(ngModel)]="m['situacion'][c[0]]" (ngModelChange)="tocar()" /></span>
+                  </label>
+                }
+              </fieldset>
+            }
+          </div>
+          <dl class="totales" aria-live="polite">
+            <div><dt>Total activos</dt><dd class="num">{{ totales().activos | dinero }}</dd></div>
+            <div><dt>Total pasivos</dt><dd class="num">{{ totales().pasivos | dinero }}</dd></div>
+            <div><dt>Patrimonio</dt><dd class="num">{{ totales().patrimonio | dinero }}</dd></div>
+            <div><dt>Ingresos</dt><dd class="num">{{ totales().ingresos | dinero }}</dd></div>
+            <div><dt>Egresos</dt><dd class="num">{{ totales().egresos | dinero }}</dd></div>
+            <div class="disp"><dt>Disponible mensual</dt><dd class="num" [class.negativo]="totales().disponible < 0">{{ totales().disponible | dinero }}</dd></div>
+          </dl>
+          @if (errores()['ingresos']) { <span class="error">{{ errores()['ingresos'] }}</span> }
+        }
+
+        @case (8) {
+          <div class="declaraciones">
+            <label class="casilla"><input type="checkbox" name="lic" [(ngModel)]="m['declaraciones']['declaraLicitud']" />
+              <span>El socio declara bajo juramento que la información es correcta y que los fondos no provienen de actividades ilícitas (Prevención de Lavado de Activos).</span></label>
+            @if (errores()['licitud']) { <span class="error">{{ errores()['licitud'] }}</span> }
+            <fieldset class="campo">
+              <legend class="etiqueta">¿Es persona expuesta políticamente (PEP)?</legend>
+              <div class="opciones">
+                <label class="opcion"><input type="radio" name="pep" [value]="false" [(ngModel)]="m['declaraciones']['esPep']" /><span>No</span></label>
+                <label class="opcion"><input type="radio" name="pep" [value]="true" [(ngModel)]="m['declaraciones']['esPep']" /><span>Sí</span></label>
+              </div>
+            </fieldset>
+
+            <section class="lopdp" aria-labelledby="lopdp-t">
+              <h3 id="lopdp-t"><pjl-icono nombre="escudo" [tam]="18" /> Autorización de consulta a la central de riesgos y uso de datos personales</h3>
+              <p>Autorizo de manera expresa a la Cooperativa de Ahorro y Crédito «Padre Julián Lorente Ltda.» para que realice las consultas que creyere convenientes y necesarias en la central de riesgo en cualquier tiempo. En cumplimiento de la Ley Orgánica de Protección de Datos Personales, autorizo el tratamiento de mis datos personales, inclusive datos sensibles como biométricos, crediticios y transaccionales.</p>
+              @if (socioCore()?.['consentimiento']) {
+                <p class="lopdp-ok">Ya existe una autorización vigente. Firmar de nuevo renueva su vigencia por 24 meses.</p>
+              }
+              <label class="casilla"><input type="checkbox" name="aut" [(ngModel)]="m['autorizacion']['acepta']" /> <span>El socio firmó la autorización en la agencia.</span></label>
+              @if (m['autorizacion']['acepta']) {
+                <div class="campo"><label for="aae">Actividad económica declarada</label><input id="aae" class="entrada" name="aae" [(ngModel)]="m['autorizacion']['actividadEconomica']" /></div>
+              }
+            </section>
+
+            <div class="formulario">
+              <div class="campo c4"><label for="lat">Croquis: latitud del domicilio</label><input id="lat" class="entrada num" type="number" step="0.000001" name="lat" [(ngModel)]="m['croquis']['casaLat']" /></div>
+              <div class="campo c4"><label for="lng">Longitud</label><input id="lng" class="entrada num" type="number" step="0.000001" name="lng" [(ngModel)]="m['croquis']['casaLng']" /></div>
+              <div class="c4 casilla-campo"><button class="btn" type="button" (click)="ubicar()">Usar mi ubicación</button></div>
+              <div class="campo c12"><label for="obs">Observaciones del asesor</label><textarea id="obs" class="entrada" name="obs" [(ngModel)]="m['observaciones']" rows="3"></textarea></div>
+            </div>
+          </div>
+        }
+      }
+
+      @if (errorGeneral()) { <div class="aviso-error" role="alert"><pjl-icono nombre="alerta" /> {{ errorGeneral() }}</div> }
+
+      <div class="pie">
+        @if (paso() > 1) {
+          <button class="btn" type="button" (click)="irA(paso() - (paso() === 5 && !conConyuge() ? 2 : 1))"><pjl-icono nombre="arrow-left" [tam]="17" /> Anterior</button>
+        }
+        <span class="espacio"></span>
+        <span class="muted">Paso {{ paso() }} de 8</span>
+        @if (paso() < 8) {
+          <button class="btn btn-primario" type="submit">Siguiente <pjl-icono nombre="chevron-right" [tam]="17" /></button>
+        } @else {
+          <button class="btn btn-primario btn-grande" type="submit" [disabled]="enviando()">
+            @if (enviando()) { <span class="giro"></span> Registrando… } @else { <pjl-icono nombre="enviar" /> Registrar solicitud }
+          </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+{
+ "schemaVersion": 2,
+ "generatedAt": "2026-11-15T18:57:06.801184+00:00",
+ "title": "Design System: PJL Crédito · Terrazas del escudo",
+ "extensions": {
+  "colorMeta": {
+   "azul-escudo": {
+    "role": "primary",
+    "displayName": "Azul del escudo",
+    "tonalRamp": [
+     "#0a2a47",
+     "#0e3a60",
+     "#124a78",
+     "#16588e",
+     "#1d6aa8",
+     "#3b82c0",
+     "#9dbfdf",
+     "#e4eef7"
+    ]
+   },
+   "ambar-terraza": {
+    "role": "secondary",
+    "displayName": "Ámbar de las terrazas",
+    "tonalRamp": [
+     "#5c4000",
+     "#7a5500",
+     "#a87500",
+     "#e0a100",
+     "#f5b500",
+     "#ffc933",
+     "#ffd866",
+     "#fff4cc"
+    ]
+   },
+   "azul-profundo": {
+    "role": "tertiary",
+    "displayName": "Cielo profundo"
+   },
+   "tinta": {
+    "role": "neutral",
+    "displayName": "Tinta del logo",
+    "tonalRamp": [
+     "#1a212d",
+     "#364152",
+     "#4a5668",
+     "#5f6b7e",
+     "#a9b4c3",
+     "#d3dae4",
+     "#e7ecf2",
+     "#f7f9fc"
+    ]
+   }
+  },
+  "typographyMeta": {
+   "display": {
+    "displayName": "Cifra de etapa",
+    "purpose": "Conteos de terrazas, score y montos de oferta."
+   }
+  },
+  "shadows": [
+   {
+    "name": "sombra-1",
+    "value": "0 1px 2px rgba(14,58,96,.06), 0 1px 1px rgba(14,58,96,.04)",
+    "purpose": "Paneles en reposo."
+   },
+   {
+    "name": "sombra-2",
+    "value": "0 2px 4px rgba(14,58,96,.05), 0 12px 28px -12px rgba(14,58,96,.24)",
+    "purpose": "Campo de terrazas y tarjeta de próxima cuota."
+   },
+   {
+    "name": "sombra-3",
+    "value": "0 24px 60px -20px rgba(10,42,71,.42)",
+    "purpose": "Avisos, cajón y hoja inferior."
+   }
+  ],
+  "motion": [
+   {
+    "name": "ease-out",
+    "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+    "purpose": "Presión de botones (140 ms) y entradas."
+   },
+   {
+    "name": "ease-drawer",
+    "value": "cubic-bezier(0.32, 0.72, 0, 1)",
+    "purpose": "Cajón de navegación y hoja inferior (320–420 ms)."
+   },
+   {
+    "name": "crecer-terrazas",
+    "value": "520ms ease-out scaleY desde la base",
+    "purpose": "Una vez al cargar el panel."
+   }
+  ],
+  "breakpoints": [
+   {
+    "name": "telefono",
+    "value": "560px"
+   },
+   {
+    "name": "tablet",
+    "value": "900px"
+   },
+   {
+    "name": "riel",
+    "value": "1100px"
+   }
+  ]
+ },
+ "components": [
+  {
+   "name": "Botón primario",
+   "kind": "button",
+   "refersTo": "boton-primario",
+   "description": "Acción principal de cada pantalla.",
+   "html": "<button class=\"ds-btn\">Ejecutar motor de evaluación</button>",
+   "css": ".ds-btn{font-family:Manrope,system-ui,sans-serif;min-height:40px;padding:0 16px;border-radius:10px;border:1px solid #16588e;background:#16588e;color:#fff;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 6px 14px -8px rgba(22,88,142,.7);transition:transform 140ms cubic-bezier(.23,1,.32,1),background-color 200ms ease}.ds-btn:hover{background:#1d6aa8}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:none;box-shadow:0 0 0 2px #fff,0 0 0 4px #3b82c0}"
+  },
+  {
+   "name": "Chip de filtro",
+   "kind": "chip",
+   "refersTo": "chip-activo",
+   "description": "Filtro de etapa o fase.",
+   "html": "<button class=\"ds-chip\" aria-pressed=\"true\">2 Datos</button><button class=\"ds-chip\">3 Score</button>",
+   "css": ".ds-chip{font-family:Manrope,system-ui,sans-serif;min-height:36px;padding:0 12px;margin-right:6px;border-radius:999px;border:1px solid #dde4ed;background:#fff;color:#364152;font-weight:600;font-size:13px;cursor:pointer}.ds-chip[aria-pressed=true]{background:#0e3a60;border-color:#0e3a60;color:#fff}.ds-chip:hover:not([aria-pressed=true]){background:#f2f6fb;border-color:#9dbfdf}"
+  },
+  {
+   "name": "Campo",
+   "kind": "input",
+   "refersTo": "campo",
+   "description": "Entrada de formulario.",
+   "html": "<label class=\"ds-campo\"><span>Monto solicitado</span><input value=\"8500\"></label>",
+   "css": ".ds-campo{display:flex;flex-direction:column;gap:6px;font-family:Manrope,system-ui,sans-serif;font-size:13px;font-weight:600;color:#364152}.ds-campo input{min-height:42px;padding:9px 12px;border-radius:10px;border:1px solid #c3cedb;font:inherit;font-size:14px}.ds-campo input:focus{outline:none;border-color:#1d6aa8;box-shadow:0 0 0 3px #c9dcee}"
+  },
+  {
+   "name": "Marcas de etapa",
+   "kind": "custom",
+   "description": "Estado del Value Stream por forma.",
+   "html": "<span class=\"ds-m h\"></span><span class=\"ds-m h\"></span><span class=\"ds-m h\"></span><span class=\"ds-m a\"></span><span class=\"ds-m\"></span><span class=\"ds-m\"></span>",
+   "css": ".ds-m{display:inline-block;width:12px;height:12px;margin-right:6px;border-radius:50%;border:2px solid #a9b4c3;background:#fff}.ds-m.h{background:#16588e;border-color:#16588e}.ds-m.a{background:#f5b500;border-color:#e0a100;box-shadow:0 0 0 2px #fff,0 0 0 4px #f5b500;margin:0 9px 0 3px}"
+  },
+  {
+   "name": "Insignia de riesgo",
+   "kind": "chip",
+   "description": "Rampa fija A–E.",
+   "html": "<span class=\"ds-r a\">A</span><span class=\"ds-r b\">B</span><span class=\"ds-r c\">C</span><span class=\"ds-r d\">D</span><span class=\"ds-r e\">E</span>",
+   "css": ".ds-r{display:inline-grid;place-items:center;width:28px;height:28px;margin-right:6px;border-radius:6px;font:800 13px Manrope,system-ui,sans-serif}.ds-r.a{background:#dcf2e4;color:#17663a}.ds-r.b{background:#e4eef7;color:#16588e}.ds-r.c{background:#fff1cc;color:#7a5500}.ds-r.d{background:#fce6d6;color:#a3470a}.ds-r.e{background:#fde4e1;color:#b42318}"
+  },
+  {
+   "name": "Terrazas del Value Stream",
+   "kind": "custom",
+   "description": "Firma: campo azul con terrazas ámbar por etapa.",
+   "html": "<div class=\"ds-t\"><div><small>Etapa 1</small><b>10</b></div><div><small>Etapa 2</small><b>5</b></div><div><small>Etapa 3</small><b>3</b></div><svg viewBox=\"0 0 300 60\" preserveAspectRatio=\"none\"><path d=\"M0 60V20Q50 12 100 20V36Q150 28 200 36V44Q250 38 300 44V60Z\" fill=\"#f5b500\"/></svg></div>",
+   "css": ".ds-t{position:relative;display:grid;grid-template-columns:repeat(3,1fr);background:#16588e;border-radius:16px;overflow:hidden;color:#fff;font-family:Manrope,system-ui,sans-serif;padding-bottom:64px}.ds-t div{padding:14px;border-left:1px solid rgba(255,255,255,.14)}.ds-t small{display:block;color:#c9dcee;font-size:12px}.ds-t b{font-size:40px;font-weight:800;letter-spacing:-.04em}.ds-t svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:60px}"
+  }
+ ],
+ "narrative": {
+  "northStar": "Terrazas del escudo",
+  "overview": "El Value Stream de crédito dibujado con la geometría del escudo PJL: campo azul para la navegación y terrazas ámbar que representan la etapa de cada crédito.",
+  "keyCharacteristics": [
+   "Tema claro con fondo frío",
+   "Manrope con cifras tabulares",
+   "Rampa fija de riesgo A–E",
+   "Estados legibles por la forma"
+  ],
+  "rules": [
+   {
+    "name": "La rampa fija de riesgo",
+    "body": "A–E siempre con los mismos colores e insignia con letra.",
+    "section": "colors"
+   },
+   {
+    "name": "El ámbar señala el momento",
+    "body": "Ámbar solo para lo actual o la tierra de las terrazas.",
+    "section": "colors"
+   }
+  ],
+  "dos": [
+   "Mostrar etapa y siguiente paso en cada pantalla",
+   "Explicar dictámenes con factores"
+  ],
+  "donts": [
+   "Usar terrazas como adorno sin estado",
+   "Bordes laterales gruesos de color",
+   "Kickers sobre títulos"
+  ]
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "meta": {
+  "fuente": "Nube privada COAC PJL (simulada)",
+  "nota": "Datos de prueba: el tarifario fue transcrito de la hoja física y debe validarse.",
+  "version": "2026-11"
+ },
+ "avisos": [
+  {
+   "id": "av-1",
+   "tipo": "EDUCACION",
+   "titulo": "Tu cuota no debería pasar del 40 % de tus ingresos",
+   "texto": "Antes de pedir un crédito, suma tus gastos del mes y usa el simulador para ver una cuota que puedas pagar sin apuros."
+  },
+  {
+   "id": "av-2",
+   "tipo": "SEGURIDAD",
+   "titulo": "La cooperativa nunca te pedirá tu clave",
+   "texto": "Ningún asesor te pedirá tu clave por teléfono, WhatsApp o correo. Si alguien lo hace, cuelga y llama a tu agencia."
+  },
+  {
+   "id": "av-3",
+   "tipo": "PRIVACIDAD",
+   "titulo": "Tus datos, con tu autorización",
+   "texto": "Solo consultamos el buró y la central de riesgos con tu autorización firmada (LOPDP). Puedes revisarla o revocarla desde tu perfil."
+  }
+ ]
+}
