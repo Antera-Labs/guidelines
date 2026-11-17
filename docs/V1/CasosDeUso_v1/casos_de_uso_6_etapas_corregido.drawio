@@ -1,0 +1,705 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mxfile host="app.diagrams.net" version="24.7.0" type="device">
+  <diagram id="diag-CU-01" name="CU-01: 1. Solicitud y captación">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="CU-01-boundary" value="CU-01 — Sistema de Originación y Captación Crediticia — Etapa 1: Solicitud y Captación" style="swimlane;whiteSpace=wrap;html=1;startSize=38;fillColor=#f8fafc;strokeColor=#1e293b;fontColor=#0f172a;fontStyle=1;fontSize=14;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="230" y="40" width="900" height="745" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-pa-0" value="Cliente / Socio&lt;br&gt;Solicitante" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="180" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-pa-1" value="Asesor de Negocios&lt;br&gt;(Captación)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="440" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sa-0" value="Base de Datos de&lt;br&gt;Solicitudes" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="85" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sa-1" value="Servicio Biométrico y&lt;br&gt;Registro Civil" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="251" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sa-2" value="Oficial de Cumplimiento&lt;br&gt;/ Listas PLA-FT" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="417" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sa-3" value="Repositorio de&lt;br&gt;Expediente Digital" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="583" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-uc-0" value="CU-1.1 Recepción de solicitud" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="40" y="125" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-pa-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-pa-0" target="CU-01-uc-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-pa-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-pa-1" target="CU-01-uc-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-0-0" value="Registro de datos del cliente" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="65" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-0-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-0" target="CU-01-sub-0-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-0-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-0-0" target="CU-01-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-0-1" value="Definición de monto y plazo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="129" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-0-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-0" target="CU-01-sub-0-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-0-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-0-1" target="CU-01-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-0-2" value="Registro de destino del crédito" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="193" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-0-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-0" target="CU-01-sub-0-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-0-2-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-0-2" target="CU-01-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-uc-1" value="CU-1.2 Validación de identidad (KYC)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="40" y="345" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-pa-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-pa-0" target="CU-01-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-pa-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-pa-1" target="CU-01-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-1-0" value="Verificación de cédula de identidad" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="285" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-1-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-1" target="CU-01-sub-1-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-1-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-1-0" target="CU-01-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-1-1" value="Validación biométrica del solicitante" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="349" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-1-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-1" target="CU-01-sub-1-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-1-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-1-1" target="CU-01-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-1-2" value="Consulta en listas restrictivas (PLA/FT)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="413" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-1-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-1" target="CU-01-sub-1-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-1-2-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-1-2" target="CU-01-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-uc-2" value="CU-1.3 Recolección documental" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="40" y="565" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-pa-2-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-pa-0" target="CU-01-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-pa-2-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-pa-1" target="CU-01-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-2-0" value="Recolección de ingresos y roles de pago" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="505" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-2-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-2" target="CU-01-sub-2-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-2-0-3" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-2-0" target="CU-01-sa-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-2-1" value="Recepción de declaraciones tributarias" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="569" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-2-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-uc-2" target="CU-01-sub-2-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-2-1-3" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-2-1" target="CU-01-sa-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-sub-2-2" value="Registro de respaldos y garantías" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fce7f3;strokeColor=#db2777;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-01-boundary">
+          <mxGeometry x="460" y="633" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-rel-2-2" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#be185d;fontColor=#9d174d;fontSize=10;fontStyle=2;" edge="1" parent="CU-01-boundary" source="CU-01-sub-2-2" target="CU-01-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-01-edge-sa-2-2-3" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-01-sub-2-2" target="CU-01-sa-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-CU-02" name="CU-02: 2. Recolección y consolidación de datos">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="CU-02-boundary" value="CU-02 — Sistema de Recolección y Consolidación de Datos — Etapa 2: Recolección y Consolidación" style="swimlane;whiteSpace=wrap;html=1;startSize=38;fillColor=#f8fafc;strokeColor=#1e293b;fontColor=#0f172a;fontStyle=1;fontSize=14;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="230" y="40" width="900" height="689" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-pa-0" value="Analista de Crédito /&lt;br&gt;Datos" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="339" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sa-0" value="Core Bancario&lt;br&gt;(BD Datos Internos)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="85" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sa-1" value="Buró de Crédito y&lt;br&gt;Central de Riesgos (SB/SEPS)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="288" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sa-2" value="Motor de Integración y&lt;br&gt;BD de Datos Consolidados" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="491" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-uc-0" value="CU-2.1 Recolectar datos internos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="40" y="125" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-pa-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-pa-0" target="CU-02-uc-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-0-0" value="Consulta de historial con la entidad" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="65" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-0-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-0" target="CU-02-sub-0-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-0-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-0-0" target="CU-02-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-0-1" value="Evaluación de saldos y ahorros" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="129" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-0-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-0" target="CU-02-sub-0-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-0-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-0-1" target="CU-02-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-0-2" value="Análisis de comportamiento de pago interno" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="193" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-0-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-0" target="CU-02-sub-0-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-0-2-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-0-2" target="CU-02-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-uc-1" value="CU-2.2 Consultar datos externos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="40" y="313" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-pa-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-pa-0" target="CU-02-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-1-0" value="Consulta a buró de crédito" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="285" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-1-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-1" target="CU-02-sub-1-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-1-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-1-0" target="CU-02-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-1-1" value="Consulta a central de riesgos (SB/SEPS)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="349" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-1-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-1" target="CU-02-sub-1-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-1-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-1-1" target="CU-02-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-uc-2" value="CU-2.3 Integrar y limpiar datos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="40" y="509" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-2-0" value="Depuración de registros e inconsistencias" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="449" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-2-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-2" target="CU-02-sub-2-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-2-0-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-2-0" target="CU-02-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-2-1" value="Imputación de valores faltantes" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fce7f3;strokeColor=#db2777;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="513" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-2-1" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#be185d;fontColor=#9d174d;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-sub-2-1" target="CU-02-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-2-1-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-2-1" target="CU-02-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-sub-2-2" value="Normalización y estandarización de variables" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-02-boundary">
+          <mxGeometry x="460" y="577" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-rel-2-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-2" target="CU-02-sub-2-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-edge-sa-2-2-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-02-sub-2-2" target="CU-02-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-02-auto-flow-1-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b45309;fontColor=#78350f;fontSize=10;fontStyle=2;" edge="1" parent="CU-02-boundary" source="CU-02-uc-1" target="CU-02-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-CU-03" name="CU-03: 3. Evaluación y cálculo del score">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="CU-03-boundary" value="CU-03 — Sistema de Evaluación y Cálculo del Score — Etapa 3: Evaluación y Cálculo del Score" style="swimlane;whiteSpace=wrap;html=1;startSize=38;fillColor=#f8fafc;strokeColor=#1e293b;fontColor=#0f172a;fontStyle=1;fontSize=14;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="230" y="40" width="900" height="909" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-pa-0" value="Analista de Riesgo&lt;br&gt;Crediticio" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="449" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sa-0" value="Motor de Reglas y&lt;br&gt;BD de Políticas" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="85" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sa-1" value="Motor Financiero y&lt;br&gt;BD de Capacidad de Pago" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="292" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sa-2" value="Motor de Scoring Automático&lt;br&gt;(Modelo LLM y RAG)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="499" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sa-3" value="Motor de Segmentación y&lt;br&gt;BD de Calificaciones de Riesgo" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="706" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-uc-0" value="CU-3.1 Aplicar filtros de política" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="40" y="125" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-0-0" value="Validación de edad y capacidad mínima" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="65" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-0-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-0" target="CU-03-sub-0-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-0-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-0-0" target="CU-03-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-0-1" value="Verificación de mora vigente" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="129" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-0-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-0" target="CU-03-sub-0-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-0-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-0-1" target="CU-03-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-0-2" value="Control de umbral de sobreendeudamiento" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="193" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-0-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-0" target="CU-03-sub-0-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-0-2-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-0-2" target="CU-03-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-uc-1" value="CU-3.2 Analizar capacidad de pago" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="40" y="345" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-1-0" value="Cálculo de ratio cuota / ingreso" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="285" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-1-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-1" target="CU-03-sub-1-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-1-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-1-0" target="CU-03-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-1-1" value="Evaluación de nivel de endeudamiento" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="349" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-1-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-1" target="CU-03-sub-1-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-1-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-1-1" target="CU-03-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-1-2" value="Determinación de flujo de caja disponible" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="413" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-1-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-1" target="CU-03-sub-1-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-1-2-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-1-2" target="CU-03-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-uc-2" value="CU-3.3 Aplicar modelo de scoring" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="40" y="565" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-2-0" value="Inferencia automática mediante LLM y RAG" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="505" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-2-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-2" target="CU-03-sub-2-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-2-0-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-2-0" target="CU-03-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-2-1" value="Cálculo de probabilidad de default (PD)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="569" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-2-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-2" target="CU-03-sub-2-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-2-1-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-2-1" target="CU-03-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-2-2" value="Transformación a puntaje crediticio (Score)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="633" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-2-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-2" target="CU-03-sub-2-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-2-2-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-2-2" target="CU-03-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-uc-3" value="CU-3.4 Segmentar riesgo crediticio" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="40" y="753" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-pa-3-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-pa-0" target="CU-03-uc-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-3-0" value="Evaluación de puntos de corte (cut-offs)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="725" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-3-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-3" target="CU-03-sub-3-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-3-0-3" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-3-0" target="CU-03-sa-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-sub-3-1" value="Asignación a categoría de riesgo (A, B, C, D, E)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-03-boundary">
+          <mxGeometry x="460" y="789" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-rel-3-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-3" target="CU-03-sub-3-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-edge-sa-3-1-3" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-03-sub-3-1" target="CU-03-sa-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-auto-flow-0-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b45309;fontColor=#78350f;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-0" target="CU-03-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-auto-flow-1-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b45309;fontColor=#78350f;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-1" target="CU-03-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-03-auto-flow-2-3" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b45309;fontColor=#78350f;fontSize=10;fontStyle=2;" edge="1" parent="CU-03-boundary" source="CU-03-uc-2" target="CU-03-uc-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-CU-04" name="CU-04: 4. Decisión crediticia">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="CU-04-boundary" value="CU-04 — Sistema de Dictamen y Comité de Crédito — Etapa 4: Decisión Crediticia" style="swimlane;whiteSpace=wrap;html=1;startSize=38;fillColor=#f8fafc;strokeColor=#1e293b;fontColor=#0f172a;fontStyle=1;fontSize=14;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="230" y="40" width="900" height="689" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-pa-0" value="Analista de Crédito" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="180" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-pa-1" value="Comité de Crédito /&lt;br&gt;Jefe de Crédito" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="440" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sa-0" value="Motor de Matriz de&lt;br&gt;Decisión (BD Dictámenes)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="85" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sa-1" value="BD de Resoluciones y&lt;br&gt;Actas de Comité" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="288" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sa-2" value="BD de Tarifario y&lt;br&gt;Condiciones Crediticias" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="491" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-uc-0" value="CU-4.1 Evaluar en matriz de decisión" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="40" y="125" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-pa-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-pa-0" target="CU-04-uc-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-0-0" value="Cruce de score vs. monto solicitado" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="65" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-0-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-uc-0" target="CU-04-sub-0-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-0-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-0-0" target="CU-04-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-0-1" value="Contrastación contra política de riesgo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="129" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-0-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-uc-0" target="CU-04-sub-0-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-0-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-0-1" target="CU-04-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-0-2" value="Generación de dictamen automático" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="193" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-0-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-uc-0" target="CU-04-sub-0-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-0-2-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-0-2" target="CU-04-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-uc-1" value="CU-4.2 Realizar revisión manual / comité" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="40" y="313" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-pa-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-pa-0" target="CU-04-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-pa-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-pa-1" target="CU-04-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-1-0" value="Análisis de casos en zona gris" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fce7f3;strokeColor=#db2777;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="285" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-1-0" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#be185d;fontColor=#9d174d;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-sub-1-0" target="CU-04-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-1-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-1-0" target="CU-04-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-1-1" value="Evaluación y fallo para montos altos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fce7f3;strokeColor=#db2777;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="349" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-1-1" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#be185d;fontColor=#9d174d;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-sub-1-1" target="CU-04-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-1-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-1-1" target="CU-04-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-uc-2" value="CU-4.3 Definir condiciones crediticias" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="40" y="509" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-pa-2-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-pa-0" target="CU-04-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-pa-2-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-pa-1" target="CU-04-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-2-0" value="Asignación de tasa de interés según riesgo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="449" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-2-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-uc-2" target="CU-04-sub-2-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-2-0-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-2-0" target="CU-04-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-2-1" value="Definición de plazo y cupo aprobado" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="513" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-2-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-uc-2" target="CU-04-sub-2-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-2-1-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-2-1" target="CU-04-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-sub-2-2" value="Establecimiento de garantías requeridas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-04-boundary">
+          <mxGeometry x="460" y="577" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-rel-2-2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-04-boundary" source="CU-04-uc-2" target="CU-04-sub-2-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-04-edge-sa-2-2-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-04-sub-2-2" target="CU-04-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-CU-05" name="CU-05: 5. Formalización y desembolso">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="CU-05-boundary" value="CU-05 — Sistema de Formalización y Desembolso — Etapa 5: Formalización y Desembolso" style="swimlane;whiteSpace=wrap;html=1;startSize=38;fillColor=#f8fafc;strokeColor=#1e293b;fontColor=#0f172a;fontStyle=1;fontSize=14;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="230" y="40" width="900" height="620" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-pa-0" value="Cliente / Socio&lt;br&gt;Solicitante" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="180" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-pa-1" value="Oficial de Operaciones&lt;br&gt;/ Tesorería" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="440" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-sa-0" value="Sistema de Contratos y&lt;br&gt;BD de Garantías Legales" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="85" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-sa-1" value="Core Bancario (BD Cuentas&lt;br&gt;y Cartera Activa)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="355" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-uc-0" value="CU-5.1 Gestionar aceptación del cliente" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-05-boundary">
+          <mxGeometry x="40" y="93" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-edge-pa-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-05-pa-0" target="CU-05-uc-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-edge-pa-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-05-pa-1" target="CU-05-uc-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-sub-0-0" value="Firma de contrato y pagaré" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-05-boundary">
+          <mxGeometry x="460" y="65" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-rel-0-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-05-boundary" source="CU-05-uc-0" target="CU-05-sub-0-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-edge-sa-0-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-05-sub-0-0" target="CU-05-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-sub-0-1" value="Constitución formal de garantías" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-05-boundary">
+          <mxGeometry x="460" y="129" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-rel-0-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-05-boundary" source="CU-05-uc-0" target="CU-05-sub-0-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-edge-sa-0-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-05-sub-0-1" target="CU-05-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-uc-1" value="CU-5.2 Ejecutar desembolso del crédito" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-05-boundary">
+          <mxGeometry x="40" y="257" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-edge-pa-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-05-pa-1" target="CU-05-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-sub-1-0" value="Acreditación de fondos en cuenta" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-05-boundary">
+          <mxGeometry x="460" y="229" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-rel-1-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-05-boundary" source="CU-05-uc-1" target="CU-05-sub-1-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-edge-sa-1-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-05-sub-1-0" target="CU-05-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-sub-1-1" value="Generación de tabla de amortización" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-05-boundary">
+          <mxGeometry x="460" y="293" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-rel-1-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-05-boundary" source="CU-05-uc-1" target="CU-05-sub-1-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-05-edge-sa-1-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-05-sub-1-1" target="CU-05-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-CU-06" name="CU-06: 6. Seguimiento y cobranza">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="CU-06-boundary" value="CU-06 — Sistema de Seguimiento, Cobranza y Provisiones — Etapa 6: Seguimiento y Cobranza" style="swimlane;whiteSpace=wrap;html=1;startSize=38;fillColor=#f8fafc;strokeColor=#1e293b;fontColor=#0f172a;fontStyle=1;fontSize=14;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="230" y="40" width="900" height="633" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-pa-0" value="Analista de Cartera&lt;br&gt;y Riesgos" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="180" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-pa-1" value="Gestor de Cobranza" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#1d4ed8;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="65" y="440" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sa-0" value="BD de Monitoreo de Cartera&lt;br&gt;y Motor de Alertas" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="85" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sa-1" value="Cliente / Socio Deudor y&lt;br&gt;Sistema de Cobranza" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="269" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sa-2" value="Sistema Contable y&lt;br&gt;BD de Provisiones" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#b45309;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="453" width="45" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-uc-0" value="CU-6.1 Monitorear cartera activa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="40" y="93" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-pa-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-pa-0" target="CU-06-uc-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sub-0-0" value="Ejecución de score de comportamiento" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="460" y="65" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-rel-0-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-06-boundary" source="CU-06-uc-0" target="CU-06-sub-0-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-sa-0-0-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-sub-0-0" target="CU-06-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sub-0-1" value="Emisión de alertas tempranas de deterioro" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="460" y="129" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-rel-0-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-06-boundary" source="CU-06-uc-0" target="CU-06-sub-0-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-sa-0-1-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-sub-0-1" target="CU-06-sa-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-uc-1" value="CU-6.2 Ejecutar gestión de cobranza" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="40" y="289" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-pa-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-pa-1" target="CU-06-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sub-1-0" value="Gestión de cobranza preventiva" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="460" y="229" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-rel-1-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-06-boundary" source="CU-06-uc-1" target="CU-06-sub-1-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-sa-1-0-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-sub-1-0" target="CU-06-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sub-1-1" value="Gestión de cobranza temprana" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="460" y="293" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-rel-1-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-06-boundary" source="CU-06-uc-1" target="CU-06-sub-1-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-sa-1-1-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-sub-1-1" target="CU-06-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sub-1-2" value="Gestión de cobranza judicial" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fce7f3;strokeColor=#db2777;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="460" y="357" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-rel-1-2" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#be185d;fontColor=#9d174d;fontSize=10;fontStyle=2;" edge="1" parent="CU-06-boundary" source="CU-06-sub-1-2" target="CU-06-uc-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-sa-1-2-1" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-sub-1-2" target="CU-06-sa-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-uc-2" value="CU-6.3 Calcular provisiones contables" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="40" y="477" width="225" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-pa-2-0" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#1d4ed8;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-pa-0" target="CU-06-uc-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sub-2-0" value="Estimación de parámetros PD, LGD y EAD" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="460" y="449" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-rel-2-0" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-06-boundary" source="CU-06-uc-2" target="CU-06-sub-2-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-sa-2-0-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-sub-2-0" target="CU-06-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-sub-2-1" value="Cálculo de pérdida esperada (PD × LGD × EAD)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontColor=#0f172a;" vertex="1" parent="CU-06-boundary">
+          <mxGeometry x="460" y="513" width="380" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-rel-2-1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=9;dashed=1;html=1;rounded=0;strokeColor=#2e7d32;fontColor=#1b5e20;fontSize=10;fontStyle=2;" edge="1" parent="CU-06-boundary" source="CU-06-uc-2" target="CU-06-sub-2-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="CU-06-edge-sa-2-1-2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#b45309;strokeWidth=1.5;" edge="1" parent="1" source="CU-06-sub-2-1" target="CU-06-sa-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

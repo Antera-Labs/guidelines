@@ -1,0 +1,1313 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mxfile host="app.diagrams.net" version="24.7.0" type="device">
+  <diagram id="diag-DC-01" name="DC-01: 1. Solicitud y captación">
+    <mxGraphModel dx="1900" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1620" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="DC-01-banner" value="&lt;b&gt;DIAGRAMA DE CLASES / MODELO DE DOMINIO (DC-01 / CU-01) — ETAPA 1. SOLICITUD Y CAPTACIÓN [PAQUETE: pkg_01_solicitud_captacion]&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;fontColor=#ffffff;fontStyle=0;fontSize=14;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="18" width="1820" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-col-ctrl" value="&lt;b&gt;1. ACTORES PRINCIPALES DEL CASO DE USO («Actor Principal»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="72" width="460" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-col-ent" value="&lt;b&gt;2. ENTIDADES DE DOMINIO / CASOS DE USO BASE («Entity»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#78350f;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="72" width="490" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-col-repo" value="&lt;b&gt;3. MOTORES DEL SISTEMA Y BASES DE DATOS («Actor Secundario»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#14532d;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="72" width="480" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-0" value="&lt;i&gt;«Entity / CU-1.1»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RecepcionDeSolicitud&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="124" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-0-attrs" value="- idRecepcionSolicitud: UUID «PK»&lt;br&gt;- registroDatosDelCliente: String(150)&lt;br&gt;- definicionMontoYPlazo: String(100)&lt;br&gt;- registroDestinoDelCredito: String(120)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-ent-0">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-01-ent-0">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-0-meths" value="+ registrarDatosDelCliente(): Void&lt;br&gt;+ definirMontoYPlazo(): Void&lt;br&gt;+ registrarDestinoDelCredito(): Void" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-ent-0">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-1" value="&lt;i&gt;«Entity / CU-1.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ValidacionDeIdentidadKYC&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="410" width="490" height="242" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-1-attrs" value="- idValidacionKYC: UUID «PK»&lt;br&gt;- idRecepcionSolicitud: UUID «FK»&lt;br&gt;- verificacionCedulaDeIdentidad: Boolean&lt;br&gt;- validacionBiometricaDelSolicitante: Boolean&lt;br&gt;- consultaListasRestrictivasPLAFT: Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-ent-1">
+          <mxGeometry y="46" width="490" height="114" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-01-ent-1">
+          <mxGeometry y="160" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-1-meths" value="+ verificarCedulaDeIdentidad(): Boolean&lt;br&gt;+ validarBiometriaDelSolicitante(): Boolean&lt;br&gt;+ consultarListasRestrictivasPLAFT(): Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-ent-1">
+          <mxGeometry y="168" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-2" value="&lt;i&gt;«Entity / CU-1.3»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RecoleccionDocumental&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="716" width="490" height="242" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-2-attrs" value="- idRecoleccionDocumental: UUID «PK»&lt;br&gt;- idRecepcionSolicitud: UUID «FK»&lt;br&gt;- recoleccionIngresosYRolesDePago: String(255)&lt;br&gt;- recepcionDeclaracionesTributarias: String(255)&lt;br&gt;- registroRespaldosYGarantias: String(255)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-ent-2">
+          <mxGeometry y="46" width="490" height="114" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-01-ent-2">
+          <mxGeometry y="160" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-2-meths" value="+ recolectarIngresosYRolesDePago(): Boolean&lt;br&gt;+ recibirDeclaracionesTributarias(): Boolean&lt;br&gt;+ registrarRespaldosYGarantias(): Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-ent-2">
+          <mxGeometry y="168" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-pa-0" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ClienteSolicitante&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="124" width="460" height="162" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-pa-0-attrs" value="- idClienteSolicitante: UUID «PK»&lt;br&gt;- datosDelCliente: String(150)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-pa-0">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-pa-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-01-pa-0">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-pa-0-meths" value="+ iniciarRecepcionDeSolicitud(): RecepcionDeSolicitud&lt;br&gt;+ realizarRecoleccionDocumental(): RecoleccionDocumental" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-pa-0">
+          <mxGeometry y="108" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-edge-pa-0-0" value="1..* inicia ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-01-pa-0" target="DC-01-ent-0">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="605" y="169"/>
+              <mxPoint x="605" y="201"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-edge-pa-0-1" value="1..* realiza ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-01-pa-0" target="DC-01-ent-2">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="583" y="240"/>
+              <mxPoint x="583" y="800"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-pa-1" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AsesorNegocios&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="334" width="460" height="162" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-pa-1-attrs" value="- idAsesorNegocios: UUID «PK»&lt;br&gt;- areaCaptacion: String(80)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-pa-1">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-pa-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-01-pa-1">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-pa-1-meths" value="+ ejecutarRecepcionDeSolicitud(): RecepcionDeSolicitud&lt;br&gt;+ iniciarValidacionIdentidadKYC(): ValidacionDeIdentidadKYC" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-pa-1">
+          <mxGeometry y="108" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-edge-pa-1-0" value="1..* registra ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-01-pa-1" target="DC-01-ent-0">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="561" y="379"/>
+              <mxPoint x="561" y="268"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-edge-pa-1-1" value="1..* gestiona ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-01-pa-1" target="DC-01-ent-1">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="539" y="450"/>
+              <mxPoint x="539" y="567"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-info-card" value="&lt;b&gt;Paquete UML:&lt;/b&gt; pkg_01_solicitud_captacion&lt;br&gt;&lt;b&gt;Caso de Uso Origen:&lt;/b&gt; CU-01 — 1. Solicitud y captación&lt;br&gt;&lt;br&gt;&lt;b&gt;Clases de Entidad (Casos de Uso Base):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;RecepcionDeSolicitud&lt;/b&gt; (CU-1.1 Recepción de solicitud)&lt;br&gt;• &lt;b&gt;ValidacionDeIdentidadKYC&lt;/b&gt; (CU-1.2 Validación de identidad (KYC))&lt;br&gt;• &lt;b&gt;RecoleccionDocumental&lt;/b&gt; (CU-1.3 Recolección documental)&lt;br&gt;&lt;br&gt;&lt;b&gt;Motores y Bases de Datos Conectados:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;BDSolicitudes&lt;/b&gt;&lt;br&gt;• &lt;b&gt;ServicioBiometricoRegCivil&lt;/b&gt;&lt;br&gt;• &lt;b&gt;OficialCumplimientoPLAFT&lt;/b&gt;&lt;br&gt;• &lt;b&gt;RepositorioExpedienteDigital&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;spacingTop=10;spacingBottom=10;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="554" width="450" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-ent-rel-0" value="1 .. 1  habilita KYC ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamondThin;startFill=1;startSize=14;endArrow=open;endSize=10;strokeColor=#b45309;strokeWidth=1.8;fontColor=#78350f;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-01-ent-0" target="DC-01-ent-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="346"/>
+              <mxPoint x="925" y="410"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-ent-rel-1" value="1 .. 1  conforma ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;jumpStyle=arc;jumpSize=10;exitX=1;exitY=0.80;exitDx=0;exitDy=0;entryX=1;entryY=0.20;entryDx=0;entryDy=0;startArrow=diamondThin;startFill=1;startSize=14;endArrow=open;endSize=10;strokeColor=#b45309;strokeWidth=1.8;fontColor=#78350f;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-01-ent-0" target="DC-01-ent-2">
+          <mxGeometry relative="1" as="geometry" x="-0.35">
+            <Array as="points">
+              <mxPoint x="1215" y="301"/>
+              <mxPoint x="1215" y="764"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-repo-0" value="&lt;i&gt;«Actor Secundario / BD Solicitudes»&lt;/i&gt;&lt;br&gt;&lt;b&gt;BDSolicitudes&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="164" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-0-attrs" value="- idBDSolicitudes: UUID «PK»&lt;br&gt;- estadoBDSolicitudes: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-repo-0">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-01-repo-0">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-0-meths" value="+ almacenarRecepcionDeSolicitud(): Boolean" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-repo-0">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-edge-ent-repo-0" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-01-ent-0" target="DC-01-repo-0">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="235"/>
+              <mxPoint x="1280" y="235"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-repo-1" value="&lt;i&gt;«Actor Secundario / Servicio KYC»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ServicioBiometricoRegCivil&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="377" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-1-attrs" value="- idServicioBiometricoRegCivil: UUID «PK»&lt;br&gt;- estadoServicioRegCivil: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-repo-1">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-01-repo-1">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-1-meths" value="+ procesarVerificacionCedulaYBiometria(): Boolean" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-repo-1">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-edge-ent-repo-1" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-01-ent-1" target="DC-01-repo-1">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="494"/>
+              <mxPoint x="1280" y="448"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-repo-2" value="&lt;i&gt;«Actor Secundario / Listas PLA-FT»&lt;/i&gt;&lt;br&gt;&lt;b&gt;OficialCumplimientoPLAFT&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="543" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-2-attrs" value="- idOficialCumplimientoPLAFT: UUID «PK»&lt;br&gt;- listasRestrictivasPLAFT: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-repo-2">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-01-repo-2">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-2-meths" value="+ ejecutarConsultaListasRestrictivasPLAFT(): Boolean" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-repo-2">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-edge-ent-repo-2" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-01-ent-1" target="DC-01-repo-2">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1300" y="567"/>
+              <mxPoint x="1300" y="614"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-01-repo-3" value="&lt;i&gt;«Actor Secundario / Repositorio Digital»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RepositorioExpedienteDigital&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="766" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-3-attrs" value="- idRepositorioExpedienteDigital: UUID «PK»&lt;br&gt;- estadoRepositorioDigital: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-01-repo-3">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-3-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-01-repo-3">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-repo-3-meths" value="+ almacenarRecoleccionDocumental(): Boolean" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-01-repo-3">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-01-edge-ent-repo-3" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-01-ent-2" target="DC-01-repo-3">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="837"/>
+              <mxPoint x="1280" y="837"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-DC-02" name="DC-02: 2. Recolección y consolidación de datos">
+    <mxGraphModel dx="1900" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1620" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="DC-02-banner" value="&lt;b&gt;DIAGRAMA DE CLASES / MODELO DE DOMINIO (DC-02 / CU-02) — ETAPA 2. RECOLECCIÓN Y CONSOLIDACIÓN DE DATOS [PAQUETE: pkg_02_recoleccion_consolidacion]&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;fontColor=#ffffff;fontStyle=0;fontSize=14;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="18" width="1820" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-col-ctrl" value="&lt;b&gt;1. ACTORES PRINCIPALES DEL CASO DE USO («Actor Principal»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="72" width="460" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-col-ent" value="&lt;b&gt;2. ENTIDADES DE DOMINIO / CASOS DE USO BASE («Entity»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#78350f;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="72" width="490" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-col-repo" value="&lt;b&gt;3. MOTORES DEL SISTEMA Y BASES DE DATOS («Actor Secundario»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#14532d;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="72" width="480" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-0" value="&lt;i&gt;«Entity / CU-2.1»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RecoleccionDatosInternos&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="124" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-0-attrs" value="- idRecoleccionInterna: UUID «PK»&lt;br&gt;- consultaHistorialConLaEntidad: String(150)&lt;br&gt;- evaluacionSaldosYAhorros: Decimal(12,2)&lt;br&gt;- analisisComportamientoPagoInterno: String(100)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-02-ent-0">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-02-ent-0">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-0-meths" value="+ consultarHistorialConLaEntidad(): String&lt;br&gt;+ evaluarSaldosYAhorros(): Decimal&lt;br&gt;+ analizarComportamientoPagoInterno(): String" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-02-ent-0">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-1" value="&lt;i&gt;«Entity / CU-2.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ConsultaDatosExternos&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="410" width="490" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-1-attrs" value="- idConsultaExterna: UUID «PK»&lt;br&gt;- consultaABuroDeCredito: String(150)&lt;br&gt;- consultaACentralDeRiesgosSBSEPS: String(150)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-02-ent-1">
+          <mxGeometry y="46" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-02-ent-1">
+          <mxGeometry y="120" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-1-meths" value="+ consultarBuroDeCredito(): String&lt;br&gt;+ consultarCentralDeRiesgosSBSEPS(): String" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-02-ent-1">
+          <mxGeometry y="128" width="490" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-2" value="&lt;i&gt;«Entity / CU-2.3 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;IntegracionYLimpiezaDatos&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="656" width="490" height="262" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-2-attrs" value="- idIntegracionLimpieza: UUID «PK»&lt;br&gt;- idRecoleccionInterna: UUID «FK»&lt;br&gt;- idConsultaExterna: UUID «FK»&lt;br&gt;- depuracionRegistrosEInconsistencias: Boolean&lt;br&gt;- imputacionValoresFaltantes: Boolean&lt;br&gt;- normalizacionYEstandarizacionVariables: Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-02-ent-2">
+          <mxGeometry y="46" width="490" height="134" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-02-ent-2">
+          <mxGeometry y="180" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-2-meths" value="+ depurarRegistrosEInconsistencias(): Boolean&lt;br&gt;+ imputarValoresFaltantes(): Boolean&lt;br&gt;+ normalizarYEstandarizarVariables(): Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-02-ent-2">
+          <mxGeometry y="188" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-pa-0" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaCreditoDatos&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="124" width="460" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-pa-0-attrs" value="- idAnalistaCreditoDatos: UUID «PK»&lt;br&gt;- areaCreditoDatos: String(80)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-02-pa-0">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-pa-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-02-pa-0">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-pa-0-meths" value="+ solicitarRecoleccionDatosInternos(): RecoleccionDatosInternos&lt;br&gt;+ solicitarConsultaDatosExternos(): ConsultaDatosExternos&lt;br&gt;+ recibirDatosConsolidados(): IntegracionYLimpiezaDatos" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-02-pa-0">
+          <mxGeometry y="108" width="460" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-edge-pa-0-0" value="1..* solicita ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-02-pa-0" target="DC-02-ent-0">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="605" y="174"/>
+              <mxPoint x="605" y="235"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-02-edge-pa-0-1" value="1..* solicita ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-02-pa-0" target="DC-02-ent-1">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="583" y="215"/>
+              <mxPoint x="583" y="501"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-02-edge-pa-0-2" value="1..* recibe resultado ◂" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-02-pa-0" target="DC-02-ent-2">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="561" y="255"/>
+              <mxPoint x="561" y="787"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-02-info-card" value="&lt;b&gt;Paquete UML:&lt;/b&gt; pkg_02_recoleccion_consolidacion&lt;br&gt;&lt;b&gt;Caso de Uso Origen:&lt;/b&gt; CU-02 — 2. Recolección y consolidación de datos&lt;br&gt;&lt;br&gt;&lt;b&gt;Clases de Entidad (Casos de Uso Base):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;RecoleccionDatosInternos&lt;/b&gt; (CU-2.1 Recolectar datos internos)&lt;br&gt;• &lt;b&gt;ConsultaDatosExternos&lt;/b&gt; (CU-2.2 Consultar datos externos)&lt;br&gt;• &lt;b&gt;IntegracionYLimpiezaDatos&lt;/b&gt; (CU-2.3 Integrar y limpiar datos)&lt;br&gt;&lt;br&gt;&lt;b&gt;Motores y Bases de Datos Conectados:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;CoreBancarioDatosInternos&lt;/b&gt;&lt;br&gt;• &lt;b&gt;BuroCentralRiesgosSBSEPS&lt;/b&gt;&lt;br&gt;• &lt;b&gt;MotorIntegracionDatos&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;spacingTop=10;spacingBottom=10;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="364" width="450" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-ent-rel-0" value="1 .. 1  alimenta ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;jumpStyle=arc;jumpSize=10;exitX=1;exitY=0.80;exitDx=0;exitDy=0;entryX=1;entryY=0.20;entryDx=0;entryDy=0;startArrow=diamondThin;startFill=0;startSize=14;endArrow=open;endSize=10;strokeColor=#b45309;strokeWidth=1.8;fontColor=#78350f;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-02-ent-0" target="DC-02-ent-2">
+          <mxGeometry relative="1" as="geometry" x="-0.35">
+            <Array as="points">
+              <mxPoint x="1215" y="301"/>
+              <mxPoint x="1215" y="708"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-02-ent-rel-1" value="1 .. 1  integra automático ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamondThin;startFill=0;startSize=14;endArrow=open;endSize=10;strokeColor=#b45309;strokeWidth=1.8;fontColor=#78350f;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-02-ent-1" target="DC-02-ent-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="592"/>
+              <mxPoint x="925" y="656"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-02-repo-0" value="&lt;i&gt;«Actor Secundario / BD Datos Internos»&lt;/i&gt;&lt;br&gt;&lt;b&gt;CoreBancarioDatosInternos&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="164" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-0-attrs" value="- idCoreBancarioDatosInternos: UUID «PK»&lt;br&gt;- estadoBDDatosInternos: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-02-repo-0">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-02-repo-0">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-0-meths" value="+ procesarConsultaHistorialSaldosYComportamiento(): RecoleccionDatosInternos" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-02-repo-0">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-edge-ent-repo-0" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-02-ent-0" target="DC-02-repo-0">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="235"/>
+              <mxPoint x="1280" y="235"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-02-repo-1" value="&lt;i&gt;«Actor Secundario / Buró y SB-SEPS»&lt;/i&gt;&lt;br&gt;&lt;b&gt;BuroCentralRiesgosSBSEPS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="430" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-1-attrs" value="- idBuroCentralRiesgosSBSEPS: UUID «PK»&lt;br&gt;- estadoBuroCentralRiesgos: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-02-repo-1">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-02-repo-1">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-1-meths" value="+ procesarConsultaBuroYCentralDeRiesgosSBSEPS(): ConsultaDatosExternos" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-02-repo-1">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-edge-ent-repo-1" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-02-ent-1" target="DC-02-repo-1">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="501"/>
+              <mxPoint x="1280" y="501"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-02-repo-2" value="&lt;i&gt;«Motor del Sistema / BD Consolidada»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MotorIntegracionDatos&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="716" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-2-attrs" value="- idMotorIntegracionDatos: UUID «PK»&lt;br&gt;- estadoBDConsolidada: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-02-repo-2">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-02-repo-2">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-repo-2-meths" value="+ ejecutarDepuracionImputacionYNormalizacion(): IntegracionYLimpiezaDatos" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-02-repo-2">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-02-edge-ent-repo-2" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-02-ent-2" target="DC-02-repo-2">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="787"/>
+              <mxPoint x="1280" y="787"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-DC-03" name="DC-03: 3. Evaluación y cálculo del score">
+    <mxGraphModel dx="1900" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1620" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="DC-03-banner" value="&lt;b&gt;DIAGRAMA DE CLASES / MODELO DE DOMINIO (DC-03 / CU-03) — ETAPA 3. EVALUACIÓN Y CÁLCULO DEL SCORE [PAQUETE: pkg_03_evaluacion_calculo_score]&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;fontColor=#ffffff;fontStyle=0;fontSize=14;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="18" width="1820" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-col-ctrl" value="&lt;b&gt;1. ACTORES PRINCIPALES DEL CASO DE USO («Actor Principal»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="72" width="460" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-col-ent" value="&lt;b&gt;2. ENTIDADES DE DOMINIO / CASOS DE USO BASE («Entity»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#78350f;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="72" width="490" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-col-repo" value="&lt;b&gt;3. MOTORES DEL SISTEMA Y BASES DE DATOS («Actor Secundario»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#14532d;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="72" width="480" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-0" value="&lt;i&gt;«Entity / CU-3.1 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;FiltroPolitica&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="124" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-0-attrs" value="- idFiltroPolitica: UUID «PK»&lt;br&gt;- validacionEdadYCapacidadMinima: Boolean&lt;br&gt;- verificacionMoraVigente: Boolean&lt;br&gt;- controlUmbralSobreendeudamiento: Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-ent-0">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-03-ent-0">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-0-meths" value="+ validarEdadYCapacidadMinima(): Boolean&lt;br&gt;+ verificarMoraVigente(): Boolean&lt;br&gt;+ controlarUmbralSobreendeudamiento(): Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-ent-0">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-1" value="&lt;i&gt;«Entity / CU-3.2 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalisisCapacidadDePago&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="410" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-1-attrs" value="- idAnalisisCapacidadPago: UUID «PK»&lt;br&gt;- calculoRatioCuotaIngreso: Decimal(5,4)&lt;br&gt;- evaluacionNivelDeEndeudamiento: Decimal(5,4)&lt;br&gt;- determinacionFlujoDeCajaDisponible: Decimal(12,2)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-ent-1">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-03-ent-1">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-1-meths" value="+ calcularRatioCuotaIngreso(): Decimal&lt;br&gt;+ evaluarNivelDeEndeudamiento(): Decimal&lt;br&gt;+ determinarFlujoCajaDisponible(): Decimal" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-ent-1">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-2" value="&lt;i&gt;«Entity / CU-3.3 (Automático LLM y RAG)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AplicacionModeloScoring&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="696" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-2-attrs" value="- idAplicacionScoring: UUID «PK»&lt;br&gt;- inferenciaAutomaticaLLMYRAG: String(100)&lt;br&gt;- calculoProbabilidadDefaultPD: Decimal(6,5)&lt;br&gt;- transformacionAPuntajeCrediticioScore: Integer" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-ent-2">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-03-ent-2">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-2-meths" value="+ inferirAutomaticamenteConLLMYRAG(): String&lt;br&gt;+ calcularProbabilidadDefaultPD(): Decimal&lt;br&gt;+ transformarAPuntajeCrediticioScore(): Integer" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-ent-2">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-3" value="&lt;i&gt;«Entity / CU-3.4 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;SegmentacionRiesgoCrediticio&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="982" width="490" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-3-attrs" value="- idSegmentacionRiesgo: UUID «PK»&lt;br&gt;- evaluacionPuntosDeCorteCutOffs: Integer&lt;br&gt;- asignacionACategoriaDeRiesgoABCDE: String(5)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-ent-3">
+          <mxGeometry y="46" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-3-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-03-ent-3">
+          <mxGeometry y="120" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-3-meths" value="+ evaluarPuntosDeCorteCutOffs(): Integer&lt;br&gt;+ asignarCategoriaDeRiesgoABCDE(): String" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-ent-3">
+          <mxGeometry y="128" width="490" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-pa-0" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaRiesgoCrediticio&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="982" width="460" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-pa-0-attrs" value="- idAnalistaRiesgoCrediticio: UUID «PK»&lt;br&gt;- areaRiesgoCrediticio: String(80)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-pa-0">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-pa-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-03-pa-0">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-pa-0-meths" value="+ recibirCalificacionYScoreDelSistema(): SegmentacionRiesgoCrediticio" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-pa-0">
+          <mxGeometry y="108" width="460" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-edge-pa-0-0" value="1..* recibe resultado calculado ◂" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-03-pa-0" target="DC-03-ent-3">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="605" y="1053"/>
+              <mxPoint x="605" y="1073"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-03-info-card" value="&lt;b&gt;Paquete UML:&lt;/b&gt; pkg_03_evaluacion_calculo_score&lt;br&gt;&lt;b&gt;Caso de Uso Origen:&lt;/b&gt; CU-03 — 3. Evaluación y cálculo del score&lt;br&gt;&lt;br&gt;&lt;b&gt;Clases de Entidad (Casos de Uso Base):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;FiltroPolitica&lt;/b&gt; (CU-3.1 Aplicar filtros de política)&lt;br&gt;• &lt;b&gt;AnalisisCapacidadDePago&lt;/b&gt; (CU-3.2 Analizar capacidad de pago)&lt;br&gt;• &lt;b&gt;AplicacionModeloScoring&lt;/b&gt; (CU-3.3 Aplicar modelo de scoring)&lt;br&gt;• &lt;b&gt;SegmentacionRiesgoCrediticio&lt;/b&gt; (CU-3.4 Segmentar riesgo crediticio)&lt;br&gt;&lt;br&gt;&lt;b&gt;Motores y Bases de Datos Conectados:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;MotorReglasPoliticas&lt;/b&gt;&lt;br&gt;• &lt;b&gt;MotorFinancieroCapacidad&lt;/b&gt;&lt;br&gt;• &lt;b&gt;MotorScoringLLMRAG&lt;/b&gt;&lt;br&gt;• &lt;b&gt;MotorSegmentacionRiesgo&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;spacingTop=10;spacingBottom=10;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="124" width="450" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-ent-rel-0" value="1 .. 0..1  encadena automático ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endSize=10;strokeColor=#334155;strokeWidth=1.8;fontColor=#0f172a;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-03-ent-0" target="DC-03-ent-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="346"/>
+              <mxPoint x="925" y="410"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-03-ent-rel-1" value="1 .. 1  encadena automático ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endSize=10;strokeColor=#334155;strokeWidth=1.8;fontColor=#0f172a;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-03-ent-1" target="DC-03-ent-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="632"/>
+              <mxPoint x="925" y="696"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-03-ent-rel-2" value="1 .. 1  segmenta automático ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamondThin;startFill=1;startSize=14;endArrow=open;endSize=10;strokeColor=#b45309;strokeWidth=1.8;fontColor=#78350f;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-03-ent-2" target="DC-03-ent-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="918"/>
+              <mxPoint x="925" y="982"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-03-repo-0" value="&lt;i&gt;«Motor del Sistema / BD Políticas»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MotorReglasPoliticas&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="164" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-0-attrs" value="- idMotorReglasPoliticas: UUID «PK»&lt;br&gt;- estadoBDPoliticas: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-repo-0">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-03-repo-0">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-0-meths" value="+ ejecutarFiltrosDePolitica(): FiltroPolitica" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-repo-0">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-edge-ent-repo-0" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-03-ent-0" target="DC-03-repo-0">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="235"/>
+              <mxPoint x="1280" y="235"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-03-repo-1" value="&lt;i&gt;«Motor del Sistema / BD Capacidad»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MotorFinancieroCapacidad&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="450" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-1-attrs" value="- idMotorFinancieroCapacidad: UUID «PK»&lt;br&gt;- estadoBDCapacidadPago: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-repo-1">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-03-repo-1">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-1-meths" value="+ calcularCapacidadDePagoAutomatica(): AnalisisCapacidadDePago" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-repo-1">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-edge-ent-repo-1" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-03-ent-1" target="DC-03-repo-1">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="521"/>
+              <mxPoint x="1280" y="521"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-03-repo-2" value="&lt;i&gt;«Motor Automático / Modelo LLM y RAG»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MotorScoringLLMRAG&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="736" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-2-attrs" value="- idMotorScoringLLMRAG: UUID «PK»&lt;br&gt;- modeloLLMYRAGActivo: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-repo-2">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-03-repo-2">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-2-meths" value="+ ejecutarScoringAutomaticoLLMYRAG(): AplicacionModeloScoring" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-repo-2">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-edge-ent-repo-2" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-03-ent-2" target="DC-03-repo-2">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="807"/>
+              <mxPoint x="1280" y="807"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-03-repo-3" value="&lt;i&gt;«Motor del Sistema / BD Riesgo»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MotorSegmentacionRiesgo&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="1002" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-3-attrs" value="- idMotorSegmentacionRiesgo: UUID «PK»&lt;br&gt;- estadoBDCalificacionesRiesgo: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-03-repo-3">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-3-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-03-repo-3">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-repo-3-meths" value="+ ejecutarSegmentacionYEntregarAlAnalista(): SegmentacionRiesgoCrediticio" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-03-repo-3">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-03-edge-ent-repo-3" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-03-ent-3" target="DC-03-repo-3">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="1073"/>
+              <mxPoint x="1280" y="1073"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-DC-04" name="DC-04: 4. Decisión crediticia">
+    <mxGraphModel dx="1900" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1620" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="DC-04-banner" value="&lt;b&gt;DIAGRAMA DE CLASES / MODELO DE DOMINIO (DC-04 / CU-04) — ETAPA 4. DECISIÓN CREDITICIA [PAQUETE: pkg_04_decision_crediticia]&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;fontColor=#ffffff;fontStyle=0;fontSize=14;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="18" width="1820" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-col-ctrl" value="&lt;b&gt;1. ACTORES PRINCIPALES DEL CASO DE USO («Actor Principal»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="72" width="460" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-col-ent" value="&lt;b&gt;2. ENTIDADES DE DOMINIO / CASOS DE USO BASE («Entity»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#78350f;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="72" width="490" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-col-repo" value="&lt;b&gt;3. MOTORES DEL SISTEMA Y BASES DE DATOS («Actor Secundario»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#14532d;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="72" width="480" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-0" value="&lt;i&gt;«Entity / CU-4.1 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;EvaluacionMatrizDecision&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="124" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-0-attrs" value="- idEvaluacionMatriz: UUID «PK»&lt;br&gt;- cruceScoreVsMontoSolicitado: String(100)&lt;br&gt;- contrastacionContraPoliticaRiesgo: Boolean&lt;br&gt;- generacionDictamenAutomatico: String(40)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-ent-0">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-04-ent-0">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-0-meths" value="+ cruzarScoreVsMontoSolicitado(): String&lt;br&gt;+ contrastarContraPoliticaDeRiesgo(): Boolean&lt;br&gt;+ generarDictamenAutomatico(): String" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-ent-0">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-1" value="&lt;i&gt;«Entity / CU-4.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RevisionManualComite&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="410" width="490" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-1-attrs" value="- idRevisionManualComite: UUID «PK»&lt;br&gt;- analisisCasosEnZonaGris: String(150)&lt;br&gt;- evaluacionYFalloParaMontosAltos: String(150)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-ent-1">
+          <mxGeometry y="46" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-04-ent-1">
+          <mxGeometry y="120" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-1-meths" value="+ analizarCasosEnZonaGris(): String&lt;br&gt;+ evaluarYEmitirFalloParaMontosAltos(): String" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-ent-1">
+          <mxGeometry y="128" width="490" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-2" value="&lt;i&gt;«Entity / CU-4.3»&lt;/i&gt;&lt;br&gt;&lt;b&gt;DefinicionCondicionesCrediticias&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="656" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-2-attrs" value="- idDefinicionCondiciones: UUID «PK»&lt;br&gt;- asignacionTasaInteresSegunRiesgo: Decimal(5,2)&lt;br&gt;- definicionPlazoYCupoAprobado: String(100)&lt;br&gt;- establecimientoGarantiasRequeridas: String(150)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-ent-2">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-04-ent-2">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-2-meths" value="+ asignarTasaDeInteresSegunRiesgo(): Decimal&lt;br&gt;+ definirPlazoYCupoAprobado(): String&lt;br&gt;+ establecerGarantiasRequeridas(): String" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-ent-2">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-pa-0" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaCredito&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="124" width="460" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-pa-0-attrs" value="- idAnalistaCredito: UUID «PK»&lt;br&gt;- areaCredito: String(80)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-pa-0">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-pa-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-04-pa-0">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-pa-0-meths" value="+ recibirDictamenMatriz(): EvaluacionMatrizDecision&lt;br&gt;+ derivarARevisionManualComite(): RevisionManualComite&lt;br&gt;+ definirCondicionesCrediticias(): DefinicionCondicionesCrediticias" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-pa-0">
+          <mxGeometry y="108" width="460" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-edge-pa-0-0" value="1..* recibe dictamen ◂" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-04-pa-0" target="DC-04-ent-0">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="605" y="174"/>
+              <mxPoint x="605" y="201"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-edge-pa-0-1" value="1..* escala a comité ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-04-pa-0" target="DC-04-ent-1">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="583" y="215"/>
+              <mxPoint x="583" y="473"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-edge-pa-0-2" value="1..* define ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-04-pa-0" target="DC-04-ent-2">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="561" y="255"/>
+              <mxPoint x="561" y="733"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-pa-1" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ComiteCredito&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="354" width="460" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-pa-1-attrs" value="- idComiteCredito: UUID «PK»&lt;br&gt;- integrantesComiteJefeCredito: String(120)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-pa-1">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-pa-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-04-pa-1">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-pa-1-meths" value="+ realizarRevisionManualComite(): RevisionManualComite" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-pa-1">
+          <mxGeometry y="108" width="460" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-edge-pa-1-0" value="1..* delibera en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-04-pa-1" target="DC-04-ent-1">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="539" y="393"/>
+              <mxPoint x="539" y="528"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-edge-pa-1-1" value="1..* aprueba ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-04-pa-1" target="DC-04-ent-2">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="517" y="456"/>
+              <mxPoint x="517" y="800"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-info-card" value="&lt;b&gt;Paquete UML:&lt;/b&gt; pkg_04_decision_crediticia&lt;br&gt;&lt;b&gt;Caso de Uso Origen:&lt;/b&gt; CU-04 — 4. Decisión crediticia&lt;br&gt;&lt;br&gt;&lt;b&gt;Clases de Entidad (Casos de Uso Base):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;EvaluacionMatrizDecision&lt;/b&gt; (CU-4.1 Evaluar en matriz de decisión)&lt;br&gt;• &lt;b&gt;RevisionManualComite&lt;/b&gt; (CU-4.2 Realizar revisión manual / comité)&lt;br&gt;• &lt;b&gt;DefinicionCondicionesCrediticias&lt;/b&gt; (CU-4.3 Definir condiciones crediticias)&lt;br&gt;&lt;br&gt;&lt;b&gt;Motores y Bases de Datos Conectados:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;MotorMatrizDecisionBDDictamenes&lt;/b&gt;&lt;br&gt;• &lt;b&gt;BDResolucionesActasComite&lt;/b&gt;&lt;br&gt;• &lt;b&gt;BDTarifarioCondiciones&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;spacingTop=10;spacingBottom=10;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="554" width="450" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-ent-rel-0" value="1 .. 0..1  deriva a comité ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endSize=10;strokeColor=#334155;strokeWidth=1.8;fontColor=#0f172a;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-04-ent-0" target="DC-04-ent-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="346"/>
+              <mxPoint x="925" y="410"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-ent-rel-1" value="1 .. 0..1  habilita ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;jumpStyle=arc;jumpSize=10;exitX=1;exitY=0.80;exitDx=0;exitDy=0;entryX=1;entryY=0.20;entryDx=0;entryDy=0;endArrow=open;endSize=10;strokeColor=#334155;strokeWidth=1.8;fontColor=#0f172a;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-04-ent-0" target="DC-04-ent-2">
+          <mxGeometry relative="1" as="geometry" x="-0.35">
+            <Array as="points">
+              <mxPoint x="1215" y="301"/>
+              <mxPoint x="1215" y="700"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-ent-rel-2" value="0..1 .. 1  habilita ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endSize=10;strokeColor=#334155;strokeWidth=1.8;fontColor=#0f172a;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-04-ent-1" target="DC-04-ent-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="592"/>
+              <mxPoint x="925" y="656"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-repo-0" value="&lt;i&gt;«Motor del Sistema / BD Dictámenes»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MotorMatrizDecisionBDDictamenes&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="164" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-0-attrs" value="- idMotorMatrizDecision: UUID «PK»&lt;br&gt;- estadoBDDictamenes: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-repo-0">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-04-repo-0">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-0-meths" value="+ ejecutarEvaluacionEnMatrizAutomatica(): EvaluacionMatrizDecision" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-repo-0">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-edge-ent-repo-0" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-04-ent-0" target="DC-04-repo-0">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="235"/>
+              <mxPoint x="1280" y="235"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-repo-1" value="&lt;i&gt;«Actor Secundario / BD Comité»&lt;/i&gt;&lt;br&gt;&lt;b&gt;BDResolucionesActasComite&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="430" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-1-attrs" value="- idBDResolucionesComite: UUID «PK»&lt;br&gt;- estadoBDActasComite: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-repo-1">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-04-repo-1">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-1-meths" value="+ registrarRevisionManualComite(): RevisionManualComite" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-repo-1">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-edge-ent-repo-1" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-04-ent-1" target="DC-04-repo-1">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="501"/>
+              <mxPoint x="1280" y="501"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-04-repo-2" value="&lt;i&gt;«Actor Secundario / BD Tarifario»&lt;/i&gt;&lt;br&gt;&lt;b&gt;BDTarifarioCondiciones&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="696" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-2-attrs" value="- idBDTarifarioCondiciones: UUID «PK»&lt;br&gt;- estadoBDTarifario: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-04-repo-2">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-04-repo-2">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-repo-2-meths" value="+ procesarDefinicionCondicionesCrediticias(): DefinicionCondicionesCrediticias" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-04-repo-2">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-04-edge-ent-repo-2" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-04-ent-2" target="DC-04-repo-2">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="767"/>
+              <mxPoint x="1280" y="767"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-DC-05" name="DC-05: 5. Formalización y desembolso">
+    <mxGraphModel dx="1900" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1620" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="DC-05-banner" value="&lt;b&gt;DIAGRAMA DE CLASES / MODELO DE DOMINIO (DC-05 / CU-05) — ETAPA 5. FORMALIZACIÓN Y DESEMBOLSO [PAQUETE: pkg_05_formalizacion_desembolso]&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;fontColor=#ffffff;fontStyle=0;fontSize=14;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="18" width="1820" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-col-ctrl" value="&lt;b&gt;1. ACTORES PRINCIPALES DEL CASO DE USO («Actor Principal»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="72" width="460" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-col-ent" value="&lt;b&gt;2. ENTIDADES DE DOMINIO / CASOS DE USO BASE («Entity»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#78350f;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="72" width="490" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-col-repo" value="&lt;b&gt;3. MOTORES DEL SISTEMA Y BASES DE DATOS («Actor Secundario»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#14532d;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="72" width="480" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-0" value="&lt;i&gt;«Entity / CU-5.1»&lt;/i&gt;&lt;br&gt;&lt;b&gt;GestionAceptacionCliente&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="124" width="490" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-0-attrs" value="- idGestionAceptacion: UUID «PK»&lt;br&gt;- firmaDeContratoYPagare: Boolean&lt;br&gt;- constitucionFormalDeGarantias: Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-05-ent-0">
+          <mxGeometry y="46" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-05-ent-0">
+          <mxGeometry y="120" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-0-meths" value="+ firmarContratoYPagare(): Boolean&lt;br&gt;+ constituirFormalmenteGarantias(): Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-05-ent-0">
+          <mxGeometry y="128" width="490" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-1" value="&lt;i&gt;«Entity / CU-5.2 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;EjecucionDesembolsoCredito&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="370" width="490" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-1-attrs" value="- idEjecucionDesembolso: UUID «PK»&lt;br&gt;- acreditacionDeFondosEnCuenta: Boolean&lt;br&gt;- generacionDeTablaDeAmortizacion: Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-05-ent-1">
+          <mxGeometry y="46" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-05-ent-1">
+          <mxGeometry y="120" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-1-meths" value="+ acreditarFondosEnCuenta(): Boolean&lt;br&gt;+ generarTablaDeAmortizacion(): Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-05-ent-1">
+          <mxGeometry y="128" width="490" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-pa-0" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ClienteSolicitante&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="124" width="460" height="162" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-pa-0-attrs" value="- idClienteSolicitante: UUID «PK»&lt;br&gt;- datosClienteSolicitante: String(150)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-05-pa-0">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-pa-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-05-pa-0">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-pa-0-meths" value="+ gestionarAceptacionDelCliente(): GestionAceptacionCliente&lt;br&gt;+ recibirFondosYTablaDeAmortizacion(): EjecucionDesembolsoCredito" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-05-pa-0">
+          <mxGeometry y="108" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-edge-pa-0-0" value="1..1 participa en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-05-pa-0" target="DC-05-ent-0">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="605" y="169"/>
+              <mxPoint x="605" y="187"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-05-edge-pa-0-1" value="1..1 recibe desembolso ◂" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-05-pa-0" target="DC-05-ent-1">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="583" y="240"/>
+              <mxPoint x="583" y="433"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-05-pa-1" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;OficialOperaciones&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="334" width="460" height="162" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-pa-1-attrs" value="- idOficialOperaciones: UUID «PK»&lt;br&gt;- areaOperacionesTesoreria: String(80)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-05-pa-1">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-pa-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-05-pa-1">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-pa-1-meths" value="+ registrarAceptacionDelCliente(): GestionAceptacionCliente&lt;br&gt;+ autorizarDesembolsoDelCredito(): EjecucionDesembolsoCredito" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-05-pa-1">
+          <mxGeometry y="108" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-edge-pa-1-0" value="1..* registra ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-05-pa-1" target="DC-05-ent-0">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="561" y="379"/>
+              <mxPoint x="561" y="242"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-05-edge-pa-1-1" value="1..* autoriza ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-05-pa-1" target="DC-05-ent-1">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="539" y="450"/>
+              <mxPoint x="539" y="488"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-05-info-card" value="&lt;b&gt;Paquete UML:&lt;/b&gt; pkg_05_formalizacion_desembolso&lt;br&gt;&lt;b&gt;Caso de Uso Origen:&lt;/b&gt; CU-05 — 5. Formalización y desembolso&lt;br&gt;&lt;br&gt;&lt;b&gt;Clases de Entidad (Casos de Uso Base):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;GestionAceptacionCliente&lt;/b&gt; (CU-5.1 Gestionar aceptación del cliente)&lt;br&gt;• &lt;b&gt;EjecucionDesembolsoCredito&lt;/b&gt; (CU-5.2 Ejecutar desembolso del crédito)&lt;br&gt;&lt;br&gt;&lt;b&gt;Motores y Bases de Datos Conectados:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;SistemaContratosBDGarantias&lt;/b&gt;&lt;br&gt;• &lt;b&gt;CoreBancarioCuentasCartera&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;spacingTop=10;spacingBottom=10;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="554" width="450" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-ent-rel-0" value="1 .. 1  habilita desembolso ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamondThin;startFill=1;startSize=14;endArrow=open;endSize=10;strokeColor=#b45309;strokeWidth=1.8;fontColor=#78350f;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-05-ent-0" target="DC-05-ent-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="306"/>
+              <mxPoint x="925" y="370"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-05-repo-0" value="&lt;i&gt;«Actor Secundario / BD Garantías»&lt;/i&gt;&lt;br&gt;&lt;b&gt;SistemaContratosBDGarantias&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="144" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-repo-0-attrs" value="- idSistemaContratosGarantias: UUID «PK»&lt;br&gt;- estadoBDGarantiasLegales: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-05-repo-0">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-repo-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-05-repo-0">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-repo-0-meths" value="+ registrarFirmaYConstitucionGarantias(): GestionAceptacionCliente" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-05-repo-0">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-edge-ent-repo-0" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-05-ent-0" target="DC-05-repo-0">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="215"/>
+              <mxPoint x="1280" y="215"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-05-repo-1" value="&lt;i&gt;«Motor del Sistema / Core Bancario»&lt;/i&gt;&lt;br&gt;&lt;b&gt;CoreBancarioCuentasCartera&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="390" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-repo-1-attrs" value="- idCoreBancarioCuentasCartera: UUID «PK»&lt;br&gt;- estadoBDCuentasCartera: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-05-repo-1">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-repo-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-05-repo-1">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-repo-1-meths" value="+ ejecutarAcreditacionYTablaDeAmortizacion(): EjecucionDesembolsoCredito" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-05-repo-1">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-05-edge-ent-repo-1" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-05-ent-1" target="DC-05-repo-1">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="461"/>
+              <mxPoint x="1280" y="461"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-DC-06" name="DC-06: 6. Seguimiento y cobranza">
+    <mxGraphModel dx="1900" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1620" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="DC-06-banner" value="&lt;b&gt;DIAGRAMA DE CLASES / MODELO DE DOMINIO (DC-06 / CU-06) — ETAPA 6. SEGUIMIENTO Y COBRANZA [PAQUETE: pkg_06_seguimiento_cobranza]&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;fontColor=#ffffff;fontStyle=0;fontSize=14;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="18" width="1820" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-col-ctrl" value="&lt;b&gt;1. ACTORES PRINCIPALES DEL CASO DE USO («Actor Principal»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="72" width="460" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-col-ent" value="&lt;b&gt;2. ENTIDADES DE DOMINIO / CASOS DE USO BASE («Entity»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#78350f;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="72" width="490" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-col-repo" value="&lt;b&gt;3. MOTORES DEL SISTEMA Y BASES DE DATOS («Actor Secundario»)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#14532d;fontSize=11;align=center;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="72" width="480" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-0" value="&lt;i&gt;«Entity / CU-6.1 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MonitoreoCarteraActiva&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="124" width="490" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-0-attrs" value="- idMonitoreoCartera: UUID «PK»&lt;br&gt;- ejecucionScoreDeComportamiento: Integer&lt;br&gt;- emisionAlertasTempranasDeDeterioro: String(50)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-ent-0">
+          <mxGeometry y="46" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-06-ent-0">
+          <mxGeometry y="120" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-0-meths" value="+ ejecutarScoreDeComportamiento(): Integer&lt;br&gt;+ emitirAlertasTempranasDeDeterioro(): String" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-ent-0">
+          <mxGeometry y="128" width="490" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-1" value="&lt;i&gt;«Entity / CU-6.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;EjecucionGestionCobranza&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="370" width="490" height="222" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-1-attrs" value="- idEjecucionCobranza: UUID «PK»&lt;br&gt;- gestionDeCobranzaPreventiva: Boolean&lt;br&gt;- gestionDeCobranzaTemprana: Boolean&lt;br&gt;- gestionDeCobranzaJudicial: Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-ent-1">
+          <mxGeometry y="46" width="490" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-06-ent-1">
+          <mxGeometry y="140" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-1-meths" value="+ ejecutarGestionDeCobranzaPreventiva(): Boolean&lt;br&gt;+ ejecutarGestionDeCobranzaTemprana(): Boolean&lt;br&gt;+ ejecutarGestionDeCobranzaJudicial(): Boolean" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-ent-1">
+          <mxGeometry y="148" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-2" value="&lt;i&gt;«Entity / CU-6.3 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;CalculoProvisionesContables&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="656" width="490" height="182" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-2-attrs" value="- idCalculoProvisiones: UUID «PK»&lt;br&gt;- estimacionParametrosPD_LGD_EAD: String(100)&lt;br&gt;- calculoPerdidaEsperada_PDxLGDxEAD: Decimal(12,2)" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-ent-2">
+          <mxGeometry y="46" width="490" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d97706;" vertex="1" parent="DC-06-ent-2">
+          <mxGeometry y="120" width="490" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-2-meths" value="+ estimarParametrosPD_LGD_EAD(): String&lt;br&gt;+ calcularPerdidaEsperada_PDxLGDxEAD(): Decimal" style="text;strokeColor=none;fillColor=#fffbeb;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-ent-2">
+          <mxGeometry y="128" width="490" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-pa-0" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaCarteraRiesgos&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="124" width="460" height="162" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-pa-0-attrs" value="- idAnalistaCarteraRiesgos: UUID «PK»&lt;br&gt;- areaCarteraYRiesgos: String(80)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-pa-0">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-pa-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-06-pa-0">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-pa-0-meths" value="+ supervisarMonitoreoCarteraActiva(): MonitoreoCarteraActiva&lt;br&gt;+ recibirProvisionesContables(): CalculoProvisionesContables" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-pa-0">
+          <mxGeometry y="108" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-edge-pa-0-0" value="1..* recibe alertas ◂" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.28;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-06-pa-0" target="DC-06-ent-0">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="605" y="169"/>
+              <mxPoint x="605" y="187"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-06-edge-pa-0-1" value="1..* recibe provisiones ◂" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-06-pa-0" target="DC-06-ent-2">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="583" y="240"/>
+              <mxPoint x="583" y="719"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-06-pa-1" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;GestorCobranza&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="334" width="460" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-pa-1-attrs" value="- idGestorCobranza: UUID «PK»&lt;br&gt;- areaCobranza: String(80)" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-pa-1">
+          <mxGeometry y="46" width="460" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-pa-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#1d4ed8;" vertex="1" parent="DC-06-pa-1">
+          <mxGeometry y="100" width="460" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-pa-1-meths" value="+ ejecutarGestionDeCobranza(): EjecucionGestionCobranza" style="text;strokeColor=none;fillColor=#f8fafc;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-pa-1">
+          <mxGeometry y="108" width="460" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-edge-pa-1-0" value="1..* ejecuta ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#1d4ed8;strokeWidth=1.5;fontColor=#1e40af;fontSize=10;labelBackgroundColor=#f8fafc;" edge="1" parent="1" source="DC-06-pa-1" target="DC-06-ent-1">
+          <mxGeometry relative="1" as="geometry" x="0.42">
+            <Array as="points">
+              <mxPoint x="561" y="405"/>
+              <mxPoint x="561" y="514"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-06-info-card" value="&lt;b&gt;Paquete UML:&lt;/b&gt; pkg_06_seguimiento_cobranza&lt;br&gt;&lt;b&gt;Caso de Uso Origen:&lt;/b&gt; CU-06 — 6. Seguimiento y cobranza&lt;br&gt;&lt;br&gt;&lt;b&gt;Clases de Entidad (Casos de Uso Base):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;MonitoreoCarteraActiva&lt;/b&gt; (CU-6.1 Monitorear cartera activa)&lt;br&gt;• &lt;b&gt;EjecucionGestionCobranza&lt;/b&gt; (CU-6.2 Ejecutar gestión de cobranza)&lt;br&gt;• &lt;b&gt;CalculoProvisionesContables&lt;/b&gt; (CU-6.3 Calcular provisiones contables)&lt;br&gt;&lt;br&gt;&lt;b&gt;Motores y Bases de Datos Conectados:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;BDMonitoreoCarteraAlertas&lt;/b&gt;&lt;br&gt;• &lt;b&gt;SistemaCobranzaClienteDeudor&lt;/b&gt;&lt;br&gt;• &lt;b&gt;SistemaContableBDProvisiones&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;spacingTop=10;spacingBottom=10;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="534" width="450" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-ent-rel-0" value="1 .. 0..*  activa cobranza ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endSize=10;strokeColor=#334155;strokeWidth=1.8;fontColor=#0f172a;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-06-ent-0" target="DC-06-ent-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="306"/>
+              <mxPoint x="925" y="370"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-06-ent-rel-1" value="1 .. 1  alimenta provisión ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;jumpStyle=arc;jumpSize=10;exitX=1;exitY=0.80;exitDx=0;exitDy=0;entryX=1;entryY=0.20;entryDx=0;entryDy=0;endArrow=open;endSize=10;strokeColor=#334155;strokeWidth=1.8;fontColor=#0f172a;fontSize=10;fontStyle=1;labelBackgroundColor=#fffbeb;" edge="1" parent="1" source="DC-06-ent-0" target="DC-06-ent-2">
+          <mxGeometry relative="1" as="geometry" x="-0.35">
+            <Array as="points">
+              <mxPoint x="1215" y="269"/>
+              <mxPoint x="1215" y="692"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-06-repo-0" value="&lt;i&gt;«Motor del Sistema / BD Monitoreo»&lt;/i&gt;&lt;br&gt;&lt;b&gt;BDMonitoreoCarteraAlertas&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="144" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-0-attrs" value="- idBDMonitoreoCarteraAlertas: UUID «PK»&lt;br&gt;- estadoMotorAlertas: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-repo-0">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-0-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-06-repo-0">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-0-meths" value="+ ejecutarMonitoreoAutomaticoCartera(): MonitoreoCarteraActiva" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-repo-0">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-edge-ent-repo-0" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-06-ent-0" target="DC-06-repo-0">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="215"/>
+              <mxPoint x="1280" y="215"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-06-repo-1" value="&lt;i&gt;«Actor Secundario / Sistema Cobranza»&lt;/i&gt;&lt;br&gt;&lt;b&gt;SistemaCobranzaClienteDeudor&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="410" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-1-attrs" value="- idSistemaCobranzaClienteDeudor: UUID «PK»&lt;br&gt;- estadoSistemaCobranza: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-repo-1">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-1-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-06-repo-1">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-1-meths" value="+ procesarEjecucionGestionCobranza(): EjecucionGestionCobranza" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-repo-1">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-edge-ent-repo-1" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-06-ent-1" target="DC-06-repo-1">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="481"/>
+              <mxPoint x="1280" y="481"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DC-06-repo-2" value="&lt;i&gt;«Motor del Sistema / BD Provisiones»&lt;/i&gt;&lt;br&gt;&lt;b&gt;SistemaContableBDProvisiones&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=46;fillColor=#dcfce7;strokeColor=#15803d;fontColor=#0f172a;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontSize=12;rounded=1;arcSize=4;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="676" width="480" height="142" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-2-attrs" value="- idSistemaContableBDProvisiones: UUID «PK»&lt;br&gt;- estadoBDProvisiones: Boolean = true" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#1e293b;" vertex="1" parent="DC-06-repo-2">
+          <mxGeometry y="46" width="480" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-2-div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#15803d;" vertex="1" parent="DC-06-repo-2">
+          <mxGeometry y="100" width="480" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-repo-2-meths" value="+ calcularProvisionesAutomaticamente(): CalculoProvisionesContables" style="text;strokeColor=none;fillColor=#f0fdf4;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;spacingBottom=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=11;fontColor=#0f172a;" vertex="1" parent="DC-06-repo-2">
+          <mxGeometry y="108" width="480" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC-06-edge-ent-repo-2" value="1..1 ejecuta en ▸" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endSize=10;dashed=1;strokeColor=#15803d;strokeWidth=1.6;fontColor=#166534;fontSize=10;fontStyle=2;labelBackgroundColor=#f0fdf4;" edge="1" parent="1" source="DC-06-ent-2" target="DC-06-repo-2">
+          <mxGeometry relative="1" as="geometry" x="0.25">
+            <Array as="points">
+              <mxPoint x="1280" y="747"/>
+              <mxPoint x="1280" y="747"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="diag-DC-00" name="DC-00: Diagrama de Clases General Integrado (6 Etapas)">
+    <mxGraphModel dx="2400" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2960" pageHeight="1250" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="DC00-pkg-0" value="&lt;b&gt;DC-01: 1. Solicitud y captación&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;fillColor=#f8fafc;strokeColor=#334155;fontStyle=0;fontSize=13;rounded=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="440" height="1120" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ctrl-0" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ClienteSolicitante / AsesorNegocios&lt;/b&gt;&lt;hr&gt;+ iniciarRecepcionDeSolicitud(): RecepcionDeSolicitud&lt;br&gt;+ realizarRecoleccionDocumental(): RecoleccionDocumental" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-0">
+          <mxGeometry x="20" y="52" width="400" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-0-0" value="&lt;i&gt;«Entity / CU-1.1»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RecepcionDeSolicitud&lt;/b&gt;&lt;hr&gt;- idRecepcionSolicitud: UUID «PK»&lt;br&gt;- registroDatosDelCliente: String(150)&lt;br&gt;- definicionMontoYPlazo: String(100)&lt;br&gt;- registroDestinoDelCredito: String(120)&lt;hr&gt;+ registrarDatosDelCliente(): Void&lt;br&gt;+ definirMontoYPlazo(): Void" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-0">
+          <mxGeometry x="20" y="190" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-0-1" value="&lt;i&gt;«Entity / CU-1.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ValidacionDeIdentidadKYC&lt;/b&gt;&lt;hr&gt;- idValidacionKYC: UUID «PK»&lt;br&gt;- idRecepcionSolicitud: UUID «FK»&lt;br&gt;- verificacionCedulaDeIdentidad: Boolean&lt;br&gt;- validacionBiometricaDelSolicitante: Boolean&lt;hr&gt;+ verificarCedulaDeIdentidad(): Boolean&lt;br&gt;+ validarBiometriaDelSolicitante(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-0">
+          <mxGeometry x="20" y="410" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-0-1" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-0" source="DC00-ent-0-0" target="DC00-ent-0-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-0-2" value="&lt;i&gt;«Entity / CU-1.3»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RecoleccionDocumental&lt;/b&gt;&lt;hr&gt;- idRecoleccionDocumental: UUID «PK»&lt;br&gt;- idRecepcionSolicitud: UUID «FK»&lt;br&gt;- recoleccionIngresosYRolesDePago: String(255)&lt;br&gt;- recepcionDeclaracionesTributarias: String(255)&lt;hr&gt;+ recolectarIngresosYRolesDePago(): Boolean&lt;br&gt;+ recibirDeclaracionesTributarias(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-0">
+          <mxGeometry x="20" y="630" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-0-2" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-0" source="DC00-ent-0-1" target="DC00-ent-0-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-pkg-1" value="&lt;b&gt;DC-02: 2. Recolección y consolidación de datos&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;fillColor=#f8fafc;strokeColor=#334155;fontStyle=0;fontSize=13;rounded=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="520" y="40" width="440" height="1120" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ctrl-1" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaCreditoDatos&lt;/b&gt;&lt;hr&gt;+ solicitarRecoleccionDatosInternos(): RecoleccionDatosInternos&lt;br&gt;+ solicitarConsultaDatosExternos(): ConsultaDatosExternos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-1">
+          <mxGeometry x="20" y="52" width="400" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-1-0" value="&lt;i&gt;«Entity / CU-2.1»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RecoleccionDatosInternos&lt;/b&gt;&lt;hr&gt;- idRecoleccionInterna: UUID «PK»&lt;br&gt;- consultaHistorialConLaEntidad: String(150)&lt;br&gt;- evaluacionSaldosYAhorros: Decimal(12,2)&lt;br&gt;- analisisComportamientoPagoInterno: String(100)&lt;hr&gt;+ consultarHistorialConLaEntidad(): String&lt;br&gt;+ evaluarSaldosYAhorros(): Decimal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-1">
+          <mxGeometry x="20" y="190" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-1-1" value="&lt;i&gt;«Entity / CU-2.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ConsultaDatosExternos&lt;/b&gt;&lt;hr&gt;- idConsultaExterna: UUID «PK»&lt;br&gt;- consultaABuroDeCredito: String(150)&lt;br&gt;- consultaACentralDeRiesgosSBSEPS: String(150)&lt;hr&gt;+ consultarBuroDeCredito(): String&lt;br&gt;+ consultarCentralDeRiesgosSBSEPS(): String" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-1">
+          <mxGeometry x="20" y="410" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-1-1" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-1" source="DC00-ent-1-0" target="DC00-ent-1-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-1-2" value="&lt;i&gt;«Entity / CU-2.3 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;IntegracionYLimpiezaDatos&lt;/b&gt;&lt;hr&gt;- idIntegracionLimpieza: UUID «PK»&lt;br&gt;- idRecoleccionInterna: UUID «FK»&lt;br&gt;- idConsultaExterna: UUID «FK»&lt;br&gt;- depuracionRegistrosEInconsistencias: Boolean&lt;hr&gt;+ depurarRegistrosEInconsistencias(): Boolean&lt;br&gt;+ imputarValoresFaltantes(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-1">
+          <mxGeometry x="20" y="630" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-1-2" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-1" source="DC00-ent-1-1" target="DC00-ent-1-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-pkg-2" value="&lt;b&gt;DC-03: 3. Evaluación y cálculo del score&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;fillColor=#f8fafc;strokeColor=#334155;fontStyle=0;fontSize=13;rounded=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="40" width="440" height="1120" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ctrl-2" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaRiesgoCrediticio&lt;/b&gt;&lt;hr&gt;+ recibirCalificacionYScoreDelSistema(): SegmentacionRiesgoCrediticio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-2">
+          <mxGeometry x="20" y="52" width="400" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-2-0" value="&lt;i&gt;«Entity / CU-3.1 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;FiltroPolitica&lt;/b&gt;&lt;hr&gt;- idFiltroPolitica: UUID «PK»&lt;br&gt;- validacionEdadYCapacidadMinima: Boolean&lt;br&gt;- verificacionMoraVigente: Boolean&lt;br&gt;- controlUmbralSobreendeudamiento: Boolean&lt;hr&gt;+ validarEdadYCapacidadMinima(): Boolean&lt;br&gt;+ verificarMoraVigente(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-2">
+          <mxGeometry x="20" y="190" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-2-1" value="&lt;i&gt;«Entity / CU-3.2 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalisisCapacidadDePago&lt;/b&gt;&lt;hr&gt;- idAnalisisCapacidadPago: UUID «PK»&lt;br&gt;- calculoRatioCuotaIngreso: Decimal(5,4)&lt;br&gt;- evaluacionNivelDeEndeudamiento: Decimal(5,4)&lt;br&gt;- determinacionFlujoDeCajaDisponible: Decimal(12,2)&lt;hr&gt;+ calcularRatioCuotaIngreso(): Decimal&lt;br&gt;+ evaluarNivelDeEndeudamiento(): Decimal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-2">
+          <mxGeometry x="20" y="410" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-2-1" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-2" source="DC00-ent-2-0" target="DC00-ent-2-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-2-2" value="&lt;i&gt;«Entity / CU-3.3 (Automático LLM y RAG)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AplicacionModeloScoring&lt;/b&gt;&lt;hr&gt;- idAplicacionScoring: UUID «PK»&lt;br&gt;- inferenciaAutomaticaLLMYRAG: String(100)&lt;br&gt;- calculoProbabilidadDefaultPD: Decimal(6,5)&lt;br&gt;- transformacionAPuntajeCrediticioScore: Integer&lt;hr&gt;+ inferirAutomaticamenteConLLMYRAG(): String&lt;br&gt;+ calcularProbabilidadDefaultPD(): Decimal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-2">
+          <mxGeometry x="20" y="630" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-2-2" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-2" source="DC00-ent-2-1" target="DC00-ent-2-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-2-3" value="&lt;i&gt;«Entity / CU-3.4 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;SegmentacionRiesgoCrediticio&lt;/b&gt;&lt;hr&gt;- idSegmentacionRiesgo: UUID «PK»&lt;br&gt;- evaluacionPuntosDeCorteCutOffs: Integer&lt;br&gt;- asignacionACategoriaDeRiesgoABCDE: String(5)&lt;hr&gt;+ evaluarPuntosDeCorteCutOffs(): Integer&lt;br&gt;+ asignarCategoriaDeRiesgoABCDE(): String" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-2">
+          <mxGeometry x="20" y="850" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-2-3" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-2" source="DC00-ent-2-2" target="DC00-ent-2-3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-pkg-3" value="&lt;b&gt;DC-04: 4. Decisión crediticia&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;fillColor=#f8fafc;strokeColor=#334155;fontStyle=0;fontSize=13;rounded=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="40" width="440" height="1120" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ctrl-3" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaCredito / ComiteCredito&lt;/b&gt;&lt;hr&gt;+ recibirDictamenMatriz(): EvaluacionMatrizDecision&lt;br&gt;+ derivarARevisionManualComite(): RevisionManualComite" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-3">
+          <mxGeometry x="20" y="52" width="400" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-3-0" value="&lt;i&gt;«Entity / CU-4.1 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;EvaluacionMatrizDecision&lt;/b&gt;&lt;hr&gt;- idEvaluacionMatriz: UUID «PK»&lt;br&gt;- cruceScoreVsMontoSolicitado: String(100)&lt;br&gt;- contrastacionContraPoliticaRiesgo: Boolean&lt;br&gt;- generacionDictamenAutomatico: String(40)&lt;hr&gt;+ cruzarScoreVsMontoSolicitado(): String&lt;br&gt;+ contrastarContraPoliticaDeRiesgo(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-3">
+          <mxGeometry x="20" y="190" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-3-1" value="&lt;i&gt;«Entity / CU-4.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;RevisionManualComite&lt;/b&gt;&lt;hr&gt;- idRevisionManualComite: UUID «PK»&lt;br&gt;- analisisCasosEnZonaGris: String(150)&lt;br&gt;- evaluacionYFalloParaMontosAltos: String(150)&lt;hr&gt;+ analizarCasosEnZonaGris(): String&lt;br&gt;+ evaluarYEmitirFalloParaMontosAltos(): String" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-3">
+          <mxGeometry x="20" y="410" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-3-1" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-3" source="DC00-ent-3-0" target="DC00-ent-3-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-3-2" value="&lt;i&gt;«Entity / CU-4.3»&lt;/i&gt;&lt;br&gt;&lt;b&gt;DefinicionCondicionesCrediticias&lt;/b&gt;&lt;hr&gt;- idDefinicionCondiciones: UUID «PK»&lt;br&gt;- asignacionTasaInteresSegunRiesgo: Decimal(5,2)&lt;br&gt;- definicionPlazoYCupoAprobado: String(100)&lt;br&gt;- establecimientoGarantiasRequeridas: String(150)&lt;hr&gt;+ asignarTasaDeInteresSegunRiesgo(): Decimal&lt;br&gt;+ definirPlazoYCupoAprobado(): String" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-3">
+          <mxGeometry x="20" y="630" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-3-2" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-3" source="DC00-ent-3-1" target="DC00-ent-3-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-pkg-4" value="&lt;b&gt;DC-05: 5. Formalización y desembolso&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;fillColor=#f8fafc;strokeColor=#334155;fontStyle=0;fontSize=13;rounded=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1960" y="40" width="440" height="1120" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ctrl-4" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;ClienteSolicitante / OficialOperaciones&lt;/b&gt;&lt;hr&gt;+ gestionarAceptacionDelCliente(): GestionAceptacionCliente&lt;br&gt;+ recibirFondosYTablaDeAmortizacion(): EjecucionDesembolsoCredito" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-4">
+          <mxGeometry x="20" y="52" width="400" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-4-0" value="&lt;i&gt;«Entity / CU-5.1»&lt;/i&gt;&lt;br&gt;&lt;b&gt;GestionAceptacionCliente&lt;/b&gt;&lt;hr&gt;- idGestionAceptacion: UUID «PK»&lt;br&gt;- firmaDeContratoYPagare: Boolean&lt;br&gt;- constitucionFormalDeGarantias: Boolean&lt;hr&gt;+ firmarContratoYPagare(): Boolean&lt;br&gt;+ constituirFormalmenteGarantias(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-4">
+          <mxGeometry x="20" y="190" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-4-1" value="&lt;i&gt;«Entity / CU-5.2 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;EjecucionDesembolsoCredito&lt;/b&gt;&lt;hr&gt;- idEjecucionDesembolso: UUID «PK»&lt;br&gt;- acreditacionDeFondosEnCuenta: Boolean&lt;br&gt;- generacionDeTablaDeAmortizacion: Boolean&lt;hr&gt;+ acreditarFondosEnCuenta(): Boolean&lt;br&gt;+ generarTablaDeAmortizacion(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-4">
+          <mxGeometry x="20" y="410" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-4-1" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-4" source="DC00-ent-4-0" target="DC00-ent-4-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-pkg-5" value="&lt;b&gt;DC-06: 6. Seguimiento y cobranza&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=36;fillColor=#f8fafc;strokeColor=#334155;fontStyle=0;fontSize=13;rounded=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="2440" y="40" width="440" height="1120" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ctrl-5" value="&lt;i&gt;«Actor Principal»&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalistaCarteraRiesgos / GestorCobranza&lt;/b&gt;&lt;hr&gt;+ supervisarMonitoreoCarteraActiva(): MonitoreoCarteraActiva&lt;br&gt;+ recibirProvisionesContables(): CalculoProvisionesContables" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-5">
+          <mxGeometry x="20" y="52" width="400" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-5-0" value="&lt;i&gt;«Entity / CU-6.1 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;MonitoreoCarteraActiva&lt;/b&gt;&lt;hr&gt;- idMonitoreoCartera: UUID «PK»&lt;br&gt;- ejecucionScoreDeComportamiento: Integer&lt;br&gt;- emisionAlertasTempranasDeDeterioro: String(50)&lt;hr&gt;+ ejecutarScoreDeComportamiento(): Integer&lt;br&gt;+ emitirAlertasTempranasDeDeterioro(): String" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-5">
+          <mxGeometry x="20" y="190" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-5-1" value="&lt;i&gt;«Entity / CU-6.2»&lt;/i&gt;&lt;br&gt;&lt;b&gt;EjecucionGestionCobranza&lt;/b&gt;&lt;hr&gt;- idEjecucionCobranza: UUID «PK»&lt;br&gt;- gestionDeCobranzaPreventiva: Boolean&lt;br&gt;- gestionDeCobranzaTemprana: Boolean&lt;br&gt;- gestionDeCobranzaJudicial: Boolean&lt;hr&gt;+ ejecutarGestionDeCobranzaPreventiva(): Boolean&lt;br&gt;+ ejecutarGestionDeCobranzaTemprana(): Boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-5">
+          <mxGeometry x="20" y="410" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-5-1" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-5" source="DC00-ent-5-0" target="DC00-ent-5-1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-ent-5-2" value="&lt;i&gt;«Entity / CU-6.3 (Automático)»&lt;/i&gt;&lt;br&gt;&lt;b&gt;CalculoProvisionesContables&lt;/b&gt;&lt;hr&gt;- idCalculoProvisiones: UUID «PK»&lt;br&gt;- estimacionParametrosPD_LGD_EAD: String(100)&lt;br&gt;- calculoPerdidaEsperada_PDxLGDxEAD: Decimal(12,2)&lt;hr&gt;+ estimarParametrosPD_LGD_EAD(): String&lt;br&gt;+ calcularPerdidaEsperada_PDxLGDxEAD(): Decimal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#0f172a;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=10;" vertex="1" parent="DC00-pkg-5">
+          <mxGeometry x="20" y="630" width="400" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-e-5-2" value="1..1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=open;strokeColor=#b45309;fontSize=9;" edge="1" parent="DC00-pkg-5" source="DC00-ent-5-1" target="DC00-ent-5-2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-cross-0" value="1 .. 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1" source="DC00-ent-0-2" target="DC00-ent-1-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-cross-1" value="1 .. 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1" source="DC00-ent-1-2" target="DC00-ent-2-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-cross-2" value="1 .. 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1" source="DC00-ent-2-3" target="DC00-ent-3-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-cross-3" value="1 .. 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1" source="DC00-ent-3-2" target="DC00-ent-4-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="DC00-cross-4" value="1 .. 1..*" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=block;endFill=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1" source="DC00-ent-4-1" target="DC00-ent-5-0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
