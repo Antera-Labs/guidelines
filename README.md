@@ -31,14 +31,14 @@ Consolidarnos como un socio tecnológico de referencia en la región, impulsando
 
 Conoce a los expertos que conforman nuestro equipo de trabajo en **Antera Labs**:
 
-| Fotografía | Integrante | Rol Especializado | Dominio Arquitectónico Principal |
-| :---: | :--- | :--- | :--- |
-| <img width="125" alt="Ronald Calderón" src="https://github.com/user-attachments/assets/ca89a030-c4eb-41c9-af3b-41f3cb3c4262" /> | **Ronald Alexander Calderón Carpio** | UX/UI | Diseñador UX/UI & Usabilidad (ISO 25010) |
-| <img width="125" alt="Josue Pardo" src="https://github.com/user-attachments/assets/bbab4996-9e49-489a-892c-0006b8c70f98" /> | **Josue Xavier Pardo Chamba** | FrontEnd | Desarrollo Cliente Web (Next.js), Móvil (Flutter) y UAT (Streamlit) |
-| <img width="125" alt="Anthony Romero" src="https://github.com/user-attachments/assets/141eb62d-350e-4879-abf9-5f56909f5b23" /> | **Anthony Joel Romero Yaguana** | BackEnd | Core API Microservicios (FastAPI), Motor ML y Servidores MCP |
-| <img width="125" alt="Alberto Herrera" src="https://github.com/user-attachments/assets/879381eb-7828-4cbe-bec1-3c4519e29e86" /> | **Alberto Nicolás Herrera Salinas** | Seguridad | Oficial de Seguridad, DevSecOps y Guardrail Agents (LOPDP / ISO 27001) |
-| <img width="125" alt="Martin Ruiz" src="https://github.com/user-attachments/assets/ad4f85cd-0904-46c7-a015-f6871d33d921" /> | **Martin Emanuel Ruiz Sánchez** | Base de Datos | DBA, PostgreSQL (ACID), Feature Store (Redis) y RAG (Qdrant) |
-| <img width="125" alt="Andrés Cárdenas" src="https://github.com/user-attachments/assets/8f589d43-850b-4412-91e1-bb15ae3af94a" /> | **Andrés Sebastián Cárdenas Armijos** | Arquitecto de Software | Líder Técnico, Vistas 4+1 (ISO/IEC/IEEE 42010) y Gobernanza IaC |
+| Fotografía | Integrante | Rol Especializado |
+| :---: | :--- | :--- | 
+| <img width="125" alt="Ronald Calderón" src="https://github.com/user-attachments/assets/ca89a030-c4eb-41c9-af3b-41f3cb3c4262" /> | **Ronald Alexander Calderón Carpio** | UX/UI |
+| <img width="125" alt="Josue Pardo" src="https://github.com/user-attachments/assets/bbab4996-9e49-489a-892c-0006b8c70f98" /> | **Josue Xavier Pardo Chamba** | FrontEnd | 
+| <img width="125" alt="Anthony Romero" src="https://github.com/user-attachments/assets/141eb62d-350e-4879-abf9-5f56909f5b23" /> | **Anthony Joel Romero Yaguana** | BackEnd | 
+| <img width="125" alt="Alberto Herrera" src="https://github.com/user-attachments/assets/879381eb-7828-4cbe-bec1-3c4519e29e86" /> | **Alberto Nicolás Herrera Salinas** | Seguridad |
+| <img width="125" alt="Martin Ruiz" src="https://github.com/user-attachments/assets/ad4f85cd-0904-46c7-a015-f6871d33d921" /> | **Martin Emanuel Ruiz Sánchez** | Base de Datos | 
+| <img width="125" alt="Andrés Cárdenas" src="https://github.com/user-attachments/assets/8f589d43-850b-4412-91e1-bb15ae3af94a" /> | **Andrés Sebastián Cárdenas Armijos** | Arquitecto de Software | 
 
 ---
 
@@ -60,40 +60,43 @@ Somos un grupo multidisciplinario de profesionales enfocados en entregar solucio
 
 ## Cadena de Valor y Capacidades del Negocio
 
-Aplicando la **Metodología de Ulrich (Nivel 3)**, la solución se estructura en **7 Capacidades Operativas**:
+Aplicando la **Metodología de Ulrich (Nivel 3)**, la solución se estructura en **6 Capacidades Operativas**, alineadas con las seis fases del proceso crediticio:
 
-1. **Gestión de Identidad, Consentimiento & Gobierno LOPDP**: Captura y trazabilidad del consentimiento firmado del socio con anonimización de datos.
-2. **Ingesta e Integración de Datos Híbridos**: Agregación de datos de buró bancario tradicional y variables socioeconómicas alternativas regionales.
-3. **Pre-filtro y Validación de Elegibilidad Normativa**: Verificación automática de requisitos mínimos y estado del socio.
-4. **Evaluación de Riesgo y Scoring Predictivo**: Inferencia en tiempo real mediante modelos de Machine Learning (XGBoost / Scikit-Learn).
-5. **Motor de Decisiones y Dictamen Automático**: Emisión de veredicto (*Aprobado, Rechazado o Sujeto a Verificación*) y recomendación de monto, tasa y plazo.
-6. **Explicabilidad Agéntica del Dictamen, RAG & Asistencia UAT**: Asistencia al analista con justificación en lenguaje natural e interfaz interactiva en Streamlit.
-7. **Monitoreo de Cartera, Auditoría Inmutable & Retroalimentación**: Registro de trazabilidad y recalibración periódica del modelo con datos de pago reales.
+1. **Gestión de Identidad, Consentimiento y Gobierno LOPDP**: Captura y trazabilidad del consentimiento firmado del socio, validación de identidad y autorización para consultas crediticias, garantizando el tratamiento adecuado y la protección de los datos personales.
 
+2. **Ingesta e Integración de Datos Híbridos**: Agregación y consolidación de información del buró bancario tradicional, registros internos de la cooperativa y variables socioeconómicas alternativas regionales.
+
+3. **Pre-filtro y Validación de Elegibilidad Normativa**: Verificación automática de requisitos mínimos, políticas institucionales, estado del socio, capacidad de pago y condiciones de elegibilidad crediticia.
+
+4. **Evaluación de Riesgo y Scoring Predictivo**: Análisis de indicadores financieros y comportamiento crediticio mediante modelos de Machine Learning (XGBoost / Scikit-Learn), incorporando variables tradicionales y alternativas para determinar la segmentación de riesgo del socio.
+
+5. **Motor de Decisiones y Dictamen Automático**: Integración de resultados predictivos y políticas institucionales para emitir un veredicto (*Aprobado, Rechazado o Sujeto a Verificación*), junto con la recomendación de monto, tasa y plazo.
+
+6. **Explicabilidad Agéntica del Dictamen, RAG y Asistencia UAT**: Asistencia al analista mediante agentes de inteligencia artificial, recuperación aumentada por generación (RAG) y justificación de resultados en lenguaje natural. Incorpora una interfaz interactiva en Streamlit para las pruebas de aceptación de usuario (UAT).
 ---
 
 ## Stack Tecnológico Cloud-Native
 
-Diseñado bajo los arquetipos del *Microsoft Application Architecture Guide v2*:
+La arquitectura del sistema sigue un enfoque **modular, multicapa y desacoplado**, diseñado para soportar analítica predictiva e integración agéntica de inteligencia artificial. Su estructura se organiza bajo el patrón **Borde-Control-Entidad (BCE)** e integra los arquetipos de diseño del *Microsoft Application Architecture Guide v2*:
 
-* **Plataforma Móvil (*Rich Mobile Client Archetype*)**:
-  * App Nativa en **Flutter** (compilada AOT a binario ARM en iOS/Android).
-  * Almacenamiento Seguro Nativo (**iOS Keychain / Android Keystore**) para tokens JWT.
-* **Plataforma Web (*Web Application Archetype*)**:
-  * **Next.js (React / TypeScript)** con *Server-Side Rendering (SSR)*.
-  * **Tailwind CSS + Shadcn UI** para el sistema de diseño accesibles.
-  * **Streamlit (Python)** para el Dashboard Analítico de pruebas UAT.
-* **Capa de Negocio e Inteligencia Artificial**:
-  * Microservicios en **FastAPI (Python)**.
-  * Inferencia de Machine Learning con **XGBoost / Scikit-Learn**.
-  * Protocolo **Model Context Protocol (MCP)** para integración agéntica desacoplada.
-  * **Guardrail Agents** para inspección y seguridad LOPDP.
-* **Capa de Persistencia e Infraestructura**:
-  * **PostgreSQL** para datos relacionales ACID.
-  * **Redis** como *Feature Store* de variables alternativas (< 50 ms latencia).
-  * **Qdrant** como base de datos vectorial para RAG.
-  * Empaquetado inmutable con **Docker & Docker Compose**.
-  * Pipeline **DevSecOps** con **GitHub Actions** y **SonarQube**.
+- **Capa de Presentación (Objetos Borde / Boundary)**:
+  - **Aplicación Móvil**: desarrollada en Flutter para dispositivos iOS y Android.
+  - **Portal Web**: desarrollado con Next.js (React / TypeScript), orientado a la interacción mediante navegador.
+  - **Dashboard Analítico UAT**: desarrollado con Streamlit (Python) para la visualización y análisis de resultados de pruebas de aceptación de usuario.
+
+- **Capa de Negocio y Analítica (Objetos Control / Control)**:
+  - **Microservicios asíncronos** desarrollados con FastAPI (Python) para gestionar la lógica de negocio y la comunicación entre componentes.
+  - **Motor de Machine Learning** basado en Scikit-Learn y XGBoost para el procesamiento de datos y la generación de predicciones.
+  - **Servidores Model Context Protocol (MCP)** para facilitar la integración y comunicación desacoplada entre los agentes y las herramientas de la malla agéntica de inteligencia artificial.
+
+- **Capa de Persistencia y Datos (Objetos Entidad / Entity)**:
+  - **PostgreSQL** como sistema de gestión de bases de datos relacional, garantizando transacciones ACID.
+  - **Redis** como Feature Store en memoria para el almacenamiento y acceso eficiente a variables alternativas utilizadas por los modelos predictivos.
+  - **Qdrant** como base de datos vectorial para gestionar embeddings y habilitar mecanismos de recuperación aumentada por generación (RAG).
+
+- **Capa de Infraestructura y Despliegue**:
+  - **Docker y Docker Compose** para el empaquetamiento, aislamiento y despliegue de los componentes mediante contenedores.
+  - **Despliegue físico desacoplado** para las plataformas web y móvil, permitiendo gestionar sus respectivos ciclos de construcción, distribución y ejecución de manera independiente.
 
 ---
 
