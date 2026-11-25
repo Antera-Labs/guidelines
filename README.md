@@ -74,31 +74,50 @@ Aplicando la **Metodología de Ulrich (Nivel 3)**, la solución se estructura en
 
 6. **Explicabilidad Agéntica del Dictamen, RAG y Asistencia UAT**: Asistencia al analista mediante agentes de inteligencia artificial, recuperación aumentada por generación (RAG) y justificación de resultados en lenguaje natural. Incorpora una interfaz interactiva en Streamlit para las pruebas de aceptación de usuario (UAT).
 ---
-
 ## Stack Tecnológico Cloud-Native
 
-La arquitectura del sistema sigue un enfoque **modular, multicapa y desacoplado**, diseñado para soportar analítica predictiva e integración agéntica de inteligencia artificial. Su estructura se organiza bajo el patrón **Borde-Control-Entidad (BCE)** e integra los arquetipos de diseño del *Microsoft Application Architecture Guide v2*:
+La arquitectura del sistema sigue un enfoque **modular, multicapa y desacoplado**, organizado como un **System-Monorepo de 7 capas** que se despliega en la **Nube Privada IaaS de la cooperativa**. Está diseñada para soportar analítica predictiva con explicabilidad (RAG) y una integración controlada con el Core Bancario. Su estructura se organiza bajo el patrón **Borde-Control-Entidad (BCE)** e integra los arquetipos de diseño del *Microsoft Application Architecture Guide v2*:
 
-- **Capa de Presentación (Objetos Borde / Boundary)**:
-  - **Aplicación Móvil**: desarrollada en Flutter para dispositivos iOS y Android.
-  - **Portal Web**: desarrollado con Next.js (React / TypeScript), orientado a la interacción mediante navegador.
-  - **Dashboard Analítico UAT**: desarrollado con Streamlit (Python) para la visualización y análisis de resultados de pruebas de aceptación de usuario.
+1. **Capa de Presentación (Objetos Borde / Boundary) — `/apps`**:
+   - **Aplicación Móvil de Socios**: desarrollada en React Native para iOS y Android, distribuida como paquetes nativos `.apk` y `.ipa`.
+   - **Portal Web SPA**: desarrollado con Angular (TypeScript) y compilado como bundle estático (`dist/`: HTML, JS, CSS), con módulos *lazy-loaded* por etapa (CU-01 a CU-06).
+   - **Guards RBAC e Interceptores JWT** para el control de acceso por rol y la propagación del token en cada solicitud.
+   - Consume exclusivamente Web Services estandarizados sobre HTTPS/JSON y no contiene lógica transaccional crítica.
 
-- **Capa de Negocio y Analítica (Objetos Control / Control)**:
-  - **Microservicios asíncronos** desarrollados con FastAPI (Python) para gestionar la lógica de negocio y la comunicación entre componentes.
-  - **Motor de Machine Learning** basado en Scikit-Learn y XGBoost para el procesamiento de datos y la generación de predicciones.
-  - **Servidores Model Context Protocol (MCP)** para facilitar la integración y comunicación desacoplada entre los agentes y las herramientas de la malla agéntica de inteligencia artificial.
+2. **Capa de Negocio y Analítica (Objetos Control / Control) — `/services`**:
+   - **Backend Principal en Groovy** (controladores REST, servicios y DTOs), empaquetado como `.jar` / `.war` sobre la JVM. Implementa las reglas crediticias, los filtros *knock-out*, el cálculo de capacidad de pago y la validación de DTOs.
+   - **Motor de ML Scoring y RAG** en Python (Scikit-Learn y XGBoost), distribuido como imagen OCI/Docker. Calcula la Probabilidad de Default (PD) y el Score (0–1000) con explicabilidad mediante RAG.
+   - **Orquestador BPMN**, con definiciones `.bpmn` que modelan las 6 etapas del flujo de valor, incluidos los flujos de aprobación y cobranza.
 
-- **Capa de Persistencia y Datos (Objetos Entidad / Entity)**:
-  - **PostgreSQL** como sistema de gestión de bases de datos relacional, garantizando transacciones ACID.
-  - **Redis** como Feature Store en memoria para el almacenamiento y acceso eficiente a variables alternativas utilizadas por los modelos predictivos.
-  - **Qdrant** como base de datos vectorial para gestionar embeddings y habilitar mecanismos de recuperación aumentada por generación (RAG).
+3. **Capa de Plataforma y Seguridad Transversal — `/platform`**:
+   - **Reverse Proxy / Balanceador con WAF** como punto de entrada protegido.
+   - **Identity Server (SSO)** con SAML2 / OAuth2 / JWT e integración con LDAP/AD en la Nube Privada.
+   - **API Manager** para el gobierno de los Web Services y **Guardrail LOPDP** para la gestión del consentimiento y el cifrado de datos personales.
+   - **ESB y Message Queue** para la mediación de protocolos hacia App Core, Buró AVAL, Registro Civil y PLA/FT, y para el desacoplamiento asíncrono mediante tópicos y colas.
 
-- **Capa de Infraestructura y Despliegue**:
-  - **Docker y Docker Compose** para el empaquetamiento, aislamiento y despliegue de los componentes mediante contenedores.
-  - **Despliegue físico desacoplado** para las plataformas web y móvil, permitiendo gestionar sus respectivos ciclos de construcción, distribución y ejecución de manera independiente.
+4. **Capa de Infraestructura y Despliegue — `/infra`**:
+   - **Nube Privada IaaS** de la cooperativa (nodos, subredes y servicios), aprovisionada mediante plantillas IaC en **Terraform / Ansible**.
+   - **Docker, Docker Compose y Kubernetes** para el empaquetamiento, la orquestación de contenedores y el escalado horizontal de los Web Services.
+   - **Agentes de monitoreo (APM) y Log Storage** para la trazabilidad operativa y la alta disponibilidad.
+   - **Despliegue físico desacoplado** de las plataformas web y móvil, que permite gestionar sus ciclos de construcción, distribución y ejecución de manera independiente.
+
+5. **Capa de Persistencia y Datos (Objetos Entidad / Entity) — `/database`**:
+   - **Oracle** como base de datos relacional principal. Web y Móvil acceden a ella de forma desacoplada mediante Listas SQL controladas (`LST_SOCIOS`, `LST_CARTERA_ACTIVA`, `LST_MORA_4M`), lo que protege al Core Bancario.
+   - **Redis** como servidor de caché **opcional**, sin imponer una dependencia NoSQL (actualmente PJL no cuenta con una base de datos NoSQL).
+   - **Repositorio BI / Reporting y Auditoría LOPDP**, con reportes diarios y previsiones de pérdida esperada (PD × LGD × EAD).
+
+6. **Capa de Componentes Compartidos — `/shared`**:
+   - **Contratos OpenAPI / WS** (`openapi-v1.yaml`) como fuente única de verdad de las interfaces.
+   - Biblioteca JVM **`shared-core-security.jar`** (Groovy/Java) y paquete NPM interno **`@pjl/shared-contracts`** (TypeScript, para Angular y React Native).
+   - DTOs transversales, entidades de seguridad (Usuario, Rol, ConsentimientoLOPDP), utilidades de cifrado y validación, y códigos de error unificados.
+
+7. **Capa DevOps (CI/CD DevSecOps) — `/.github` y `/devops`**:
+   - **Pipelines CI/CD** definidos como workflows YAML (`.github/workflows/ci-cd.yml`).
+   - **Análisis estático con SonarQube**, pruebas SAST/DAST, pruebas unitarias y de integración, reportes de cobertura y verificación de reglas de seguridad y LOPDP.
+   - **Registro de artefactos** y scripts de release y rollback automatizado para la promoción controlada hacia los entornos de QA y producción en la Nube Privada IaaS.
 
 ---
+
 
 ## Documentación Arquitectónica (SAD)
 
