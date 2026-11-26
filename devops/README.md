@@ -90,7 +90,8 @@ flowchart LR
 1. **Arranque:** fusiona en `main` el PR que trae el pipeline. Mientras no exista `staging`, `pr-policy` lo acepta como arranque.
 2. **Repo:** `devops/setup-repo.sh Antera-Labs/guidelines` (admin, con `gh auth login`).
 3. **SonarQube Cloud** (plan Free; el repo es público):
-   1. Entra a sonarcloud.io con GitHub, importa la organización `Antera-Labs` y el repo `guidelines`. La clave del proyecto queda como `Antera-Labs_guidelines`; si es otra, ajusta la variable `SONAR_PROJECT_KEY`.
+   1. Entra a sonarcloud.io con GitHub, importa la organización `Antera-Labs` y el repo `guidelines`. Queda la organización `antera-labs` y la clave `Antera-Labs_guidelines`, los valores por defecto del workflow; si son otros, ajusta las variables `SONAR_ORGANIZATION` y `SONAR_PROJECT_KEY`.
+      - SonarQube Cloud propone configurar Gradle (plugin `org.sonarqube` y `./gradlew build sonar`) porque encuentra `build.gradle`. **No lo sigas:** ese plugin analiza solo core-api, que es Groovy y Sonar no lo analiza, y reemplazaría el análisis del monorepo que hace `sonarqube.yml`.
    2. En el proyecto: *Administration → Analysis Method* → **apagar Automatic Analysis**.
    3. Genera un token (*My Account → Security*) y guárdalo: `gh secret set SONAR_TOKEN --repo Antera-Labs/guidelines`.
 4. **GHCR:** tras el primer release, revisa en *Packages* que las imágenes sean públicas. Deberían heredar la visibilidad del repo; si no, cámbiala en la configuración de cada paquete, o el Compose del release no podrá descargarlas sin credenciales.
