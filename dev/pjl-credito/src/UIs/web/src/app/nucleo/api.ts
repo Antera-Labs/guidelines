@@ -9,9 +9,13 @@ export class Api {
   private readonly http = inject(HttpClient);
   private readonly base = '/api/v1';
 
-  get<T>(ruta: string, params?: Record<string, string | number | boolean | null | undefined>): Promise<T> {
+  get<T>(
+    ruta: string,
+    params?: Record<string, string | number | boolean | null | undefined>,
+  ): Promise<T> {
     let p = new HttpParams();
-    for (const [k, v] of Object.entries(params ?? {})) if (v !== null && v !== undefined && v !== '') p = p.set(k, String(v));
+    for (const [k, v] of Object.entries(params ?? {}))
+      if (v !== null && v !== undefined && v !== '') p = p.set(k, String(v));
     return firstValueFrom(this.http.get<T>(this.base + ruta, { params: p }));
   }
 
@@ -36,8 +40,17 @@ export class Api {
       // Con responseType blob, el problem+json del backend llega como Blob: se lee para mostrar su detalle.
       if (e instanceof HttpErrorResponse && e.error instanceof Blob) {
         let cuerpo: unknown = null;
-        try { cuerpo = JSON.parse(await e.error.text()); } catch { /* sin detalle */ }
-        throw new HttpErrorResponse({ error: cuerpo, status: e.status, statusText: e.statusText, url: e.url ?? undefined });
+        try {
+          cuerpo = JSON.parse(await e.error.text());
+        } catch {
+          /* sin detalle */
+        }
+        throw new HttpErrorResponse({
+          error: cuerpo,
+          status: e.status,
+          statusText: e.statusText,
+          url: e.url ?? undefined,
+        });
       }
       throw e;
     }
@@ -56,20 +69,29 @@ export class Api {
 export function mensajeError(e: unknown): string {
   if (e instanceof HttpErrorResponse) {
     if (e.status === 0) return 'No hay conexión con el servidor. Revisa tu red e intenta de nuevo.';
-    const detalle = (e.error && typeof e.error === 'object' && 'detail' in e.error) ? String(e.error.detail) : null;
+    const detalle =
+      e.error && typeof e.error === 'object' && 'detail' in e.error ? String(e.error.detail) : null;
     return detalle ?? `El servidor respondió ${e.status}.`;
   }
   return 'Ocurrió un error inesperado.';
 }
 
-export type Rol = 'ASESOR' | 'ANALISTA' | 'RIESGO' | 'COMITE' | 'OPERACIONES' | 'CARTERA' | 'COBRANZA' | 'ADMIN';
-export interface Usuario { usuario: string; nombre: string; rol: Rol; agencia: string; }
+export type Rol =
+  'ASESOR' | 'ANALISTA' | 'RIESGO' | 'COMITE' | 'OPERACIONES' | 'CARTERA' | 'COBRANZA' | 'ADMIN';
+export interface Usuario {
+  usuario: string;
+  nombre: string;
+  rol: Rol;
+  agencia: string;
+}
 
 const CLAVE = 'pjl.web.sesion';
 
 @Injectable({ providedIn: 'root' })
 export class Sesion {
-  private readonly estado = signal<{ token: string; usuario: Usuario; expira: number } | null>(leer());
+  private readonly estado = signal<{ token: string; usuario: Usuario; expira: number } | null>(
+    leer(),
+  );
   readonly usuario = computed(() => this.estado()?.usuario ?? null);
   readonly token = computed(() => {
     const s = this.estado();
@@ -79,12 +101,20 @@ export class Sesion {
   iniciar(token: string, usuario: Usuario, expiraEnSeg: number): void {
     const s = { token, usuario, expira: Date.now() + expiraEnSeg * 1000 };
     this.estado.set(s);
-    try { sessionStorage.setItem(CLAVE, JSON.stringify(s)); } catch { /* almacenamiento no disponible */ }
+    try {
+      sessionStorage.setItem(CLAVE, JSON.stringify(s));
+    } catch {
+      /* almacenamiento no disponible */
+    }
   }
 
   cerrar(): void {
     this.estado.set(null);
-    try { sessionStorage.removeItem(CLAVE); } catch { /* sin almacenamiento */ }
+    try {
+      sessionStorage.removeItem(CLAVE);
+    } catch {
+      /* sin almacenamiento */
+    }
   }
 
   puede(...roles: Rol[]): boolean {
@@ -106,7 +136,10 @@ export const interceptorAutenticacion: HttpInterceptorFn = (req, next) => {
   const sesion = inject(Sesion);
   const router = inject(Router);
   const token = sesion.token();
-  const conToken = token && req.url.startsWith('/api/') ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
+  const conToken =
+    token && req.url.startsWith('/api/')
+      ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+      : req;
   return next(conToken).pipe(
     catchError((e: HttpErrorResponse) => {
       if (e.status === 401 && !req.url.endsWith('/auth/login')) {
@@ -133,6 +166,12 @@ export const ETAPAS = [
 ] as const;
 
 export const ROL_NOMBRE: Record<Rol, string> = {
-  ASESOR: 'Asesora de negocios', ANALISTA: 'Analista de crédito', RIESGO: 'Analista de riesgo', COMITE: 'Comité de crédito',
-  OPERACIONES: 'Oficial de operaciones', CARTERA: 'Analista de cartera', COBRANZA: 'Gestor de cobranza', ADMIN: 'Administración',
+  ASESOR: 'Asesora de negocios',
+  ANALISTA: 'Analista de crédito',
+  RIESGO: 'Analista de riesgo',
+  COMITE: 'Comité de crédito',
+  OPERACIONES: 'Oficial de operaciones',
+  CARTERA: 'Analista de cartera',
+  COBRANZA: 'Gestor de cobranza',
+  ADMIN: 'Administración',
 };

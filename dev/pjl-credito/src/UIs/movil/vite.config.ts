@@ -21,14 +21,25 @@ export default defineConfig({
         icons: [
           { src: 'logo-pjl-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'logo-pjl-512.png', sizes: '512x512', type: 'image/png' },
-          { src: 'logo-pjl-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          {
+            src: 'logo-pjl-maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
         ],
       },
       workbox: {
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/api\//],
         // Solo información pública de la nube privada se guarda para uso sin conexión; nunca datos del socio.
-        runtimeCaching: [{ urlPattern: /\/api\/v1\/info\//, handler: 'StaleWhileRevalidate', options: { cacheName: 'pjl-info' } }],
+        runtimeCaching: [
+          {
+            urlPattern: /\/api\/v1\/info\//,
+            handler: 'StaleWhileRevalidate',
+            options: { cacheName: 'pjl-info' },
+          },
+        ],
       },
     }),
   ],

@@ -1,8 +1,31 @@
 import { ETAPAS } from '../formato';
 
-const SUBETAPAS = ['1.1', '1.2', '1.3', '2.1', '2.2', '2.3', '3.1', '3.2', '3.3', '3.4', '4.1', '4.2', '4.3', '5.1', '5.2', '6.1'];
+const SUBETAPAS = [
+  '1.1',
+  '1.2',
+  '1.3',
+  '2.1',
+  '2.2',
+  '2.3',
+  '3.1',
+  '3.2',
+  '3.3',
+  '3.4',
+  '4.1',
+  '4.2',
+  '4.3',
+  '5.1',
+  '5.2',
+  '6.1',
+];
 
-interface Props { etapa: number; subetapa: string; estado: string; tam?: number; claro?: boolean; }
+interface Props {
+  etapa: number;
+  subetapa: string;
+  estado: string;
+  tam?: number;
+  claro?: boolean;
+}
 
 /** Punto de un arco de 180° (izquierda → derecha) con centro (100, 100). */
 function punto(r: number, t: number): [number, number] {
@@ -24,18 +47,34 @@ export function ArcoEtapas({ etapa, subetapa, estado, tam = 220, claro = false }
   const desembolsada = estado === 'DESEMBOLSADA';
   const cerrada = estado === 'RECHAZADA' || estado === 'ANULADA';
   const actual = desembolsada ? 6 : etapa;
-  const avance = desembolsada ? 1 : Math.max(0.04, (SUBETAPAS.indexOf(subetapa) + 1) / SUBETAPAS.length);
+  const avance = desembolsada
+    ? 1
+    : Math.max(0.04, (SUBETAPAS.indexOf(subetapa) + 1) / SUBETAPAS.length);
   const hueco = 0.012;
   const nombre = ETAPAS[actual - 1]?.paraSocio ?? '';
-  const etiqueta = cerrada ? `Solicitud cerrada en la etapa ${etapa} de 6` : `Etapa ${actual} de 6: ${ETAPAS[actual - 1]?.nombre}`;
+  const etiqueta = cerrada
+    ? `Solicitud cerrada en la etapa ${etapa} de 6`
+    : `Etapa ${actual} de 6: ${ETAPAS[actual - 1]?.nombre}`;
 
   return (
-    <figure className={`arco ${claro ? 'arco-claro' : ''}`} style={{ width: tam }} role="img" aria-label={etiqueta}>
+    <figure
+      className={`arco ${claro ? 'arco-claro' : ''}`}
+      style={{ width: tam }}
+      role="img"
+      aria-label={etiqueta}
+    >
       <svg viewBox="0 0 200 108" aria-hidden="true">
         {ETAPAS.map((e, i) => {
           const t0 = i / 6 + hueco;
           const t1 = (i + 1) / 6 - hueco;
-          const clase = e.id < actual || (desembolsada && e.id < 6) ? 'hecha' : e.id === actual ? (cerrada ? 'cerrada' : 'actual') : 'pendiente';
+          const clase =
+            e.id < actual || (desembolsada && e.id < 6)
+              ? 'hecha'
+              : e.id === actual
+                ? cerrada
+                  ? 'cerrada'
+                  : 'actual'
+                : 'pendiente';
           return <path key={e.id} d={segmento(84, t0, t1)} className={`seg ${clase}`} />;
         })}
         <path d={segmento(66, 0, 1)} className="pista" />

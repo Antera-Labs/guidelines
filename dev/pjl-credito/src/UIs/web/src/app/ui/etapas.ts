@@ -4,11 +4,26 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 @Component({
   selector: 'pjl-riesgo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<span class="riesgo" [class]="'riesgo riesgo-' + (categoria() || 'vacio')" [attr.title]="titulo()">{{ categoria() || '—' }}</span>`,
+  template: `<span
+    class="riesgo"
+    [class]="'riesgo riesgo-' + (categoria() || 'vacio')"
+    [attr.title]="titulo()"
+    >{{ categoria() || '—' }}</span
+  >`,
 })
 export class Riesgo {
   readonly categoria = input<string | null | undefined>();
-  protected readonly titulo = computed(() => (this.categoria() ? `Categoría de riesgo ${this.categoria()}` : 'Sin evaluación'));
+  protected readonly titulo = computed(() =>
+    this.categoria() ? `Categoría de riesgo ${this.categoria()}` : 'Sin evaluación',
+  );
 }
 
-export interface KpiEtapa { idEtapa: number; nombre: string; casoUso: string; enCurso: number; monto: number; atencion: number; horasPromedio: number | null; }
+export interface KpiEtapa {
+  idEtapa: number;
+  nombre: string;
+  casoUso: string;
+  enCurso: number;
+  monto: number;
+  atencion: number;
+  horasPromedio: number | null;
+}

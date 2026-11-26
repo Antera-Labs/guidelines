@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Api, ETAPAS, Sesion, mensajeError } from '../nucleo/api';
@@ -21,15 +29,21 @@ const DOCS = [
   { tipo: 'OTRO', texto: 'Otro documento' },
 ];
 const FILTROS = [
-  { clave: 'filtroEdad', texto: 'Edad y plazo dentro de la política (18 a 75 años al vencimiento)' },
+  {
+    clave: 'filtroEdad',
+    texto: 'Edad y plazo dentro de la política (18 a 75 años al vencimiento)',
+  },
   { clave: 'filtroCapacidadMinima', texto: 'Flujo disponible positivo después de la cuota' },
   { clave: 'filtroMoraVigente', texto: 'Sin deuda vencida en el sistema financiero' },
   { clave: 'filtroSobreendeudamiento', texto: 'Cuota/ingreso total hasta 50 %' },
   { clave: 'filtroListas', texto: 'Listas UAFE, OFAC y ONU satisfactorias' },
 ];
 const CORTES = [
-  { cat: 'E', desde: 0, hasta: 500 }, { cat: 'D', desde: 500, hasta: 580 }, { cat: 'C', desde: 580, hasta: 650 },
-  { cat: 'B', desde: 650, hasta: 720 }, { cat: 'A', desde: 720, hasta: 1000 },
+  { cat: 'E', desde: 0, hasta: 500 },
+  { cat: 'D', desde: 500, hasta: 580 },
+  { cat: 'C', desde: 580, hasta: 650 },
+  { cat: 'B', desde: 650, hasta: 720 },
+  { cat: 'A', desde: 720, hasta: 1000 },
 ];
 
 @Component({
@@ -69,28 +83,49 @@ export class Expediente {
   protected readonly ajustando = signal(false);
 
   // Formularios
-  protected comite = { dictamen: 'APROBADO', motivo: '', acta: '', votosFavor: 3, votosContra: 0, montoAprobado: null as number | null, plazoMeses: null as number | null };
+  protected comite = {
+    dictamen: 'APROBADO',
+    motivo: '',
+    acta: '',
+    votosFavor: 3,
+    votosContra: 0,
+    montoAprobado: null as number | null,
+    plazoMeses: null as number | null,
+  };
   protected ajuste = { montoAprobado: 0, plazoMeses: 0, tipoGarantia: '', detalleGarantia: '' };
   protected formal = { contratoFirmado: false, pagareFirmado: false, garantiasConstituidas: false };
   protected tipoDoc = 'CEDULA';
   protected archivo: File | null = null;
 
-  protected readonly estado = computed(() => ESTADOS[this.exp()?.['estado']] ?? { texto: '', clase: 'neutro' });
+  protected readonly estado = computed(
+    () => ESTADOS[this.exp()?.['estado']] ?? { texto: '', clase: 'neutro' },
+  );
   protected readonly sub = computed(() => String(this.exp()?.['idSubetapa'] ?? '1.1'));
-  protected readonly docsCargados = computed<string[]>(() => (this.exp()?.['documentos'] ?? []).map((d: Exp) => d['tipo']));
+  protected readonly docsCargados = computed<string[]>(() =>
+    (this.exp()?.['documentos'] ?? []).map((d: Exp) => d['tipo']),
+  );
   protected readonly docsCompletos = computed(() => {
     const t = this.docsCargados();
-    return t.includes('CEDULA') && t.includes('PLANILLA_SERVICIO') && ['ROL_PAGOS', 'RUC_RISE', 'DECLARACION_SRI'].some((x) => t.includes(x));
+    return (
+      t.includes('CEDULA') &&
+      t.includes('PLANILLA_SERVICIO') &&
+      ['ROL_PAGOS', 'RUC_RISE', 'DECLARACION_SRI'].some((x) => t.includes(x))
+    );
   });
   protected readonly factores = computed(() => {
     const f: Exp[] = this.exp()?.['factores'] ?? [];
     const max = Math.max(...f.map((x) => Math.abs(x['aporte'])), 0.01);
     return f.map((x): Exp => ({ ...x, ancho: Math.round((Math.abs(x['aporte']) / max) * 100) }));
   });
-  protected readonly marcador = computed(() => Math.min(100, Math.max(0, (Number(this.exp()?.['score'] ?? 0) / 1000) * 100)));
+  protected readonly marcador = computed(() =>
+    Math.min(100, Math.max(0, (Number(this.exp()?.['score'] ?? 0) / 1000) * 100)),
+  );
   protected readonly lineaPorEtapa = computed(() => {
     const eventos: Exp[] = this.exp()?.['lineaTiempo'] ?? [];
-    return ETAPAS.map((e) => ({ ...e, eventos: eventos.filter((x) => x['idEtapa'] === e.id) })).filter((g) => g.eventos.length);
+    return ETAPAS.map((e) => ({
+      ...e,
+      eventos: eventos.filter((x) => x['idEtapa'] === e.id),
+    })).filter((g) => g.eventos.length);
   });
   protected readonly ultimaDecision = computed(() => {
     const d: Exp[] = this.exp()?.['decisiones'] ?? [];
@@ -102,7 +137,9 @@ export class Expediente {
   });
 
   constructor() {
-    effect(() => { this.cargar(this.id()); });
+    effect(() => {
+      this.cargar(this.id());
+    });
   }
 
   protected async cargar(id = this.id()): Promise<void> {
@@ -110,8 +147,17 @@ export class Expediente {
       const e = await this.api.get<Exp>(`/solicitudes/${id}`);
       this.exp.set(e);
       this.error.set(null);
-      this.formal = { contratoFirmado: !!e['contratoFirmado'], pagareFirmado: !!e['pagareFirmado'], garantiasConstituidas: !!e['garantiasConstituidas'] };
-      this.ajuste = { montoAprobado: e['montoAprobado'] ?? e['montoSolicitado'], plazoMeses: e['plazoAprobado'] ?? e['plazoMeses'], tipoGarantia: e['tipoGarantia'] ?? '', detalleGarantia: e['detalleGarantia'] ?? '' };
+      this.formal = {
+        contratoFirmado: !!e['contratoFirmado'],
+        pagareFirmado: !!e['pagareFirmado'],
+        garantiasConstituidas: !!e['garantiasConstituidas'],
+      };
+      this.ajuste = {
+        montoAprobado: e['montoAprobado'] ?? e['montoSolicitado'],
+        plazoMeses: e['plazoAprobado'] ?? e['plazoMeses'],
+        tipoGarantia: e['tipoGarantia'] ?? '',
+        detalleGarantia: e['detalleGarantia'] ?? '',
+      };
       if (!e['score'] && this.pestana() === 'evaluacion') this.pestana.set('solicitud');
     } catch (err) {
       this.error.set(mensajeError(err));
@@ -133,7 +179,11 @@ export class Expediente {
   }
 
   protected validarIdentidad() {
-    return this.accion('kyc', () => this.api.post(`/solicitudes/${this.id()}/identidad`), 'Identidad validada en Registro Civil, biometría y listas restrictivas.');
+    return this.accion(
+      'kyc',
+      () => this.api.post(`/solicitudes/${this.id()}/identidad`),
+      'Identidad validada en Registro Civil, biometría y listas restrictivas.',
+    );
   }
 
   protected async procesar() {
@@ -144,8 +194,14 @@ export class Expediente {
       await this.cargar();
       this.verVista('evaluacion');
       const d = r.resultado['dictamen'];
-      this.avisos.mostrar(d === 'APROBADO' ? `Aprobada automáticamente · score ${r.resultado['score']}` :
-        d === 'RECHAZADO' ? 'La matriz rechazó la solicitud. Revisa los factores.' : 'Derivada a comité por la matriz de decisión.', d === 'RECHAZADO' ? 'info' : 'ok');
+      this.avisos.mostrar(
+        d === 'APROBADO'
+          ? `Aprobada automáticamente · score ${r.resultado['score']}`
+          : d === 'RECHAZADO'
+            ? 'La matriz rechazó la solicitud. Revisa los factores.'
+            : 'Derivada a comité por la matriz de decisión.',
+        d === 'RECHAZADO' ? 'info' : 'ok',
+      );
     } catch (err) {
       this.errorAccion.set(mensajeError(err));
     } finally {
@@ -154,23 +210,49 @@ export class Expediente {
   }
 
   protected resolverComite() {
-    if (this.comite.motivo.trim().length < 10) { this.errorAccion.set('Escribe el motivo de la resolución (mínimo 10 caracteres).'); return; }
-    const c = { ...this.comite, montoAprobado: this.comite.montoAprobado || null, plazoMeses: this.comite.plazoMeses || null };
-    return this.accion('comite', () => this.api.post(`/solicitudes/${this.id()}/resolucion-comite`, c),
-      this.comite.dictamen === 'APROBADO' ? 'Resolución registrada: aprobado. La oferta se envió al socio.' : 'Resolución registrada: rechazado.');
+    if (this.comite.motivo.trim().length < 10) {
+      this.errorAccion.set('Escribe el motivo de la resolución (mínimo 10 caracteres).');
+      return;
+    }
+    const c = {
+      ...this.comite,
+      montoAprobado: this.comite.montoAprobado || null,
+      plazoMeses: this.comite.plazoMeses || null,
+    };
+    return this.accion(
+      'comite',
+      () => this.api.post(`/solicitudes/${this.id()}/resolucion-comite`, c),
+      this.comite.dictamen === 'APROBADO'
+        ? 'Resolución registrada: aprobado. La oferta se envió al socio.'
+        : 'Resolución registrada: rechazado.',
+    );
   }
 
   protected guardarAjuste() {
-    return this.accion('ajuste', async () => { await this.api.put(`/solicitudes/${this.id()}/condiciones`, this.ajuste); this.ajustando.set(false); },
-      'Condiciones actualizadas y enviadas al socio.');
+    return this.accion(
+      'ajuste',
+      async () => {
+        await this.api.put(`/solicitudes/${this.id()}/condiciones`, this.ajuste);
+        this.ajustando.set(false);
+      },
+      'Condiciones actualizadas y enviadas al socio.',
+    );
   }
 
   protected formalizar() {
-    return this.accion('formal', () => this.api.post(`/solicitudes/${this.id()}/formalizacion`, this.formal), 'Formalización guardada.');
+    return this.accion(
+      'formal',
+      () => this.api.post(`/solicitudes/${this.id()}/formalizacion`, this.formal),
+      'Formalización guardada.',
+    );
   }
 
   protected desembolsar() {
-    return this.accion('desembolso', () => this.api.post(`/solicitudes/${this.id()}/desembolso`), 'Desembolso acreditado en la cuenta del socio.');
+    return this.accion(
+      'desembolso',
+      () => this.api.post(`/solicitudes/${this.id()}/desembolso`),
+      'Desembolso acreditado en la cuenta del socio.',
+    );
   }
 
   protected elegirArchivo(ev: Event) {
@@ -178,23 +260,36 @@ export class Expediente {
   }
 
   protected subir(form: HTMLFormElement) {
-    if (!this.archivo) { this.errorAccion.set('Elige un archivo PDF o una imagen.'); return; }
+    if (!this.archivo) {
+      this.errorAccion.set('Elige un archivo PDF o una imagen.');
+      return;
+    }
     const datos = new FormData();
     datos.append('tipo', this.tipoDoc);
     datos.append('archivo', this.archivo);
-    return this.accion('subir', async () => {
-      await this.api.subir(`/solicitudes/${this.id()}/documentos`, datos);
-      this.archivo = null;
-      form.reset();
-    }, 'Documento guardado en el expediente digital.');
+    return this.accion(
+      'subir',
+      async () => {
+        await this.api.subir(`/solicitudes/${this.id()}/documentos`, datos);
+        this.archivo = null;
+        form.reset();
+      },
+      'Documento guardado en el expediente digital.',
+    );
   }
 
   protected async descargar(d: Exp): Promise<void> {
     this.descargando.set(d['idDocumento']);
     try {
-      await this.api.descargar(`/solicitudes/${this.id()}/documentos/${d['idDocumento']}/archivo`, d['nombreArchivo']);
+      await this.api.descargar(
+        `/solicitudes/${this.id()}/documentos/${d['idDocumento']}/archivo`,
+        d['nombreArchivo'],
+      );
     } catch (e) {
-      this.avisos.mostrar(`No se pudo descargar ${d['nombreArchivo']}: ${mensajeError(e)}`, 'error');
+      this.avisos.mostrar(
+        `No se pudo descargar ${d['nombreArchivo']}: ${mensajeError(e)}`,
+        'error',
+      );
     } finally {
       this.descargando.set(null);
     }
@@ -202,14 +297,25 @@ export class Expediente {
 
   /** Abre una pestaña (o «Siguiente paso»); en pantallas pequeñas también cambia la sección visible. */
   protected verVista(v: string): void {
-    if (v === 'paso') { this.enPaso.set(true); return; }
+    if (v === 'paso') {
+      this.enPaso.set(true);
+      return;
+    }
     this.pestana.set(v as Pestana);
     this.enPaso.set(false);
   }
 
-  protected tieneDoc(tipo: string) { return this.docsCargados().includes(tipo); }
-  protected nombreDoc(tipo: string) { return DOCS.find((d) => d.tipo === tipo)?.texto ?? tipo; }
-  protected kb(b: number) { return b > 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`; }
+  protected tieneDoc(tipo: string) {
+    return this.docsCargados().includes(tipo);
+  }
+  protected nombreDoc(tipo: string) {
+    return DOCS.find((d) => d.tipo === tipo)?.texto ?? tipo;
+  }
+  protected kb(b: number) {
+    return b > 1048576
+      ? `${(b / 1048576).toFixed(1)} MB`
+      : `${Math.max(1, Math.round(b / 1024))} KB`;
+  }
   protected marca(idEtapa: number): string {
     const e = this.exp();
     if (!e) return 'pendiente';
@@ -218,5 +324,7 @@ export class Expediente {
     if (idEtapa === e['idEtapa']) return e['estado'] === 'RECHAZADA' ? 'rechazada' : 'actual';
     return 'pendiente';
   }
-  protected suma(obj: Exp | null, claves: string[]): number { return claves.reduce((t, k) => t + Number(obj?.[k] ?? 0), 0); }
+  protected suma(obj: Exp | null, claves: string[]): number {
+    return claves.reduce((t, k) => t + Number(obj?.[k] ?? 0), 0);
+  }
 }
