@@ -1,0 +1,44 @@
+# core-api · endpoints de la Web Trx (personal). Solo lecturas: no cambia datos.
+# Entorno sugerido: core-api o web-nginx (ver .vscode/settings.json).
+
+@idSolicitud = 1
+@cedula = 1145525752
+
+### Ingreso (analista de crédito)
+# @name personal
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{"usuario": "pespinosa", "clave": "{{clave}}"}
+
+### Panel: KPI por etapa e indicadores (V_KPI_ETAPAS, V_INDICADORES)
+GET {{api}}/panel
+Authorization: Bearer {{personal.response.body.token}}
+
+### Catálogo de etapas del Value Stream
+GET {{api}}/catalogos/etapas
+Authorization: Bearer {{personal.response.body.token}}
+
+### Tarifario (V_TARIFARIO)
+GET {{api}}/catalogos/productos
+Authorization: Bearer {{personal.response.body.token}}
+
+### Bandeja de solicitudes activas (V_BANDEJA_SOLICITUDES)
+GET {{api}}/solicitudes?activas=true&limite=20
+Authorization: Bearer {{personal.response.body.token}}
+
+### Expediente de una solicitud (V_EXPEDIENTE_SOLICITUD)
+GET {{api}}/solicitudes/{{idSolicitud}}
+Authorization: Bearer {{personal.response.body.token}}
+
+### Cartera (V_CARTERA)
+GET {{api}}/cartera
+Authorization: Bearer {{personal.response.body.token}}
+
+### Alertas de cartera
+GET {{api}}/alertas
+Authorization: Bearer {{personal.response.body.token}}
+
+### Socio en el core bancario (simulador en desarrollo)
+GET {{api}}/core/socios/{{cedula}}
+Authorization: Bearer {{personal.response.body.token}}

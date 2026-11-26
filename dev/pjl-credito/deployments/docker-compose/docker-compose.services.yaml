@@ -1,0 +1,46 @@
+# PJL Crédito · servicios de la aplicación (se construyen desde src/)
+#   http://localhost:8081  Web Trx (Angular, personal)
+#   http://localhost:8082  App del socio (React PWA)
+#   http://localhost:8080  core-api (Groovy / Spring Boot)
+# Depende de docker-compose.infrastructure.yaml (oracle, correo): se levanta con docker-compose.yaml.
+# Las rutas son relativas a esta carpeta (deployments/docker-compose).
+name: pjl-credito
+
+services:
+  core-api:
+    build: ../../src/Services/core-api
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-simulador}
+      PJL_DB_URL: jdbc:oracle:thin:@//oracle:1521/FREEPDB1
+      PJL_DB_USER: PJL_CREDITO
+      PJL_DB_PASSWORD: ${PJL_DB_PASSWORD:-PjlCredito2026}
+      PJL_JWT_SECRET: ${PJL_JWT_SECRET:-desarrollo-pjl-credito-clave-jwt-hs256-solo-local-2026}
+      PJL_CORS: http://localhost:8081,http://localhost:8082
+      # Integraciones: en producción apuntan al core, buró y nube privada reales
+      PJL_CORE_URL: http://localhost:8080/sim/core
+      PJL_EXTERNOS_URL: http://localhost:8080/sim/externos
+      PJL_NUBE_URL: http://localhost:8080/sim/nube
+      # Correo saliente: en desarrollo, Mailpit; en producción, el SMTP de la cooperativa
+      PJL_SMTP_HOST: ${PJL_SMTP_HOST:-correo}
+      PJL_SMTP_PORT: ${PJL_SMTP_PORT:-1025}
+      PJL_WEB_URL: ${PJL_WEB_URL:-http://localhost:8081}
+    ports: ["8080:8080"]
+    volumes:
+      - expediente:/var/pjl/expediente
+    depends_on:
+      oracle: { condition: service_healthy }
+      correo: { condition: service_started }
+    restart: unless-stopped
+
+  web:
+    build: ../../src/UIs/web
+    ports: ["8081:80"]
+    depends_on: [core-api]
+
+  movil:
+    build: ../../src/UIs/movil
+    ports: ["8082:80"]
+    depends_on: [core-api]
+
+volumes:
+  expediente:

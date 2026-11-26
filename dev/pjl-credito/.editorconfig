@@ -1,0 +1,25 @@
+# PJL Crédito · estilo de edición para todo el monorepo (https://editorconfig.org)
+# src/UIs/web/.editorconfig conserva las reglas propias de Angular (comillas simples en .ts).
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# core-api (Groovy/Gradle) y el generador de datos (Python) usan 4 espacios
+[*.{groovy,gradle,py}]
+indent_size = 4
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+
+[*.{bat,cmd}]
+end_of_line = crlf

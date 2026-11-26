@@ -1,0 +1,37 @@
+# PJL Crédito · solo infraestructura (Oracle y buzón de correo de desarrollo)
+#   localhost:1521         Oracle Free (servicio FREEPDB1, esquema PJL_CREDITO)
+#   http://localhost:8025  Buzón de correo de desarrollo (Mailpit): recuperación de clave
+# Sola sirve para desarrollar sin Compose las apps y la API:
+#   docker compose -f deployments/docker-compose/docker-compose.infrastructure.yaml up -d
+# Las rutas son relativas a esta carpeta (deployments/docker-compose).
+name: pjl-credito
+
+services:
+  oracle:
+    image: gvenzl/oracle-free:23-slim-faststart
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD:-PjlSys2026}
+      APP_USER: PJL_CREDITO
+      APP_USER_PASSWORD: ${PJL_DB_PASSWORD:-PjlCredito2026}
+      NLS_LANG: AMERICAN_AMERICA.AL32UTF8
+      TZ: America/Guayaquil
+    ports: ["1521:1521"]
+    volumes:
+      - ../../src/Database/oracle:/opt/pjl/sql:ro,z
+      - ../configs/oracle:/container-entrypoint-initdb.d:ro,z
+      - oracle-datos:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 60
+      start_period: 30s
+
+  # Buzón de desarrollo: recibe todo el correo SMTP y lo muestra en http://localhost:8025
+  correo:
+    image: axllent/mailpit:v1.21
+    ports: ["8025:8025", "1025:1025"]
+    restart: unless-stopped
+
+volumes:
+  oracle-datos:

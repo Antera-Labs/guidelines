@@ -1,16 +1,16 @@
 ---
 version: 1
 slug: "apps-web"
-primary_target: "apps/web"
-related_targets: ["apps/movil"]
+primary_target: "src/UIs/web"
+related_targets: ["src/UIs/movil"]
 ---
 
 # Superficies: Web Trx (Angular, personal) y App del socio (React PWA)
 
 Modo: **Operate** (las dos). Responsivas: teléfono, tablet y PC.
 
-- **Web Trx (`apps/web`)**: asesores, analistas, riesgo, comité, operaciones, cartera y cobranza recorren el Value Stream de 6 etapas: bandeja, expediente, motor de evaluación, comité, formalización, desembolso, cartera, cobranza y provisiones.
-- **App del socio (`apps/movil`)**: el socio solicita, firma la autorización LOPDP, sigue su crédito por etapas, acepta la oferta, ve su tabla de amortización y paga sus cuotas.
+- **Web Trx (`src/UIs/web`)**: asesores, analistas, riesgo, comité, operaciones, cartera y cobranza recorren el Value Stream de 6 etapas: bandeja, expediente, motor de evaluación, comité, formalización, desembolso, cartera, cobranza y provisiones.
+- **App del socio (`src/UIs/movil`)**: el socio solicita, firma la autorización LOPDP, sigue su crédito por etapas, acepta la oferta, ve su tabla de amortización y paga sus cuotas.
 - Restricciones: la paleta del logo (#16588E, #F5B500, #0E3A60, #1A212D) y Manrope; información desde la nube privada y transacciones contra Oracle; WCAG 2.2 AA.
 - Momento memorable: el arco del escudo como medidor de progreso de cada crédito.
 

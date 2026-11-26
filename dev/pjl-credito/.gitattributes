@@ -19,5 +19,5 @@ gradlew        text eol=lf
 
 # Archivos generados: se pliegan en las revisiones de GitHub y no cuentan en las estadísticas de lenguaje.
 package-lock.json                    linguist-generated=true
-database/oracle/05_datos_prueba.sql  linguist-generated=true
-services/core-api/src/main/resources/simulador/*.json  linguist-generated=true
+src/Database/oracle/05_datos_prueba.sql  linguist-generated=true
+src/Services/core-api/src/main/resources/simulador/**/*.json  linguist-generated=true

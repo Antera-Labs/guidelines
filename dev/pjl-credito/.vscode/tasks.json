@@ -1,0 +1,26 @@
+{
+  // Tareas del monorepo (Terminal → Ejecutar tarea). Envuelven el Makefile de la raíz.
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "pjl: levantar todo (make up)", "type": "shell", "command": "make up", "problemMatcher": [] },
+    { "label": "pjl: solo infraestructura (make infra)", "type": "shell", "command": "make infra", "problemMatcher": [] },
+    { "label": "pjl: detener (make down)", "type": "shell", "command": "make down", "problemMatcher": [] },
+    {
+      "label": "pjl: pruebas (make test)",
+      "type": "shell",
+      "command": "make test",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    { "label": "pjl: pruebas de core-api (make test-api)", "type": "shell", "command": "make test-api", "group": "test", "problemMatcher": [] },
+    { "label": "pjl: regenerar datos de prueba (make datos)", "type": "shell", "command": "make datos", "problemMatcher": [] },
+    {
+      "label": "pjl: core-api bootRun",
+      "type": "shell",
+      "command": "./gradlew bootRun",
+      "options": { "cwd": "${workspaceFolder}/src/Services/core-api" },
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

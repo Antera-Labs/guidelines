@@ -1,0 +1,37 @@
+# PJL Crédito · integración continua
+# Instala los runtimes de mise.toml, corre las pruebas de core-api, compila las
+# dos apps y valida el Compose. GitHub solo lee .github/ en la raíz del repositorio:
+# este workflow corre tal cual cuando pjl-credito es la raíz de su propio repo.
+name: build-test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Runtimes de mise.toml (JDK 21, Node 22, Python 3)
+        uses: jdx/mise-action@v2
+
+      - name: Pruebas de core-api y compilación de web y móvil
+        run: ./scripts/run-tests.sh todo
+
+      - name: Compose válido
+        run: docker compose -f deployments/docker-compose/docker-compose.yaml config -q
+
+      - name: Resultados de pruebas de core-api
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-api-test-results
+          path: src/Services/core-api/build/test-results/test/
+          if-no-files-found: ignore

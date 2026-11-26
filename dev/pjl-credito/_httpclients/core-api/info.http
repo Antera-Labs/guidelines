@@ -1,0 +1,18 @@
+# core-api · información de la nube privada (/api/v1/info). Solo lecturas.
+
+@idProducto = 1
+
+### Productos publicados
+GET {{api}}/info/productos
+
+### Agencias
+GET {{api}}/info/agencias
+
+### Avisos
+GET {{api}}/info/avisos
+
+### Simulador de cuota
+POST {{api}}/info/simulacion
+Content-Type: application/json
+
+{"idProducto": {{idProducto}}, "monto": 5000, "plazoMeses": 24}

@@ -1,0 +1,56 @@
+plugins {
+    id 'groovy'
+    id 'org.springframework.boot' version '3.5.7'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'ec.coop.pjl'
+version = '1.0.0'
+description = 'Core API de crédito · COAC Padre Julián Lorente'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.apache.groovy:groovy'
+    implementation 'org.apache.groovy:groovy-json'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Las pruebas viven fuera del código de runtime, en tests/Services/core-api (estructura del monorepo).
+// Dentro de la imagen Docker esa carpeta no existe y Gradle simplemente no encuentra pruebas.
+sourceSets {
+    test {
+        groovy { srcDirs = [file('../../../tests/Services/core-api/UnitTests')] }
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+bootJar {
+    archiveFileName = 'core-api.jar'
+}
+
+// Spring 6+ resuelve @PathVariable/@RequestParam por nombre: requiere nombres de parámetros en el bytecode
+tasks.withType(GroovyCompile).configureEach {
+    groovyOptions.parameters = true
+}

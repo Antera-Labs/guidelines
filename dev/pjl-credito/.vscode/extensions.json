@@ -1,0 +1,13 @@
+{
+  // Extensiones recomendadas para el monorepo
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "angular.ng-template",
+    "vscjava.vscode-gradle",
+    "redhat.java",
+    "ms-python.python",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "humao.rest-client"
+  ]
+}

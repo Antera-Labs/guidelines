@@ -1,0 +1,53 @@
+# =====================================================================
+#  PJL Crédito · runtimes y tareas del monorepo (mise)
+#  Como el mise.toml del monorepo de referencia: fija los runtimes y
+#  expone las mismas tareas que el Makefile. El manifiesto de herramientas
+#  (imágenes, Gradle, npm, cachés) está en .config/herramientas.json.
+#
+#  Quién lo consume:
+#    mise install            instala JDK, Node y Python fijados   (make prepare)
+#    mise run <tarea>        mismas tareas que el Makefile
+#    scripts/run-tests.sh    lee [tools] para aceptar JDK/Node locales
+# =====================================================================
+
+[tools]
+java   = "temurin-21"   # = eclipse-temurin:21-jre y gradle:...-jdk21 de src/Services/core-api/Dockerfile
+node   = "22"           # = node:22-alpine de src/UIs/web y src/UIs/movil
+python = "3"            # scripts/generar_datos_prueba.py y el resumen de pruebas
+
+# ---------------------------------------------------------------------
+#  Tareas (mise run <tarea>). Se ejecutan desde la raíz del repo.
+# ---------------------------------------------------------------------
+[tasks.env]
+description = "Crea deployments/docker-compose/.env desde .env.example (si no existe)"
+run = "test -f deployments/docker-compose/.env || cp deployments/docker-compose/.env.example deployments/docker-compose/.env"
+
+[tasks.up]
+description = "Levanta todo (Oracle, correo, core-api, web y móvil)"
+depends = ["env"]
+run = "docker compose -f deployments/docker-compose/docker-compose.yaml up -d --build"
+
+[tasks.down]
+description = "Detiene todo (conserva los datos)"
+run = "docker compose -f deployments/docker-compose/docker-compose.yaml down"
+
+[tasks.infra]
+description = "Solo Oracle y el buzón de correo"
+depends = ["env"]
+run = "docker compose -f deployments/docker-compose/docker-compose.infrastructure.yaml up -d"
+
+[tasks.test]
+description = "Pruebas de core-api y compilación de las dos apps"
+run = "./scripts/run-tests.sh todo"
+
+[tasks."test:api"]
+description = "Solo las pruebas unitarias de core-api"
+run = "./scripts/run-tests.sh api"
+
+[tasks.datos]
+description = "Regenera los datos de prueba (Oracle 05 y simuladores)"
+run = "python3 -I scripts/generar_datos_prueba.py"
+
+[tasks.hooks]
+description = "Activa los hooks de Git de .husky/ (pre-commit y pre-push)"
+run = "./scripts/instalar-hooks.sh"

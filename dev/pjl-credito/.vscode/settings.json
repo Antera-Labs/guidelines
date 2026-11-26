@@ -1,0 +1,20 @@
+{
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.angular": true,
+    "**/.gradle": true,
+    "src/Database/oracle/05_datos_prueba.sql": true
+  },
+  // Entornos de REST Client para _httpclients/ (selector abajo a la derecha).
+  // $shared es el valor por defecto: core-api directo en :8080.
+  "rest-client.environmentVariables": {
+    "$shared": { "api": "http://localhost:8080/api/v1", "clave": "Pjl.2026" },
+    "core-api": { "api": "http://localhost:8080/api/v1" },
+    "web-nginx": { "api": "http://localhost:8081/api/v1" },
+    "movil-nginx": { "api": "http://localhost:8082/api/v1" }
+  }
+}

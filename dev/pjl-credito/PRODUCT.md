@@ -8,10 +8,10 @@ web
 
 ## Stack
 
-- **Socios (miembros):** React + Vite + TypeScript, PWA instalable, mobile-first y responsiva (teléfono, tablet, PC). Ruta: `apps/movil`.
-- **Personal de la cooperativa:** Angular, aplicación web transaccional ("Web Trx"), responsiva. Ruta: `apps/web`.
-- **Backend:** Groovy 4 + Spring Boot 3 + Gradle (`services/core-api`).
-- **Base de datos:** Oracle relacional (vistas `V_*` para lectura, paquete PL/SQL para transacciones). Ruta: `database/oracle`.
+- **Socios (miembros):** React + Vite + TypeScript, PWA instalable, mobile-first y responsiva (teléfono, tablet, PC). Ruta: `src/UIs/movil`.
+- **Personal de la cooperativa:** Angular, aplicación web transaccional ("Web Trx"), responsiva. Ruta: `src/UIs/web`.
+- **Backend:** Groovy 4 + Spring Boot 3 + Gradle (`src/Services/core-api`).
+- **Base de datos:** Oracle relacional (vistas `V_*` para lectura, paquete PL/SQL para transacciones). Ruta: `src/Database/oracle`.
 - **Integraciones:** Core bancario de la cooperativa vía API REST; nube privada de la cooperativa para información no transaccional.
 - Confirmado por el usuario (2026-11-15). Toda la UI en español de Ecuador.
 

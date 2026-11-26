@@ -1,0 +1,21 @@
+# core-api · endpoints de la App del socio. Solo lecturas: no cambia datos.
+# Entorno sugerido: core-api o movil-nginx (ver .vscode/settings.json).
+
+### Ingreso de la socia demo
+# @name socio
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{"usuario": "1145525752", "clave": "{{clave}}", "app": "movil"}
+
+### Inicio: socio, cuentas, solicitudes, créditos, avisos y consentimiento
+GET {{api}}/movil/inicio
+Authorization: Bearer {{socio.response.body.token}}
+
+### Mis solicitudes
+GET {{api}}/movil/solicitudes
+Authorization: Bearer {{socio.response.body.token}}
+
+### Mis autorizaciones LOPDP
+GET {{api}}/movil/consentimientos
+Authorization: Bearer {{socio.response.body.token}}

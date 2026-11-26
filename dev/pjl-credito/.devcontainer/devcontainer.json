@@ -1,0 +1,30 @@
+{
+  // PJL Crédito · Dev Container (VS Code "Reabrir en contenedor" o GitHub Codespaces).
+  // Levanta Oracle y Mailpit de deployments/docker-compose y un contenedor "dev"
+  // con JDK 21, Gradle 8.14.3, Node 22 y Python 3 (las versiones de mise.toml).
+  "name": "PJL Crédito",
+  "dockerComposeFile": [
+    "../deployments/docker-compose/docker-compose.infrastructure.yaml",
+    "docker-compose.yaml"
+  ],
+  "service": "dev",
+  "runServices": ["dev", "oracle", "correo"],
+  "workspaceFolder": "/workspaces/pjl-credito",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "gradle",
+  // 4200 Web Trx (ng serve) · 5173 App del socio (vite) · 8080 core-api · 8025 Mailpit · 1521 Oracle
+  "forwardPorts": [4200, 5173, 8080, 8025, 1521],
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "editorconfig.editorconfig",
+        "angular.ng-template",
+        "vscjava.vscode-gradle",
+        "redhat.java",
+        "ms-python.python",
+        "humao.rest-client"
+      ]
+    }
+  }
+}

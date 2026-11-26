@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# PJL Crédito · pre-commit. Hook de Git plano (sin Husky ni npm): se activa con `make hooks`.
+# Solo actúa si el commit toca archivos del proyecto (el repo Git puede contener otros proyectos).
+set -euo pipefail
+PROY="$(cd "$(dirname "$0")/.." && pwd)"
+TOP="$(git rev-parse --show-toplevel)"
+PRE="$(realpath --relative-to="$TOP" "$PROY")"
+[ "$PRE" = "." ] && PRE=""
+
+mapfile -t cambios < <(git -C "$TOP" diff --cached --name-only --diff-filter=ACMR -- "${PRE:-.}")
+[ "${#cambios[@]}" -eq 0 ] && exit 0
+echo "PJL Crédito · pre-commit (${#cambios[@]} archivos del proyecto)"
+fallo=0
+
+# 1. Solo se versiona .env.example; los .env reales nunca.
+for f in "${cambios[@]}"; do
+  case "$(basename "$f")" in
+    .env.example) ;;
+    .env|.env.*) echo "  ✗ No se versiona $f (solo .env.example)"; fallo=1 ;;
+  esac
+done
+
+# 2. assets/tokens.css es la fuente única: las copias de las apps deben ser idénticas.
+for copia in src/UIs/web/src/styles/tokens.css src/UIs/movil/src/estilos/tokens.css; do
+  if ! cmp -s "$PROY/assets/tokens.css" "$PROY/$copia"; then
+    echo "  ✗ $copia difiere de assets/tokens.css (cópialo desde la fuente)"; fallo=1
+  fi
+done
+
+# 3. Si cambió el despliegue, el Compose debe seguir siendo válido.
+if printf '%s\n' "${cambios[@]}" | grep -q "deployments/docker-compose/" && command -v docker >/dev/null 2>&1; then
+  docker compose -f "$PROY/deployments/docker-compose/docker-compose.yaml" config -q \
+    || { echo "  ✗ deployments/docker-compose no es válido"; fallo=1; }
+fi
+
+[ "$fallo" -eq 0 ] && echo "  ✓ listo"
+exit "$fallo"

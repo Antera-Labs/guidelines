@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "gradle": {
+      "version": "8.14.3",
+      "image": "gradle:8.14.3-jdk21",
+      "cache": "pjl-gradle-cache",
+      "commands": ["./gradlew"],
+      "fijadoEn": ["src/Services/core-api/gradle/wrapper/gradle-wrapper.properties", "src/Services/core-api/Dockerfile"]
+    },
+    "node": {
+      "version": "22",
+      "image": "node:22-alpine",
+      "cache": "pjl-npm-cache",
+      "commands": ["npm", "npx"],
+      "fijadoEn": ["src/UIs/web/Dockerfile", "src/UIs/movil/Dockerfile"]
+    },
+    "npm": {
+      "version": "10.9.9",
+      "commands": ["npm"],
+      "fijadoEn": ["src/UIs/web/package.json"]
+    }
+  }
+}

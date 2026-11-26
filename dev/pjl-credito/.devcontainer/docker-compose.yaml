@@ -1,0 +1,22 @@
+# PJL Crédito · servicio "dev" del Dev Container.
+# Se usa junto con deployments/docker-compose/docker-compose.infrastructure.yaml (Oracle y correo),
+# que va primero en devcontainer.json: por eso las rutas de aquí son relativas a
+# deployments/docker-compose (el directorio del primer archivo de Compose).
+services:
+  dev:
+    build:
+      context: ../../.devcontainer
+      dockerfile: Dockerfile
+    command: sleep infinity
+    volumes:
+      - ../..:/workspaces/pjl-credito:z
+    environment:
+      # core-api (./gradlew bootRun) dentro del contenedor habla con la infraestructura por nombre de servicio
+      PJL_DB_URL: jdbc:oracle:thin:@//oracle:1521/FREEPDB1
+      PJL_DB_USER: PJL_CREDITO
+      PJL_DB_PASSWORD: ${PJL_DB_PASSWORD:-PjlCredito2026}
+      PJL_SMTP_HOST: correo
+      PJL_SMTP_PORT: "1025"
+    depends_on:
+      oracle: { condition: service_healthy }
+      correo: { condition: service_started }

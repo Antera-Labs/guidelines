@@ -1,0 +1,15 @@
+# COAC Padre Julián Lorente · Sistema de crédito (entorno de desarrollo y demostración)
+#   http://localhost:8081  Web Trx (Angular, personal)
+#   http://localhost:8082  App del socio (React PWA)
+#   http://localhost:8080  core-api (Groovy / Spring Boot)
+#   localhost:1521         Oracle Free (servicio FREEPDB1, esquema PJL_CREDITO)
+#   http://localhost:8025  Buzón de correo de desarrollo (Mailpit): recuperación de clave
+#
+# Compose base: junta la infraestructura y los servicios. Desde la raíz del repo:
+#   docker compose -f deployments/docker-compose/docker-compose.yaml up -d --build   (o: make up)
+# Las variables se leen de deployments/docker-compose/.env (copia de .env.example).
+name: pjl-credito
+
+include:
+  - docker-compose.infrastructure.yaml
+  - docker-compose.services.yaml

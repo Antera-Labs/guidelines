@@ -1,0 +1,28 @@
+# core-api · autenticación
+# Abre con REST Client (VS Code). Elige el entorno abajo a la derecha:
+# core-api (:8080), web-nginx (:8081) o movil-nginx (:8082). Ver .vscode/settings.json.
+
+### Cuentas de demostración (solo con el perfil "simulador")
+GET {{api}}/auth/demo
+
+### Ingreso del personal (Web Trx)
+# @name personal
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{"usuario": "pespinosa", "clave": "{{clave}}"}
+
+### Quién soy (token del personal)
+GET {{api}}/auth/yo
+Authorization: Bearer {{personal.response.body.token}}
+
+### Ingreso de la socia demo (App del socio: "app" debe ser "movil")
+# @name socio
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{"usuario": "1145525752", "clave": "{{clave}}", "app": "movil"}
+
+### Quién soy (token del socio)
+GET {{api}}/auth/yo
+Authorization: Bearer {{socio.response.body.token}}

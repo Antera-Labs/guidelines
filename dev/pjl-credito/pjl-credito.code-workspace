@@ -1,0 +1,17 @@
+{
+  // Espacio de trabajo de VS Code del monorepo. Cada app se abre como carpeta propia
+  // para que VS Code use su .vscode/ (p. ej. "ng serve" de src/UIs/web). Rutas relativas: portable.
+  "folders": [
+    { "name": "pjl-credito", "path": "." },
+    { "name": "web · Angular (Web Trx)", "path": "src/UIs/web" },
+    { "name": "movil · React (App del socio)", "path": "src/UIs/movil" },
+    { "name": "core-api · Groovy", "path": "src/Services/core-api" }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.angular": true,
+      "**/.gradle": true
+    }
+  }
+}
