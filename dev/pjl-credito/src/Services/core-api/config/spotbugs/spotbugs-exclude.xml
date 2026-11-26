@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SpotBugs + FindSecBugs en core-api: solo hallazgos de seguridad. La calidad la
+  revisa CodeNarc. Por ahora solo reporta (ignoreFailures en build.gradle).
+
+  Se excluye la plomería que genera el compilador de Groovy en cada clase
+  (metaclase, call sites, despacho dinámico): no es código del equipo. Las
+  closures (Clase$_metodo_closureN) NO se excluyen: su doCall es código del
+  equipo y puede armar SQL.
+-->
+<FindBugsFilter
+    xmlns="https://github.com/spotbugs/filter/3.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+  <Match>
+    <Not>
+      <Bug category="SECURITY"/>
+    </Not>
+  </Match>
+  <!-- Inventario de endpoints de Spring (uno por cada @GetMapping…): informativo, no es una vulnerabilidad. -->
+  <Match>
+    <Bug pattern="SPRING_ENDPOINT"/>
+  </Match>
+  <Match>
+    <Method name="~(\$getStaticMetaClass|\$getCallSiteArray|\$createCallSiteArray|__\$swapInit|\$static_methodMissing|\$static_propertyMissing|getMetaClass|setMetaClass|invokeMethod|getProperty|setProperty)"/>
+  </Match>
+</FindBugsFilter>
