@@ -1,0 +1,324 @@
+name: Build del release
+
+# Único lugar donde se compila para producción: lo llaman release.yml (cada
+# versión nueva) y rollback.yml (si una versión anterior no tiene artefactos).
+# Construye todo el código del tag, no solo lo que cambió:
+#   apps       <producto>-<app>-vX.Y.Z.zip          bundle estático (nginx)
+#   servicios  <producto>-<svc>-vX.Y.Z.jar          jar ejecutable
+#   producto   <producto>-database-vX.Y.Z.zip       DDL y migraciones, sin datos de prueba
+#              <producto>-deployments-vX.Y.Z.zip    Compose del release + .env.example
+#   imágenes   ghcr.io/<owner>/<producto>-<proyecto>:vX.Y.Z y :<sha del commit>,
+#              escaneadas con Trivy ANTES de publicarse
+# y adjunta al Release los archivos, SHA256SUMS.txt e imagenes.txt, con firma
+# de procedencia (attestations) de cada archivo e imagen.
+#
+# Sin cachés: un job que publica no restaura nada que un PR haya podido escribir.
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: "Versión a construir, p. ej. v1.2.0"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  TAG: ${{ inputs.tag }}
+  MISE_TRUSTED_CONFIG_PATHS: ${{ github.workspace }}
+  NG_CLI_ANALYTICS: "false"
+
+jobs:
+  detect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      ui: ${{ steps.detect.outputs.ui }}
+      servicios: ${{ steps.detect.outputs.servicios }}
+      productos: ${{ steps.detect.outputs.productos }}
+      imagenes: ${{ steps.imagenes.outputs.lista }}
+      sha: ${{ steps.imagenes.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+
+      - name: Proyectos del tag
+        id: detect
+        env:
+          TODOS: "true"
+        run: bash devops/scripts/detect-projects.sh
+
+      # Imagen por cada app o servicio con Dockerfile.
+      - name: Imágenes
+        id: imagenes
+        env:
+          UI: ${{ steps.detect.outputs.ui }}
+          SERVICIOS: ${{ steps.detect.outputs.servicios }}
+        run: |
+          echo "lista=$(jq -cn --argjson a "$UI" --argjson b "$SERVICIOS" '[$a[], $b[] | select(.imagen) | {dir, nombre}]')" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  ui:
+    needs: detect
+    if: needs.detect.outputs.ui != '[]'
+    name: ui (${{ matrix.app.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        app: ${{ fromJSON(needs.detect.outputs.ui) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        if: matrix.app.mise
+        with:
+          working_directory: ${{ matrix.app.producto }}
+          install_args: node
+          cache: false
+      - uses: actions/setup-node@v7
+        if: ${{ !matrix.app.mise }}
+        with:
+          node-version: ${{ vars.NODE_VERSION || '22' }}
+      - name: Instalar dependencias
+        working-directory: ${{ matrix.app.dir }}
+        run: npm ci --no-audit --no-fund
+      - name: Empaquetar
+        env:
+          SALIDA: ${{ runner.temp }}/artefactos
+        run: bash devops/scripts/empaquetar.sh ui "${{ matrix.app.dir }}" "${{ matrix.app.nombre }}"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: artefacto-${{ matrix.app.nombre }}
+          path: ${{ runner.temp }}/artefactos/
+          if-no-files-found: error
+
+  servicio:
+    needs: detect
+    if: needs.detect.outputs.servicios != '[]'
+    name: servicio (${{ matrix.svc.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        svc: ${{ fromJSON(needs.detect.outputs.servicios) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        if: matrix.svc.mise
+        with:
+          working_directory: ${{ matrix.svc.producto }}
+          install_args: java
+          cache: false
+      - uses: actions/setup-java@v6
+        if: ${{ !matrix.svc.mise }}
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.svc.java }}
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+        with:
+          cache-disabled: true
+      - name: Empaquetar
+        env:
+          SALIDA: ${{ runner.temp }}/artefactos
+        run: bash devops/scripts/empaquetar.sh servicio "${{ matrix.svc.dir }}" "${{ matrix.svc.nombre }}"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: artefacto-${{ matrix.svc.nombre }}
+          path: ${{ runner.temp }}/artefactos/
+          if-no-files-found: error
+
+  producto:
+    needs: detect
+    if: needs.detect.outputs.productos != '[]'
+    name: producto (${{ matrix.prod.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        prod: ${{ fromJSON(needs.detect.outputs.productos) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+      - name: Empaquetar SQL y Compose del release
+        env:
+          SALIDA: ${{ runner.temp }}/artefactos
+          DIR: ${{ matrix.prod.dir }}
+          NOMBRE: ${{ matrix.prod.nombre }}
+          RELEASE: ${{ matrix.prod.release }}
+        run: |
+          if [[ -d "$DIR/src/Database" ]]; then
+            bash devops/scripts/empaquetar.sh database "$DIR" "$NOMBRE"
+          fi
+          if [[ -n "$RELEASE" ]]; then
+            bash devops/scripts/empaquetar.sh deployments "$DIR" "$NOMBRE"
+          fi
+          mkdir -p "$SALIDA"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: artefacto-${{ matrix.prod.nombre }}
+          path: ${{ runner.temp }}/artefactos/
+          if-no-files-found: ignore
+
+  imagen:
+    needs: detect
+    if: needs.detect.outputs.imagenes != '[]'
+    name: imagen (${{ matrix.img.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write # publicar en GHCR
+      id-token: write # firma de procedencia
+      attestations: write
+    strategy:
+      matrix:
+        img: ${{ fromJSON(needs.detect.outputs.imagenes) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+
+      # GHCR exige el nombre en minúsculas.
+      - name: Nombre de la imagen
+        id: nombre
+        run: echo "imagen=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/${{ matrix.img.nombre }}" >> "$GITHUB_OUTPUT"
+
+      # Una versión publicada es inmutable: si el tag ya existe en GHCR (p. ej.
+      # un rollback que reconstruye artefactos faltantes) se reutiliza su digest
+      # en vez de subir otra imagen con la misma etiqueta.
+      - name: ¿Ya está publicada?
+        id: existe
+        env:
+          IMAGEN: ${{ steps.nombre.outputs.imagen }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          if digest="$(docker buildx imagetools inspect "$IMAGEN:$TAG" --format '{{.Manifest.Digest}}' 2>/dev/null)"; then
+            echo "::notice::$IMAGEN:$TAG ya existe ($digest): se reutiliza."
+            echo "existe=true" >> "$GITHUB_OUTPUT"
+            echo "digest=$digest" >> "$GITHUB_OUTPUT"
+          else
+            echo "existe=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Construir
+        if: steps.existe.outputs.existe != 'true'
+        env:
+          IMAGEN: ${{ steps.nombre.outputs.imagen }}
+          SHA: ${{ needs.detect.outputs.sha }}
+        run: |
+          docker build --pull \
+            --label "org.opencontainers.image.source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
+            --label "org.opencontainers.image.version=$TAG" \
+            --label "org.opencontainers.image.revision=$SHA" \
+            -t "$IMAGEN:$TAG" -t "$IMAGEN:$SHA" "${{ matrix.img.dir }}"
+
+      # Antes de publicar: vulnerabilidades críticas o altas con corrección
+      # disponible detienen el release (la imagen no se sube).
+      - name: Escanear con Trivy
+        if: steps.existe.outputs.existe != 'true'
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: ${{ steps.nombre.outputs.imagen }}:${{ inputs.tag }}
+          severity: ${{ vars.TRIVY_SEVERIDAD || 'CRITICAL,HIGH' }}
+          ignore-unfixed: true
+          exit-code: "1"
+          format: table
+
+      - name: Publicar en GHCR
+        id: publicar
+        if: steps.existe.outputs.existe != 'true'
+        env:
+          IMAGEN: ${{ steps.nombre.outputs.imagen }}
+          SHA: ${{ needs.detect.outputs.sha }}
+        run: |
+          docker push "$IMAGEN:$TAG"
+          docker push "$IMAGEN:$SHA"
+          digest="$(docker inspect --format '{{index .RepoDigests 0}}' "$IMAGEN:$TAG")"
+          echo "digest=${digest#*@}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/attest-build-provenance@v4
+        if: steps.existe.outputs.existe != 'true'
+        with:
+          subject-name: ${{ steps.nombre.outputs.imagen }}
+          subject-digest: ${{ steps.publicar.outputs.digest }}
+          push-to-registry: true
+
+      # Referencia con digest para imagenes.txt del Release (lo que usará el deploy).
+      - name: Referencia de la imagen
+        env:
+          IMAGEN: ${{ steps.nombre.outputs.imagen }}
+          DIGEST: ${{ steps.publicar.outputs.digest || steps.existe.outputs.digest }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/imagen"
+          echo "$IMAGEN:$TAG@$DIGEST" > "$RUNNER_TEMP/imagen/${{ matrix.img.nombre }}.txt"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: imagen-${{ matrix.img.nombre }}
+          path: ${{ runner.temp }}/imagen/
+
+  publicar:
+    needs: [ui, servicio, producto, imagen]
+    # Solo si nada falló: un release con artefactos a medias es peor que sin
+    # artefactos (rollback.yml los reconstruye si faltan).
+    if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write # adjuntar al Release
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: artefacto-*
+          path: release
+          merge-multiple: true
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: imagen-*
+          path: imagenes
+          merge-multiple: true
+
+      - name: SHA256SUMS e imagenes.txt
+        run: |
+          if compgen -G "imagenes/*.txt" > /dev/null; then
+            sort imagenes/*.txt > release/imagenes.txt
+          fi
+          # Fuera de release/ y después se mueve: el glob no debe incluirse a sí mismo.
+          (cd release && sha256sum -- * | sort -k2) > SHA256SUMS.txt
+          mv SHA256SUMS.txt release/
+          {
+            echo "### Artefactos de $TAG"
+            echo
+            echo '```'
+            cat release/SHA256SUMS.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: release/*
+
+      - name: Adjuntar al Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" release/* --clobber --repo "$GITHUB_REPOSITORY"

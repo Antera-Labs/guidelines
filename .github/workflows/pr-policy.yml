@@ -1,0 +1,65 @@
+name: PR Policy
+
+# Valida cada PR hacia staging o main: nombre de rama, título Conventional
+# Commits, issue (opcional) y, en la promoción, la versión y las notas que se
+# publicarán. Reglas en devops/scripts/rules.js (documentadas en CONTRIBUTING.md).
+#
+# No comenta en el PR: el resultado queda en el check (anotaciones y resumen
+# del job). Sí completa lo que puede: título de promoción y sincronización,
+# referencia al issue y etiquetas.
+#
+# pull_request y NO pull_request_target: desde el 02/11/2026 GitHub bloquea
+# pull_request_target por defecto en repos públicos. Un check requerido se
+# satisface con cualquier job del mismo nombre, así que la defensa ante cambios
+# a esta política (que corre con la versión del PR) es la aprobación
+# obligatoria: los cambios en .github/ y devops/ llevan la etiqueta area:devsecops.
+
+on:
+  pull_request:
+    # labeled/unlabeled: poner o quitar `version:mayor` cambia la versión de
+    # la promoción. Las etiquetas que pone el bot no re-disparan (GITHUB_TOKEN).
+    types: [opened, edited, reopened, synchronize, ready_for_review, labeled, unlabeled]
+    branches: [staging, main]
+
+permissions: {}
+
+concurrency:
+  group: pr-policy-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # Check requerido por los rulesets de staging y main: no renombrar el job.
+  pr-policy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read # tags, ramas, comparaciones y scripts
+      issues: read # validar el issue de la rama (opcional)
+      pull-requests: write # título, cuerpo y etiqueta del PR (no comentarios)
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: devops/scripts
+          persist-credentials: false
+
+      - name: Validar PR
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { validarPR } = require('./devops/scripts/pr-policy.js');
+            await validarPR({ github, context, core });
+
+  # Etiquetas según las carpetas que toca el PR (.github/labeler.yml), entre
+  # ellas `docs` cuando cambian los documentos.
+  labels:
+    # Los PRs de Dependabot reciben un token de solo lectura: no se etiquetan.
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/labeler@v7
+        with:
+          sync-labels: true

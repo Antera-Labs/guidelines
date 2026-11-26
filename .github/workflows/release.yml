@@ -1,0 +1,98 @@
+name: Release
+
+# Publica la versión cuando se fusiona en main una promoción (staging → main:
+# sube minor) o un hotfix (sube patch): tag vX.Y.Z y GitHub Release con las
+# notas en estilo changelog, incluida la sección Documentación. Después
+# build.yml genera y adjunta los artefactos. En staging no crea tags: solo
+# resume lo acumulado y la versión que saldría. Lógica en devops/scripts/release.js.
+#
+# Lo llama ci-cd.yml con `uses:` (GITHUB_TOKEN no dispara otros workflows, así
+# que no puede colgarse de un evento push o release). Cuando exista el deploy
+# a la IaaS, irá como job después de `artefactos`, con sus salidas.
+
+on:
+  workflow_call:
+    outputs:
+      publicado:
+        description: "true si este run publicó una versión nueva"
+        value: ${{ jobs.publish.outputs.publicado }}
+      version:
+        description: "Versión publicada (o ya publicada en el commit), sin la v"
+        value: ${{ jobs.publish.outputs.version }}
+      tag:
+        description: "Tag de la versión, p. ej. v1.1.0"
+        value: ${{ jobs.publish.outputs.tag }}
+  # Reintento manual sobre main: publica si falta (idempotente, no duplica una
+  # versión del mismo commit) y vuelve a generar los artefactos.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write # crear el tag y el Release
+      pull-requests: read # PR fusionado y sus etiquetas
+    concurrency:
+      group: release-main
+      # Encolar, nunca cancelar: cortar un release a la mitad puede dejar un
+      # tag sin Release.
+      cancel-in-progress: false
+    outputs:
+      publicado: ${{ steps.release.outputs.publicado }}
+      version: ${{ steps.release.outputs.version }}
+      tag: ${{ steps.release.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: devops/scripts
+          persist-credentials: false
+
+      - name: Publicar versión
+        id: release
+        uses: actions/github-script@v9
+        env:
+          TZ_EQUIPO: ${{ vars.TZ_EQUIPO || 'America/Guayaquil' }}
+        with:
+          script: |
+            const { publicar } = require('./devops/scripts/release.js');
+            await publicar({ github, context, core });
+
+  artefactos:
+    needs: publish
+    # Versión nueva, o reintento manual de una ya publicada en este commit.
+    if: needs.publish.outputs.tag != '' && (needs.publish.outputs.publicado == 'true' || github.event_name == 'workflow_dispatch')
+    uses: ./.github/workflows/build.yml
+    with:
+      tag: ${{ needs.publish.outputs.tag }}
+    permissions:
+      contents: write # adjuntar al Release
+      packages: write # imágenes en GHCR
+      id-token: write # firma de procedencia
+      attestations: write
+
+  staging-summary:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: devops/scripts
+          persist-credentials: false
+
+      - name: Resumir lo acumulado
+        uses: actions/github-script@v9
+        env:
+          TZ_EQUIPO: ${{ vars.TZ_EQUIPO || 'America/Guayaquil' }}
+        with:
+          script: |
+            const { resumenStaging } = require('./devops/scripts/release.js');
+            await resumenStaging({ github, context, core });

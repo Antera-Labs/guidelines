@@ -1,0 +1,15 @@
+# Configuración de CodeQL (sast.yml). security-extended suma consultas de
+# seguridad de menor precisión a las predeterminadas; la calidad la revisan
+# SonarQube Cloud y CodeNarc.
+name: CodeQL · guidelines
+
+queries:
+  - uses: security-extended
+
+paths-ignore:
+  - docs
+  - "**/node_modules"
+  - "**/dist"
+  - "**/coverage"
+  - "**/build"
+  - "**/.angular"

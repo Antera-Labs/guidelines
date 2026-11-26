@@ -1,0 +1,154 @@
+name: SAST
+
+# Análisis estático de seguridad (SAST) con los resultados en la pestaña
+# Security de GitHub (gratis en repos públicos):
+#   codeql  JavaScript/TypeScript (Angular, React), Python y los workflows de
+#           Actions. Sin compilar (build-mode none).
+#   groovy  CodeQL no analiza Groovy: CodeNarc (calidad; la prioridad 1 llega
+#           como error y bloquea) y SpotBugs + FindSecBugs (seguridad sobre el
+#           bytecode; por ahora solo reporta).
+# Los rulesets bloquean el merge con alertas nuevas: CodeQL de severidad alta o
+# crítica, y errores de CodeNarc.
+#
+# Configuración avanzada: el «default setup» de CodeQL debe estar apagado
+# (devops/setup-repo.sh lo apaga); con él activo GitHub rechaza estos resultados.
+
+on:
+  pull_request:
+    branches: [staging, main]
+  push:
+    branches: [staging, main]
+  schedule:
+    # Lunes 06:30 UTC (01:30 en Ecuador): nuevas consultas sobre código que no cambió.
+    - cron: "30 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sast-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  MISE_TRUSTED_CONFIG_PATHS: ${{ github.workspace }}
+
+jobs:
+  detect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      lenguajes: ${{ steps.lenguajes.outputs.lista }}
+      servicios: ${{ steps.detect.outputs.servicios }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # Siempre se analiza todo: cada subida reemplaza los resultados de su
+      # categoría, y analizar solo lo afectado daría por resueltas las demás.
+      - name: Proyectos
+        id: detect
+        env:
+          TODOS: "true"
+        run: bash devops/scripts/detect-projects.sh
+
+      # Lenguajes de CodeQL presentes en el repo. Groovy no está en la lista
+      # de CodeQL: lo cubre el job groovy.
+      - name: Lenguajes de CodeQL
+        id: lenguajes
+        run: |
+          lenguajes=(actions)
+          git ls-files '*.ts' '*.tsx' '*.js' '*.jsx' '*.mjs' '*.cjs' | grep -q . && lenguajes+=(javascript-typescript)
+          git ls-files '*.py' | grep -q . && lenguajes+=(python)
+          git ls-files '*.java' | grep -q . && lenguajes+=(java-kotlin)
+          echo "lista=$(printf '%s\n' "${lenguajes[@]}" | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
+
+  codeql:
+    needs: detect
+    name: codeql (${{ matrix.lenguaje }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write # subir resultados a la pestaña Security
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        lenguaje: ${{ fromJSON(needs.detect.outputs.lenguajes) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@915412ff23e8b7659517e607487dbeae018f2934 # v4.39.5
+        with:
+          languages: ${{ matrix.lenguaje }}
+          build-mode: none
+          config-file: ./.github/codeql/codeql-config.yml
+      - uses: github/codeql-action/analyze@915412ff23e8b7659517e607487dbeae018f2934 # v4.39.5
+        with:
+          category: /language:${{ matrix.lenguaje }}
+
+  groovy:
+    needs: detect
+    if: needs.detect.outputs.servicios != '[]'
+    name: groovy (${{ matrix.svc.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        svc: ${{ fromJSON(needs.detect.outputs.servicios) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        if: matrix.svc.mise
+        with:
+          working_directory: ${{ matrix.svc.producto }}
+          install_args: java
+      - uses: actions/setup-java@v6
+        if: ${{ !matrix.svc.mise }}
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.svc.java }}
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+
+      # --continue y continue-on-error: aunque CodeNarc falle por prioridad 1,
+      # los reportes se suben para ver el detalle en la pestaña Security.
+      - name: CodeNarc y SpotBugs + FindSecBugs
+        id: gradle
+        continue-on-error: true
+        working-directory: ${{ matrix.svc.dir }}
+        run: ./gradlew codenarcMain codenarcTest spotbugsMain --continue --no-daemon --console=plain
+
+      - name: Reportes a SARIF
+        env:
+          REPORTES: ${{ matrix.svc.dir }}/build/reports
+        run: |
+          mkdir -p sarif/codenarc sarif/spotbugs
+          mapfile -t xml < <(find "$REPORTES/codenarc" -name '*.xml' 2>/dev/null)
+          [[ ${#xml[@]} -gt 0 ]] || { echo "::error::No se generó el reporte de CodeNarc (revisa el paso anterior)."; exit 1; }
+          node devops/scripts/sarif.js codenarc sarif/codenarc/codenarc.sarif "${xml[@]}"
+          [[ -f "$REPORTES/spotbugs/main.sarif" ]] || { echo "::error::No se generó el reporte de SpotBugs (revisa el paso anterior)."; exit 1; }
+          node devops/scripts/sarif.js spotbugs sarif/spotbugs/spotbugs.sarif "$REPORTES/spotbugs/main.sarif"
+
+      - uses: github/codeql-action/upload-sarif@915412ff23e8b7659517e607487dbeae018f2934 # v4.39.5
+        with:
+          sarif_file: sarif/codenarc/codenarc.sarif
+          category: codenarc/${{ matrix.svc.nombre }}
+      - uses: github/codeql-action/upload-sarif@915412ff23e8b7659517e607487dbeae018f2934 # v4.39.5
+        with:
+          sarif_file: sarif/spotbugs/spotbugs.sarif
+          category: spotbugs/${{ matrix.svc.nombre }}
+
+      - name: Resultado
+        if: steps.gradle.outcome == 'failure'
+        run: |
+          echo "::error::CodeNarc encontró violaciones de prioridad 1 (o Gradle falló). El detalle está en la pestaña Security y en el log de «CodeNarc y SpotBugs»."
+          exit 1

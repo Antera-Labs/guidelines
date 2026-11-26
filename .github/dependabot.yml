@@ -1,0 +1,22 @@
+# Mantiene al día las GitHub Actions. Las de terceros van fijadas por SHA en
+# los workflows: Dependabot actualiza el SHA y el comentario de versión.
+# Los PRs van a staging (target-branch: main es la rama por defecto, pero el
+# trabajo entra por staging) con título Conventional Commits (ci(deps): …) y
+# la política los acepta como «dependencias» (sin issue).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: staging
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    commit-message:
+      prefix: ci
+      include: scope
+    labels: [dependencias]
+    # Un solo PR semanal con todas las acciones.
+    groups:
+      acciones:
+        patterns: ["*"]

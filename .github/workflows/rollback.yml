@@ -1,0 +1,152 @@
+name: Rollback
+
+# Volver a una versión anterior (SAD § 8.2: «rollback automatizado»). Manual:
+# Actions → Rollback → Run workflow, desde main.
+#   1. validar      vX.Y.Z existe como release publicado (no borrador ni prerelease).
+#   2. reconstruir  si ese release no tiene artefactos, build.yml los genera
+#                   desde su tag (las imágenes ya publicadas se reutilizan).
+#   3. reactivar    lo marca como Latest (la versión vigente) y deja constancia
+#                   del motivo en sus notas. Sus salidas son las que usará el
+#                   deploy a la IaaS cuando exista (job `desplegar`, abajo).
+#   4. revertir     (opcional) rama hotfix/rollback-vX-Y-Z con el código de esa
+#                   versión. El PR lo abre una persona con el enlace del resumen:
+#                   un PR abierto con GITHUB_TOKEN no dispararía los checks.
+# Lógica en devops/scripts/rollback.js y rollback-codigo.sh.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Versión a la que volver (vX.Y.Z)"
+        required: true
+        type: string
+      motivo:
+        description: "Por qué se vuelve (queda en las notas del release)"
+        required: true
+        type: string
+      revertir_codigo:
+        description: "Además, crear la rama hotfix/rollback-… con el código de esa versión"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  # Un rollback a la vez y nunca cancelado a la mitad.
+  group: rollback
+  cancel-in-progress: false
+
+jobs:
+  validar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.validar.outputs.tag }}
+      artefactos: ${{ steps.validar.outputs.artefactos }}
+      vigente: ${{ steps.validar.outputs.vigente }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: devops/scripts
+          persist-credentials: false
+      - name: Validar la versión
+        id: validar
+        uses: actions/github-script@v9
+        env:
+          VERSION: ${{ inputs.version }}
+        with:
+          script: |
+            const { validar } = require('./devops/scripts/rollback.js');
+            await validar({ github, context, core, entrada: process.env.VERSION });
+
+  reconstruir:
+    needs: validar
+    if: needs.validar.outputs.artefactos == '0'
+    uses: ./.github/workflows/build.yml
+    with:
+      tag: ${{ needs.validar.outputs.tag }}
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+      attestations: write
+
+  reactivar:
+    needs: [validar, reconstruir]
+    # reconstruir se omite si ya había artefactos; solo se detiene si falló.
+    if: always() && needs.validar.result == 'success' && needs.reconstruir.result != 'failure' && needs.reconstruir.result != 'cancelled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write # marcar Latest y anotar el motivo
+    outputs:
+      tag: ${{ steps.reactivar.outputs.tag }}
+      version: ${{ steps.reactivar.outputs.version }}
+      sha: ${{ steps.reactivar.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: devops/scripts
+          persist-credentials: false
+      - name: Marcar como versión vigente
+        id: reactivar
+        uses: actions/github-script@v9
+        env:
+          TAG: ${{ needs.validar.outputs.tag }}
+          ANTERIOR: ${{ needs.validar.outputs.vigente }}
+          MOTIVO: ${{ inputs.motivo }}
+          TZ_EQUIPO: ${{ vars.TZ_EQUIPO || 'America/Guayaquil' }}
+        with:
+          script: |
+            const { reactivar } = require('./devops/scripts/rollback.js');
+            const { TAG, ANTERIOR, MOTIVO } = process.env;
+            await reactivar({ github, context, core, tag: TAG, anterior: ANTERIOR, motivo: MOTIVO });
+
+  # Cuando exista el deploy a la Nube Privada IaaS, va aquí: despliega los
+  # artefactos de needs.reactivar.outputs.tag (imagenes.txt del release trae
+  # las imágenes con su digest), con un environment `produccion` que pida
+  # aprobación.
+  #
+  # desplegar:
+  #   needs: reactivar
+  #   environment: produccion
+  #   ...
+
+  revertir:
+    needs: validar
+    if: inputs.revertir_codigo
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write # subir la rama hotfix/rollback-…
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          # Este job sube una rama: necesita las credenciales del checkout.
+          persist-credentials: true
+      - name: Rama con el código de la versión
+        id: revertir
+        env:
+          TAG: ${{ needs.validar.outputs.tag }}
+          MOTIVO: ${{ inputs.motivo }}
+        run: bash devops/scripts/rollback-codigo.sh
+      - name: Enlace para abrir el PR
+        if: steps.revertir.outputs.hay_cambios == 'true'
+        env:
+          RAMA: ${{ steps.revertir.outputs.rama }}
+          TITULO: ${{ steps.revertir.outputs.titulo }}
+          TAG: ${{ needs.validar.outputs.tag }}
+        run: |
+          titulo="$(node -p 'encodeURIComponent(process.argv[1])' "$TITULO")"
+          {
+            echo "## Revert del código a $TAG"
+            echo
+            echo "Rama \`$RAMA\` lista. [Abre el PR hacia main](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/compare/main...${RAMA}?expand=1&title=${titulo})"
+            echo "y fusiónalo con **Create a merge commit**: publica un patch con el código de $TAG."
+            echo
+            echo "Después, el PR de sincronización main → staging lleva el revert a staging: lo que se"
+            echo "revirtió vuelve a entrar con un revert del revert o con la corrección."
+          } >> "$GITHUB_STEP_SUMMARY"

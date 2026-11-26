@@ -1,0 +1,313 @@
+name: CI/CD
+
+# Pipeline del System-Monorepo (SAD § 8.2, capa 7 DevOps):
+#   PR y push   CI por proyecto afectado (devops/scripts/detect-projects.sh):
+#               apps (Prettier, typecheck, pruebas), servicios (pruebas y
+#               CodeNarc), contrato de herramientas, Compose y seguridad/LOPDP.
+#   push main   además, el release: tag vX.Y.Z, notas y artefactos (release.yml
+#               → build.yml). El build solo se genera ahí: no hay deploy.
+#
+# Check requerido: `ci-ok` (rulesets de staging y main). Resume a los demás
+# jobs: un proyecto sin cambios (job omitido) no bloquea. No renombrarlo.
+
+on:
+  pull_request:
+    branches: [staging, main]
+  push:
+    branches: [staging, main]
+  workflow_dispatch:
+    inputs:
+      todos:
+        description: "Verificar TODOS los proyectos (ignora el filtro de afectados)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  # En un PR, un push nuevo deja obsoleta la corrida anterior: se cancela.
+  # Cada push a staging o main lleva su propio grupo: nunca se cancela ni se
+  # reemplaza un run que puede terminar en release.
+  group: ci-cd-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  # Los runtimes salen del mise.toml de cada producto; se confía en el del
+  # checkout porque solo se usa para instalar JDK y Node.
+  MISE_TRUSTED_CONFIG_PATHS: ${{ github.workspace }}
+  NG_CLI_ANALYTICS: "false"
+
+jobs:
+  detect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      ui: ${{ steps.detect.outputs.ui }}
+      servicios: ${{ steps.detect.outputs.servicios }}
+      productos: ${{ steps.detect.outputs.productos }}
+      pipeline: ${{ steps.detect.outputs.pipeline }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Historia completa para el diff contra la base, sin bajar contenidos
+          # de archivos que no se usan (clon blobless).
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+
+      # En un PR, github.sha es el merge de prueba con la base: base.sha..sha es
+      # exactamente lo que aporta el PR. En push, before..sha. Sin base, todo.
+      - name: Detectar proyectos afectados
+        id: detect
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+          TODOS: ${{ inputs.todos || false }}
+        run: bash devops/scripts/detect-projects.sh
+
+  ui:
+    needs: detect
+    if: needs.detect.outputs.ui != '[]'
+    name: ui (${{ matrix.app.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ${{ fromJSON(needs.detect.outputs.ui) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.app.dir }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Verificar lockfile
+        if: matrix.app.lock == ''
+        run: |
+          echo "::error file=${{ matrix.app.dir }}/package.json::Falta package-lock.json. Sin él la instalación no es reproducible: commitéalo."
+          exit 1
+
+      # El Node de mise.toml: el mismo de `make prepare` y del Dev Container.
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        if: matrix.app.mise
+        with:
+          working_directory: ${{ matrix.app.producto }}
+          install_args: node
+      - uses: actions/setup-node@v7
+        if: ${{ !matrix.app.mise }}
+        with:
+          node-version: ${{ vars.NODE_VERSION || '22' }}
+
+      - uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles(matrix.app.lock) }}
+          restore-keys: npm-${{ runner.os }}-
+
+      - run: npm ci --no-audit --no-fund
+
+      # Se corren los scripts que existan, en este orden. Sin build: los
+      # artefactos solo se generan en el release (build.yml).
+      - name: format:check, lint, typecheck y test
+        run: |
+          for script in format:check lint typecheck test; do
+            if node -e "process.exit(require('./package.json').scripts?.['$script'] ? 0 : 1)"; then
+              echo "::group::npm run $script"
+              npm run "$script"
+              echo "::endgroup::"
+            else
+              echo "::notice::${{ matrix.app.dir }}: sin script \"$script\" en package.json (se omite)"
+            fi
+          done
+
+  servicio:
+    needs: detect
+    if: needs.detect.outputs.servicios != '[]'
+    name: servicio (${{ matrix.svc.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        svc: ${{ fromJSON(needs.detect.outputs.servicios) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.svc.dir }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        if: matrix.svc.mise
+        with:
+          working_directory: ${{ matrix.svc.producto }}
+          install_args: java
+      - uses: actions/setup-java@v6
+        if: ${{ !matrix.svc.mise }}
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.svc.java }}
+
+      # Caché de Gradle (dependencias y wrapper).
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+
+      # Pruebas y CodeNarc: la prioridad 1 de CodeNarc bloquea desde el inicio
+      # (maxPriority1Violations = 0 en build.gradle). El reporte completo y
+      # SpotBugs + FindSecBugs van a la pestaña Security desde sast.yml.
+      - name: Pruebas y CodeNarc
+        run: ./gradlew test codenarcMain codenarcTest --no-daemon --console=plain
+
+      - name: Reportes de pruebas y CodeNarc
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: reportes-${{ matrix.svc.nombre }}
+          path: |
+            ${{ matrix.svc.dir }}/build/reports/
+            ${{ matrix.svc.dir }}/build/test-results/
+          if-no-files-found: ignore
+
+  producto:
+    needs: detect
+    if: needs.detect.outputs.productos != '[]'
+    name: producto (${{ matrix.prod.nombre }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        prod: ${{ fromJSON(needs.detect.outputs.productos) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.prod.dir }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # mise.toml ↔ .config/herramientas.json ↔ Dockerfiles, wrapper y
+      # packageManager: el mismo chequeo con que arranca `make test`.
+      - name: Contrato de herramientas
+        if: matrix.prod.contrato
+        run: ./scripts/run-tests.sh contrato
+
+      # Los hooks son opcionales: el CI repite lo que revisa el pre-commit.
+      - name: Tokens idénticos a assets/tokens.css
+        if: matrix.prod.tokens
+        run: |
+          fallo=0
+          while IFS= read -r copia; do
+            if cmp -s assets/tokens.css "$copia"; then
+              echo "OK $copia"
+            else
+              echo "::error file=${{ matrix.prod.dir }}/$copia::Difiere de assets/tokens.css (fuente única): cópiala desde la fuente."
+              fallo=1
+            fi
+          done < <(find src/UIs -name tokens.css -not -path '*/node_modules/*')
+          exit "$fallo"
+
+      - name: Compose de desarrollo válido
+        if: matrix.prod.compose != ''
+        run: docker compose -f "${{ matrix.prod.compose }}" config -q
+
+      # El Compose del release no compila desde src/ ni trae secretos por
+      # defecto; con variables de prueba debe resolver sin errores.
+      - name: Compose del release válido
+        if: matrix.prod.release != ''
+        env:
+          COMPOSE: ${{ matrix.prod.release }}
+          PRODUCTO: ${{ matrix.prod.nombre }}
+        run: |
+          imagenes=()
+          for d in src/UIs/* src/Services/*; do
+            [[ -f "$d/Dockerfile" ]] && imagenes+=("$PRODUCTO-$(basename "$d")")
+          done
+          lista="$(IFS=,; echo "${imagenes[*]}")"
+          node "$GITHUB_WORKSPACE/devops/scripts/compose-release.js" validar "$COMPOSE" "ghcr.io/${GITHUB_REPOSITORY_OWNER,,}" "$lista"
+          ejemplo="$(dirname "$COMPOSE")/release.env.example"
+          grep -oE '^[A-Z0-9_]+=' "$ejemplo" | sed 's/=$/=ci/' > "$RUNNER_TEMP/release.env"
+          echo "PJL_VERSION=v0.0.0" >> "$RUNNER_TEMP/release.env"
+          docker compose --env-file "$RUNNER_TEMP/release.env" -f "$COMPOSE" config -q
+
+  pipeline:
+    needs: detect
+    if: needs.detect.outputs.pipeline == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ vars.NODE_VERSION || '22' }}
+
+      - name: Pruebas de los scripts del pipeline
+        run: node --test "devops/scripts/**/*.test.js"
+
+      # Imágenes fijadas por versión. actionlint incluye shellcheck para los
+      # bloques run: de los workflows; el segundo paso revisa los .sh sueltos.
+      - name: actionlint
+        run: docker run --rm -v "$PWD:/repo" --workdir /repo rhysd/actionlint:1.7.12 -color
+
+      - name: shellcheck
+        run: docker run --rm -v "$PWD:/mnt" --workdir /mnt koalaman/shellcheck:v0.11.0 devops/*.sh devops/scripts/*.sh
+
+  # Reglas de seguridad/LOPDP: corre siempre, no depende de qué cambió.
+  seguridad:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Archivos sensibles versionados
+        run: bash devops/scripts/archivos-sensibles.sh
+
+      # Dependencias nuevas con vulnerabilidades altas o críticas conocidas.
+      # Sin comentario en el PR: el resultado queda en el resumen del job.
+      - name: Revisión de dependencias
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@v5
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: never
+
+  # Check requerido: falla si algún job falló o se canceló. Los omitidos
+  # (proyecto sin cambios) cuentan como OK.
+  ci-ok:
+    if: always()
+    needs: [detect, ui, servicio, producto, pipeline, seguridad]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Resultado del CI
+        env:
+          RESULTADOS: ${{ toJSON(needs.*.result) }}
+          FALLO: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: |
+          echo "Resultados: $RESULTADOS"
+          if [ "$FALLO" = "true" ]; then
+            echo "::error::Algún job del CI falló o se canceló."
+            exit 1
+          fi
+
+  # Release encadenado con needs (GITHUB_TOKEN no dispara otros workflows):
+  # en main publica la versión y sus artefactos; en staging solo resume lo
+  # acumulado. Solo si el CI del mismo commit quedó en verde.
+  release:
+    needs: ci-ok
+    if: github.event_name == 'push' && needs.ci-ok.result == 'success'
+    uses: ./.github/workflows/release.yml
+    permissions:
+      contents: write # tag, Release y artefactos adjuntos
+      pull-requests: read # PR fusionado, sus etiquetas
+      packages: write # imágenes en GHCR
+      id-token: write # firma de procedencia (attestations)
+      attestations: write

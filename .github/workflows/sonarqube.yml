@@ -1,0 +1,124 @@
+name: SonarQube Cloud
+
+# Calidad y seguridad del System-Monorepo en SonarQube Cloud (edición gratuita),
+# con la cobertura de las pruebas de las apps (SAD § 12: escaneo estático
+# automatizado con SonarQube en GitHub Actions).
+#
+# El plan Free solo analiza la rama principal (main, la rama por defecto) y
+# los PRs que van hacia ella: la promoción y los hotfix, justo antes de cada
+# release. Los PRs hacia staging quedan cubiertos por sast.yml (CodeQL).
+#
+# Análisis desde el CI con el scanner de Sonar: en SonarQube Cloud hay que
+# APAGAR el «Automatic Analysis» del proyecto (no da cobertura y choca con
+# este). Sin el secreto SONAR_TOKEN el job se omite con un aviso.
+# Sonar no tiene analizador de Groovy: core-api lo cubren CodeNarc y SpotBugs.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonar-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  MISE_TRUSTED_CONFIG_PATHS: ${{ github.workspace }}
+  NG_CLI_ANALYTICS: "false"
+
+jobs:
+  analisis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+      - name: Sin SONAR_TOKEN
+        if: env.SONAR_TOKEN == ''
+        run: |
+          echo "::notice::Falta el secreto SONAR_TOKEN (o es un PR desde un fork): no se analiza. Ver devops/README.md § SonarQube Cloud."
+          echo "SonarQube Cloud omitido: falta el secreto \`SONAR_TOKEN\`." >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/checkout@v7
+        if: env.SONAR_TOKEN != ''
+        with:
+          # Historia completa: Sonar la usa para el «código nuevo» y el blame.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Proyectos
+        id: detect
+        if: env.SONAR_TOKEN != ''
+        env:
+          TODOS: "true"
+        run: bash devops/scripts/detect-projects.sh
+
+      # Solo el binario de mise: desde la carpeta de cada app, mise encuentra el
+      # mise.toml de su producto subiendo de carpeta e instala ese Node.
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        if: env.SONAR_TOKEN != ''
+        with:
+          install: false
+
+      # Cobertura de las apps que tengan el script test:coverage (lcov).
+      - name: Cobertura de las apps
+        id: cobertura
+        if: env.SONAR_TOKEN != ''
+        env:
+          UI: ${{ steps.detect.outputs.ui }}
+        run: |
+          rutas=()
+          while IFS= read -r app; do
+            dir="$(jq -r .dir <<<"$app")"
+            if ! jq -e '.scripts["test:coverage"]' "$dir/package.json" >/dev/null; then
+              echo "::notice::$dir sin script test:coverage: no aporta cobertura."
+              continue
+            fi
+            echo "::group::$dir"
+            (cd "$dir" && mise install node && mise exec -- npm ci --no-audit --no-fund && mise exec -- npm run test:coverage)
+            echo "::endgroup::"
+            while IFS= read -r lcov; do rutas+=("$lcov"); done < <(find "$dir/coverage" -name lcov.info 2>/dev/null)
+          done < <(jq -c '.[]' <<<"$UI")
+          echo "lcov=$(IFS=,; echo "${rutas[*]}")" >> "$GITHUB_OUTPUT"
+
+      - name: Proyecto en SonarQube Cloud
+        id: sonar
+        if: env.SONAR_TOKEN != ''
+        env:
+          ORGANIZACION: ${{ vars.SONAR_ORGANIZATION }}
+          CLAVE: ${{ vars.SONAR_PROJECT_KEY }}
+        run: |
+          # Por defecto, lo que crea SonarQube Cloud al importar el repo: la
+          # organización en minúsculas y la clave <owner>_<repo>.
+          echo "organizacion=${ORGANIZACION:-${GITHUB_REPOSITORY_OWNER,,}}" >> "$GITHUB_OUTPUT"
+          echo "clave=${CLAVE:-${GITHUB_REPOSITORY_OWNER}_${GITHUB_REPOSITORY#*/}}" >> "$GITHUB_OUTPUT"
+
+      - uses: SonarSource/sonarqube-scan-action@70bad232163b09d998ea0707ee80c0ec80798c16 # v8.5.1
+        if: env.SONAR_TOKEN != ''
+        env:
+          SONAR_HOST_URL: https://sonarcloud.io
+        with:
+          # qualitygate.wait: el job falla si el Quality Gate no pasa.
+          args: >
+            -Dsonar.organization=${{ steps.sonar.outputs.organizacion }}
+            -Dsonar.projectKey=${{ steps.sonar.outputs.clave }}
+            -Dsonar.sources=.
+            -Dsonar.tests=.
+            -Dsonar.test.inclusions=**/*.spec.ts,**/tests/**
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/coverage/**,**/build/**,**/.angular/**,docs/**,**/*.spec.ts,**/tests/**,**/src/Database/oracle/05_datos_prueba.sql,**/simulador/**/*.json
+            -Dsonar.javascript.lcov.reportPaths=${{ steps.cobertura.outputs.lcov }}
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.qualitygate.timeout=300
+
+      - name: Reporte de cobertura
+        if: env.SONAR_TOKEN != '' && steps.cobertura.outputs.lcov != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: cobertura
+          path: "**/coverage/**/lcov.info"
+          if-no-files-found: ignore
