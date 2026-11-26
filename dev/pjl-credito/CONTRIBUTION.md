@@ -4,7 +4,7 @@
 
 1. Herramientas: JDK 21, Node 22 y Python 3 (fijados en `mise.toml`). Con mise: `make prepare`. Sin nada instalado, Docker basta: `make test` y `make up` usan las imágenes de `.config/herramientas.json`.
 2. Otra opción es abrir el proyecto en el Dev Container (`.devcontainer/`): trae las herramientas, Oracle y el buzón de correo.
-3. Opcional: `make hooks` activa los hooks de `.husky/` (revisiones en cada commit y pruebas antes de cada push).
+3. Opcional: `make hooks` activa los hooks de `.husky/` (revisiones en cada commit, incluido el formato de las apps, y pruebas antes de cada push).
 
 ## Dónde va cada cosa
 
@@ -23,6 +23,7 @@
 - **No editar `05_datos_prueba.sql` ni los JSON del simulador a mano**: se regeneran con `make datos` desde una sola semilla.
 - **Solo se versiona `.env.example`**. Los secretos van en `deployments/docker-compose/.env`, que Git ignora.
 - **Los tokens se cambian en `assets/tokens.css`** y se copian a `src/UIs/web/src/styles/` y `src/UIs/movil/src/estilos/`. El hook `pre-commit` avisa si no coinciden.
+- **Formato de las apps con Prettier**: `npm run format` dentro de `src/UIs/web` o `src/UIs/movil`. El CI corre `npm run format:check` y el hook `pre-commit` revisa los archivos que commiteas (solo avisa, no los reescribe). En las plantillas embebidas de Angular, si `format:check` sigue marcando archivos, corre `format` una vez más.
 - **Versiones de herramientas**: si cambias una (Dockerfile, wrapper de Gradle, `packageManager`), actualiza también `mise.toml` y `.config/herramientas.json`. `scripts/run-tests.sh` se detiene si hay desfase.
 - **Las lecturas salen de vistas `V_*` y el dinero pasa por `PKG_CREDITO`** (ver `docs/ARQUITECTURA.md`).
 

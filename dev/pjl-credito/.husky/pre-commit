@@ -33,5 +33,29 @@ if printf '%s\n' "${cambios[@]}" | grep -q "deployments/docker-compose/" && comm
     || { echo "  ✗ deployments/docker-compose no es válido"; fallo=1; }
 fi
 
+# 4. Formato de las apps: solo revisa, no reescribe lo que vas a commitear.
+#    Usa el Prettier instalado en cada app (npm ci); si no está, avisa y sigue,
+#    porque el CI (format:check) lo revisa igual.
+#    El prefijo sale de git (--show-prefix) y no de $PRE: en Git Bash de Windows
+#    show-toplevel da C:/… y pwd /c/…, y realpath devuelve una ruta absoluta.
+prefijo="$(git -C "$PROY" rev-parse --show-prefix)"
+for app in web movil; do
+  base="${prefijo}src/UIs/$app/"
+  archivos=()
+  for f in "${cambios[@]}"; do
+    [[ "$f" == "$base"* ]] && archivos+=("${f#"$base"}")
+  done
+  [ "${#archivos[@]}" -eq 0 ] && continue
+  prettier="$PROY/src/UIs/$app/node_modules/.bin/prettier"
+  if [ ! -x "$prettier" ]; then
+    echo "  ! src/UIs/$app: sin node_modules, no se revisa el formato (corre npm ci en la app)"
+    continue
+  fi
+  # --ignore-unknown: binarios y archivos sin parser de Prettier no cuentan como error.
+  if ! (cd "$PROY/src/UIs/$app" && "$prettier" --check --ignore-unknown --log-level=warn "${archivos[@]}"); then
+    echo "  ✗ src/UIs/$app tiene archivos sin formato: cd src/UIs/$app && npm run format"; fallo=1
+  fi
+done
+
 [ "$fallo" -eq 0 ] && echo "  ✓ listo"
 exit "$fallo"
