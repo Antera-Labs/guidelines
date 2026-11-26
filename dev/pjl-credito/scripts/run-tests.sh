@@ -5,6 +5,7 @@
 #    web    → compilación de producción de la Web Trx (src/UIs/web)
 #    movil  → tsc + vite build de la App del socio (src/UIs/movil)
 #    todo   → las tres (por defecto)
+#    contrato → solo verifica el contrato de herramientas (lo usa el CI)
 #  Contrato de herramientas, como en el monorepo de referencia:
 #    mise.toml                 [tools] → versión mayor de JDK y Node aceptada
 #    .config/herramientas.json → imágenes Docker de respaldo, cachés y
@@ -12,7 +13,7 @@
 #  Antes de probar verifica que el manifiesto coincide con donde cada
 #  versión está fijada (Dockerfile, wrapper de Gradle, package.json).
 #  Usa JDK / Node locales solo si su versión mayor coincide; si no, Docker.
-#  Uso: ./scripts/run-tests.sh [api|web|movil|todo]
+#  Uso: ./scripts/run-tests.sh [api|web|movil|todo|contrato]
 # =====================================================================
 set -euo pipefail
 
@@ -122,6 +123,9 @@ compilar_ui() {
 }
 
 case "$QUE" in
+  # Solo el contrato de herramientas (ya verificado arriba): lo usa el CI cuando
+  # cambia una app o un Dockerfile sin tocar core-api.
+  contrato) ;;
   api)   pruebas_api ;;
   web)   compilar_ui web "npx ng build --configuration production" ;;
   movil) compilar_ui movil "npm run build" ;;
@@ -130,7 +134,7 @@ case "$QUE" in
     compilar_ui web "npx ng build --configuration production"
     compilar_ui movil "npm run build"
     ;;
-  *) echo "Uso: $0 [api|web|movil|todo]" >&2; exit 2 ;;
+  *) echo "Uso: $0 [api|web|movil|todo|contrato]" >&2; exit 2 ;;
 esac
 
 titulo "OK ($QUE)"

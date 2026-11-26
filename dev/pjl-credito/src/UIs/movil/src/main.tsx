@@ -13,10 +13,17 @@ import { Solicitud } from './paginas/Solicitud';
 import { Credito } from './paginas/Credito';
 import { Perfil, Simulador } from './paginas/Otras';
 
-const consultas = new QueryClient({ defaultOptions: { queries: { staleTime: 20_000, retry: 1, refetchOnWindowFocus: true } } });
+const consultas = new QueryClient({
+  defaultOptions: { queries: { staleTime: 20_000, retry: 1, refetchOnWindowFocus: true } },
+});
 
 function Raiz() {
-  return (<><ScrollRestoration /><Outlet /></>);
+  return (
+    <>
+      <ScrollRestoration />
+      <Outlet />
+    </>
+  );
 }
 
 const rutas = createBrowserRouter([
@@ -27,12 +34,47 @@ const rutas = createBrowserRouter([
       {
         element: <Marco />,
         children: [
-          { path: '/', element: <RequiereSesion><Inicio /></RequiereSesion> },
+          {
+            path: '/',
+            element: (
+              <RequiereSesion>
+                <Inicio />
+              </RequiereSesion>
+            ),
+          },
           { path: '/simulador', element: <Simulador /> },
-          { path: '/solicitar', element: <RequiereSesion><Solicitar /></RequiereSesion> },
-          { path: '/solicitudes/:id', element: <RequiereSesion><Solicitud /></RequiereSesion> },
-          { path: '/creditos/:id', element: <RequiereSesion><Credito /></RequiereSesion> },
-          { path: '/perfil', element: <RequiereSesion><Perfil /></RequiereSesion> },
+          {
+            path: '/solicitar',
+            element: (
+              <RequiereSesion>
+                <Solicitar />
+              </RequiereSesion>
+            ),
+          },
+          {
+            path: '/solicitudes/:id',
+            element: (
+              <RequiereSesion>
+                <Solicitud />
+              </RequiereSesion>
+            ),
+          },
+          {
+            path: '/creditos/:id',
+            element: (
+              <RequiereSesion>
+                <Credito />
+              </RequiereSesion>
+            ),
+          },
+          {
+            path: '/perfil',
+            element: (
+              <RequiereSesion>
+                <Perfil />
+              </RequiereSesion>
+            ),
+          },
         ],
       },
     ],

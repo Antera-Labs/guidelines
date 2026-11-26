@@ -1,0 +1,51 @@
+# PJL Crédito · Compose de un release (no es para desarrollo: para eso, docker-compose.yaml).
+# build.yml lo empaqueta en pjl-credito-deployments-vX.Y.Z.zip con la versión ya fijada.
+#
+# - Usa las imágenes publicadas en GHCR (etiqueta = versión del release); no compila desde src/.
+# - Sin Oracle ni Mailpit: la base de datos y el SMTP son los de la cooperativa (Nube Privada IaaS).
+# - Sin valores por defecto para secretos ni direcciones: si falta una variable obligatoria
+#   (${VAR:?…}), docker compose se detiene en vez de arrancar con credenciales de desarrollo.
+#
+# Uso: cp .env.example .env, completar .env y luego:  docker compose up -d
+name: pjl-credito
+
+services:
+  core-api:
+    image: ${PJL_REGISTRO:-ghcr.io/antera-labs}/pjl-credito-core-api:${PJL_VERSION:?Falta PJL_VERSION (la fija el release)}
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:?Falta SPRING_PROFILES_ACTIVE}
+      PJL_DB_URL: ${PJL_DB_URL:?Falta PJL_DB_URL (Oracle de la cooperativa)}
+      PJL_DB_USER: ${PJL_DB_USER:?Falta PJL_DB_USER}
+      PJL_DB_PASSWORD: ${PJL_DB_PASSWORD:?Falta PJL_DB_PASSWORD}
+      PJL_JWT_SECRET: ${PJL_JWT_SECRET:?Falta PJL_JWT_SECRET (32 bytes o más)}
+      PJL_CORS: ${PJL_CORS:?Falta PJL_CORS (orígenes de la web y la app)}
+      PJL_CORE_URL: ${PJL_CORE_URL:?Falta PJL_CORE_URL (core bancario)}
+      PJL_EXTERNOS_URL: ${PJL_EXTERNOS_URL:?Falta PJL_EXTERNOS_URL (buró, SB/SEPS, Registro Civil)}
+      PJL_NUBE_URL: ${PJL_NUBE_URL:?Falta PJL_NUBE_URL (nube privada)}
+      PJL_SMTP_HOST: ${PJL_SMTP_HOST:?Falta PJL_SMTP_HOST}
+      PJL_SMTP_PORT: ${PJL_SMTP_PORT:?Falta PJL_SMTP_PORT}
+      PJL_SMTP_USUARIO: ${PJL_SMTP_USUARIO:-}
+      PJL_SMTP_CLAVE: ${PJL_SMTP_CLAVE:-}
+      PJL_SMTP_AUTH: ${PJL_SMTP_AUTH:-true}
+      PJL_SMTP_TLS: ${PJL_SMTP_TLS:-true}
+      PJL_WEB_URL: ${PJL_WEB_URL:?Falta PJL_WEB_URL (dirección pública de la web)}
+      PJL_CORREO_REMITENTE: ${PJL_CORREO_REMITENTE:?Falta PJL_CORREO_REMITENTE}
+    ports: ["8080:8080"]
+    volumes:
+      - expediente:/var/pjl/expediente
+    restart: unless-stopped
+
+  web:
+    image: ${PJL_REGISTRO:-ghcr.io/antera-labs}/pjl-credito-web:${PJL_VERSION:?Falta PJL_VERSION (la fija el release)}
+    ports: ["8081:80"]
+    depends_on: [core-api]
+    restart: unless-stopped
+
+  movil:
+    image: ${PJL_REGISTRO:-ghcr.io/antera-labs}/pjl-credito-movil:${PJL_VERSION:?Falta PJL_VERSION (la fija el release)}
+    ports: ["8082:80"]
+    depends_on: [core-api]
+    restart: unless-stopped
+
+volumes:
+  expediente:

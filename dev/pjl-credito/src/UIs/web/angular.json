@@ -49,10 +49,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "node_modules/@fontsource-variable/manrope/index.css",
-              "src/styles.css"
-            ]
+            "styles": ["node_modules/@fontsource-variable/manrope/index.css", "src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -100,6 +97,9 @@
           "options": {
             "proxyConfig": "proxy.conf.json"
           }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
         }
       }
     }

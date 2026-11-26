@@ -29,7 +29,11 @@ export class Borradores {
 
   cargar(): Borrador[] {
     let l: Borrador[] = [];
-    try { l = JSON.parse(sessionStorage.getItem(this.clave()) ?? '[]'); } catch { l = []; }
+    try {
+      l = JSON.parse(sessionStorage.getItem(this.clave()) ?? '[]');
+    } catch {
+      l = [];
+    }
     if (!Array.isArray(l)) l = [];
     this.lista.set(l);
     return l;
@@ -40,7 +44,9 @@ export class Borradores {
   }
 
   guardar(b: Borrador): void {
-    const l = [b, ...this.cargar().filter((x) => x.id !== b.id)].sort((a, c) => c.actualizado - a.actualizado).slice(0, MAXIMO);
+    const l = [b, ...this.cargar().filter((x) => x.id !== b.id)]
+      .sort((a, c) => c.actualizado - a.actualizado)
+      .slice(0, MAXIMO);
     this.escribir(l);
   }
 
@@ -50,13 +56,21 @@ export class Borradores {
 
   /** Al cerrar sesión: no dejar datos de socios en el navegador. */
   limpiar(): void {
-    try { sessionStorage.removeItem(this.clave()); } catch { /* sin almacenamiento */ }
+    try {
+      sessionStorage.removeItem(this.clave());
+    } catch {
+      /* sin almacenamiento */
+    }
     this.lista.set([]);
   }
 
   private escribir(l: Borrador[]): void {
     this.lista.set(l);
-    try { sessionStorage.setItem(this.clave(), JSON.stringify(l)); } catch { /* sin almacenamiento: quedan solo en memoria */ }
+    try {
+      sessionStorage.setItem(this.clave(), JSON.stringify(l));
+    } catch {
+      /* sin almacenamiento: quedan solo en memoria */
+    }
   }
 }
 

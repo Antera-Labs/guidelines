@@ -1,0 +1,12 @@
+# Generados, dependencias y binarios.
+dist/
+dev-dist/
+coverage/
+.angular/
+node_modules/
+public/
+package-lock.json
+
+# Copia idéntica de assets/tokens.css (fuente única): se edita allí y se copia.
+# Si Prettier la reformateara, el pre-commit la vería distinta de la fuente.
+src/styles/tokens.css

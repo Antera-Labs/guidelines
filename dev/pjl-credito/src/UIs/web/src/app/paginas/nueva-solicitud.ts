@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, input, signal, untracked } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  untracked,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Api, mensajeError } from '../nucleo/api';
@@ -21,10 +31,62 @@ const PASOS = [
 ];
 
 export const GRUPOS_SITUACION = [
-  { titulo: 'Activos', total: 'Total activos', campos: [['efectivo', 'Efectivo'], ['bancos', 'Bancos'], ['mobiliario', 'Mobiliario'], ['vehiculos', 'Vehículos'], ['bienesInmuebles', 'Bienes inmuebles'], ['cuentasPorCobrar', 'Cuentas por cobrar'], ['otrosActivos', 'Otros activos']] },
-  { titulo: 'Pasivos', total: 'Total pasivos', campos: [['cuentasPorPagar', 'Cuentas por pagar'], ['deudasSfnMicrocredito', 'Deudas SFN microcrédito'], ['deudasSfnConsumo', 'Deudas SFN consumo'], ['deudasSfnComercial', 'Deudas SFN comercial'], ['deudasSfnVivienda', 'Deudas SFN vivienda'], ['deudasSectorComercial', 'Deudas sector comercial'], ['otrosPasivos', 'Otros pasivos']] },
-  { titulo: 'Ingresos mensuales', total: 'Total ingresos', campos: [['sueldo', 'Sueldos'], ['sueldoConyuge', 'Sueldo cónyuge'], ['arriendos', 'Arriendos'], ['pensionJubilacion', 'Pensión jubilación'], ['comisiones', 'Comisiones'], ['remesasIntereses', 'Remesas e intereses'], ['ingresoVentas', 'Ingreso por ventas'], ['ingresoVentasConyuge', 'Ventas cónyuge'], ['otrosIngresos', 'Otros ingresos']] },
-  { titulo: 'Egresos mensuales', total: 'Total egresos', campos: [['alimentacion', 'Alimentación'], ['arriendo', 'Arriendo o alquiler'], ['serviciosBasicos', 'Servicios básicos'], ['gastosFinancieros', 'Gastos financieros'], ['transporte', 'Transporte'], ['educacion', 'Educación'], ['salud', 'Salud'], ['vestimenta', 'Vestimenta'], ['otrosEgresos', 'Otros egresos']] },
+  {
+    titulo: 'Activos',
+    total: 'Total activos',
+    campos: [
+      ['efectivo', 'Efectivo'],
+      ['bancos', 'Bancos'],
+      ['mobiliario', 'Mobiliario'],
+      ['vehiculos', 'Vehículos'],
+      ['bienesInmuebles', 'Bienes inmuebles'],
+      ['cuentasPorCobrar', 'Cuentas por cobrar'],
+      ['otrosActivos', 'Otros activos'],
+    ],
+  },
+  {
+    titulo: 'Pasivos',
+    total: 'Total pasivos',
+    campos: [
+      ['cuentasPorPagar', 'Cuentas por pagar'],
+      ['deudasSfnMicrocredito', 'Deudas SFN microcrédito'],
+      ['deudasSfnConsumo', 'Deudas SFN consumo'],
+      ['deudasSfnComercial', 'Deudas SFN comercial'],
+      ['deudasSfnVivienda', 'Deudas SFN vivienda'],
+      ['deudasSectorComercial', 'Deudas sector comercial'],
+      ['otrosPasivos', 'Otros pasivos'],
+    ],
+  },
+  {
+    titulo: 'Ingresos mensuales',
+    total: 'Total ingresos',
+    campos: [
+      ['sueldo', 'Sueldos'],
+      ['sueldoConyuge', 'Sueldo cónyuge'],
+      ['arriendos', 'Arriendos'],
+      ['pensionJubilacion', 'Pensión jubilación'],
+      ['comisiones', 'Comisiones'],
+      ['remesasIntereses', 'Remesas e intereses'],
+      ['ingresoVentas', 'Ingreso por ventas'],
+      ['ingresoVentasConyuge', 'Ventas cónyuge'],
+      ['otrosIngresos', 'Otros ingresos'],
+    ],
+  },
+  {
+    titulo: 'Egresos mensuales',
+    total: 'Total egresos',
+    campos: [
+      ['alimentacion', 'Alimentación'],
+      ['arriendo', 'Arriendo o alquiler'],
+      ['serviciosBasicos', 'Servicios básicos'],
+      ['gastosFinancieros', 'Gastos financieros'],
+      ['transporte', 'Transporte'],
+      ['educacion', 'Educación'],
+      ['salud', 'Salud'],
+      ['vestimenta', 'Vestimenta'],
+      ['otrosEgresos', 'Otros egresos'],
+    ],
+  },
 ];
 
 function cedulaValida(c: string): boolean {
@@ -32,25 +94,98 @@ function cedulaValida(c: string): boolean {
   const prov = +c.slice(0, 2);
   if (!((prov >= 1 && prov <= 24) || prov === 30) || +c[2] > 5) return false;
   let s = 0;
-  for (let i = 0; i < 9; i++) { let d = +c[i] * (i % 2 === 0 ? 2 : 1); s += d > 9 ? d - 9 : d; }
+  for (let i = 0; i < 9; i++) {
+    let d = +c[i] * (i % 2 === 0 ? 2 : 1);
+    s += d > 9 ? d - 9 : d;
+  }
   return (10 - (s % 10)) % 10 === +c[9];
 }
 
 /** Formulario en blanco: cada solicitud nueva (y cada borrador) parte de aquí. */
 function modeloVacio(): Mapa {
   return {
-    cedula: '', idProducto: null, monto: null, plazoMeses: null, destino: '', tipoPago: 'FIJO', calidad: 'DEUDOR',
-    socio: { fechaNacimiento: '', sexo: '', estadoCivil: '', cargasFamiliares: 0, separacionBienes: false, instruccion: '', profesion: '', tipoVivienda: '',
-             tiempoResidenciaMeses: null, callePrincipal: '', calleTransversal: '', numeroCasa: '', referenciaUbicacion: '', provincia: 'Loja', canton: 'Loja',
-             parroquia: '', barrio: '', telefono: '', celular: '', correo: '' },
-    actividades: [{ condicion: '', empresa: '', actividadEmpresa: '', sector: '', cargo: '', tipoContratacion: '', tipoIngresos: 'VARIABLE', afiliacion: 'NINGUNO',
-                    tiempoTrabajoMeses: null, numeroTrabajadores: null, horasTrabajo: 8, tiempoMercadoMeses: null, localPropio: false, productos: '', direccion: '', ventasAnuales: null }],
-    conyuge: { cedula: '', apellidos: '', nombres: '', fechaNacimiento: '', instruccion: '', profesion: '', condicionLaboral: '', actividad: '', empresa: '', cargo: '', celular: '', correo: '' },
+    cedula: '',
+    idProducto: null,
+    monto: null,
+    plazoMeses: null,
+    destino: '',
+    tipoPago: 'FIJO',
+    calidad: 'DEUDOR',
+    socio: {
+      fechaNacimiento: '',
+      sexo: '',
+      estadoCivil: '',
+      cargasFamiliares: 0,
+      separacionBienes: false,
+      instruccion: '',
+      profesion: '',
+      tipoVivienda: '',
+      tiempoResidenciaMeses: null,
+      callePrincipal: '',
+      calleTransversal: '',
+      numeroCasa: '',
+      referenciaUbicacion: '',
+      provincia: 'Loja',
+      canton: 'Loja',
+      parroquia: '',
+      barrio: '',
+      telefono: '',
+      celular: '',
+      correo: '',
+    },
+    actividades: [
+      {
+        condicion: '',
+        empresa: '',
+        actividadEmpresa: '',
+        sector: '',
+        cargo: '',
+        tipoContratacion: '',
+        tipoIngresos: 'VARIABLE',
+        afiliacion: 'NINGUNO',
+        tiempoTrabajoMeses: null,
+        numeroTrabajadores: null,
+        horasTrabajo: 8,
+        tiempoMercadoMeses: null,
+        localPropio: false,
+        productos: '',
+        direccion: '',
+        ventasAnuales: null,
+      },
+    ],
+    conyuge: {
+      cedula: '',
+      apellidos: '',
+      nombres: '',
+      fechaNacimiento: '',
+      instruccion: '',
+      profesion: '',
+      condicionLaboral: '',
+      actividad: '',
+      empresa: '',
+      cargo: '',
+      celular: '',
+      correo: '',
+    },
     referencias: [
       { tipo: 'CUENTA_BANCARIA', nombre: '', tipoCuenta: 'AHORROS', numeroCuenta: '' },
       { tipo: 'COMERCIAL', nombre: '', direccion: '', telefono: '' },
-      { tipo: 'PERSONAL', nombre: '', direccion: '', telefono: '', empresaTrabajo: '', parentesco: '' },
-      { tipo: 'PERSONAL', nombre: '', direccion: '', telefono: '', empresaTrabajo: '', parentesco: '' },
+      {
+        tipo: 'PERSONAL',
+        nombre: '',
+        direccion: '',
+        telefono: '',
+        empresaTrabajo: '',
+        parentesco: '',
+      },
+      {
+        tipo: 'PERSONAL',
+        nombre: '',
+        direccion: '',
+        telefono: '',
+        empresaTrabajo: '',
+        parentesco: '',
+      },
     ],
     bienes: [] as Mapa[],
     situacion: Object.fromEntries(GRUPOS_SITUACION.flatMap((g) => g.campos.map(([k]) => [k, 0]))),
@@ -81,7 +216,9 @@ export class NuevaSolicitud {
   protected readonly idBorrador = signal<string | null>(null);
   protected readonly guardadoA = signal<number | null>(null);
   protected readonly porDescartar = signal<string | null>(null);
-  protected readonly otros = computed(() => this.borradores.lista().filter((b) => b.id !== this.idBorrador()));
+  protected readonly otros = computed(() =>
+    this.borradores.lista().filter((b) => b.id !== this.idBorrador()),
+  );
   /** Pantallas pequeñas: el formulario o la lista de solicitudes sin terminar. */
   protected readonly vista = signal('formulario');
   protected readonly vistas = computed<OpcionVista[]>(() => [
@@ -106,17 +243,32 @@ export class NuevaSolicitud {
 
   protected m: Mapa = modeloVacio();
 
-  protected readonly producto = computed(() => { this.version(); return this.productos().find((p) => p['idProducto'] === Number(this.m['idProducto'])) ?? null; });
-  protected readonly conConyuge = computed(() => { this.version(); return ['CASADO', 'UNION_LIBRE'].includes(this.m['socio']['estadoCivil']); });
+  protected readonly producto = computed(() => {
+    this.version();
+    return this.productos().find((p) => p['idProducto'] === Number(this.m['idProducto'])) ?? null;
+  });
+  protected readonly conConyuge = computed(() => {
+    this.version();
+    return ['CASADO', 'UNION_LIBRE'].includes(this.m['socio']['estadoCivil']);
+  });
   protected readonly totales = computed(() => {
     this.version();
     const s = this.m['situacion'];
     const t = GRUPOS_SITUACION.map((g) => g.campos.reduce((a, [k]) => a + (Number(s[k]) || 0), 0));
-    return { activos: t[0], pasivos: t[1], ingresos: t[2], egresos: t[3], patrimonio: t[0] - t[1], disponible: t[2] - t[3] };
+    return {
+      activos: t[0],
+      pasivos: t[1],
+      ingresos: t[2],
+      egresos: t[3],
+      patrimonio: t[0] - t[1],
+      disponible: t[2] - t[3],
+    };
   });
   protected readonly cuotaEstimada = computed(() => {
     this.version();
-    const p = this.producto(); const monto = Number(this.m['monto']); const n = Number(this.m['plazoMeses']);
+    const p = this.producto();
+    const monto = Number(this.m['monto']);
+    const n = Number(this.m['plazoMeses']);
     if (!p || !monto || !n) return null;
     const i = Number(p['tasaReferencial']) / 1200;
     return (monto * i) / (1 - Math.pow(1 + i, -n));
@@ -131,7 +283,10 @@ export class NuevaSolicitud {
   });
 
   constructor() {
-    this.api.get<Mapa[]>('/catalogos/productos').then((p) => this.productos.set(p)).catch((e) => this.errorGeneral.set(mensajeError(e)));
+    this.api
+      .get<Mapa[]>('/catalogos/productos')
+      .then((p) => this.productos.set(p))
+      .catch((e) => this.errorGeneral.set(mensajeError(e)));
     this.borradores.cargar();
     effect(() => {
       const id = this.borrador() ?? null;
@@ -140,7 +295,10 @@ export class NuevaSolicitud {
     inject(DestroyRef).onDestroy(() => this.guardarActual());
   }
 
-  protected tocar() { this.version.update((v) => v + 1); this.marcar(); }
+  protected tocar() {
+    this.version.update((v) => v + 1);
+    this.marcar();
+  }
 
   // ================================================================ borradores
   /** Cualquier cambio en el formulario: se guarda solo, poco después de dejar de escribir. */
@@ -156,11 +314,25 @@ export class NuevaSolicitud {
     if (!this.sucio || this.registrada || JSON.stringify(this.m) === VACIO) return;
     let id = this.idBorrador();
     const nuevo = !id;
-    if (!id) { id = nuevoIdBorrador(); this.idBorrador.set(id); }
-    this.borradores.guardar({ id, actualizado: Date.now(), paso: this.paso(), visitado: this.visitado(), m: structuredClone(this.m), socio: this.socioCore() });
+    if (!id) {
+      id = nuevoIdBorrador();
+      this.idBorrador.set(id);
+    }
+    this.borradores.guardar({
+      id,
+      actualizado: Date.now(),
+      paso: this.paso(),
+      visitado: this.visitado(),
+      m: structuredClone(this.m),
+      socio: this.socioCore(),
+    });
     this.sucio = false;
     this.guardadoA.set(Date.now());
-    if (nuevo && sincronizar) this.router.navigate(['/solicitudes/nueva'], { queryParams: { borrador: id }, replaceUrl: true });
+    if (nuevo && sincronizar)
+      this.router.navigate(['/solicitudes/nueva'], {
+        queryParams: { borrador: id },
+        replaceUrl: true,
+      });
   }
 
   /** Abre un borrador (o un formulario en blanco) guardando antes el que estaba abierto. */
@@ -185,7 +357,8 @@ export class NuevaSolicitud {
     const habia = JSON.stringify(this.m) !== VACIO ? this.nombreDe(this.socioCore(), this.m) : null;
     this.abrir(null);
     if (this.borrador()) this.router.navigate(['/solicitudes/nueva']);
-    if (habia) this.avisos.mostrar(`La solicitud de ${habia} quedó guardada en «Solicitudes sin terminar».`);
+    if (habia)
+      this.avisos.mostrar(`La solicitud de ${habia} quedó guardada en «Solicitudes sin terminar».`);
     queueMicrotask(() => document.getElementById('paso-titulo')?.focus());
   }
 
@@ -217,7 +390,9 @@ export class NuevaSolicitud {
     return partes.join(' · ');
   }
 
-  protected hace(ts: number): string { return haceCuanto(ts); }
+  protected hace(ts: number): string {
+    return haceCuanto(ts);
+  }
 
   private nombreDe(s: Mapa | null, m: Mapa): string {
     const n = s?.['core']?.['nombres'] ?? s?.['ficha']?.['nombres'];
@@ -229,7 +404,10 @@ export class NuevaSolicitud {
 
   protected async buscarSocio(): Promise<void> {
     const c = String(this.m['cedula'] ?? '').trim();
-    if (!cedulaValida(c)) { this.errores.set({ cedula: 'La cédula no es válida (10 dígitos, verificador módulo 10).' }); return; }
+    if (!cedulaValida(c)) {
+      this.errores.set({ cedula: 'La cédula no es válida (10 dígitos, verificador módulo 10).' });
+      return;
+    }
     this.buscando.set(true);
     this.errores.set({});
     try {
@@ -237,9 +415,12 @@ export class NuevaSolicitud {
       this.socioCore.set(r);
       const f = r['ficha'];
       if (f) {
-        for (const k of Object.keys(this.m['socio'])) if (f[k] !== undefined && f[k] !== null) this.m['socio'][k] = k === 'fechaNacimiento' ? String(f[k]).slice(0, 10) : f[k];
+        for (const k of Object.keys(this.m['socio']))
+          if (f[k] !== undefined && f[k] !== null)
+            this.m['socio'][k] = k === 'fechaNacimiento' ? String(f[k]).slice(0, 10) : f[k];
       }
-      this.m['autorizacion']['actividadEconomica'] = this.m['autorizacion']['actividadEconomica'] || '';
+      this.m['autorizacion']['actividadEconomica'] =
+        this.m['autorizacion']['actividadEconomica'] || '';
       this.tocar();
     } catch (e) {
       this.socioCore.set(null);
@@ -259,29 +440,36 @@ export class NuevaSolicitud {
       if (!p) e['idProducto'] = 'Elige un producto del tarifario.';
       const monto = Number(m['monto']);
       if (!monto) e['monto'] = 'Ingresa el monto.';
-      else if (p && (monto < p['montoMinimo'] || monto > p['montoMaximo'])) e['monto'] = `Entre $${p['montoMinimo']} y $${Number(p['montoMaximo']).toLocaleString('en-US')}.`;
+      else if (p && (monto < p['montoMinimo'] || monto > p['montoMaximo']))
+        e['monto'] =
+          `Entre $${p['montoMinimo']} y $${Number(p['montoMaximo']).toLocaleString('en-US')}.`;
       const plazo = Number(m['plazoMeses']);
       if (!plazo) e['plazoMeses'] = 'Ingresa el plazo.';
-      else if (p && plazo > p['plazoMaximoMeses']) e['plazoMeses'] = `Máximo ${p['plazoMaximoMeses']} meses.`;
+      else if (p && plazo > p['plazoMaximoMeses'])
+        e['plazoMeses'] = `Máximo ${p['plazoMaximoMeses']} meses.`;
       if (!String(m['destino']).trim()) e['destino'] = 'Describe el destino del crédito.';
     }
     if (paso === 2) {
       if (!m['socio']['fechaNacimiento']) e['fechaNacimiento'] = 'Ingresa la fecha de nacimiento.';
       if (!m['socio']['estadoCivil']) e['estadoCivil'] = 'Elige el estado civil.';
-      if (!/^09\d{8}$/.test(String(m['socio']['celular'] ?? ''))) e['celular'] = 'Celular de 10 dígitos que empieza con 09.';
+      if (!/^09\d{8}$/.test(String(m['socio']['celular'] ?? '')))
+        e['celular'] = 'Celular de 10 dígitos que empieza con 09.';
     }
     if (paso === 3) {
       if (!m['actividades'][0]['condicion']) e['condicion'] = 'Elige la condición laboral.';
-      if (!m['actividades'][0]['tiempoTrabajoMeses']) e['tiempoTrabajoMeses'] = 'Indica el tiempo de trabajo en meses.';
+      if (!m['actividades'][0]['tiempoTrabajoMeses'])
+        e['tiempoTrabajoMeses'] = 'Indica el tiempo de trabajo en meses.';
     }
     if (paso === 4 && this.conConyuge()) {
-      if (!String(m['conyuge']['nombres']).trim() || !String(m['conyuge']['apellidos']).trim()) e['conyuge'] = 'Ingresa nombres y apellidos del cónyuge.';
+      if (!String(m['conyuge']['nombres']).trim() || !String(m['conyuge']['apellidos']).trim())
+        e['conyuge'] = 'Ingresa nombres y apellidos del cónyuge.';
     }
     if (paso === 7) {
       if (this.totales().ingresos <= 0) e['ingresos'] = 'Registra al menos un ingreso mensual.';
     }
     if (paso === 8) {
-      if (!m['declaraciones']['declaraLicitud']) e['licitud'] = 'El socio debe declarar el origen lícito de los fondos.';
+      if (!m['declaraciones']['declaraLicitud'])
+        e['licitud'] = 'El socio debe declarar el origen lícito de los fondos.';
     }
     return e;
   }
@@ -290,7 +478,11 @@ export class NuevaSolicitud {
     if (n > this.paso()) {
       for (let p = this.paso(); p < n; p++) {
         const e = this.validar(p);
-        if (Object.keys(e).length) { this.paso.set(p); this.errores.set(e); return; }
+        if (Object.keys(e).length) {
+          this.paso.set(p);
+          this.errores.set(e);
+          return;
+        }
       }
     }
     this.errores.set({});
@@ -300,19 +492,40 @@ export class NuevaSolicitud {
     queueMicrotask(() => document.getElementById('paso-titulo')?.focus());
   }
 
-  protected agregarBien() { this.m['bienes'].push({ tipo: 'CASA', descripcion: '', valorComercial: null, hipotecado: false, institucion: '' }); this.tocar(); }
-  protected quitarBien(i: number) { this.m['bienes'].splice(i, 1); this.tocar(); }
+  protected agregarBien() {
+    this.m['bienes'].push({
+      tipo: 'CASA',
+      descripcion: '',
+      valorComercial: null,
+      hipotecado: false,
+      institucion: '',
+    });
+    this.tocar();
+  }
+  protected quitarBien(i: number) {
+    this.m['bienes'].splice(i, 1);
+    this.tocar();
+  }
 
   protected ubicar(): void {
     navigator.geolocation?.getCurrentPosition(
-      (p) => { this.m['croquis'] = { casaLat: +p.coords.latitude.toFixed(6), casaLng: +p.coords.longitude.toFixed(6) }; this.tocar(); },
+      (p) => {
+        this.m['croquis'] = {
+          casaLat: +p.coords.latitude.toFixed(6),
+          casaLng: +p.coords.longitude.toFixed(6),
+        };
+        this.tocar();
+      },
       () => this.avisos.mostrar('No se pudo obtener la ubicación. Escríbela a mano.', 'info'),
     );
   }
 
   protected async registrar(): Promise<void> {
     const e = this.validar(8);
-    if (Object.keys(e).length) { this.errores.set(e); return; }
+    if (Object.keys(e).length) {
+      this.errores.set(e);
+      return;
+    }
     this.enviando.set(true);
     this.errorGeneral.set(null);
     const m = structuredClone(this.m);

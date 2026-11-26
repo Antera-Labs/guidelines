@@ -1,7 +1,9 @@
 plugins {
     id 'groovy'
+    id 'codenarc'
     id 'org.springframework.boot' version '3.5.7'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.github.spotbugs' version '6.5.13'
 }
 
 group = 'ec.coop.pjl'
@@ -32,6 +34,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Reglas de seguridad (inyección, criptografía débil…) sobre el bytecode: CodeQL no analiza Groovy.
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.14.0'
 }
 
 // Las pruebas viven fuera del código de runtime, en tests/Services/core-api (estructura del monorepo).
@@ -53,4 +58,59 @@ bootJar {
 // Spring 6+ resuelve @PathVariable/@RequestParam por nombre: requiere nombres de parámetros en el bytecode
 tasks.withType(GroovyCompile).configureEach {
     groovyOptions.parameters = true
+}
+
+// ---- Análisis estático (SAST). Lo corre `./gradlew check` y el workflow sast.yml;
+//      `./gradlew test` (pre-push, make test-api) y bootJar (Dockerfile) no lo incluyen.
+
+// CodeNarc (calidad del código Groovy): bloquea la prioridad 1 desde el inicio y
+// reporta el resto. Conjunto de reglas en config/codenarc/codenarc.groovy.
+codenarc {
+    toolVersion = '3.7.0-groovy-4.0'
+    configFile = file('config/codenarc/codenarc.groovy')
+    maxPriority1Violations = 0
+    maxPriority2Violations = 100000
+    maxPriority3Violations = 100000
+}
+tasks.withType(CodeNarc).configureEach {
+    reports {
+        xml.required = true // el CI lo convierte a SARIF para la pestaña Security
+        html.required = true
+    }
+}
+
+// SpotBugs + FindSecBugs (seguridad sobre el bytecode): por ahora solo reporta.
+// Se vuelve bloqueante (ignoreFailures = false) cuando se haya revisado el ruido.
+// Límite conocido: en Groovy dinámico las llamadas pasan por CallSite, así que
+// FindSecBugs no ve jdbc.query(sql) como sumidero y no reporta el SQL que Bd y
+// los repositorios arman con GString. Con @CompileStatic en esas clases sí lo ve.
+// Filtro en config/spotbugs/spotbugs-exclude.xml.
+spotbugs {
+    ignoreFailures = true
+    effort = com.github.spotbugs.snom.Effort.MAX
+    // Confianza baja: en seguridad conviene más sensibilidad (el ruido de calidad
+    // ya lo quita el filtro). valueOf porque Groovy resuelve Confidence.LOW como clase.
+    reportLevel = com.github.spotbugs.snom.Confidence.valueOf('LOW')
+    excludeFilter = file('config/spotbugs/spotbugs-exclude.xml')
+}
+tasks.named('spotbugsMain') {
+    reports {
+        sarif { required = true }
+        html { required = true }
+    }
+}
+// Las pruebas no llegan a producción: no se analizan por seguridad.
+tasks.named('spotbugsTest') {
+    enabled = false
+}
+
+// io.spring.dependency-management aplica el BOM de Spring Boot a TODAS las
+// configuraciones, también a las de las herramientas: bajaba commons-lang3 de
+// 3.21.0 a 3.17.0 y SpotBugs se caía en silencio (NoClassDefFoundError
+// …/lang3/Strings, sin hallazgos y con el build en verde por ignoreFailures).
+// Las herramientas usan exactamente las versiones que piden.
+configurations.matching { it.name in ['codenarc', 'spotbugs', 'spotbugsPlugins', 'spotbugsSlf4j'] }.configureEach {
+    resolutionStrategy.eachDependency { detalle ->
+        if (detalle.requested.version) detalle.useVersion(detalle.requested.version)
+    }
 }

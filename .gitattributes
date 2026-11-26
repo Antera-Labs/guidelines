@@ -1,0 +1,11 @@
+# Finales de línea normalizados en todo el repo. Los scripts de shell siempre
+# en LF: con CRLF (checkout en Windows) bash falla con "$'\r': command not found".
+# dev/<producto>/.gitattributes agrega las reglas propias de cada producto.
+* text=auto
+*.sh text eol=lf
+
+# Entregables binarios (SAD en Word, imágenes): no se comparan como texto.
+*.docx binary
+*.pdf binary
+*.png binary
+*.jpg binary

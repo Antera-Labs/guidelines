@@ -1,0 +1,44 @@
+# Etiquetas según las carpetas que toca el PR (actions/labeler, job `labels`
+# de pr-policy.yml). Siguen las capas del SAD y la estructura de cada producto
+# (dev/<producto>/src/UIs, src/Services…). devops/setup-repo.sh crea las
+# etiquetas a partir de este archivo.
+
+# Cambios en los documentos (SAD, diagramas, entregables): la etiqueta avisa
+# en el PR y las notas del release los listan en la sección Documentación.
+docs:
+  - changed-files:
+      - any-glob-to-any-file: ["docs/**", "dev/*/docs/**"]
+
+"area:ui":
+  - changed-files:
+      - any-glob-to-any-file: ["**/src/UIs/**", "**/assets/**"]
+
+"area:servicios":
+  - changed-files:
+      - any-glob-to-any-file: ["**/src/Services/**", "**/tests/Services/**"]
+
+"area:datos":
+  - changed-files:
+      - any-glob-to-any-file: ["**/src/Database/**", "**/deployments/configs/oracle/**", "**/scripts/generar_datos_prueba.py"]
+
+"area:infra":
+  - changed-files:
+      - any-glob-to-any-file: ["**/deployments/**", "**/.devcontainer/**", "**/Dockerfile", "**/nginx.conf"]
+
+"area:devsecops":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+          - "devops/**"
+          - "dev/*/.github/**"
+          - "**/.husky/**"
+          - "**/.config/**"
+          - "**/mise.toml"
+          - "**/Makefile"
+          - "**/scripts/run-tests.sh"
+          - "**/scripts/instalar-hooks.sh"
+          - "**/config/codenarc/**"
+          - "**/config/spotbugs/**"
+          - ".gitignore"
+          - ".gitattributes"
+          - ".editorconfig"
